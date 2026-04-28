@@ -17,7 +17,7 @@ Form submit -> local queued state
 Supabase-ready frontend behavior:
 
 ```text
-Form submit -> Supabase REST insert into buildout_requests
+Form submit -> Vercel API route -> Supabase REST insert into buildout_requests
 ```
 
 Production frontend behavior:
@@ -37,8 +37,9 @@ VITE_SUPABASE_ANON_KEY=
 Priority order:
 
 1. If `VITE_N8N_BUILDOUT_WEBHOOK_URL` exists, submit to n8n.
-2. If n8n is not configured but Supabase variables exist, insert into `buildout_requests`.
-3. If neither exists, show local queued state for demo only.
+2. If local Vite env variables exist, insert directly into `buildout_requests` for local development.
+3. In production, submit to `/api/buildout-request`, which writes to Supabase server-side.
+4. If none of those paths exist, show local queued state for demo only.
 
 ## Request Payload
 
@@ -124,7 +125,7 @@ requests directly into Supabase as a temporary MVP intake path.
 
 ## Supabase Insert Shape
 
-When n8n is not configured, the frontend maps the request payload into `buildout_requests`:
+When n8n is not configured, the Vercel API route maps the request payload into `buildout_requests`:
 
 ```json
 {
@@ -147,6 +148,30 @@ When n8n is not configured, the frontend maps the request payload into `buildout
 ```
 
 This requires `docs/backend/Supabase-Schema.sql` to be run first.
+
+## Vercel API Route
+
+Production fallback:
+
+```text
+POST /api/buildout-request
+```
+
+The API route reads Supabase credentials from Vercel environment variables server-side:
+
+```text
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+```
+
+It also supports non-Vite aliases for later cleanup:
+
+```text
+SUPABASE_URL
+SUPABASE_ANON_KEY
+```
+
+This keeps the browser bundle from needing to expose the anon key directly while n8n is not connected.
 
 ## Expected n8n Response
 

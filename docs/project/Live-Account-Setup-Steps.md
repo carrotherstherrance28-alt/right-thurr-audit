@@ -35,6 +35,8 @@ VITE_SUPABASE_ANON_KEY=<stored locally in ignored .env.local>
 VITE_N8N_BUILDOUT_WEBHOOK_URL=<add after n8n webhook exists>
 ```
 
+The production form can submit through `/api/buildout-request`, so `VITE_SUPABASE_ANON_KEY` may stay marked Sensitive in Vercel. The browser bundle does not need to expose it for the MVP intake path.
+
 After adding or changing environment variables, redeploy the latest `main` deployment.
 
 ## 2. Supabase Tables

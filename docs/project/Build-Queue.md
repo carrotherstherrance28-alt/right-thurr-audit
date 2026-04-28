@@ -22,6 +22,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Define n8n webhook payload contract.
 - [x] Wire buildout form for optional n8n webhook URL.
 - [x] Add temporary Supabase direct-intake fallback when n8n is not connected.
+- [x] Add Vercel API route for production Supabase intake.
 - [x] Add first Thurr Solutions services page/view.
 - [x] Connect local repo to GitHub remote `right-thurr-audit`.
 - [x] Add domain strategy for Right Thurr, Thurr Solutions, diagnostics, and backups.

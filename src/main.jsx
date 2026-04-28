@@ -172,6 +172,20 @@ async function submitBuildoutRequest(payload) {
     return 'queued-supabase';
   }
 
+  const response = await fetch('/api/buildout-request', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  if (response.ok) {
+    return 'queued-supabase';
+  }
+
+  if (response.status !== 404) {
+    throw new Error('Buildout request API failed');
+  }
+
   return 'queued-local';
 }
 
