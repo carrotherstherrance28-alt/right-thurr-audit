@@ -63,7 +63,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Create n8n production webhook URL and add it to Vercel/local env.
 - [x] Test form submission against Supabase or n8n.
 - [x] Draft Slack status update after n8n intake works.
-- [ ] Connect Slack alert inside n8n after Slack credentials are available.
+- [ ] Fix n8n Slack credential/channel access for buildout request alerts.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.

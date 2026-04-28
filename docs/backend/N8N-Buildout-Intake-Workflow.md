@@ -40,6 +40,42 @@ Direct POST to production webhook returned 201 and saved a fake QA row to Supaba
 Vercel Production is configured with VITE_N8N_BUILDOUT_WEBHOOK_URL.
 ```
 
+## Slack Alert Status
+
+A Slack node was added after the Supabase save step:
+
+```text
+Slack: Buildout Request Alert
+```
+
+The alert is set to continue on fail so intake does not break if Slack is unavailable.
+
+Test result:
+
+```text
+n8n intake still returns 201 and saves to Supabase.
+Slack node returns channel_not_found.
+```
+
+Tried channels:
+
+```text
+general
+new-clients
+```
+
+Likely fix:
+
+```text
+Reconnect or update the n8n Slack credential so it has access to the Right Thurr Slack workspace and the desired alert channel.
+```
+
+Recommended channel:
+
+```text
+new-clients
+```
+
 ## V1 Importable Workflow
 
 Starter import file:
