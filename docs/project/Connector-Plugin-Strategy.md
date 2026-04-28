@@ -171,6 +171,11 @@ Use Discord now for internal alerts. Keep Supabase as the source of truth and po
 summaries into Discord. Do not duplicate the same alert into Slack and Discord unless there is a
 specific operational reason.
 
+Current status:
+
+The active n8n workflow includes a non-blocking Discord alert node for `#leads-alerts`. The alert is
+privacy-safe by default and does not post lead email or phone details.
+
 ### Gmail
 
 Use Gmail for drafting and sending report/meeting/follow-up messages later.

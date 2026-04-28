@@ -170,6 +170,11 @@ main {
   color: var(--rt-paper-cold);
 }
 
+.activity-page h1,
+.activity-page h2 {
+  color: var(--rt-paper-cold);
+}
+
 .report-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 0.42fr);
@@ -188,6 +193,63 @@ main {
 
 .report-hero .hero-copy p {
   color: var(--rt-paper);
+}
+
+.activity-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.42fr);
+  gap: var(--s-10);
+  align-items: center;
+  min-height: 520px;
+  margin: calc(var(--s-10) * -1) calc(50% - 50vw) var(--s-12);
+  padding: var(--s-12) max(16px, calc((100vw - 1480px) / 2));
+  background:
+    linear-gradient(90deg, rgba(245, 239, 226, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(rgba(245, 239, 226, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--rt-ink-900);
+  border-bottom: var(--bw-loud) solid var(--rt-orange-500);
+  color: var(--rt-paper-cold);
+}
+
+.activity-hero .hero-copy p {
+  color: var(--rt-paper);
+}
+
+.activity-hero-stamp {
+  display: grid;
+  gap: var(--s-4);
+  align-content: end;
+  min-height: 340px;
+  padding: var(--s-6);
+  background: rgba(245, 239, 226, 0.06);
+  border: var(--bw-loud) solid rgba(245, 239, 226, 0.42);
+  box-shadow: var(--shadow-stamp-orange);
+}
+
+.activity-hero-stamp span {
+  width: fit-content;
+  padding: var(--s-2) var(--s-3);
+  background: var(--rt-orange-500);
+  border: var(--bw-thin) solid var(--rt-ink-900);
+  color: var(--rt-paper-cold);
+  font-family: var(--font-subhead);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: var(--tracking-loud);
+  text-transform: uppercase;
+}
+
+.activity-hero-stamp strong {
+  font-family: var(--font-display-ts);
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+.activity-hero-stamp p {
+  margin: 0;
+  color: var(--rt-paper);
+  font-size: var(--text-xl);
+  font-weight: 800;
 }
 
 .report-summary-stamp {
@@ -1068,6 +1130,133 @@ textarea:focus {
   color: var(--rt-paper-cold);
 }
 
+.mission-feed-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.38fr) minmax(0, 1fr) minmax(280px, 0.34fr);
+  gap: var(--s-5);
+  margin: var(--s-12) 0;
+  padding: var(--s-5);
+  background:
+    linear-gradient(90deg, rgba(245, 239, 226, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(rgba(245, 239, 226, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--rt-ink-900);
+  border: var(--bw-loud) solid var(--rt-ink-900);
+  box-shadow: var(--shadow-stamp-orange);
+  color: var(--rt-paper-cold);
+}
+
+.mission-status-panel,
+.mission-feed-panel,
+.mission-attention-panel {
+  background: rgba(245, 239, 226, 0.06);
+  border: var(--bw-thin) solid rgba(245, 239, 226, 0.3);
+}
+
+.mission-status-panel,
+.mission-attention-panel {
+  display: grid;
+  gap: var(--s-4);
+  align-content: start;
+  padding: var(--s-5);
+}
+
+.mission-status-panel h2 {
+  margin: 0;
+  font-family: var(--font-display-ts);
+  font-size: clamp(34px, 3vw, 54px);
+  line-height: 1;
+}
+
+.mission-status-panel p,
+.mission-feed-row p,
+.attention-card p {
+  color: var(--rt-paper);
+}
+
+.mission-metrics {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.mission-metric {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  background: rgba(42, 37, 32, 0.82);
+  border: var(--bw-thin) solid rgba(245, 239, 226, 0.24);
+}
+
+.mission-metric span,
+.attention-card span {
+  color: var(--rt-orange-300);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mission-metric strong {
+  color: var(--rt-paper-cold);
+  font-family: var(--font-display-ts);
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+.mission-feed-panel {
+  display: grid;
+  align-content: start;
+  overflow: hidden;
+}
+
+.mission-feed-panel .proof-header {
+  padding: var(--s-4);
+  border-bottom: var(--bw-thin) solid rgba(245, 239, 226, 0.24);
+}
+
+.mission-feed-row {
+  display: grid;
+  grid-template-columns: 70px 32px minmax(0, 1fr);
+  gap: var(--s-3);
+  padding: var(--s-5);
+  border-bottom: var(--bw-hair) solid rgba(245, 239, 226, 0.18);
+}
+
+.mission-feed-row time {
+  color: var(--rt-orange-300);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 800;
+}
+
+.mission-feed-row strong {
+  display: block;
+  margin-bottom: var(--s-1);
+  color: var(--rt-orange-300);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+}
+
+.mission-feed-row h3,
+.attention-card h3 {
+  color: var(--rt-paper-cold);
+  font-family: var(--font-display-ts);
+  font-size: var(--text-xl);
+  line-height: 1.05;
+}
+
+.attention-card {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-5);
+  background: rgba(42, 37, 32, 0.82);
+  border: var(--bw-thin) solid rgba(245, 239, 226, 0.28);
+}
+
+.attention-card:first-of-type {
+  border-color: var(--rt-orange-500);
+}
+
 .section-title {
   display: flex;
   align-items: center;
@@ -1429,13 +1618,15 @@ dd {
   .buildout-hero,
   .solutions-hero,
   .report-hero,
+  .activity-hero,
   .buildout-section,
   .blueprint-showcase,
   .machine-section,
   .solutions-process,
   .workspace-grid,
   .brand-boundary,
-  .blueprint-command-report {
+  .blueprint-command-report,
+  .mission-feed-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1488,6 +1679,10 @@ dd {
   }
 
   .report-page h1 {
+    font-size: 46px;
+  }
+
+  .activity-page h1 {
     font-size: 46px;
   }
 

@@ -19,6 +19,7 @@ Check:
 - Buildout Plan view opens.
 - Thurr Solutions view opens.
 - Blueprint Report view opens.
+- Activity Feed view opens.
 - R+T favicon appears.
 - Social preview image is available at `/og-image.png`.
 - `robots.txt` is available at `/robots.txt`.
@@ -72,6 +73,8 @@ End-to-end n8n webhook test returned 201 after Vercel was configured with VITE_N
 Slack status update was drafted in #general for manual review/send.
 Slack node was added to n8n as non-blocking, but n8n Slack credential returned channel_not_found for general and new-clients.
 Local Blueprint Report browser QA passed after contrast and mobile headline fixes.
+Discord node was added to the active n8n workflow as a non-blocking `#leads-alerts` alert branch.
+Live Discord QA test returned a successful n8n execution with `Discord: Leads Alert` included.
 ```
 
 ## Domain Checks

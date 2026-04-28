@@ -111,6 +111,25 @@ const initialEvents = [
   },
 ];
 
+const activityMetrics = [
+  ['Tasks Done', '89'],
+  ['Issues Found', '1'],
+  ['Revenue Today', '$427'],
+];
+
+const attentionItems = [
+  {
+    label: 'Issue Found',
+    title: 'Slack credential is noisy.',
+    text: 'Discord is now the V1 leads alert path. Slack can wait until the workspace access is worth fixing.',
+  },
+  {
+    label: 'Next Move',
+    title: 'Review blueprint draft.',
+    text: 'Approve the offer before generating client-facing copy or outreach assets.',
+  },
+];
+
 const systemCards = [
   {
     name: 'Dallas Mobile Detailing Engine',
@@ -295,6 +314,7 @@ function App() {
             ['Buildout Plan', 'buildout'],
             ['Thurr Solutions', 'solutions'],
             ['Blueprint Report', 'report'],
+            ['Activity Feed', 'activity'],
           ].map(([label, target]) => (
             <button
               className={page === target ? 'nav-tab active' : 'nav-tab'}
@@ -323,7 +343,41 @@ function App() {
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
       {page === 'solutions' && <SolutionsPage setPage={setPage} />}
       {page === 'report' && <BlueprintReportPage setPage={setPage} />}
+      {page === 'activity' && <ActivityFeedPage setPage={setPage} />}
     </div>
+  );
+}
+
+function ActivityFeedPage({ setPage }) {
+  return (
+    <main className="activity-page" id="top">
+      <section className="activity-hero">
+        <div className="hero-copy">
+          <div className="eyebrow">WHAT YOUR SYSTEM DID TODAY</div>
+          <h1>The machine should show its work.</h1>
+          <p>
+            Every workflow, agent action, issue, and revenue event becomes a visible operator feed
+            so the owner can see the business-building system moving.
+          </p>
+          <div className="hero-actions">
+            <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
+              QUEUE A BUILDOUT
+              <ArrowUpRight size={18} strokeWidth={3} />
+            </button>
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('report')}>
+              View blueprint report
+            </button>
+          </div>
+        </div>
+        <aside className="activity-hero-stamp">
+          <span>AI Engine Active</span>
+          <strong>Current Mission</strong>
+          <p>Build lead capture system</p>
+        </aside>
+      </section>
+
+      <MissionActivityFeed />
+    </main>
   );
 }
 
@@ -873,6 +927,58 @@ function ActivityPanel() {
           </article>
         ))}
       </div>
+    </section>
+  );
+}
+
+function MissionActivityFeed() {
+  return (
+    <section className="mission-feed-grid" aria-label="Right Thurr mission activity feed">
+      <aside className="mission-status-panel">
+        <div className="eyebrow">CURRENT MISSION</div>
+        <h2>Build lead capture system.</h2>
+        <p>
+          Activity is grouped around the mission the machine is trying to finish right now, not just
+          dumped into a log.
+        </p>
+        <div className="mission-metrics">
+          {activityMetrics.map(([label, value]) => (
+            <div className="mission-metric" key={label}>
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </div>
+      </aside>
+
+      <section className="mission-feed-panel">
+        <div className="proof-header">
+          <span>RIGHT THURR ACTIVITY LOG</span>
+          <span className="activity-glyph">✓</span>
+        </div>
+        {initialEvents.map((event) => (
+          <article className="mission-feed-row" key={`${event.time}-${event.agent}-mission`}>
+            <time>{event.time}</time>
+            <span className="activity-glyph">{event.glyph}</span>
+            <div>
+              <strong>{event.agent}</strong>
+              <h3>{event.text}</h3>
+              <p>{event.impact} event written to the activity log.</p>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <aside className="mission-attention-panel">
+        <div className="eyebrow">NEEDS ATTENTION</div>
+        {attentionItems.map((item) => (
+          <article className="attention-card" key={item.title}>
+            <span>{item.label}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </aside>
     </section>
   );
 }

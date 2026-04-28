@@ -81,6 +81,15 @@ new-clients
 Discord is the recommended V1 operator alert channel because the user already uses it and n8n can
 post to a Discord channel with a simple webhook.
 
+Live status:
+
+```text
+Discord node added to active n8n workflow as "Discord: Leads Alert".
+Continue On Fail: true
+Channel: #leads-alerts
+Live QA execution succeeded and ran the Discord node.
+```
+
 Recommended server/channel setup:
 
 ```text

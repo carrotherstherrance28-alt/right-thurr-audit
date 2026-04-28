@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Right Thurr Activity Feed Options</title>
+    <link rel="stylesheet" href="../src/styles/brand-tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background:
+          linear-gradient(90deg, rgba(26, 23, 20, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(26, 23, 20, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          var(--rt-paper);
+        color: var(--rt-ink-900);
+        font-family: var(--font-body);
+      }
+      .option { display: none; min-height: 100vh; padding: 28px; }
+      .option:target { display: block; }
+      body:not(:has(.option:target)) #option-a { display: block; }
+      .label {
+        position: fixed;
+        z-index: 5;
+        top: 14px;
+        left: 14px;
+        padding: 8px 12px;
+        background: var(--rt-ink-900);
+        border: 2px solid var(--rt-orange-500);
+        color: var(--rt-paper);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .switcher {
+        position: fixed;
+        z-index: 5;
+        top: 14px;
+        right: 14px;
+        display: flex;
+        gap: 8px;
+      }
+      .switcher a {
+        padding: 9px 12px;
+        background: var(--rt-paper-cold);
+        border: 2px solid var(--rt-ink-900);
+        color: var(--rt-ink-900);
+        font-family: var(--font-subhead);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .shell {
+        width: min(1380px, 100%);
+        margin: 0 auto;
+        padding-top: 58px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-bottom: 20px;
+        border-bottom: 4px solid var(--rt-ink-900);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .brand img { width: 52px; height: 52px; object-fit: contain; }
+      .status {
+        color: var(--rt-success);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 {
+        margin-bottom: 18px;
+        font-family: var(--font-display-rt);
+        font-size: clamp(60px, 7vw, 112px);
+        line-height: .98;
+        letter-spacing: 0;
+      }
+      h2 {
+        font-family: var(--font-display-ts);
+        font-size: clamp(34px, 4vw, 58px);
+        line-height: 1;
+      }
+      h3 {
+        margin-bottom: 6px;
+        font-family: var(--font-display-ts);
+        font-size: 24px;
+        line-height: 1.05;
+      }
+      p { color: var(--rt-ink-700); font-size: 18px; line-height: 1.45; }
+      .eyebrow,
+      .tag,
+      .small-label {
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .eyebrow { margin-bottom: 14px; color: var(--rt-orange-600); font-size: 13px; }
+      .tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 7px 12px;
+        background: var(--rt-orange-500);
+        border: 2px solid var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+        font-size: 11px;
+      }
+      .panel,
+      .feed,
+      .card {
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 6px 6px 0 var(--rt-ink-900);
+        background: var(--rt-paper-cold);
+      }
+      .option-a .hero {
+        display: grid;
+        grid-template-columns: minmax(0, .42fr) minmax(0, 1fr);
+        gap: 28px;
+        padding-top: 36px;
+      }
+      .option-a .panel {
+        min-height: 620px;
+        padding: 30px;
+      }
+      .option-a .feed { display: grid; background: var(--rt-paper-cold); }
+      .timeline-row {
+        display: grid;
+        grid-template-columns: 84px 42px minmax(0, 1fr) 120px;
+        gap: 16px;
+        align-items: center;
+        padding: 18px 22px;
+        border-bottom: 2px solid var(--rt-ink-200);
+      }
+      time,
+      .impact,
+      .small-label {
+        color: var(--rt-ink-500);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .glyph {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        background: var(--rt-orange-500);
+        border: 2px solid var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+        font-weight: 900;
+      }
+      .option-b {
+        background:
+          linear-gradient(90deg, rgba(245, 239, 226, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(245, 239, 226, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          var(--rt-ink-900);
+        color: var(--rt-paper);
+      }
+      .option-b header { border-color: rgba(245,239,226,.34); }
+      .option-b h1, .option-b h2 { color: var(--rt-paper-cold); }
+      .option-b p { color: var(--rt-paper); }
+      .option-b .dashboard {
+        display: grid;
+        grid-template-columns: minmax(280px, .38fr) minmax(0, 1fr) minmax(280px, .34fr);
+        gap: 20px;
+        padding-top: 34px;
+      }
+      .option-b .panel,
+      .option-b .feed,
+      .option-b .card {
+        background: rgba(245,239,226,.06);
+        border-color: rgba(245,239,226,.32);
+        box-shadow: 6px 6px 0 var(--rt-orange-500);
+      }
+      .option-b .panel,
+      .option-b .card { padding: 22px; }
+      .option-b .timeline-row {
+        grid-template-columns: 76px 36px minmax(0, 1fr);
+        border-color: rgba(245,239,226,.18);
+      }
+      .option-b .impact { display: none; }
+      .mission {
+        display: grid;
+        gap: 14px;
+      }
+      .mission .card { box-shadow: none; }
+      .metric {
+        display: grid;
+        gap: 8px;
+        padding: 16px;
+        border: 2px solid rgba(245,239,226,.24);
+      }
+      .metric strong {
+        color: var(--rt-paper-cold);
+        font-family: var(--font-display-ts);
+        font-size: 34px;
+        line-height: 1;
+      }
+      .option-c .kanban {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        padding-top: 34px;
+      }
+      .column {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+        min-height: 640px;
+        padding: 18px;
+        border: 4px solid var(--rt-ink-900);
+        background: var(--rt-paper-cold);
+        box-shadow: 6px 6px 0 var(--rt-ink-900);
+      }
+      .activity-card {
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+        background: var(--rt-paper);
+        border: 2px solid var(--rt-ink-900);
+      }
+      .activity-card .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      @media (max-width: 980px) {
+        .option { padding: 18px; }
+        .label, .switcher { position: static; margin-bottom: 12px; flex-wrap: wrap; }
+        .option-a .hero,
+        .option-b .dashboard,
+        .option-c .kanban { grid-template-columns: 1fr; }
+        .timeline-row { grid-template-columns: 64px 34px minmax(0, 1fr); }
+        .impact { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="switcher" aria-label="Option navigation">
+      <a href="#option-a">Option A</a>
+      <a href="#option-b">Option B</a>
+      <a href="#option-c">Option C</a>
+    </nav>
+
+    <section class="option option-a" id="option-a">
+      <div class="label">OPTION A · DAILY OPERATOR LOG</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Activity</div><div class="status">System Live</div></header>
+        <main class="hero">
+          <aside class="panel">
+            <div class="eyebrow">WHAT YOUR SYSTEM DID TODAY</div>
+            <h1>Proof the machine moved.</h1>
+            <p>Readable, chronological, and client-demo friendly. Best when the owner wants a daily recap without learning another dashboard.</p>
+          </aside>
+          <section class="feed">
+            <div class="timeline-row"><time>10:42</time><span class="glyph">✓</span><div><h3>Created landing page draft</h3><p>Build Agent generated the first offer page outline.</p></div><span class="impact">Blueprint</span></div>
+            <div class="timeline-row"><time>11:15</time><span class="glyph">✓</span><div><h3>Found 24 local leads</h3><p>Research Agent found nearby service prospects.</p></div><span class="impact">Leads</span></div>
+            <div class="timeline-row"><time>12:03</time><span class="glyph">→</span><div><h3>Queued outreach emails</h3><p>Operator Agent prepared follow-up tasks for review.</p></div><span class="impact">Sales</span></div>
+            <div class="timeline-row"><time>01:20</time><span class="glyph">▲</span><div><h3>Updated pricing recommendation</h3><p>Revenue Agent moved starter offer to $149.</p></div><span class="impact">Money</span></div>
+            <div class="timeline-row"><time>02:44</time><span class="glyph">$</span><div><h3>Logged $327 in new revenue</h3><p>Finance Agent added a manual revenue event.</p></div><span class="impact">Revenue</span></div>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section class="option option-b" id="option-b">
+      <div class="label">OPTION B · LIVE MISSION CONTROL</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Mission Feed</div><div class="status">AI Engine Active</div></header>
+        <main class="dashboard">
+          <aside class="panel">
+            <div class="eyebrow">CURRENT MISSION</div>
+            <h2>Build lead capture system.</h2>
+            <p>The feed is grouped around what the machine is trying to complete right now.</p>
+            <div class="mission">
+              <div class="metric"><span class="small-label">Tasks Done</span><strong>89</strong></div>
+              <div class="metric"><span class="small-label">Issues Found</span><strong>1</strong></div>
+              <div class="metric"><span class="small-label">Revenue Today</span><strong>$427</strong></div>
+            </div>
+          </aside>
+          <section class="feed">
+            <div class="timeline-row"><time>10:42</time><span class="glyph">✓</span><div><h3>Opportunity Agent picked the fastest launch path.</h3><p>Local detailing has urgent intent, simple proof, and fast offer validation.</p></div><span class="impact">Blueprint</span></div>
+            <div class="timeline-row"><time>11:15</time><span class="glyph">✓</span><div><h3>Funnel Agent drafted the booking path.</h3><p>Landing page, CTA, intake questions, CRM tag, and owner alert were mapped.</p></div><span class="impact">Funnel</span></div>
+            <div class="timeline-row"><time>12:03</time><span class="glyph">→</span><div><h3>Automation Agent queued follow-up workflow.</h3><p>n8n receives the lead, saves it, alerts Discord, and starts review.</p></div><span class="impact">n8n</span></div>
+            <div class="timeline-row"><time>01:20</time><span class="glyph">▲</span><div><h3>Execution Agent created launch tasks.</h3><p>First 10 tasks are ready for the 30-day roadmap.</p></div><span class="impact">Tasks</span></div>
+          </section>
+          <aside class="panel">
+            <div class="eyebrow">NEEDS ATTENTION</div>
+            <div class="card"><span class="tag">Issue Found</span><h3>Slack credential is noisy.</h3><p>Discord is now the V1 alert path. Slack can wait.</p></div>
+            <div class="card"><span class="tag">Next Move</span><h3>Review blueprint draft.</h3><p>Approve the offer before generating client-facing copy.</p></div>
+          </aside>
+        </main>
+      </div>
+    </section>
+
+    <section class="option option-c" id="option-c">
+      <div class="label">OPTION C · AGENT WORK LANES</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Agent Lanes</div><div class="status">System Live</div></header>
+        <main class="kanban">
+          <section class="column">
+            <div class="eyebrow">GENERATED</div>
+            <article class="activity-card"><div class="meta"><time>10:42</time><span class="tag">Blueprint</span></div><h3>Business model mapped.</h3><p>Opportunity Agent chose local service funnel.</p></article>
+            <article class="activity-card"><div class="meta"><time>11:15</time><span class="tag">Copy</span></div><h3>Offer page outline drafted.</h3><p>Build Agent prepared the first page sections.</p></article>
+          </section>
+          <section class="column">
+            <div class="eyebrow">QUEUED</div>
+            <article class="activity-card"><div class="meta"><time>12:03</time><span class="tag">Automation</span></div><h3>Lead follow-up workflow.</h3><p>n8n task is ready for review and test.</p></article>
+            <article class="activity-card"><div class="meta"><time>01:20</time><span class="tag">Tasks</span></div><h3>30-day launch queue.</h3><p>Execution Agent created starter tasks.</p></article>
+          </section>
+          <section class="column">
+            <div class="eyebrow">ATTENTION</div>
+            <article class="activity-card"><div class="meta"><time>02:44</time><span class="tag">Money</span></div><h3>Revenue entry needs source.</h3><p>Finance Agent needs manual confirmation.</p></article>
+            <article class="activity-card"><div class="meta"><time>03:05</time><span class="tag">Review</span></div><h3>Blueprint ready.</h3><p>Operator Agent recommends approval before sending.</p></article>
+          </section>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>

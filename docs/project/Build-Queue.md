@@ -64,8 +64,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Test form submission against Supabase or n8n.
 - [x] Draft Slack status update after n8n intake works.
 - [ ] Fix n8n Slack credential/channel access for buildout request alerts.
-- [ ] Create Discord `#leads-alerts` webhook.
-- [ ] Add Discord buildout request alert to n8n.
+- [x] Create Discord `#leads-alerts` webhook.
+- [x] Add Discord buildout request alert to n8n.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
@@ -92,8 +92,9 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Add Start Build onboarding form.
 - [x] Create 3 generated Autopilot Blueprint report screenshot options.
 - [x] Add generated Autopilot Blueprint view.
+- [x] Create 3 Activity Feed screen options before coding.
+- [x] Add Activity Feed screen.
 - [ ] Add Systems screen.
-- [ ] Add Activity Feed screen.
 - [ ] Add Money screen with manual entries.
 - [ ] Add AI Engine screen.
 - [ ] Add mock local data store.
@@ -108,7 +109,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Build n8n intake workflow.
 - [ ] Add AI blueprint generation prompt chain.
 - [ ] Add email delivery step.
-- [ ] Add Discord notification step.
+- [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
 - [ ] Add CRM tagging step.
 
@@ -139,6 +140,12 @@ Daily session:
 3. Commit clean progress.
 4. Write a short next-day task list.
 
+## Latest Completed
+
+- [x] Sent a live QA Right Thurr buildout request through n8n.
+- [x] Verified n8n execution finished successfully.
+- [x] Verified the Discord `#leads-alerts` node ran in the successful execution.
+
 ## Next Task
 
-Create the Discord `#leads-alerts` webhook, connect it in n8n, then test one live Right Thurr form submission.
+Deploy the Activity Feed view, verify it live, then create 3 Systems screen options before coding the next app view.
