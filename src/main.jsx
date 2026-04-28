@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { createClient } from '@supabase/supabase-js';
 import {
   Activity,
   ArrowUpRight,
@@ -68,6 +69,19 @@ const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabaseBuildoutUrl = supabaseUrl ? `${supabaseUrl}/rest/v1/buildout_requests` : '';
+const ownerEmails = (import.meta.env.VITE_OWNER_EMAILS || '')
+  .split(',')
+  .map((email) => email.trim().toLowerCase())
+  .filter(Boolean);
+const authClient = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
+
+function isAllowedOwner(session) {
+  if (!session?.user?.email) {
+    return false;
+  }
+
+  return ownerEmails.includes(session.user.email.toLowerCase());
+}
 
 function mapBuildoutPayloadToSupabaseRow(payload) {
   return {
@@ -144,11 +158,47 @@ function App() {
   const [page, setPage] = useState('home');
   const [form, setForm] = useState(fieldDefaults);
   const [submissionState, setSubmissionState] = useState('idle');
+  const [authSession, setAuthSession] = useState(null);
+  const [authReady, setAuthReady] = useState(!authClient);
   const isOperatorPreview = getIsOperatorPreview();
+  const canViewOperator = isOperatorPreview && isAllowedOwner(authSession);
   const currentStep = useMemo(() => buildSteps[form.idea.length % buildSteps.length], [form.idea]);
 
+  useEffect(() => {
+    if (!authClient) {
+      return undefined;
+    }
+
+    let mounted = true;
+
+    authClient.auth.getSession().then(({ data }) => {
+      if (mounted) {
+        setAuthSession(data.session);
+        setAuthReady(true);
+      }
+    });
+
+    const {
+      data: { subscription },
+    } = authClient.auth.onAuthStateChange((_event, session) => {
+      setAuthSession(session);
+      setAuthReady(true);
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (canViewOperator && page === 'home') {
+      setPage('command');
+    }
+  }, [canViewOperator, page]);
+
   function navigateToPage(target) {
-    if (!isOperatorPreview && operatorPages.includes(target)) {
+    if (!canViewOperator && operatorPages.includes(target)) {
       setPage('home');
       return;
     }
@@ -225,7 +275,7 @@ function App() {
               {label}
             </button>
           ))}
-          {isOperatorPreview &&
+          {canViewOperator &&
             operatorNavItems.map(([label, target]) => (
               <button
                 className={page === target ? 'nav-tab active operator-nav-tab' : 'nav-tab operator-nav-tab'}
@@ -237,20 +287,126 @@ function App() {
               </button>
             ))}
         </nav>
-        <div className="system-live">
+        <div className={canViewOperator ? 'system-live owner-live' : 'system-live'}>
           <span className="live-dot" />
-          SYSTEM LIVE
+          {canViewOperator ? 'OWNER MODE' : 'SYSTEM LIVE'}
         </div>
       </header>
 
-      {page === 'home' && <HomePage {...sharedProps} />}
-      {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
-      {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
-      {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
-      {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
-      {isOperatorPreview && page === 'command' && <CommandCenterPage setPage={navigateToPage} />}
-      {isOperatorPreview && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
+      {isOperatorPreview && !canViewOperator ? (
+        <OwnerAccessGate authReady={authReady} authSession={authSession} />
+      ) : (
+        <>
+          {page === 'home' && <HomePage {...sharedProps} />}
+          {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
+          {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
+          {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
+          {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
+          {canViewOperator && page === 'command' && <CommandCenterPage setPage={navigateToPage} />}
+          {canViewOperator && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
+        </>
+      )}
     </div>
+  );
+}
+
+function OwnerAccessGate({ authReady, authSession }) {
+  const [email, setEmail] = useState('');
+  const [authMessage, setAuthMessage] = useState('');
+  const [authStatus, setAuthStatus] = useState('idle');
+  const signedInEmail = authSession?.user?.email || '';
+  const isRejectedOwner = signedInEmail && !isAllowedOwner(authSession);
+  const isAllowlistMissing = ownerEmails.length === 0;
+
+  async function handleOwnerSignIn(event) {
+    event.preventDefault();
+
+    if (!authClient) {
+      setAuthStatus('error');
+      setAuthMessage('Supabase Auth is not configured yet.');
+      return;
+    }
+
+    setAuthStatus('sending');
+    setAuthMessage('');
+
+    const { error } = await authClient.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: window.location.href,
+      },
+    });
+
+    if (error) {
+      setAuthStatus('error');
+      setAuthMessage(error.message);
+      return;
+    }
+
+    setAuthStatus('sent');
+    setAuthMessage('Check your email for the owner access link.');
+  }
+
+  async function handleSignOut() {
+    if (!authClient) {
+      return;
+    }
+
+    await authClient.auth.signOut();
+  }
+
+  return (
+    <main className="owner-access-page">
+      <section className="owner-access-card">
+        <div className="eyebrow">OWNER ACCESS</div>
+        <h1>Sign in to view the operator machine.</h1>
+        <p>
+          Command Center and Systems are private owner screens. Public visitors only see the
+          website, buildout intake, and Thurr Solutions service pages.
+        </p>
+
+        {!authReady && <p className="form-note">Checking owner session...</p>}
+
+        {isAllowlistMissing && (
+          <p className="form-note error-note">
+            Add VITE_OWNER_EMAILS in Vercel before using owner access in production.
+          </p>
+        )}
+
+        {isRejectedOwner && (
+          <div className="owner-auth-warning">
+            <strong>{signedInEmail}</strong>
+            <span>This account is signed in, but it is not on the owner allowlist.</span>
+            <button className="text-link dark-link button-link" type="button" onClick={handleSignOut}>
+              Sign out
+            </button>
+          </div>
+        )}
+
+        <form className="owner-access-form" onSubmit={handleOwnerSignIn}>
+          <label>
+            Owner email
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="you@example.com"
+              required
+            />
+          </label>
+          <button className="stamp-button" type="submit" disabled={authStatus === 'sending'}>
+            {authStatus === 'sending' ? 'SENDING ACCESS LINK' : 'SEND OWNER ACCESS LINK'}
+            <ArrowUpRight size={18} strokeWidth={3} />
+          </button>
+        </form>
+
+        {authMessage && (
+          <p className={authStatus === 'error' ? 'form-note error-note' : 'form-note'}>
+            {authMessage}
+          </p>
+        )}
+      </section>
+    </main>
   );
 }
 

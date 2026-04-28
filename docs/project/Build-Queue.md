@@ -72,6 +72,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add Discord buildout request alert to n8n.
 - [x] Hide owner/operator screens from public website navigation.
 - [x] Consolidate repetitive owner tabs into Command Center and Systems.
+- [x] Add Supabase owner email auth gate for operator preview.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
@@ -107,7 +108,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Create 3 AI Engine screen options before coding.
 - [x] Add AI Engine screen.
 - [x] Add mock local data store.
-- [ ] Add real owner authentication before storing or showing private client/operator data.
+- [x] Add real owner authentication before storing or showing private client/operator data.
+- [ ] Add owner RLS hardening before loading real private operator/client records.
 - [x] Create 3 exportable report layout options before coding.
 - [x] Add exportable report layout.
 
@@ -161,7 +163,8 @@ Daily session:
 - [x] Split public website navigation from owner/operator preview screens.
 - [x] Added export-ready Autopilot Blueprint report view using Option A.
 - [x] Narrowed navigation to public website tabs plus owner Command Center/Systems.
+- [x] Added Supabase email magic-link gate for `?operator=1`.
 
 ## Next Task
 
-Verify the latest Vercel deployment, then add real owner authentication before storing or showing private client/operator data.
+Add `VITE_OWNER_EMAILS` in Vercel, configure Supabase Auth redirect URLs, redeploy, then test owner login at `/?operator=1`.

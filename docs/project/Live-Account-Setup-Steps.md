@@ -35,9 +35,10 @@ VITE_SUPABASE_ANON_KEY=<stored locally in ignored .env.local>
 SUPABASE_URL=https://xplfryahxdegfvxmymco.supabase.co
 SUPABASE_ANON_KEY=<stored locally in ignored .env.local>
 VITE_N8N_BUILDOUT_WEBHOOK_URL=<add after n8n webhook exists>
+VITE_OWNER_EMAILS=<owner email allowlist>
 ```
 
-The production form can submit through `/api/buildout-request`, so `VITE_SUPABASE_ANON_KEY` may stay marked Sensitive in Vercel. The browser bundle does not need to expose it for the MVP intake path.
+The production form can submit through `/api/buildout-request`, and Supabase Auth uses the public anon key in the browser. Keep RLS enabled and narrow. Never put the service-role key in Vercel client env vars or frontend code.
 
 The serverless API route reads `SUPABASE_URL` and `SUPABASE_ANON_KEY` at runtime. These were added with Vercel CLI for the `right-thurr-audit` Production environment.
 

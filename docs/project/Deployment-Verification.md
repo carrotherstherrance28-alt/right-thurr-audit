@@ -36,7 +36,7 @@ Current production fallback:
 - Buildout form should POST to `/api/buildout-request`.
 - Vercel API route should save the request into Supabase `buildout_requests`.
 - Success state should say `Blueprint request saved. Connect n8n next to generate and deliver the report.`
-- The browser bundle should not expose the Supabase anon key.
+- The browser bundle may include the Supabase anon key for Auth. RLS policies must stay enabled and narrow; never expose the service-role key.
 
 After n8n webhook is configured:
 
