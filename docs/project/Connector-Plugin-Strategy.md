@@ -141,6 +141,12 @@ Recommendation:
 
 Add Slack after Supabase and n8n are working. Send concise alerts with links to Supabase/report records.
 
+Current status:
+
+The n8n Slack node is non-blocking so blueprint intake keeps working even when Slack fails. The
+current n8n Slack credential returned `channel_not_found` for both `general` and `new-clients`, so
+fix channel access later instead of blocking the app build.
+
 ### Gmail
 
 Use Gmail for drafting and sending report/meeting/follow-up messages later.

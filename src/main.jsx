@@ -44,6 +44,42 @@ const blueprintSections = [
   'Recommended Next Step',
 ];
 
+const reportMetrics = [
+  ['Confidence', '87%'],
+  ['Launch Path', '30 days'],
+  ['Money Path', 'Booked jobs'],
+];
+
+const roadmapWeeks = [
+  ['W1', 'Offer, landing page, intake form, CRM fields'],
+  ['W2', 'n8n lead routing, email/SMS follow-up, owner alerts'],
+  ['W3', 'Local lead sources, outreach list, content starter pack'],
+  ['W4', 'Revenue review, bottleneck fix, second offer test'],
+];
+
+const reportCards = [
+  {
+    label: 'Your Business Opportunity',
+    title: 'Local service demand with urgent buyer intent.',
+    text: 'Mobile detailing has search intent, repeat potential, and a clear before/after offer. The first system should make the business easy to understand and easy to book.',
+  },
+  {
+    label: 'Best Business Model',
+    title: 'Service revenue first, recurring packages second.',
+    text: 'Start with a simple express-detail offer, then add memberships and fleet packages after the lead-to-booking path proves reliable.',
+  },
+  {
+    label: 'Funnel Strategy',
+    title: 'One page, one offer, one action.',
+    text: 'Use a local landing page with proof, pricing anchor, booking CTA, and fast response automation for leads that do not book immediately.',
+  },
+  {
+    label: 'Automation Stack',
+    title: 'Webhook, CRM, alerts, follow-up, daily summary.',
+    text: 'n8n receives the form, saves the lead, tags the opportunity, triggers email/SMS follow-up, and sends an operator summary.',
+  },
+];
+
 const initialEvents = [
   {
     time: '04:42',
@@ -258,6 +294,7 @@ function App() {
             ['Home', 'home'],
             ['Buildout Plan', 'buildout'],
             ['Thurr Solutions', 'solutions'],
+            ['Blueprint Report', 'report'],
           ].map(([label, target]) => (
             <button
               className={page === target ? 'nav-tab active' : 'nav-tab'}
@@ -285,7 +322,42 @@ function App() {
       {page === 'home' && <HomePage {...sharedProps} />}
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
       {page === 'solutions' && <SolutionsPage setPage={setPage} />}
+      {page === 'report' && <BlueprintReportPage setPage={setPage} />}
     </div>
+  );
+}
+
+function BlueprintReportPage({ setPage }) {
+  return (
+    <main className="report-page" id="top">
+      <section className="report-hero">
+        <div className="hero-copy">
+          <div className="eyebrow">GENERATED AUTOPILOT BLUEPRINT</div>
+          <h1>Your first system is a lead-to-booking engine.</h1>
+          <p>
+            This is the client-facing report view Right Thurr can generate after the intake. It
+            turns an idea into a model, revenue path, funnel, automation plan, agent map, and launch
+            queue.
+          </p>
+          <div className="hero-actions">
+            <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
+              START ANOTHER BLUEPRINT
+              <ArrowUpRight size={18} strokeWidth={3} />
+            </button>
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
+              Back to machine
+            </button>
+          </div>
+        </div>
+        <aside className="report-summary-stamp">
+          <img src={monogram} alt="" />
+          <span>Report Ready</span>
+          <strong>Dallas Mobile Detailing Engine</strong>
+        </aside>
+      </section>
+
+      <BlueprintCommandReport />
+    </main>
   );
 }
 
@@ -470,6 +542,9 @@ function HomePage({ form, updateField, handleSubmit, submissionState, currentSte
             The report explains the business angle, revenue path, funnel, automations, agents,
             bottlenecks, and next move.
           </p>
+          <button className="text-link dark-link button-link" type="button" onClick={() => setPage('report')}>
+            View generated report
+          </button>
         </div>
         <BlueprintPanel />
       </section>
@@ -663,6 +738,92 @@ function BlueprintPanel() {
           </div>
         ))}
       </div>
+    </section>
+  );
+}
+
+function BlueprintCommandReport() {
+  return (
+    <section className="blueprint-command-report" aria-label="Generated Autopilot Blueprint report">
+      <aside className="report-nav-rail">
+        {blueprintSections.map((section) => (
+          <a href="#report-body" key={section}>
+            {section}
+          </a>
+        ))}
+      </aside>
+
+      <section className="report-command-center" id="report-body">
+        <div className="proof-header">
+          <span>RIGHT THURR REPORT ENGINE</span>
+          <span className="activity-glyph">✓</span>
+        </div>
+        <div className="eyebrow">AI BUSINESS BUILDOUT PLAN</div>
+        <h2>Build the system that captures leads before they cool off.</h2>
+        <p>
+          The fastest first move is a focused lead-to-booking system: landing page, offer, intake,
+          CRM routing, follow-up, owner alerts, and a weekly revenue review.
+        </p>
+        <div className="report-metric-grid">
+          {reportMetrics.map(([label, value]) => (
+            <div className="report-metric" key={label}>
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </div>
+
+        <div className="report-card-grid">
+          {reportCards.map((card) => (
+            <article className="report-info-card" key={card.label}>
+              <span>{card.label}</span>
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))}
+        </div>
+
+        <section className="report-roadmap">
+          <div className="section-title">
+            <ClipboardCheck size={22} strokeWidth={3} />
+            30-Day Launch Roadmap
+          </div>
+          <div className="roadmap-list">
+            {roadmapWeeks.map(([week, item]) => (
+              <div className="roadmap-row" key={week}>
+                <span>{week}</span>
+                <strong>{item}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="report-next-step">
+          <span>Recommended Next Step</span>
+          <strong>Your blueprint is ready. The only thing missing is execution.</strong>
+          <p>
+            Ideas do not pay you. Systems do. Your blueprint shows what to build. Right Thurr builds
+            the first system for you.
+          </p>
+        </section>
+      </section>
+
+      <aside className="report-activity-rail">
+        <div className="eyebrow">WHAT THE SYSTEM DID</div>
+        {initialEvents.map((event) => (
+          <article className="report-feed-item" key={`${event.time}-${event.agent}`}>
+            <time>{event.time}</time>
+            <div>
+              <strong>{event.agent}</strong>
+              <p>{event.text}</p>
+            </div>
+          </article>
+        ))}
+        <div className="report-agent-stack">
+          <span>Agents Used</span>
+          <strong>Opportunity · Funnel · Revenue · Automation · Execution</strong>
+        </div>
+      </aside>
     </section>
   );
 }

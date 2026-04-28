@@ -165,6 +165,75 @@ main {
   letter-spacing: var(--tracking-tight);
 }
 
+.report-page h1,
+.report-page h2 {
+  color: var(--rt-paper-cold);
+}
+
+.report-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.42fr);
+  gap: var(--s-10);
+  align-items: center;
+  min-height: 520px;
+  margin: calc(var(--s-10) * -1) calc(50% - 50vw) var(--s-12);
+  padding: var(--s-12) max(16px, calc((100vw - 1480px) / 2));
+  background:
+    linear-gradient(90deg, rgba(245, 239, 226, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(rgba(245, 239, 226, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--rt-ink-900);
+  border-bottom: var(--bw-loud) solid var(--rt-orange-500);
+  color: var(--rt-paper-cold);
+}
+
+.report-hero .hero-copy p {
+  color: var(--rt-paper);
+}
+
+.report-summary-stamp {
+  position: relative;
+  display: grid;
+  gap: var(--s-4);
+  min-height: 340px;
+  align-content: end;
+  padding: var(--s-6);
+  overflow: hidden;
+  background: rgba(245, 239, 226, 0.06);
+  border: var(--bw-loud) solid rgba(245, 239, 226, 0.42);
+  box-shadow: var(--shadow-stamp-orange);
+}
+
+.report-summary-stamp img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(72%, 320px);
+  opacity: 0.08;
+  filter: grayscale(1) contrast(1.3);
+  transform: translate(-50%, -50%) rotate(-8deg) scale(1.4);
+}
+
+.report-summary-stamp span {
+  position: relative;
+  width: fit-content;
+  padding: var(--s-2) var(--s-3);
+  background: var(--rt-orange-500);
+  border: var(--bw-thin) solid var(--rt-ink-900);
+  color: var(--rt-paper-cold);
+  font-family: var(--font-subhead);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: var(--tracking-loud);
+  text-transform: uppercase;
+}
+
+.report-summary-stamp strong {
+  position: relative;
+  font-family: var(--font-display-ts);
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
 .hero-copy {
   display: flex;
   flex-direction: column;
@@ -817,6 +886,188 @@ textarea:focus {
   align-self: stretch;
 }
 
+.blueprint-command-report {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr) 330px;
+  gap: var(--s-5);
+  margin: var(--s-12) 0;
+  padding: var(--s-5);
+  background:
+    linear-gradient(90deg, rgba(245, 239, 226, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(rgba(245, 239, 226, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--rt-ink-900);
+  border: var(--bw-loud) solid var(--rt-ink-900);
+  box-shadow: var(--shadow-stamp-orange);
+  color: var(--rt-paper-cold);
+}
+
+.report-nav-rail,
+.report-command-center,
+.report-activity-rail {
+  background: rgba(245, 239, 226, 0.06);
+  border: var(--bw-thin) solid rgba(245, 239, 226, 0.3);
+}
+
+.report-nav-rail {
+  align-self: start;
+  position: sticky;
+  top: 132px;
+  padding: var(--s-4);
+}
+
+.report-nav-rail a {
+  display: block;
+  padding: var(--s-3) 0;
+  border-bottom: var(--bw-hair) solid rgba(245, 239, 226, 0.2);
+  color: var(--rt-paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.report-command-center {
+  display: grid;
+  gap: var(--s-5);
+  padding: var(--s-6);
+}
+
+.report-command-center h2 {
+  max-width: 860px;
+  margin: 0;
+  font-family: var(--font-display-ts);
+  font-size: clamp(42px, 5vw, 78px);
+  line-height: 1;
+}
+
+.report-command-center p,
+.report-feed-item p,
+.report-next-step p {
+  color: var(--rt-paper);
+}
+
+.report-metric-grid,
+.report-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+
+.report-card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.report-metric,
+.report-info-card,
+.report-next-step,
+.report-agent-stack {
+  padding: var(--s-5);
+  background: rgba(42, 37, 32, 0.82);
+  border: var(--bw-thin) solid rgba(245, 239, 226, 0.28);
+}
+
+.report-metric span,
+.report-info-card span,
+.report-next-step span,
+.report-agent-stack span {
+  display: block;
+  margin-bottom: var(--s-2);
+  color: var(--rt-orange-300);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.report-metric strong {
+  font-family: var(--font-display-ts);
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+.report-info-card h3 {
+  color: var(--rt-paper-cold);
+  font-family: var(--font-display-ts);
+  font-size: var(--text-xl);
+  line-height: 1.05;
+}
+
+.report-roadmap {
+  background: rgba(42, 37, 32, 0.82);
+  border: var(--bw-thin) solid rgba(245, 239, 226, 0.28);
+}
+
+.report-roadmap .section-title {
+  background: rgba(245, 239, 226, 0.08);
+  border-bottom-color: rgba(245, 239, 226, 0.28);
+}
+
+.roadmap-list {
+  display: grid;
+}
+
+.roadmap-row {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr);
+  gap: var(--s-4);
+  align-items: center;
+  padding: var(--s-4);
+  border-bottom: var(--bw-hair) solid rgba(245, 239, 226, 0.18);
+}
+
+.roadmap-row span {
+  color: var(--rt-orange-300);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 900;
+}
+
+.roadmap-row strong {
+  color: var(--rt-paper-cold);
+}
+
+.report-next-step {
+  border-color: var(--rt-orange-500);
+}
+
+.report-next-step strong {
+  display: block;
+  max-width: 760px;
+  margin-bottom: var(--s-3);
+  color: var(--rt-paper-cold);
+  font-family: var(--font-display-ts);
+  font-size: var(--text-2xl);
+  line-height: 1.05;
+}
+
+.report-activity-rail {
+  display: grid;
+  gap: var(--s-4);
+  align-content: start;
+  padding: var(--s-5);
+}
+
+.report-feed-item {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: var(--s-3);
+  padding-bottom: var(--s-4);
+  border-bottom: var(--bw-hair) solid rgba(245, 239, 226, 0.2);
+}
+
+.report-feed-item time {
+  color: var(--rt-orange-300);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 800;
+}
+
+.report-feed-item strong,
+.report-agent-stack strong {
+  color: var(--rt-paper-cold);
+}
+
 .section-title {
   display: flex;
   align-items: center;
@@ -1177,13 +1428,19 @@ dd {
   .machine-first-hero,
   .buildout-hero,
   .solutions-hero,
+  .report-hero,
   .buildout-section,
   .blueprint-showcase,
   .machine-section,
   .solutions-process,
   .workspace-grid,
-  .brand-boundary {
+  .brand-boundary,
+  .blueprint-command-report {
     grid-template-columns: 1fr;
+  }
+
+  .report-nav-rail {
+    position: static;
   }
 
   .metric-strip {
@@ -1230,9 +1487,15 @@ dd {
     font-size: 54px;
   }
 
+  .report-page h1 {
+    font-size: 46px;
+  }
+
   .input-row,
   .blueprint-list,
-  .buildout-form {
+  .buildout-form,
+  .report-metric-grid,
+  .report-card-grid {
     grid-template-columns: 1fr;
   }
 

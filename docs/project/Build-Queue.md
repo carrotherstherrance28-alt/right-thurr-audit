@@ -37,9 +37,9 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add deployment verification checklist.
 - [x] Add connector/plugin strategy with pros, cons, and recommended order.
 - [x] Run app locally and verify the first screen.
-- [ ] Fix responsive/layout issues from browser review.
-- [ ] Create clean repo branch and first commit.
-- [ ] Connect repo to GitHub `right-thurr`.
+- [x] Fix responsive/layout issues from browser review.
+- [x] Create clean repo branch and first commit.
+- [x] Connect repo to GitHub remote `right-thurr-audit`.
 
 ## External Setup Tasks
 
@@ -81,14 +81,15 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Create shared website header/footer components.
 - [ ] Add basic SEO metadata.
 - [ ] Add founder/operator trust section for Thurr Solutions.
-- [ ] Add accessibility and mobile QA pass.
+- [ ] Add full accessibility and mobile QA pass.
 - [ ] Add analytics event plan for CTA/form/report/booked-call tracking.
 - [ ] Add LinkedIn-first B2B content plan.
 
 ## Phase 3: Right Thurr App MVP
 
 - [ ] Add Start Build onboarding form.
-- [ ] Add generated Autopilot Blueprint view.
+- [x] Create 3 generated Autopilot Blueprint report screenshot options.
+- [x] Add generated Autopilot Blueprint view.
 - [ ] Add Systems screen.
 - [ ] Add Activity Feed screen.
 - [ ] Add Money screen with manual entries.
@@ -137,4 +138,4 @@ Daily session:
 
 ## Next Task
 
-Run browser QA on the deployed Vercel URL, then connect Supabase tables and the first n8n intake webhook.
+Deploy the generated Autopilot Blueprint view to Vercel, then verify the live Blueprint Report tab and form submission path.

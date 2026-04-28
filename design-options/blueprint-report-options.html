@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Right Thurr Blueprint Report Options</title>
+    <link rel="stylesheet" href="../src/styles/brand-tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background:
+          linear-gradient(90deg, rgba(26, 23, 20, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(26, 23, 20, 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+          var(--rt-paper);
+        color: var(--rt-ink-900);
+        font-family: var(--font-body);
+      }
+      .option {
+        min-height: 100vh;
+        display: none;
+        padding: 28px;
+      }
+      .option:target { display: block; }
+      body:not(:has(.option:target)) #option-a { display: block; }
+      .label {
+        position: fixed;
+        z-index: 3;
+        top: 16px;
+        left: 16px;
+        padding: 8px 12px;
+        background: var(--rt-ink-900);
+        color: var(--rt-paper);
+        border: 2px solid var(--rt-orange-500);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .switcher {
+        position: fixed;
+        z-index: 4;
+        right: 16px;
+        top: 16px;
+        display: flex;
+        gap: 8px;
+      }
+      .switcher a {
+        padding: 9px 12px;
+        background: var(--rt-paper-cold);
+        border: 2px solid var(--rt-ink-900);
+        color: var(--rt-ink-900);
+        font-family: var(--font-subhead);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .report-shell {
+        width: min(1380px, 100%);
+        min-height: calc(100vh - 56px);
+        margin: 0 auto;
+        padding-top: 54px;
+      }
+      .report-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-bottom: 18px;
+        border-bottom: 4px solid var(--rt-ink-900);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .brand img {
+        width: 52px;
+        height: 52px;
+        object-fit: contain;
+      }
+      .brand strong,
+      .report-status {
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .report-status {
+        color: var(--rt-success);
+        font-size: 12px;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 {
+        margin-bottom: 18px;
+        font-family: var(--font-display-rt);
+        font-size: clamp(56px, 7vw, 112px);
+        line-height: .98;
+        letter-spacing: 0;
+      }
+      h2 {
+        margin-bottom: 12px;
+        font-family: var(--font-display-ts);
+        font-size: clamp(34px, 4vw, 58px);
+        line-height: 1;
+      }
+      h3 {
+        margin-bottom: 10px;
+        font-family: var(--font-display-ts);
+        font-size: 25px;
+        line-height: 1.05;
+      }
+      p {
+        color: var(--rt-ink-700);
+        font-size: 18px;
+        line-height: 1.45;
+      }
+      .eyebrow,
+      .mini-label {
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .eyebrow {
+        margin-bottom: 14px;
+        color: var(--rt-orange-600);
+        font-size: 13px;
+      }
+      .stamp {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 50px;
+        padding: 0 18px;
+        background: var(--rt-orange-500);
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 5px 5px 0 var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+        font-family: var(--font-subhead);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .panel,
+      .tile,
+      .rail,
+      .ticket {
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 6px 6px 0 var(--rt-ink-900);
+      }
+      .tile {
+        padding: 20px;
+        background: var(--rt-paper-cold);
+      }
+      .mini-label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--rt-orange-600);
+        font-size: 12px;
+      }
+      .value {
+        display: block;
+        font-family: var(--font-display-ts);
+        font-size: 30px;
+        line-height: 1;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .roadmap {
+        display: grid;
+        gap: 10px;
+      }
+      .roadmap div {
+        display: grid;
+        grid-template-columns: 54px minmax(0, 1fr);
+        gap: 14px;
+        align-items: center;
+        padding: 13px;
+        background: var(--rt-paper-cold);
+        border: 2px solid var(--rt-ink-900);
+      }
+      .roadmap span {
+        color: var(--rt-orange-600);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .option-a .report-main {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, .34fr);
+        gap: 28px;
+        padding-top: 38px;
+      }
+      .option-a .hero-panel {
+        padding: 34px;
+        background: var(--rt-paper-cold);
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 8px 8px 0 var(--rt-ink-900);
+      }
+      .option-a .summary {
+        display: grid;
+        gap: 18px;
+        margin-top: 28px;
+      }
+      .option-a .section-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 18px;
+      }
+      .option-a aside {
+        display: grid;
+        gap: 18px;
+        align-content: start;
+      }
+      .option-a .watermark {
+        position: absolute;
+        right: 58px;
+        bottom: 42px;
+        width: 260px;
+        opacity: .055;
+        transform: rotate(-8deg);
+        pointer-events: none;
+      }
+      .option-a .hero-panel { position: relative; overflow: hidden; }
+      .option-b {
+        background:
+          linear-gradient(90deg, rgba(245, 239, 226, 0.04) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(245, 239, 226, 0.04) 1px, transparent 1px) 0 0 / 48px 48px,
+          var(--rt-ink-900);
+        color: var(--rt-paper);
+      }
+      .option-b .report-top { border-color: rgba(245, 239, 226, .34); }
+      .option-b p { color: var(--rt-paper); }
+      .option-b .report-main {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr) 315px;
+        gap: 20px;
+        padding-top: 28px;
+      }
+      .option-b .rail,
+      .option-b .command,
+      .option-b .activity {
+        background: rgba(245, 239, 226, .06);
+        border-color: rgba(245, 239, 226, .42);
+        box-shadow: 6px 6px 0 var(--rt-orange-500);
+      }
+      .option-b .rail {
+        padding: 18px;
+      }
+      .option-b .rail a {
+        display: block;
+        padding: 13px 0;
+        border-bottom: 1px solid rgba(245, 239, 226, .2);
+        color: var(--rt-paper);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .option-b .command {
+        padding: 26px;
+      }
+      .option-b h1 {
+        color: var(--rt-paper);
+        font-size: clamp(48px, 5.7vw, 88px);
+      }
+      .option-b .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin: 18px 0;
+      }
+      .option-b .tile {
+        background: var(--rt-ink-800);
+        border-color: rgba(245, 239, 226, .36);
+        box-shadow: none;
+      }
+      .option-b .value { color: var(--rt-paper); }
+      .option-b .roadmap div {
+        background: rgba(245, 239, 226, .05);
+        border-color: rgba(245, 239, 226, .24);
+      }
+      .option-b .activity {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+        padding: 18px;
+      }
+      .feed-item {
+        display: grid;
+        grid-template-columns: 58px minmax(0, 1fr);
+        gap: 12px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(245, 239, 226, .2);
+      }
+      .feed-item time {
+        color: var(--rt-orange-300);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .feed-item strong { display: block; margin-bottom: 3px; }
+      .option-c .report-main {
+        display: grid;
+        grid-template-columns: minmax(0, .9fr) minmax(340px, 1.1fr);
+        gap: 30px;
+        padding-top: 38px;
+      }
+      .option-c .cover-ticket {
+        position: sticky;
+        top: 90px;
+        display: grid;
+        align-content: center;
+        min-height: 650px;
+        padding: 42px;
+        background: var(--rt-orange-500);
+        color: var(--rt-paper-cold);
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 8px 8px 0 var(--rt-ink-900);
+        transform: rotate(-1deg);
+      }
+      .option-c .cover-ticket h1 {
+        color: var(--rt-paper-cold);
+        font-size: clamp(58px, 7.2vw, 110px);
+      }
+      .option-c .cover-ticket p { color: var(--rt-paper-cold); font-weight: 800; }
+      .option-c .ticket-stack {
+        display: grid;
+        gap: 18px;
+      }
+      .ticket {
+        position: relative;
+        padding: 22px 22px 22px 30px;
+        background: var(--rt-paper-cold);
+      }
+      .ticket::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 100%;
+        background: var(--rt-orange-500);
+      }
+      .ticket .mini-label {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .ticket p { margin-bottom: 0; }
+      @media (max-width: 980px) {
+        .option { padding: 18px; }
+        .switcher { position: static; margin-bottom: 12px; flex-wrap: wrap; }
+        .label { position: static; display: inline-flex; margin-bottom: 12px; }
+        .report-top { align-items: flex-start; flex-direction: column; }
+        .option-a .report-main,
+        .option-b .report-main,
+        .option-c .report-main {
+          grid-template-columns: 1fr;
+        }
+        .grid-3,
+        .option-a .section-grid,
+        .option-b .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .option-c .cover-ticket { position: static; min-height: 440px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="switcher" aria-label="Option navigation">
+      <a href="#option-a">Option A</a>
+      <a href="#option-b">Option B</a>
+      <a href="#option-c">Option C</a>
+    </nav>
+
+    <section class="option option-a" id="option-a">
+      <div class="label">OPTION A · EXECUTIVE REPORT SHEET</div>
+      <div class="report-shell">
+        <header class="report-top">
+          <div class="brand">
+            <img src="../src/assets/rt-monogram-clean.png" alt="" />
+            <strong>Right Thurr Autopilot Blueprint</strong>
+          </div>
+          <div class="report-status">Generated · Ready for Review</div>
+        </header>
+        <main class="report-main">
+          <section class="hero-panel">
+            <img class="watermark" src="../src/assets/rt-monogram-clean.png" alt="" />
+            <div class="eyebrow">AI BUSINESS BUILDOUT PLAN</div>
+            <h1>Dallas Mobile Detailing Engine</h1>
+            <p>
+              Build a lead capture and follow-up system around a fast first offer, then use
+              automation to turn missed inquiries into booked jobs.
+            </p>
+            <div class="grid-3 summary">
+              <div class="tile"><span class="mini-label">Best first offer</span><strong class="value">$149 express detail</strong></div>
+              <div class="tile"><span class="mini-label">Revenue potential</span><strong class="value">$6k-$12k/mo</strong></div>
+              <div class="tile"><span class="mini-label">First system</span><strong class="value">Lead capture</strong></div>
+            </div>
+            <div class="section-grid">
+              <div class="tile"><h3>Funnel Strategy</h3><p>One-page local landing page, booking CTA, proof block, and SMS/email follow-up.</p></div>
+              <div class="tile"><h3>Automation Stack</h3><p>n8n webhook, Supabase lead table, CRM tag, Gmail/SMS alert, daily owner summary.</p></div>
+              <div class="tile"><h3>AI Agents</h3><p>Opportunity, Funnel, Revenue, Automation, and Execution agents work in sequence.</p></div>
+              <div class="tile"><h3>Bottleneck</h3><p>No consistent capture path. Leads arrive through scattered channels and go cold.</p></div>
+            </div>
+          </section>
+          <aside>
+            <div class="tile">
+              <span class="mini-label">Recommended Next Step</span>
+              <h3>Launch the first system.</h3>
+              <p>Ideas do not pay you. Systems do. This blueprint shows what to build first.</p>
+            </div>
+            <div class="tile">
+              <span class="mini-label">30-Day Roadmap</span>
+              <div class="roadmap">
+                <div><span>01</span><strong>Approve offer and niche promise</strong></div>
+                <div><span>07</span><strong>Publish lead capture page</strong></div>
+                <div><span>14</span><strong>Connect CRM and follow-up</strong></div>
+                <div><span>30</span><strong>Review revenue and scale path</strong></div>
+              </div>
+            </div>
+            <div class="stamp">Build First System →</div>
+          </aside>
+        </main>
+      </div>
+    </section>
+
+    <section class="option option-b" id="option-b">
+      <div class="label">OPTION B · COMMAND CENTER REPORT</div>
+      <div class="report-shell">
+        <header class="report-top">
+          <div class="brand">
+            <img src="../src/assets/rt-monogram-clean.png" alt="" />
+            <strong>Right Thurr Report Engine</strong>
+          </div>
+          <div class="report-status">AI Engine Active · 128 Tasks Today</div>
+        </header>
+        <main class="report-main">
+          <aside class="rail">
+            <a href="#option-b">Opportunity</a>
+            <a href="#option-b">Business Model</a>
+            <a href="#option-b">Revenue</a>
+            <a href="#option-b">Funnel</a>
+            <a href="#option-b">Automation</a>
+            <a href="#option-b">Agents</a>
+            <a href="#option-b">Roadmap</a>
+            <a href="#option-b">Next Step</a>
+          </aside>
+          <section class="command">
+            <div class="eyebrow">GENERATED AUTOPILOT BLUEPRINT</div>
+            <h1>Your first system is a lead-to-booking engine.</h1>
+            <p>
+              The machine found the simplest revenue path: a specific local service offer, one
+              conversion page, fast response automation, and a 30-day execution queue.
+            </p>
+            <div class="grid-3">
+              <div class="tile"><span class="mini-label">Confidence</span><strong class="value">87%</strong></div>
+              <div class="tile"><span class="mini-label">Launch path</span><strong class="value">30 days</strong></div>
+              <div class="tile"><span class="mini-label">Money path</span><strong class="value">Booked jobs</strong></div>
+            </div>
+            <div class="tile">
+              <span class="mini-label">What To Build First</span>
+              <h3>Lead capture system with AI-assisted follow-up.</h3>
+              <p>
+                Capture name, phone, vehicle type, location, and urgency. Route the lead into CRM,
+                notify the owner, and send a follow-up sequence if they do not book.
+              </p>
+            </div>
+            <div class="tile">
+              <span class="mini-label">30-Day Launch Roadmap</span>
+              <div class="roadmap">
+                <div><span>W1</span><strong>Offer, landing page, intake form, CRM fields</strong></div>
+                <div><span>W2</span><strong>n8n lead routing, email/SMS follow-up, owner alerts</strong></div>
+                <div><span>W3</span><strong>Local lead sources, outreach list, content starter pack</strong></div>
+                <div><span>W4</span><strong>Revenue review, bottleneck fix, second offer test</strong></div>
+              </div>
+            </div>
+          </section>
+          <aside class="activity">
+            <div class="eyebrow">WHAT THE SYSTEM DID</div>
+            <div class="feed-item"><time>10:42</time><div><strong>Opportunity Agent</strong><span>Ranked local service as fastest path.</span></div></div>
+            <div class="feed-item"><time>10:45</time><div><strong>Funnel Agent</strong><span>Built the capture and booking path.</span></div></div>
+            <div class="feed-item"><time>10:49</time><div><strong>Revenue Agent</strong><span>Mapped offer ladder and monthly target.</span></div></div>
+            <div class="feed-item"><time>10:52</time><div><strong>Execution Agent</strong><span>Queued the first 10 launch tasks.</span></div></div>
+            <div class="stamp">Blueprint Ready →</div>
+          </aside>
+        </main>
+      </div>
+    </section>
+
+    <section class="option option-c" id="option-c">
+      <div class="label">OPTION C · PRINTABLE BLUEPRINT STACK</div>
+      <div class="report-shell">
+        <header class="report-top">
+          <div class="brand">
+            <img src="../src/assets/rt-monogram-clean.png" alt="" />
+            <strong>Right Thurr Client Blueprint</strong>
+          </div>
+          <div class="report-status">PDF / Web Report Ready</div>
+        </header>
+        <main class="report-main">
+          <section class="cover-ticket">
+            <div class="eyebrow">RIGHT THURR AUTOPILOT BLUEPRINT</div>
+            <h1>Business buildout plan.</h1>
+            <p>
+              A client-ready report that can become a PDF, sales follow-up, or internal build ticket.
+            </p>
+          </section>
+          <section class="ticket-stack">
+            <article class="ticket"><span class="mini-label">01 <b>Opportunity</b></span><h3>Mobile detailing wins because urgency and local intent are high.</h3><p>The first version should focus on speed, trust, and booking simplicity.</p></article>
+            <article class="ticket"><span class="mini-label">02 <b>Business Model</b></span><h3>Start with service revenue, then add membership and fleet packages.</h3><p>Simple cash flow first, recurring relationships second.</p></article>
+            <article class="ticket"><span class="mini-label">03 <b>Revenue Potential</b></span><h3>$6k-$12k monthly target after offer, lead source, and follow-up are consistent.</h3><p>Track booked jobs, close rate, average ticket, and lost-lead reasons.</p></article>
+            <article class="ticket"><span class="mini-label">04 <b>Automation Stack</b></span><h3>n8n, Supabase, Gmail/SMS, CRM, and daily operator summary.</h3><p>The system must show what it did, not hide in the background.</p></article>
+            <article class="ticket"><span class="mini-label">05 <b>Next Step</b></span><h3>Your blueprint is ready. The only thing missing is execution.</h3><p>Right Thurr can build the first system and prove the machine works.</p></article>
+            <div class="stamp">Ideas Do Not Pay You → Systems Do</div>
+          </section>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>
