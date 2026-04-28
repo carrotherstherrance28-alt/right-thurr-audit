@@ -29,6 +29,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Apply browser comments: remove header wordmark, revise hero headline, convert brand image to watermark treatment.
 - [x] Create 3 homepage screenshot options before coding the next visual direction.
 - [x] Add secondary R+T logo as favicon and website/social preview cover.
+- [x] Add robots.txt, sitemap.xml, web app manifest, theme color, and Apple touch icon.
+- [x] Add direct setup checklist for GitHub, Vercel, n8n, Supabase, and domains.
 - [ ] Run app locally and verify the first screen.
 - [ ] Fix responsive/layout issues from browser review.
 - [ ] Create clean repo branch and first commit.

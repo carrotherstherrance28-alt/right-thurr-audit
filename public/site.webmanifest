@@ -1,0 +1,17 @@
+{
+  "name": "Right Thurr",
+  "short_name": "Right Thurr",
+  "description": "Turn your idea into a live business system with an AI Business Buildout Plan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5EFE2",
+  "theme_color": "#D9621F",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
