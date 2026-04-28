@@ -43,6 +43,30 @@ const {
   tasks,
 } = rightThurrMockData;
 
+const publicNavItems = [
+  ['Home', 'home'],
+  ['Buildout Plan', 'buildout'],
+  ['Thurr Solutions', 'solutions'],
+  ['Blueprint Report', 'report'],
+];
+
+const operatorNavItems = [
+  ['Activity Feed', 'activity'],
+  ['Systems', 'systems'],
+  ['Money', 'money'],
+  ['AI Engine', 'ai'],
+];
+
+const operatorPages = operatorNavItems.map(([, target]) => target);
+
+function getIsOperatorPreview() {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  return new URLSearchParams(window.location.search).get('operator') === '1';
+}
+
 const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -123,7 +147,17 @@ function App() {
   const [page, setPage] = useState('home');
   const [form, setForm] = useState(fieldDefaults);
   const [submissionState, setSubmissionState] = useState('idle');
+  const isOperatorPreview = getIsOperatorPreview();
   const currentStep = useMemo(() => buildSteps[form.idea.length % buildSteps.length], [form.idea]);
+
+  function navigateToPage(target) {
+    if (!isOperatorPreview && operatorPages.includes(target)) {
+      setPage('home');
+      return;
+    }
+
+    setPage(target);
+  }
 
   function updateField(field, value) {
     setForm((current) => ({ ...current, [field]: value }));
@@ -174,35 +208,37 @@ function App() {
     handleSubmit,
     submissionState,
     currentStep,
-    setPage,
+    setPage: navigateToPage,
   };
 
   return (
     <div className="app-shell">
       <header className="topbar">
-        <button className="brand-lockup brand-button" type="button" onClick={() => setPage('home')}>
+        <button className="brand-lockup brand-button" type="button" onClick={() => navigateToPage('home')}>
           <img src={monogram} alt="" className="brand-mark" />
         </button>
         <nav className="nav-tabs" aria-label="Primary navigation">
-          {[
-            ['Home', 'home'],
-            ['Buildout Plan', 'buildout'],
-            ['Thurr Solutions', 'solutions'],
-            ['Blueprint Report', 'report'],
-            ['Activity Feed', 'activity'],
-            ['Systems', 'systems'],
-            ['Money', 'money'],
-            ['AI Engine', 'ai'],
-          ].map(([label, target]) => (
+          {publicNavItems.map(([label, target]) => (
             <button
               className={page === target ? 'nav-tab active' : 'nav-tab'}
               key={label}
               type="button"
-              onClick={() => setPage(target)}
+              onClick={() => navigateToPage(target)}
             >
               {label}
             </button>
           ))}
+          {isOperatorPreview &&
+            operatorNavItems.map(([label, target]) => (
+              <button
+                className={page === target ? 'nav-tab active operator-nav-tab' : 'nav-tab operator-nav-tab'}
+                key={label}
+                type="button"
+                onClick={() => navigateToPage(target)}
+              >
+                {label}
+              </button>
+            ))}
           {page === 'home' && (
             <>
               <a className="nav-tab" href="#blueprint">Blueprint</a>
@@ -219,12 +255,12 @@ function App() {
 
       {page === 'home' && <HomePage {...sharedProps} />}
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
-      {page === 'solutions' && <SolutionsPage setPage={setPage} />}
-      {page === 'report' && <BlueprintReportPage setPage={setPage} />}
-      {page === 'activity' && <ActivityFeedPage setPage={setPage} />}
-      {page === 'systems' && <SystemsPage setPage={setPage} />}
-      {page === 'money' && <MoneyPage setPage={setPage} />}
-      {page === 'ai' && <AIEnginePage setPage={setPage} />}
+      {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
+      {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
+      {isOperatorPreview && page === 'activity' && <ActivityFeedPage setPage={navigateToPage} />}
+      {isOperatorPreview && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
+      {isOperatorPreview && page === 'money' && <MoneyPage setPage={navigateToPage} />}
+      {isOperatorPreview && page === 'ai' && <AIEnginePage setPage={navigateToPage} />}
     </div>
   );
 }

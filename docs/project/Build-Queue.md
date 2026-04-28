@@ -8,6 +8,8 @@ Use the Right Thurr / Thurr Solutions design system only for our owned brands.
 
 Client diagnostic funnels can use the same backend engine, but they must stay visually re-skinnable and should not inherit Right Thurr styling unless the work is a Thurr Solutions case study or sales asset.
 
+Public visitors should only see the sales, buildout intake, Thurr Solutions, and sample blueprint views. Operator screens such as Activity Feed, Systems, Money, and AI Engine are owner/admin views and should stay out of the public navigation until real authentication exists.
+
 Before coding major visual changes, create 3 different example screenshots/options for review. The user chooses one direction or combines parts, then implementation starts.
 
 ## Phase 1: Foundation
@@ -66,6 +68,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Fix n8n Slack credential/channel access for buildout request alerts.
 - [x] Create Discord `#leads-alerts` webhook.
 - [x] Add Discord buildout request alert to n8n.
+- [x] Hide owner/operator screens from public website navigation.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
@@ -101,6 +104,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Create 3 AI Engine screen options before coding.
 - [x] Add AI Engine screen.
 - [x] Add mock local data store.
+- [ ] Add real owner authentication before storing or showing private client/operator data.
 - [ ] Add exportable report layout.
 
 ## Phase 4: Backend Execution Engine
@@ -150,7 +154,8 @@ Daily session:
 - [x] Verified the Discord `#leads-alerts` node ran in the successful execution.
 - [x] Deployed and verified the AI Engine screen.
 - [x] Moved MVP mock app data into `src/data/rightThurrMockData.js`.
+- [x] Split public website navigation from owner/operator preview screens.
 
 ## Next Task
 
-Create 3 exportable report layout options, choose the strongest direction, then add a printable/export-ready Autopilot Blueprint report view.
+Verify the public site hides owner screens, then create 3 exportable report layout options and add a printable/export-ready Autopilot Blueprint report view.

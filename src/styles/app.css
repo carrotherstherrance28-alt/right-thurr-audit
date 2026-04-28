@@ -105,6 +105,17 @@ button {
   border-color: var(--rt-ink-900);
 }
 
+.operator-nav-tab {
+  border-color: rgba(217, 98, 31, 0.35);
+  color: var(--rt-orange-700);
+}
+
+.operator-nav-tab.active {
+  background: var(--rt-orange-600);
+  color: var(--rt-paper-cold);
+  border-color: var(--rt-orange-600);
+}
+
 .system-live {
   display: flex;
   align-items: center;
