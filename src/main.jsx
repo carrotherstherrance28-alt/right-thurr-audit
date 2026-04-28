@@ -132,23 +132,74 @@ const attentionItems = [
 
 const systemCards = [
   {
+    id: 'detailing',
     name: 'Dallas Mobile Detailing Engine',
     status: 'Building',
     revenue: '$0',
     action: 'Autopilot Blueprint generated',
+    mission: 'Launch the first lead capture and booking system.',
+    offer: '$149 Express Detail',
+    page: 'Landing page draft ready',
+    crm: 'Lead table connected',
+    automations: 'Discord alert live',
+    agents: '5 agents assigned',
+    logs: '4 events today',
+    next: 'Approve starter offer and service area.',
   },
   {
+    id: 'roofing',
     name: 'Roofing Lead Engine',
     status: 'Needs Review',
     revenue: '$427',
     action: 'Lead follow-up sequence drafted',
+    mission: 'Turn estimate requests into booked inspection calls.',
+    offer: 'Free storm damage inspection',
+    page: 'Hero and proof section drafted',
+    crm: 'Pipeline fields mapped',
+    automations: 'Follow-up sequence queued',
+    agents: 'Funnel + Revenue active',
+    logs: '3 events today',
+    next: 'Review follow-up script before outreach.',
   },
   {
+    id: 'cleaning',
     name: 'Cleaning Booking Engine',
     status: 'Live',
     revenue: '$1,280',
     action: 'Daily revenue summary sent',
+    mission: 'Keep booking flow live and find the next upsell.',
+    offer: 'Recurring clean starter package',
+    page: 'Published',
+    crm: 'Booking tracker active',
+    automations: 'Daily summary running',
+    agents: 'Operator + Finance active',
+    logs: '6 events today',
+    next: 'Add referral request automation.',
   },
+  {
+    id: 'content',
+    name: 'Content Brand Engine',
+    status: 'Paused',
+    revenue: '$0',
+    action: 'Niche research waiting',
+    mission: 'Choose the content angle before building the calendar.',
+    offer: 'Audience-first content system',
+    page: 'Not started',
+    crm: 'Audience list pending',
+    automations: 'Paused',
+    agents: 'Research assigned',
+    logs: '1 event today',
+    next: 'Pick niche and publishing cadence.',
+  },
+];
+
+const systemAssetKeys = [
+  ['Offer', 'offer'],
+  ['Landing Page', 'page'],
+  ['CRM', 'crm'],
+  ['Automations', 'automations'],
+  ['AI Agents', 'agents'],
+  ['Logs', 'logs'],
 ];
 
 const tasks = [
@@ -315,6 +366,7 @@ function App() {
             ['Thurr Solutions', 'solutions'],
             ['Blueprint Report', 'report'],
             ['Activity Feed', 'activity'],
+            ['Systems', 'systems'],
           ].map(([label, target]) => (
             <button
               className={page === target ? 'nav-tab active' : 'nav-tab'}
@@ -344,7 +396,48 @@ function App() {
       {page === 'solutions' && <SolutionsPage setPage={setPage} />}
       {page === 'report' && <BlueprintReportPage setPage={setPage} />}
       {page === 'activity' && <ActivityFeedPage setPage={setPage} />}
+      {page === 'systems' && <SystemsPage setPage={setPage} />}
     </div>
+  );
+}
+
+function SystemsPage({ setPage }) {
+  const [selectedSystemId, setSelectedSystemId] = useState(systemCards[0].id);
+  const selectedSystem = systemCards.find((system) => system.id === selectedSystemId) ?? systemCards[0];
+
+  return (
+    <main className="systems-page" id="top">
+      <section className="systems-hero">
+        <div className="hero-copy">
+          <div className="eyebrow">MY SYSTEMS</div>
+          <h1>Each business gets its own machine.</h1>
+          <p>
+            A System is the workspace for the offer, landing page, CRM, automations, agents,
+            revenue tracking, logs, and next action.
+          </p>
+          <div className="hero-actions">
+            <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
+              START A NEW SYSTEM
+              <ArrowUpRight size={18} strokeWidth={3} />
+            </button>
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('activity')}>
+              View activity feed
+            </button>
+          </div>
+        </div>
+        <aside className="systems-hero-stamp">
+          <span>Systems Running</span>
+          <strong>{systemCards.length}</strong>
+          <p>One workspace per business build.</p>
+        </aside>
+      </section>
+
+      <SystemCockpit
+        selectedSystem={selectedSystem}
+        selectedSystemId={selectedSystemId}
+        setSelectedSystemId={setSelectedSystemId}
+      />
+    </main>
   );
 }
 
@@ -978,6 +1071,61 @@ function MissionActivityFeed() {
             <p>{item.text}</p>
           </article>
         ))}
+      </aside>
+    </section>
+  );
+}
+
+function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }) {
+  return (
+    <section className="system-cockpit" aria-label="Right Thurr system workspace">
+      <aside className="system-selector-panel">
+        <div className="eyebrow">SYSTEMS</div>
+        <div className="system-selector-list">
+          {systemCards.map((system) => (
+            <button
+              className={system.id === selectedSystemId ? 'system-selector active' : 'system-selector'}
+              key={system.id}
+              type="button"
+              onClick={() => setSelectedSystemId(system.id)}
+            >
+              <strong>{system.name}</strong>
+              <span>{system.status}</span>
+            </button>
+          ))}
+        </div>
+      </aside>
+
+      <section className="system-workspace-panel">
+        <div className="status-stamp">{selectedSystem.status}</div>
+        <h2>{selectedSystem.name}</h2>
+        <p>{selectedSystem.mission}</p>
+        <div className="system-asset-grid">
+          {systemAssetKeys.map(([label, key]) => (
+            <article className="system-asset" key={label}>
+              <span>{label}</span>
+              <h3>{selectedSystem[key]}</h3>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <aside className="system-next-panel">
+        <div className="eyebrow">NEXT ACTION</div>
+        <h3>{selectedSystem.next}</h3>
+        <p>
+          Right Thurr keeps the workspace organized so the next build step is always visible.
+        </p>
+        <div className="system-mini-stats">
+          <div>
+            <span>Revenue</span>
+            <strong>{selectedSystem.revenue}</strong>
+          </div>
+          <div>
+            <span>Last Action</span>
+            <strong>{selectedSystem.action}</strong>
+          </div>
+        </div>
       </aside>
     </section>
   );

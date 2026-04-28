@@ -94,7 +94,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add generated Autopilot Blueprint view.
 - [x] Create 3 Activity Feed screen options before coding.
 - [x] Add Activity Feed screen.
-- [ ] Add Systems screen.
+- [x] Create 3 Systems screen options before coding.
+- [x] Add Systems screen.
 - [ ] Add Money screen with manual entries.
 - [ ] Add AI Engine screen.
 - [ ] Add mock local data store.
@@ -148,4 +149,4 @@ Daily session:
 
 ## Next Task
 
-Deploy the Activity Feed view, verify it live, then create 3 Systems screen options before coding the next app view.
+Deploy the Systems screen, verify it live, then create 3 Money screen options before coding the next app view.

@@ -20,6 +20,7 @@ Check:
 - Thurr Solutions view opens.
 - Blueprint Report view opens.
 - Activity Feed view opens.
+- Systems view opens.
 - R+T favicon appears.
 - Social preview image is available at `/og-image.png`.
 - `robots.txt` is available at `/robots.txt`.

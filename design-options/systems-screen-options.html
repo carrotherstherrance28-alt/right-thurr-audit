@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Right Thurr Systems Screen Options</title>
+    <link rel="stylesheet" href="../src/styles/brand-tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background:
+          linear-gradient(90deg, rgba(26, 23, 20, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(26, 23, 20, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          var(--rt-paper);
+        color: var(--rt-ink-900);
+        font-family: var(--font-body);
+      }
+      .option { display: none; min-height: 100vh; padding: 28px; }
+      .option:target { display: block; }
+      body:not(:has(.option:target)) #option-a { display: block; }
+      .label {
+        position: fixed;
+        z-index: 5;
+        top: 14px;
+        left: 14px;
+        padding: 8px 12px;
+        background: var(--rt-ink-900);
+        border: 2px solid var(--rt-orange-500);
+        color: var(--rt-paper);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .switcher {
+        position: fixed;
+        z-index: 5;
+        top: 14px;
+        right: 14px;
+        display: flex;
+        gap: 8px;
+      }
+      .switcher a {
+        padding: 9px 12px;
+        background: var(--rt-paper-cold);
+        border: 2px solid var(--rt-ink-900);
+        color: var(--rt-ink-900);
+        font-family: var(--font-subhead);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .shell { width: min(1380px, 100%); margin: 0 auto; padding-top: 58px; }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-bottom: 20px;
+        border-bottom: 4px solid var(--rt-ink-900);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .brand img { width: 52px; height: 52px; object-fit: contain; }
+      .status {
+        color: var(--rt-success);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 {
+        margin-bottom: 18px;
+        font-family: var(--font-display-rt);
+        font-size: clamp(58px, 7vw, 106px);
+        line-height: .98;
+        letter-spacing: 0;
+      }
+      h2 {
+        margin-bottom: 12px;
+        font-family: var(--font-display-ts);
+        font-size: clamp(34px, 4vw, 58px);
+        line-height: 1;
+      }
+      h3 {
+        margin-bottom: 8px;
+        font-family: var(--font-display-ts);
+        font-size: 24px;
+        line-height: 1.05;
+      }
+      p { color: var(--rt-ink-700); font-size: 18px; line-height: 1.45; }
+      .eyebrow,
+      .tag,
+      .small-label {
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .eyebrow { margin-bottom: 14px; color: var(--rt-orange-600); font-size: 13px; }
+      .tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 7px 12px;
+        background: var(--rt-orange-500);
+        border: 2px solid var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+        font-size: 11px;
+      }
+      .card,
+      .panel,
+      .table {
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 6px 6px 0 var(--rt-ink-900);
+        background: var(--rt-paper-cold);
+      }
+      .option-a .hero {
+        display: grid;
+        grid-template-columns: minmax(0, .42fr) minmax(0, 1fr);
+        gap: 28px;
+        padding-top: 36px;
+      }
+      .option-a .panel {
+        min-height: 640px;
+        padding: 30px;
+      }
+      .system-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .system-card {
+        display: grid;
+        gap: 16px;
+        min-height: 310px;
+        padding: 22px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .stat {
+        padding: 12px;
+        border: 2px solid var(--rt-ink-200);
+      }
+      .stat span,
+      .small-label {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--rt-ink-500);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .stat strong {
+        font-family: var(--font-display-ts);
+        font-size: 28px;
+        line-height: 1;
+      }
+      .option-b {
+        background:
+          linear-gradient(90deg, rgba(245, 239, 226, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(245, 239, 226, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          var(--rt-ink-900);
+        color: var(--rt-paper);
+      }
+      .option-b header { border-color: rgba(245,239,226,.34); }
+      .option-b h1, .option-b h2, .option-b h3 { color: var(--rt-paper-cold); }
+      .option-b p { color: var(--rt-paper); }
+      .option-b .dashboard {
+        display: grid;
+        grid-template-columns: minmax(280px, .34fr) minmax(0, 1fr);
+        gap: 20px;
+        padding-top: 34px;
+      }
+      .option-b .panel,
+      .option-b .table {
+        background: rgba(245,239,226,.06);
+        border-color: rgba(245,239,226,.32);
+        box-shadow: 6px 6px 0 var(--rt-orange-500);
+      }
+      .option-b .panel { padding: 24px; }
+      .system-row {
+        display: grid;
+        grid-template-columns: minmax(220px, 1fr) 110px 120px minmax(170px, .7fr) 110px;
+        gap: 14px;
+        align-items: center;
+        padding: 18px;
+        border-bottom: 1px solid rgba(245,239,226,.2);
+      }
+      .system-row.header {
+        color: var(--rt-orange-300);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .system-row strong,
+      .system-row span { color: var(--rt-paper-cold); }
+      .health {
+        width: fit-content;
+        padding: 6px 10px;
+        background: var(--rt-success);
+        border: 2px solid var(--rt-paper-cold);
+        color: var(--rt-paper-cold);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .option-c .cockpit {
+        display: grid;
+        grid-template-columns: minmax(300px, .42fr) minmax(0, 1fr) minmax(280px, .32fr);
+        gap: 18px;
+        padding-top: 34px;
+      }
+      .option-c .panel { padding: 22px; min-height: 650px; }
+      .system-list {
+        display: grid;
+        gap: 12px;
+      }
+      .system-tab {
+        display: grid;
+        gap: 6px;
+        padding: 14px;
+        background: var(--rt-paper);
+        border: 2px solid var(--rt-ink-900);
+      }
+      .system-tab.active {
+        background: var(--rt-orange-500);
+        color: var(--rt-paper-cold);
+      }
+      .system-tab.active span { color: var(--rt-paper-cold); }
+      .asset-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .asset {
+        padding: 16px;
+        background: var(--rt-paper);
+        border: 2px solid var(--rt-ink-900);
+      }
+      @media (max-width: 980px) {
+        .option { padding: 18px; }
+        .label, .switcher { position: static; margin-bottom: 12px; flex-wrap: wrap; }
+        .option-a .hero,
+        .option-b .dashboard,
+        .option-c .cockpit,
+        .system-grid,
+        .asset-grid { grid-template-columns: 1fr; }
+        .system-row { grid-template-columns: 1fr; }
+        .system-row.header { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="switcher" aria-label="Option navigation">
+      <a href="#option-a">Option A</a>
+      <a href="#option-b">Option B</a>
+      <a href="#option-c">Option C</a>
+    </nav>
+
+    <section class="option option-a" id="option-a">
+      <div class="label">OPTION A · SYSTEM CARDS</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Systems</div><div class="status">4 Systems Running</div></header>
+        <main class="hero">
+          <aside class="panel">
+            <div class="eyebrow">MY SYSTEMS</div>
+            <h1>Each business has a machine.</h1>
+            <p>Big, scannable workspace cards. Best for an MVP because the user understands what is live, building, or stuck.</p>
+          </aside>
+          <section class="system-grid">
+            <article class="card system-card"><span class="tag">Building</span><h3>Dallas Mobile Detailing Engine</h3><p>Lead capture, offer page, CRM routing, Discord alert, and 30-day launch queue.</p><div class="stats"><div class="stat"><span>Revenue</span><strong>$0</strong></div><div class="stat"><span>Last Action</span><strong>Blueprint</strong></div></div></article>
+            <article class="card system-card"><span class="tag">Needs Review</span><h3>Roofing Lead Engine</h3><p>Landing page outline is ready. Follow-up script needs owner approval.</p><div class="stats"><div class="stat"><span>Revenue</span><strong>$427</strong></div><div class="stat"><span>Last Action</span><strong>Follow-up</strong></div></div></article>
+            <article class="card system-card"><span class="tag">Live</span><h3>Cleaning Booking Engine</h3><p>Daily summary sent, revenue logged, next upsell task queued.</p><div class="stats"><div class="stat"><span>Revenue</span><strong>$1.2k</strong></div><div class="stat"><span>Last Action</span><strong>Summary</strong></div></div></article>
+            <article class="card system-card"><span class="tag">Paused</span><h3>Content Brand Engine</h3><p>Waiting on niche decision before content calendar generation.</p><div class="stats"><div class="stat"><span>Revenue</span><strong>$0</strong></div><div class="stat"><span>Last Action</span><strong>Research</strong></div></div></article>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section class="option option-b" id="option-b">
+      <div class="label">OPTION B · SYSTEM COMMAND TABLE</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Operations</div><div class="status">Operator View</div></header>
+        <main class="dashboard">
+          <aside class="panel">
+            <div class="eyebrow">SYSTEMS RUNNING</div>
+            <h1>4</h1>
+            <p>Dense operating table for comparing systems, revenue, health, and next action without clicking into every workspace.</p>
+            <div class="stats"><div class="stat"><span>Total Revenue</span><strong>$2.1k</strong></div><div class="stat"><span>Issues</span><strong>1</strong></div></div>
+          </aside>
+          <section class="table">
+            <div class="system-row header"><span>System</span><span>Status</span><span>Revenue</span><span>Last Action</span><span>Health</span></div>
+            <div class="system-row"><strong>Dallas Mobile Detailing Engine</strong><span>Building</span><span>$0</span><span>Autopilot Blueprint generated</span><span class="health">Active</span></div>
+            <div class="system-row"><strong>Roofing Lead Engine</strong><span>Needs Review</span><span>$427</span><span>Lead follow-up sequence drafted</span><span class="health">Review</span></div>
+            <div class="system-row"><strong>Cleaning Booking Engine</strong><span>Live</span><span>$1,280</span><span>Daily revenue summary sent</span><span class="health">Live</span></div>
+            <div class="system-row"><strong>Content Brand Engine</strong><span>Paused</span><span>$0</span><span>Niche research waiting</span><span class="health">Paused</span></div>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section class="option option-c" id="option-c">
+      <div class="label">OPTION C · SYSTEM COCKPIT</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Workspace</div><div class="status">System Detail</div></header>
+        <main class="cockpit">
+          <aside class="panel">
+            <div class="eyebrow">SYSTEMS</div>
+            <div class="system-list">
+              <div class="system-tab active"><strong>Dallas Mobile Detailing Engine</strong><span class="small-label">Building</span></div>
+              <div class="system-tab"><strong>Roofing Lead Engine</strong><span class="small-label">Needs Review</span></div>
+              <div class="system-tab"><strong>Cleaning Booking Engine</strong><span class="small-label">Live</span></div>
+            </div>
+          </aside>
+          <section class="panel">
+            <span class="tag">Building</span>
+            <h2>Dallas Mobile Detailing Engine</h2>
+            <p>One workspace that contains the offer, landing page, CRM, automations, AI agents, revenue tracking, and logs.</p>
+            <div class="asset-grid">
+              <div class="asset"><span class="small-label">Offer</span><h3>$149 Express Detail</h3></div>
+              <div class="asset"><span class="small-label">Landing Page</span><h3>Draft Ready</h3></div>
+              <div class="asset"><span class="small-label">CRM</span><h3>Lead Table Connected</h3></div>
+              <div class="asset"><span class="small-label">Automations</span><h3>Discord Alert Live</h3></div>
+              <div class="asset"><span class="small-label">Agents</span><h3>5 Agents Assigned</h3></div>
+              <div class="asset"><span class="small-label">Logs</span><h3>4 Events Today</h3></div>
+            </div>
+          </section>
+          <aside class="panel">
+            <div class="eyebrow">NEXT ACTION</div>
+            <h3>Approve starter offer.</h3>
+            <p>The machine can build the first landing page after the owner confirms the offer and service area.</p>
+          </aside>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>
