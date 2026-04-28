@@ -175,7 +175,10 @@ main {
   min-height: calc(100vh - 120px);
 }
 
-.solutions-page h1 {
+.solutions-page h1,
+.authority-section h2,
+.solutions-process h2,
+.solutions-boundary h2 {
   font-family: var(--font-display-ts);
   letter-spacing: var(--tracking-tight);
 }
