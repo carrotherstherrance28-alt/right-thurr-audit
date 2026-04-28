@@ -34,6 +34,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add robots.txt, sitemap.xml, web app manifest, theme color, and Apple touch icon.
 - [x] Add direct setup checklist for GitHub, Vercel, n8n, Supabase, and domains.
 - [x] Add deployment verification checklist.
+- [x] Add connector/plugin strategy with pros, cons, and recommended order.
 - [ ] Run app locally and verify the first screen.
 - [ ] Fix responsive/layout issues from browser review.
 - [ ] Create clean repo branch and first commit.
@@ -60,6 +61,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Create n8n workflow `Right Thurr - Buildout Plan Intake`.
 - [ ] Create n8n production webhook URL and add it to Vercel/local env.
 - [ ] Test form submission against Supabase or n8n.
+- [ ] Connect Slack alert after n8n intake works.
+- [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
 - [ ] Future domain: use `diagnostic.thurrsolutions.com` for client diagnostic funnels.
