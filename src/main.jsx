@@ -47,7 +47,7 @@ const {
 const publicNavItems = [
   ['Home', 'home'],
   ['Buildout Plan', 'buildout'],
-  ['Thurr Solutions', 'solutions'],
+  ['Thurr Solutions LLC', 'solutions'],
 ];
 
 const operatorNavItems = [
@@ -398,7 +398,7 @@ function OwnerAccessGate({ authReady, authSession, ownerAccess }) {
         <h1>Sign in to view the operator machine.</h1>
         <p>
           Command Center and Systems are private owner screens. Public visitors only see the
-          website, buildout intake, and Thurr Solutions service pages.
+          website, buildout intake, and Thurr Solutions LLC service pages.
         </p>
 
         {!authReady && <p className="form-note">Checking owner session...</p>}
@@ -527,7 +527,7 @@ function BlueprintReportPage({ setPage }) {
           <div className="eyebrow">GENERATED AUTOPILOT BLUEPRINT</div>
           <h1>Your first system is a lead-to-booking engine.</h1>
           <p>
-            This is the client-facing report view Right Thurr can generate after the intake. It
+            This is the client-facing report view Thurr Solutions LLC can generate after the intake. It
             turns an idea into a model, revenue path, funnel, automation plan, agent map, and launch
             queue.
           </p>
@@ -561,11 +561,12 @@ function SolutionsPage({ setPage }) {
     <main className="solutions-page" data-brand="thurr-solutions">
       <section className="solutions-hero">
         <div className="hero-copy">
-          <div className="eyebrow">THURR SOLUTIONS</div>
-          <h1>AI systems for small business operators.</h1>
+          <div className="eyebrow">THURR SOLUTIONS LLC</div>
+          <h1>Private AI systems for local service businesses.</h1>
           <p>
-            Thurr Solutions builds the automation, lead handling, reporting, and AI workflows that
-            make a business easier to run and easier to scale.
+            Custom AI agents, automations, lead intake, follow-up, and backend systems that help
+            contractors, salons, realtors, and service companies stop losing money from missed
+            leads and manual work.
           </p>
           <div className="hero-actions">
             <a className="stamp-button link-button" href="#solutions-services">
@@ -573,7 +574,7 @@ function SolutionsPage({ setPage }) {
               <ArrowUpRight size={18} strokeWidth={3} />
             </a>
             <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
-              View Right Thurr product
+              View buildout plan
             </button>
           </div>
         </div>
@@ -627,7 +628,7 @@ function SolutionsPage({ setPage }) {
           <div className="eyebrow">HOW IT WORKS</div>
           <h2>Strategy first. Systems second. Proof always.</h2>
           <p>
-            Thurr Solutions starts with the business case, then builds the workflow around the
+            Thurr Solutions LLC starts with the business case, then builds the workflow around the
             outcome. The goal is not more tools. The goal is fewer leaks.
           </p>
         </div>
@@ -655,9 +656,9 @@ function SolutionsPage({ setPage }) {
       <section className="brand-boundary solutions-boundary">
         <div>
           <div className="eyebrow">BRAND SPLIT</div>
-          <h2>Right Thurr is the product. Thurr Solutions is the builder.</h2>
+          <h2>Thurr Solutions LLC builds the systems. The client keeps the brand.</h2>
           <p>
-            Client diagnostic funnels are built by Thurr Solutions and can use the same backend
+            Client diagnostic funnels are built by Thurr Solutions LLC and can use the same backend
             engine, but the visual system stays client-owned unless the asset is a Thurr Solutions
             sales page, proposal, or case study.
           </p>
@@ -682,8 +683,8 @@ function HomePage({ form, updateField, handleSubmit, submissionState, currentSte
           <div className="eyebrow">YOUR SYSTEM IS ALREADY MOVING</div>
           <h1 id="hero-title">Ideas do not pay you. Systems do.</h1>
           <p>
-            Right Thurr turns the idea into visible action: blueprint, offer, page copy,
-            automations, tasks, and the next move.
+            Thurr Solutions LLC turns business ideas and missed-lead problems into visible action:
+            blueprint, offer, page copy, automations, tasks, and the next move.
           </p>
           <div className="hero-actions">
             <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
@@ -722,12 +723,14 @@ function HomePage({ form, updateField, handleSubmit, submissionState, currentSte
       </section>
 
       <section className="metric-strip" aria-label="Autopilot metrics">
-        <Metric icon={Gauge} label="Autopilot" value="Active" />
-        <Metric icon={Factory} label="Systems Running" value="4" />
-        <Metric icon={DollarSign} label="Revenue Today" value="$427" />
-        <Metric icon={ClipboardCheck} label="Tasks Completed" value="89" />
-        <Metric icon={Zap} label="Issues Found" value="1" />
+        <Metric icon={Gauge} label="Private Systems" value="Built" />
+        <Metric icon={Factory} label="Lead Intake" value="Automated" />
+        <Metric icon={DollarSign} label="Revenue Leaks" value="Tracked" />
+        <Metric icon={ClipboardCheck} label="Follow-Up" value="Handled" />
+        <Metric icon={Zap} label="Owner Alerts" value="Live" />
       </section>
+
+      <AuthoritySection />
 
       <section className="blueprint-showcase" id="blueprint">
         <div className="section-copy">
@@ -750,7 +753,6 @@ function HomePage({ form, updateField, handleSubmit, submissionState, currentSte
       </section>
 
       <AppPreview />
-      <BrandBoundary />
     </main>
   );
 }
@@ -763,8 +765,8 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
           <div className="eyebrow">FREE AI BUSINESS BUILDOUT PLAN</div>
           <h1>Get the blueprint before you build.</h1>
           <p>
-            Right Thurr analyzes your idea, niche, goal, and current assets, then maps the business
-            System we would build first.
+            Thurr Solutions LLC analyzes your idea, niche, goal, and current assets, then maps the
+            private AI system we would build first.
           </p>
           <div className="hero-actions">
             <a className="stamp-button link-button" href="#buildout-form">
@@ -772,7 +774,7 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
               <ArrowUpRight size={18} strokeWidth={3} />
             </a>
             <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
-              Back to product page
+              Back to home
             </button>
           </div>
         </div>
@@ -822,6 +824,44 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
         <BackendMap />
       </section>
     </main>
+  );
+}
+
+function AuthoritySection() {
+  return (
+    <section className="authority-section" id="authority">
+      <div className="section-copy">
+        <div className="eyebrow">BUILT FOR OPERATORS</div>
+        <h2>AI automation without turning your business into a course.</h2>
+        <p>
+          The long-term brand can grow into content and community, but the first offer stays
+          client-focused: private systems for local service businesses that need leads handled,
+          follow-up done, and the owner kept in the loop.
+        </p>
+      </div>
+      <div className="authority-card-grid">
+        <FlowCard
+          icon={Target}
+          title="Lead Intake"
+          text="Capture the request, qualify the opportunity, and route it before the lead cools off."
+        />
+        <FlowCard
+          icon={Zap}
+          title="Automation Build"
+          text="n8n workflows for forms, alerts, follow-up, summaries, and client-ready handoffs."
+        />
+        <FlowCard
+          icon={Bot}
+          title="Private AI Agents"
+          text="Internal agents draft reports, summarize activity, and help decide the next best move."
+        />
+        <FlowCard
+          icon={BriefcaseBusiness}
+          title="Owner Visibility"
+          text="The command center shows what happened, what changed, and what needs attention."
+        />
+      </div>
+    </section>
   );
 }
 
@@ -922,7 +962,7 @@ function BlueprintPanel() {
     <section className="blueprint-panel">
       <div className="section-title">
         <FileText size={22} strokeWidth={3} />
-        Right Thurr Autopilot Blueprint
+        Thurr Solutions LLC Autopilot Blueprint
       </div>
       <div className="blueprint-list">
         {blueprintSections.map((section, index) => (
@@ -950,7 +990,7 @@ function BlueprintCommandReport() {
 
       <section className="report-command-center" id="report-body">
         <div className="proof-header">
-          <span>RIGHT THURR REPORT ENGINE</span>
+          <span>THURR SOLUTIONS LLC REPORT ENGINE</span>
           <span className="activity-glyph">✓</span>
         </div>
         <div className="eyebrow">AI BUSINESS BUILDOUT PLAN</div>
@@ -997,8 +1037,8 @@ function BlueprintCommandReport() {
           <span>Recommended Next Step</span>
           <strong>Your blueprint is ready. The only thing missing is execution.</strong>
           <p>
-            Ideas do not pay you. Systems do. Your blueprint shows what to build. Right Thurr builds
-            the first system for you.
+            Ideas do not pay you. Systems do. Your blueprint shows what to build. Thurr Solutions
+            LLC builds the first system for you.
           </p>
         </section>
       </section>
@@ -1036,10 +1076,10 @@ function ExportReportPage({ setPage }) {
         </button>
       </section>
 
-      <article className="export-report-sheet" aria-label="Export-ready Right Thurr Autopilot Blueprint">
+      <article className="export-report-sheet" aria-label="Export-ready Thurr Solutions LLC Autopilot Blueprint">
         <header className="export-report-cover">
           <div>
-            <div className="eyebrow">Right Thurr Autopilot Blueprint</div>
+            <div className="eyebrow">Thurr Solutions LLC Autopilot Blueprint</div>
             <h1>Build the system that captures leads before they cool off.</h1>
           </div>
           <div className="export-report-status">Ready for Review</div>
@@ -1065,7 +1105,8 @@ function ExportReportPage({ setPage }) {
           <aside className="export-report-panel dark">
             <h2>Recommended Next Step</h2>
             <p>
-              Approve the starter offer and let Right Thurr build the first lead-to-booking System.
+              Approve the starter offer and let Thurr Solutions LLC build the first lead-to-booking
+              system.
             </p>
           </aside>
         </section>
@@ -1097,7 +1138,7 @@ function ExportReportPage({ setPage }) {
 
         <section className="export-report-cta">
           <strong>Ideas do not pay you. Systems do.</strong>
-          <p>Your blueprint shows what to build. Right Thurr builds the first system for you.</p>
+          <p>Your blueprint shows what to build. Thurr Solutions LLC builds the first system for you.</p>
         </section>
       </article>
     </main>
@@ -1155,7 +1196,7 @@ function ActivityPanel() {
 
 function MissionActivityFeed() {
   return (
-    <section className="mission-feed-grid" aria-label="Right Thurr mission activity feed">
+    <section className="mission-feed-grid" aria-label="Thurr Solutions LLC mission activity feed">
       <aside className="mission-status-panel">
         <div className="eyebrow">CURRENT MISSION</div>
         <h2>Build lead capture system.</h2>
@@ -1175,7 +1216,7 @@ function MissionActivityFeed() {
 
       <section className="mission-feed-panel">
         <div className="proof-header">
-          <span>RIGHT THURR ACTIVITY LOG</span>
+          <span>THURR SOLUTIONS LLC ACTIVITY LOG</span>
           <span className="activity-glyph">✓</span>
         </div>
         {activityEvents.map((event) => (
@@ -1207,7 +1248,7 @@ function MissionActivityFeed() {
 
 function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }) {
   return (
-    <section className="system-cockpit" aria-label="Right Thurr system workspace">
+    <section className="system-cockpit" aria-label="Thurr Solutions LLC system workspace">
       <aside className="system-selector-panel">
         <div className="eyebrow">SYSTEMS</div>
         <div className="system-selector-list">
@@ -1243,7 +1284,7 @@ function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }
         <div className="eyebrow">NEXT ACTION</div>
         <h3>{selectedSystem.next}</h3>
         <p>
-          Right Thurr keeps the workspace organized so the next build step is always visible.
+          Thurr Solutions LLC keeps the workspace organized so the next build step is always visible.
         </p>
         <div className="system-mini-stats">
           <div>
@@ -1262,7 +1303,7 @@ function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }
 
 function FinanceCommandCenter() {
   return (
-    <section className="finance-command-grid" aria-label="Right Thurr finance command center">
+    <section className="finance-command-grid" aria-label="Thurr Solutions LLC finance command center">
       <aside className="finance-summary-panel">
         <div className="eyebrow">FINANCE AGENT</div>
         <h2>$1,648</h2>
@@ -1321,7 +1362,7 @@ function FinanceCommandCenter() {
 
 function AIEngineOrchestra() {
   return (
-    <section className="ai-orchestra-grid" aria-label="Right Thurr AI Engine orchestration">
+    <section className="ai-orchestra-grid" aria-label="Thurr Solutions LLC AI Engine orchestration">
       <aside className="ai-mission-panel">
         <div className="eyebrow">ORCHESTRATOR</div>
         <h2>Build lead funnel.</h2>
@@ -1516,7 +1557,7 @@ function BrandBoundary() {
         </div>
         <div>
           <div className="eyebrow">BRAND BOUNDARY</div>
-          <h2>Right Thurr is the product. Thurr Solutions is the builder.</h2>
+          <h2>Thurr Solutions LLC builds the system. Client brands stay client-owned.</h2>
           <p>
             The same execution engine can power owned products, B2B services, and client
             diagnostics. The brand layer changes depending on who the system is for.
@@ -1525,8 +1566,8 @@ function BrandBoundary() {
         <div className="brand-lane-grid">
           <article>
             <Target size={24} strokeWidth={3} />
-            <h3>Right Thurr</h3>
-            <p>Product, app, public buildout plan, and owned systems from ideas.</p>
+            <h3>Thurr Solutions LLC</h3>
+            <p>Public buildout plan, B2B services, and private automation systems.</p>
           </article>
           <article>
             <BriefcaseBusiness size={24} strokeWidth={3} />

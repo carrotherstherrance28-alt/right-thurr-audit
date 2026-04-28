@@ -8,7 +8,7 @@ Use the Right Thurr / Thurr Solutions design system only for our owned brands.
 
 Client diagnostic funnels can use the same backend engine, but they must stay visually re-skinnable and should not inherit Right Thurr styling unless the work is a Thurr Solutions case study or sales asset.
 
-Public visitors should only see `Home`, `Buildout Plan`, and `Thurr Solutions` in the main navigation. Sample blueprint/report views are reached from the buildout flow, not top-level tabs.
+Public visitors should see the offer under `Thurr Solutions LLC`. Right Thurr can stay as an internal/product-engine name in backend/workflow language until the brand architecture is finalized.
 
 Operator preview should stay narrow: `Command Center` for activity, AI, money, alerts, and next moves; `Systems` for individual business workspaces. Real owner authentication is required before private client/operator data is stored or shown.
 
@@ -74,6 +74,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Consolidate repetitive owner tabs into Command Center and Systems.
 - [x] Add Supabase owner email auth gate for operator preview.
 - [x] Add local Thurnos/Ollama smoke test and bridge documentation.
+- [x] Reposition public website copy around Thurr Solutions LLC instead of Right Thurr.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
@@ -94,6 +95,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Add full accessibility and mobile QA pass.
 - [ ] Add analytics event plan for CTA/form/report/booked-call tracking.
 - [ ] Add LinkedIn-first B2B content plan.
+- [ ] Create inspiration tracker for Nate Herk and other AI automation/content references.
+- [ ] Add future community roadmap for Thurr brand after consistent content exists.
 
 ## Phase 3: Right Thurr App MVP
 
@@ -166,6 +169,7 @@ Daily session:
 - [x] Narrowed navigation to public website tabs plus owner Command Center/Systems.
 - [x] Added Supabase email magic-link gate for `?operator=1` with server-side owner email allowlist.
 - [x] Verified local `thurnos:latest` responds through Ollama.
+- [x] Updated public site positioning to `Thurr Solutions LLC`.
 
 ## Next Task
 
