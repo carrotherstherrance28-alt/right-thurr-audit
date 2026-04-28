@@ -91,8 +91,12 @@ https://supabase.com/dashboard/projects
 
 What I need:
 
-- Create a Supabase project when you are ready for real app storage.
-- Send me the project URL.
+- Supabase project is created:
+
+```text
+https://supabase.com/dashboard/project/xplfryahxdegfvxmymco
+```
+
 - Send me the public anon key only when we are ready to wire the frontend.
 - Do not send service role keys in chat.
 

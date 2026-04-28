@@ -56,6 +56,8 @@ Environment variables:
 
 ```text
 VITE_N8N_BUILDOUT_WEBHOOK_URL=
+VITE_SUPABASE_URL=https://xplfryahxdegfvxmymco.supabase.co
+VITE_SUPABASE_ANON_KEY=<stored in .env.local and Vercel env>
 ```
 
 Leave the webhook variable empty until the n8n workflow exists.
@@ -120,6 +122,24 @@ Supabase:
 
 ```text
 https://supabase.com/dashboard/projects
+```
+
+Current Right Thurr Supabase project:
+
+```text
+https://supabase.com/dashboard/project/xplfryahxdegfvxmymco
+```
+
+Project ref:
+
+```text
+xplfryahxdegfvxmymco
+```
+
+Schema setup:
+
+```text
+docs/backend/Supabase-Schema.sql
 ```
 
 ## Current Local Commands
