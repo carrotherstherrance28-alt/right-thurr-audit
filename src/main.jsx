@@ -257,6 +257,7 @@ function App() {
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
       {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
       {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
+      {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
       {isOperatorPreview && page === 'activity' && <ActivityFeedPage setPage={navigateToPage} />}
       {isOperatorPreview && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
       {isOperatorPreview && page === 'money' && <MoneyPage setPage={navigateToPage} />}
@@ -423,6 +424,9 @@ function BlueprintReportPage({ setPage }) {
             </button>
             <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
               Back to machine
+            </button>
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('export')}>
+              Export-ready view
             </button>
           </div>
         </div>
@@ -902,6 +906,87 @@ function BlueprintCommandReport() {
         </div>
       </aside>
     </section>
+  );
+}
+
+function ExportReportPage({ setPage }) {
+  return (
+    <main className="export-report-page" id="top">
+      <section className="export-report-toolbar">
+        <button className="text-link dark-link button-link" type="button" onClick={() => setPage('report')}>
+          Back to blueprint
+        </button>
+        <button className="stamp-button link-button" type="button" onClick={() => window.print()}>
+          PRINT / SAVE PDF
+          <FileText size={18} strokeWidth={3} />
+        </button>
+      </section>
+
+      <article className="export-report-sheet" aria-label="Export-ready Right Thurr Autopilot Blueprint">
+        <header className="export-report-cover">
+          <div>
+            <div className="eyebrow">Right Thurr Autopilot Blueprint</div>
+            <h1>Build the system that captures leads before they cool off.</h1>
+          </div>
+          <div className="export-report-status">Ready for Review</div>
+        </header>
+
+        <section className="export-report-summary">
+          <article className="export-report-panel">
+            <h2>Your Business Opportunity</h2>
+            <p>
+              Mobile detailing has urgent buyer intent, strong local search behavior, and
+              repeat-purchase potential. The first build should make the offer easy to understand
+              and easy to book.
+            </p>
+            <div className="export-report-metrics">
+              {reportMetrics.map(([label, value]) => (
+                <div className="export-report-metric" key={label}>
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </div>
+              ))}
+            </div>
+          </article>
+          <aside className="export-report-panel dark">
+            <h2>Recommended Next Step</h2>
+            <p>
+              Approve the starter offer and let Right Thurr build the first lead-to-booking System.
+            </p>
+          </aside>
+        </section>
+
+        <section className="export-report-section">
+          <div className="export-report-section-title">Blueprint Sections</div>
+          <div className="export-ticket-grid">
+            {reportCards.map((card, index) => (
+              <article className="export-ticket" key={card.label}>
+                <span>{String(index + 1).padStart(2, '0')} {card.label}</span>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="export-report-section">
+          <div className="export-report-section-title">30-Day Launch Roadmap</div>
+          <div className="export-roadmap">
+            {roadmapWeeks.map(([week, item]) => (
+              <div className="export-roadmap-row" key={week}>
+                <span>{week}</span>
+                <strong>{item}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="export-report-cta">
+          <strong>Ideas do not pay you. Systems do.</strong>
+          <p>Your blueprint shows what to build. Right Thurr builds the first system for you.</p>
+        </section>
+      </article>
+    </main>
   );
 }
 

@@ -105,7 +105,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add AI Engine screen.
 - [x] Add mock local data store.
 - [ ] Add real owner authentication before storing or showing private client/operator data.
-- [ ] Add exportable report layout.
+- [x] Create 3 exportable report layout options before coding.
+- [x] Add exportable report layout.
 
 ## Phase 4: Backend Execution Engine
 
@@ -155,7 +156,8 @@ Daily session:
 - [x] Deployed and verified the AI Engine screen.
 - [x] Moved MVP mock app data into `src/data/rightThurrMockData.js`.
 - [x] Split public website navigation from owner/operator preview screens.
+- [x] Added export-ready Autopilot Blueprint report view using Option A.
 
 ## Next Task
 
-Verify the public site hides owner screens, then create 3 exportable report layout options and add a printable/export-ready Autopilot Blueprint report view.
+Verify the latest Vercel deployment, then add real owner authentication before storing or showing private client/operator data.
