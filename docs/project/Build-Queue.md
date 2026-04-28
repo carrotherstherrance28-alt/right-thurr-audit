@@ -57,7 +57,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add generated reports table to Supabase MVP schema.
 - [x] Add live account setup checklist for Vercel, Supabase, n8n, and domains.
 - [x] Add n8n workflow build sheet and AI prompt chain.
-- [ ] Create Supabase tables for leads/buildout requests/activity logs.
+- [x] Create Supabase tables for leads/buildout requests/activity logs.
 - [ ] Create n8n workflow `Right Thurr - Buildout Plan Intake`.
 - [ ] Create n8n production webhook URL and add it to Vercel/local env.
 - [ ] Test form submission against Supabase or n8n.
