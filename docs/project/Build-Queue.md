@@ -64,7 +64,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Test form submission against Supabase or n8n.
 - [x] Draft Slack status update after n8n intake works.
 - [ ] Fix n8n Slack credential/channel access for buildout request alerts.
-- [ ] Create Discord `#buildout-requests` webhook.
+- [ ] Create Discord `#general` webhook.
 - [ ] Add Discord buildout request alert to n8n.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
@@ -141,4 +141,4 @@ Daily session:
 
 ## Next Task
 
-Create the Discord buildout webhook, connect it in n8n, then test one live Right Thurr form submission.
+Create the Discord `#general` webhook, connect it in n8n, then test one live Right Thurr form submission.

@@ -6,7 +6,7 @@ Use Discord as the V1 internal operator feed. Supabase remains the source of tru
 
 ```text
 Right Thurr HQ
-#buildout-requests
+#general
 #system-activity
 #errors
 #revenue-alerts
@@ -15,17 +15,17 @@ Right Thurr HQ
 
 ## First Channel
 
-Create this channel first:
+Use this existing channel first:
 
 ```text
-#buildout-requests
+#general
 ```
 
 ## Create The Webhook
 
 In Discord:
 
-1. Open the `#buildout-requests` channel.
+1. Open the `#general` channel.
 2. Open channel settings.
 3. Go to Integrations.
 4. Create a Webhook.
