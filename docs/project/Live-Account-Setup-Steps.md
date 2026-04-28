@@ -57,6 +57,7 @@ This creates the MVP tables:
 buildout_requests
 systems
 system_assets
+generated_reports
 activity_logs
 tasks
 money_entries

@@ -49,6 +49,22 @@ create table if not exists public.system_assets (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.generated_reports (
+  id uuid primary key default gen_random_uuid(),
+  buildout_request_id uuid references public.buildout_requests(id) on delete cascade,
+  system_id uuid references public.systems(id) on delete set null,
+  report_type text not null default 'right-thurr-autopilot-blueprint',
+  title text not null,
+  report_status text not null default 'draft',
+  report_url text,
+  pdf_url text,
+  summary text,
+  sections jsonb not null default '{}'::jsonb,
+  created_by_agent text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 create table if not exists public.activity_logs (
   id uuid primary key default gen_random_uuid(),
   system_id uuid references public.systems(id) on delete cascade,
@@ -87,6 +103,7 @@ create table if not exists public.money_entries (
 alter table public.buildout_requests enable row level security;
 alter table public.systems enable row level security;
 alter table public.system_assets enable row level security;
+alter table public.generated_reports enable row level security;
 alter table public.activity_logs enable row level security;
 alter table public.tasks enable row level security;
 alter table public.money_entries enable row level security;
