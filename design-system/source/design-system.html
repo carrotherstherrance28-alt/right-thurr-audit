@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en" data-brand="right-thurr">
+<head>
+<meta charset="utf-8">
+<title>Right Thurr / Thurr Solutions — Design System</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  body { margin: 0; padding: 0; }
+  .page { max-width: 1280px; margin: 0 auto; padding: 64px 48px 128px; }
+
+  /* Section header */
+  .section { margin-top: 96px; }
+  .section:first-of-type { margin-top: 32px; }
+  .section-eyebrow {
+    font-family: var(--font-subhead);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-loud);
+    font-size: 13px;
+    color: var(--rt-orange-500);
+    margin: 0 0 8px;
+  }
+  .section-title {
+    font-family: var(--font-display-rt);
+    font-size: 56px;
+    line-height: 1;
+    margin: 0 0 12px;
+    color: var(--rt-ink-900);
+  }
+  .section-lede {
+    font-size: 18px;
+    color: var(--fg-muted);
+    max-width: 680px;
+    margin: 0 0 40px;
+  }
+  .section-rule {
+    height: 4px; background: var(--rt-ink-900); width: 100%; margin-bottom: 40px;
+  }
+
+  /* Card grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .card {
+    background: var(--rt-paper-cold);
+    border: 4px solid var(--rt-ink-900);
+    box-shadow: var(--shadow-stamp);
+    padding: 24px;
+    grid-column: span 6;
+  }
+  .card.wide { grid-column: span 12; }
+  .card.third { grid-column: span 4; }
+  .card.quarter { grid-column: span 3; }
+  .card-title {
+    font-family: var(--font-body);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-loud);
+    font-size: 13px;
+    color: var(--rt-ink-900);
+    margin: 0 0 4px;
+  }
+  .card-sub {
+    color: var(--fg-muted);
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    background: var(--rt-paper);
+    border: 6px solid var(--rt-ink-900);
+    padding: 56px 48px;
+    position: relative;
+    box-shadow: var(--shadow-stamp-lg);
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: var(--rt-orange-500);
+    color: var(--rt-paper-cold);
+    font-family: var(--font-subhead);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: var(--tracking-loud);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 2px solid var(--rt-ink-900);
+    transform: rotate(-1.5deg);
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-family: var(--font-display-rt);
+    font-size: 96px;
+    line-height: 0.95;
+    margin: 0 0 24px;
+    color: var(--rt-ink-900);
+    max-width: 14ch;
+  }
+  .hero-sub {
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--fg-muted);
+    max-width: 60ch;
+    margin: 0 0 32px;
+  }
+  .hero-meta {
+    display: flex; gap: 32px; flex-wrap: wrap;
+    border-top: 2px dashed var(--rt-ink-300);
+    padding-top: 24px;
+  }
+  .hero-meta div { font-family: var(--font-mono); font-size: 13px; color: var(--fg-muted); }
+  .hero-meta strong { display: block; color: var(--rt-ink-900); font-size: 18px; font-family: var(--font-body); font-weight: 700; margin-top: 2px; text-transform: uppercase; letter-spacing: var(--tracking-loud); }
+
+  /* ============ COLOR ============ */
+  .swatch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 4px solid var(--rt-ink-900); }
+  .swatch { padding: 32px 16px 16px; aspect-ratio: 1.2/1; display: flex; flex-direction: column; justify-content: flex-end; position: relative; }
+  .swatch-name { font-family: var(--font-body); font-weight: 800; text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 11px; }
+  .swatch-hex { font-family: var(--font-mono); font-size: 12px; opacity: 0.85; margin-top: 2px; }
+  .swatch-row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; border: 4px solid var(--rt-ink-900); margin-top: 16px; }
+  .swatch.small { aspect-ratio: 1/1; padding: 8px; font-size: 10px; }
+  .swatch.small .swatch-hex { font-size: 10px; }
+
+  /* ============ TYPE ============ */
+  .type-row { padding: 24px 0; border-bottom: 2px dashed var(--rt-ink-300); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-label {
+    font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted);
+    text-transform: uppercase; letter-spacing: var(--tracking-loud);
+    margin-bottom: 8px;
+    display: flex; gap: 16px;
+  }
+  .type-spec { color: var(--rt-orange-500); font-weight: 700; }
+  .type-display-rt { font-family: var(--font-display-rt); font-size: 72px; line-height: 1; color: var(--rt-ink-900); }
+  .type-display-ts { font-family: var(--font-display-ts); font-size: 56px; line-height: 1.05; color: var(--rt-ink-900); letter-spacing: -0.02em; }
+  .type-h3 { font-family: var(--font-body); font-weight: 800; font-size: 28px; }
+  .type-body { font-family: var(--font-body); font-size: 16px; line-height: 1.5; max-width: 60ch; }
+  .type-mono { font-family: var(--font-mono); font-size: 14px; color: var(--rt-ink-900); }
+  .type-eyebrow { font-family: var(--font-subhead); font-weight: 700; text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 14px; }
+
+  /* ============ SPACING ============ */
+  .space-stack { display: flex; flex-direction: column; gap: 12px; }
+  .space-row { display: flex; align-items: center; gap: 16px; font-family: var(--font-mono); font-size: 13px; }
+  .space-bar { background: var(--rt-orange-500); height: 16px; border: 2px solid var(--rt-ink-900); }
+  .space-name { width: 64px; color: var(--rt-ink-900); font-weight: 700; }
+  .space-val { color: var(--fg-muted); width: 48px; }
+
+  /* ============ RADIUS / BORDER / SHADOW ============ */
+  .demo-tile {
+    background: var(--rt-paper-cold);
+    border: 4px solid var(--rt-ink-900);
+    height: 80px; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 13px; color: var(--rt-ink-900);
+  }
+  .border-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .shadow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 24px 8px; }
+  .shadow-tile {
+    background: var(--rt-paper-cold);
+    height: 100px; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 12px; color: var(--rt-ink-900);
+    border: 4px solid var(--rt-ink-900);
+  }
+
+  /* ============ COMPONENTS ============ */
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-body); font-weight: 800;
+    text-transform: uppercase; letter-spacing: var(--tracking-loud);
+    font-size: 14px;
+    padding: 14px 22px;
+    border: 3px solid var(--rt-ink-900);
+    background: var(--rt-orange-500); color: var(--rt-paper-cold);
+    box-shadow: var(--shadow-stamp-sm);
+    cursor: pointer;
+    transition: transform var(--dur-fast) var(--ease-snap), box-shadow var(--dur-fast) var(--ease-snap);
+  }
+  .btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 var(--rt-ink-900); }
+  .btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 0 var(--rt-ink-900); }
+  .btn.ink { background: var(--rt-ink-900); color: var(--rt-paper-cold); }
+  .btn.ghost { background: transparent; color: var(--rt-ink-900); }
+  .btn.sm { padding: 8px 14px; font-size: 12px; }
+  .btn .arrow { font-size: 18px; line-height: 1; }
+
+  /* Hang tag */
+  .hang-tag {
+    display: inline-block;
+    background: var(--rt-orange-500);
+    color: var(--rt-paper-cold);
+    border: 3px solid var(--rt-ink-900);
+    padding: 14px 24px 14px 32px;
+    font-family: var(--font-display-rt);
+    font-size: 28px;
+    line-height: 1;
+    transform: rotate(-2deg);
+    position: relative;
+    box-shadow: var(--shadow-stamp-sm);
+  }
+  .hang-tag::before {
+    content: ""; position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--rt-paper-cold);
+    background: transparent;
+  }
+
+  /* Stamp badge */
+  .stamp {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 96px; height: 96px; border-radius: 50%;
+    border: 3px solid var(--rt-ink-900);
+    background: var(--rt-paper-cold);
+    color: var(--rt-ink-900);
+    font-family: var(--font-display-rt);
+    font-size: 14px;
+    text-align: center;
+    transform: rotate(-8deg);
+    line-height: 1.1;
+    padding: 8px;
+  }
+
+  /* Status badge */
+  .status {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono); font-size: 12px;
+    padding: 4px 10px;
+    border: 2px solid var(--rt-ink-900);
+    background: var(--rt-paper-cold);
+    text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
+  }
+  .status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rt-success); }
+  .status.warn .dot { background: var(--rt-warning); }
+  .status.danger .dot { background: var(--rt-danger); }
+  .status.info .dot { background: var(--rt-info); }
+
+  /* Input */
+  .input {
+    width: 100%;
+    font-family: var(--font-body); font-size: 16px;
+    padding: 12px 16px;
+    border: 3px solid var(--rt-ink-900);
+    background: var(--rt-paper-cold);
+    color: var(--rt-ink-900);
+  }
+  .input:focus { outline: none; box-shadow: var(--shadow-stamp-sm); transform: translate(-1px, -1px); }
+
+  /* TS variants */
+  .ts-card {
+    background: white; border: 1px solid var(--rt-ink-200); border-radius: 8px;
+    padding: 20px; box-shadow: var(--shadow-paper);
+  }
+  .ts-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-weight: 600;
+    font-size: 15px; padding: 11px 18px;
+    border-radius: 6px; border: 1px solid var(--rt-ink-900);
+    background: var(--rt-ink-900); color: var(--rt-paper-cold);
+    cursor: pointer;
+  }
+  .ts-btn.outline { background: transparent; color: var(--rt-ink-900); }
+  .ts-btn.orange { background: var(--rt-orange-500); border-color: var(--rt-orange-600); color: white; }
+
+  /* Iconography */
+  .icon-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+  .icon-tile {
+    aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 3px solid var(--rt-ink-900); background: var(--rt-paper-cold); gap: 8px;
+  }
+  .icon-tile svg { stroke: var(--rt-ink-900); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-label { font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); }
+  .glyph-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .glyph-tile {
+    aspect-ratio: 1.6/1; display: flex; align-items: center; gap: 12px; padding: 16px;
+    border: 3px solid var(--rt-ink-900); background: var(--rt-paper-cold);
+    font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .glyph-tile .g { font-size: 32px; font-weight: 700; }
+  .glyph-tile.ok .g { color: var(--rt-success); }
+  .glyph-tile.build .g { color: var(--rt-warning); }
+  .glyph-tile.next .g { color: var(--rt-orange-500); }
+  .glyph-tile.queue .g { color: var(--rt-ink-500); }
+
+  /* Logo lockup */
+  .logo-row { display: flex; align-items: center; gap: 48px; flex-wrap: wrap; padding: 32px; background: var(--rt-paper); border: 4px solid var(--rt-ink-900); }
+  .logo-row img { max-height: 96px; }
+  .logo-row.dark { background: var(--rt-ink-900); border-color: var(--rt-ink-900); }
+  .logo-row.orange { background: var(--rt-orange-500); border-color: var(--rt-ink-900); }
+
+  /* Nav */
+  .nav {
+    background: var(--rt-paper-cold);
+    border: 3px solid var(--rt-ink-900);
+    display: flex; align-items: center; gap: 16px;
+    padding: 8px;
+  }
+  .nav .brand-mark { width: 40px; height: 40px; background: var(--rt-orange-500); border: 2px solid var(--rt-ink-900); display: flex; align-items: center; justify-content: center; }
+  .nav .brand-mark img { width: 32px; height: 32px; }
+  .nav .nav-title { font-family: var(--font-display-rt); font-size: 22px; line-height: 1; }
+  .nav .nav-links { display: flex; gap: 4px; margin-left: auto; }
+  .nav .nav-link { font-family: var(--font-body); font-weight: 700; text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 12px; padding: 8px 12px; border: 2px solid transparent; }
+  .nav .nav-link.active { border-color: var(--rt-ink-900); background: var(--rt-ink-900); color: var(--rt-paper-cold); }
+
+  /* Caveat box */
+  .caveat {
+    background: var(--rt-orange-50);
+    border: 3px solid var(--rt-orange-500);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--rt-orange-800);
+  }
+  .caveat strong { display: block; font-family: var(--font-body); font-weight: 800; text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 12px; margin-bottom: 6px; color: var(--rt-orange-700); }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 96px; padding-top: 32px; border-top: 4px solid var(--rt-ink-900);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ========== HERO ========== -->
+  <header class="hero">
+    <span class="hero-eyebrow">Brand &amp; Product Guide · v0.1</span>
+    <h1 class="hero-title">Right Thurr.<br>Thurr Solutions.</h1>
+    <p class="hero-sub">Two sibling brands sharing one palette, one monogram, and one arrow language. Right Thurr gets attention. Thurr Solutions earns trust. This document is the source of truth for both.</p>
+    <div class="hero-meta">
+      <div>BRAND <strong>Two-headed</strong></div>
+      <div>PALETTE <strong>3 colors</strong></div>
+      <div>VOICE <strong>Boots-on</strong></div>
+      <div>STATUS <strong>Living draft</strong></div>
+    </div>
+  </header>
+
+  <!-- ========== BRAND SPLIT ========== -->
+  <section class="section">
+    <p class="section-eyebrow">01 · The two brands</p>
+    <h2 class="section-title">Siblings, not twins</h2>
+    <p class="section-lede">Right Thurr is the loud one — saloon posters, hang-tags, hard shadows. Thurr Solutions is the calm one — clean slabs, soft paper, professional surfaces. They share blood, not wardrobe.</p>
+    <div class="section-rule"></div>
+
+    <div class="grid">
+      <div class="card">
+        <p class="card-title">Right Thurr</p>
+        <p class="card-sub">Product · App · Public face · Merch</p>
+        <div class="logo-row">
+          <img src="assets/right-thurr-wordmark-clean.png" alt="Right Thurr primary logo" style="max-height: 140px;">
+        </div>
+        <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;">
+          <span class="status"><span class="dot"></span>Bold</span>
+          <span class="status warn"><span class="dot"></span>Western</span>
+          <span class="status info"><span class="dot"></span>Sticker</span>
+          <span class="status danger"><span class="dot"></span>Loud</span>
+        </div>
+      </div>
+      <div class="card" data-brand="thurr-solutions" style="background: white; border: 1px solid var(--rt-ink-200); box-shadow: var(--shadow-paper);">
+        <p class="card-title">Thurr Solutions</p>
+        <p class="card-sub">Consulting · Automations · Proposals · Case studies</p>
+        <div style="background: var(--rt-paper-cold); border: 1px solid var(--rt-ink-200); border-radius: 8px; padding: 32px; display: flex; align-items: center; gap: 16px;">
+          <img src="assets/rt-monogram-clean.png" alt="" style="height: 64px;">
+          <div>
+            <div style="font-family: var(--font-display-ts); font-size: 32px; line-height: 1; letter-spacing: -0.02em;">Thurr<br>Solutions</div>
+          </div>
+        </div>
+        <div style="margin-top: 16px; color: var(--fg-muted); font-size: 14px;">Wordmark uses Alfa Slab One (substituted). Replace with the licensed slab when available.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COLOR ========== -->
+  <section class="section">
+    <p class="section-eyebrow">02 · Color</p>
+    <h2 class="section-title">Three colors. That's it.</h2>
+    <p class="section-lede">Rust orange does the shouting. Ink black does the structure. Paper does everything else. Status accents exist but never decorate.</p>
+    <div class="section-rule"></div>
+
+    <div class="card wide">
+      <p class="card-title">Core palette</p>
+      <p class="card-sub">The three colors that make the brand recognizable in a glance.</p>
+      <div class="swatch-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="swatch" style="background: var(--rt-orange-500); color: var(--rt-paper-cold); aspect-ratio: 2/1;">
+          <div class="swatch-name">Rust Orange</div>
+          <div class="swatch-hex">#D9621F · --rt-orange-500</div>
+        </div>
+        <div class="swatch" style="background: var(--rt-ink-900); color: var(--rt-paper-cold); aspect-ratio: 2/1;">
+          <div class="swatch-name">Ink Black</div>
+          <div class="swatch-hex">#1A1714 · --rt-ink-900</div>
+        </div>
+        <div class="swatch" style="background: var(--rt-paper); color: var(--rt-ink-900); aspect-ratio: 2/1;">
+          <div class="swatch-name">Paper</div>
+          <div class="swatch-hex">#F5EFE2 · --rt-paper</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top: 24px;">
+      <div class="card wide">
+        <p class="card-title">Orange ramp</p>
+        <p class="card-sub">For tints, fills, and rare hover states. Use 500 as default.</p>
+        <div class="swatch-row">
+          <div class="swatch small" style="background: var(--rt-orange-50); color: var(--rt-ink-900);"><span class="swatch-name">50</span><span class="swatch-hex">FCEFE6</span></div>
+          <div class="swatch small" style="background: var(--rt-orange-100); color: var(--rt-ink-900);"><span class="swatch-name">100</span><span class="swatch-hex">F8DCC4</span></div>
+          <div class="swatch small" style="background: var(--rt-orange-200); color: var(--rt-ink-900);"><span class="swatch-name">200</span><span class="swatch-hex">F1B68A</span></div>
+          <div class="swatch small" style="background: var(--rt-orange-300); color: var(--rt-ink-900);"><span class="swatch-name">300</span><span class="swatch-hex">EA8F50</span></div>
+          <div class="swatch small" style="background: var(--rt-orange-400); color: var(--rt-paper-cold);"><span class="swatch-name">400</span><span class="swatch-hex">E2742B</span></div>
+          <div class="swatch small" style="background: var(--rt-orange-500); color: var(--rt-paper-cold);"><span class="swatch-name">500★</span><span class="swatch-hex">D9621F</span></div>
+          <div class="swatch small" style="background: var(--rt-orange-600); color: var(--rt-paper-cold);"><span class="swatch-name">600</span><span class="swatch-hex">B84F18</span></div>
+          <div class="swatch small" style="background: var(--rt-orange-800); color: var(--rt-paper-cold);"><span class="swatch-name">800</span><span class="swatch-hex">5E280C</span></div>
+        </div>
+      </div>
+      <div class="card wide">
+        <p class="card-title">Ink ramp</p>
+        <p class="card-sub">Type, borders, dark surfaces. 900 is the brand's default ink.</p>
+        <div class="swatch-row">
+          <div class="swatch small" style="background: var(--rt-ink-100); color: var(--rt-ink-900);"><span class="swatch-name">100</span><span class="swatch-hex">EFE7D9</span></div>
+          <div class="swatch small" style="background: var(--rt-ink-200); color: var(--rt-ink-900);"><span class="swatch-name">200</span><span class="swatch-hex">E5DCCD</span></div>
+          <div class="swatch small" style="background: var(--rt-ink-300); color: var(--rt-ink-900);"><span class="swatch-name">300</span><span class="swatch-hex">CFC3B4</span></div>
+          <div class="swatch small" style="background: var(--rt-ink-400); color: var(--rt-ink-900);"><span class="swatch-name">400</span><span class="swatch-hex">A89A8B</span></div>
+          <div class="swatch small" style="background: var(--rt-ink-500); color: var(--rt-paper-cold);"><span class="swatch-name">500</span><span class="swatch-hex">7A6E62</span></div>
+          <div class="swatch small" style="background: var(--rt-ink-600); color: var(--rt-paper-cold);"><span class="swatch-name">600</span><span class="swatch-hex">574E45</span></div>
+          <div class="swatch small" style="background: var(--rt-ink-800); color: var(--rt-paper-cold);"><span class="swatch-name">800</span><span class="swatch-hex">2A2520</span></div>
+          <div class="swatch small" style="background: var(--rt-ink-900); color: var(--rt-paper-cold);"><span class="swatch-name">900★</span><span class="swatch-hex">1A1714</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top: 24px;">
+      <div class="card">
+        <p class="card-title">Paper tones</p>
+        <p class="card-sub">For visual rhythm in long pages — never go cool gray.</p>
+        <div class="swatch-row" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="swatch small" style="background: var(--rt-paper-cold); color: var(--rt-ink-900); aspect-ratio: 1.4/1;"><span class="swatch-name">Cold</span><span class="swatch-hex">FAF7EE</span></div>
+          <div class="swatch small" style="background: var(--rt-paper); color: var(--rt-ink-900); aspect-ratio: 1.4/1;"><span class="swatch-name">Default ★</span><span class="swatch-hex">F5EFE2</span></div>
+          <div class="swatch small" style="background: var(--rt-paper-warm); color: var(--rt-ink-900); aspect-ratio: 1.4/1;"><span class="swatch-name">Warm</span><span class="swatch-hex">EFE5D2</span></div>
+          <div class="swatch small" style="background: var(--rt-paper-deep); color: var(--rt-ink-900); aspect-ratio: 1.4/1;"><span class="swatch-name">Deep</span><span class="swatch-hex">E5D9C0</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="card-title">Status accents</p>
+        <p class="card-sub">Status only — not for branding or decoration.</p>
+        <div class="swatch-row" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="swatch small" style="background: var(--rt-success); color: var(--rt-paper-cold); aspect-ratio: 1.4/1;"><span class="swatch-name">Success</span><span class="swatch-hex">4F7A3A</span></div>
+          <div class="swatch small" style="background: var(--rt-warning); color: var(--rt-ink-900); aspect-ratio: 1.4/1;"><span class="swatch-name">Warning</span><span class="swatch-hex">E2A12B</span></div>
+          <div class="swatch small" style="background: var(--rt-danger); color: var(--rt-paper-cold); aspect-ratio: 1.4/1;"><span class="swatch-name">Danger</span><span class="swatch-hex">B33A2A</span></div>
+          <div class="swatch small" style="background: var(--rt-info); color: var(--rt-paper-cold); aspect-ratio: 1.4/1;"><span class="swatch-name">Info</span><span class="swatch-hex">2F5D6E</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TYPOGRAPHY ========== -->
+  <section class="section">
+    <p class="section-eyebrow">03 · Typography</p>
+    <h2 class="section-title">Two displays. One workhorse.</h2>
+    <p class="section-lede">Rye for Right Thurr's saloon energy. Alfa Slab One for Thurr Solutions' professional confidence. Archivo handles everything else, six weights deep.</p>
+    <div class="section-rule"></div>
+
+    <div class="card wide">
+      <div class="type-row">
+        <div class="type-label"><span>Display · Right Thurr</span><span class="type-spec">Rye / 72px / line 1.0</span></div>
+        <div class="type-display-rt">Boots-on, not boots-up.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label"><span>Display · Thurr Solutions</span><span class="type-spec">Alfa Slab One / 56px / -0.02em / line 1.05</span></div>
+        <div class="type-display-ts">Systems for small business operators.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label"><span>H3 · Section header</span><span class="type-spec">Archivo 800 / 28px / line 1.2</span></div>
+        <div class="type-h3">Wired your offer to a landing page.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label"><span>Eyebrow / label</span><span class="type-spec">Archivo Narrow 700 / 14px / 0.14em caps</span></div>
+        <div class="type-eyebrow">02 · Recently shipped</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label"><span>Body</span><span class="type-spec">Archivo 400 / 16px / line 1.45</span></div>
+        <p class="type-body">Drop your idea in. We'll wire up the offer, the landing page, and the next ten things to do — by the time your coffee's done. No dashboards. No setup wizards. Just a business system, building.</p>
+      </div>
+      <div class="type-row">
+        <div class="type-label"><span>Mono · trackers / IDs</span><span class="type-spec">JetBrains Mono / 14px</span></div>
+        <div class="type-mono">$ 4,820.00 MRR · TASK-0142 · 2026-04-28T11:14Z</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SPACING / RADII / BORDERS / SHADOWS ========== -->
+  <section class="section">
+    <p class="section-eyebrow">04 · Foundations</p>
+    <h2 class="section-title">Spacing, borders, shadows.</h2>
+    <p class="section-lede">A 4px base. Bold black borders by default. Hard offset shadows that move on hover — the brand's signature stamp.</p>
+    <div class="section-rule"></div>
+
+    <div class="grid">
+      <div class="card">
+        <p class="card-title">Spacing scale</p>
+        <p class="card-sub">4px base. Right Thurr leans bigger; Thurr Solutions leans tighter.</p>
+        <div class="space-stack">
+          <div class="space-row"><span class="space-name">s-1</span><span class="space-val">4</span><span class="space-bar" style="width:4px"></span></div>
+          <div class="space-row"><span class="space-name">s-2</span><span class="space-val">8</span><span class="space-bar" style="width:8px"></span></div>
+          <div class="space-row"><span class="space-name">s-3</span><span class="space-val">12</span><span class="space-bar" style="width:12px"></span></div>
+          <div class="space-row"><span class="space-name">s-4</span><span class="space-val">16</span><span class="space-bar" style="width:16px"></span></div>
+          <div class="space-row"><span class="space-name">s-6</span><span class="space-val">24</span><span class="space-bar" style="width:24px"></span></div>
+          <div class="space-row"><span class="space-name">s-8</span><span class="space-val">32</span><span class="space-bar" style="width:32px"></span></div>
+          <div class="space-row"><span class="space-name">s-12</span><span class="space-val">48</span><span class="space-bar" style="width:48px"></span></div>
+          <div class="space-row"><span class="space-name">s-16</span><span class="space-val">64</span><span class="space-bar" style="width:64px"></span></div>
+          <div class="space-row"><span class="space-name">s-24</span><span class="space-val">96</span><span class="space-bar" style="width:96px"></span></div>
+          <div class="space-row"><span class="space-name">s-32</span><span class="space-val">128</span><span class="space-bar" style="width:128px"></span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Border weights</p>
+        <p class="card-sub">Right Thurr defaults to 4px loud. Thurr Solutions stays at 1–2px hair.</p>
+        <div class="border-grid">
+          <div class="demo-tile" style="border-width: 1px;">1px</div>
+          <div class="demo-tile" style="border-width: 2px;">2px</div>
+          <div class="demo-tile" style="border-width: 3px;">3px</div>
+          <div class="demo-tile" style="border-width: 4px;">4px★</div>
+          <div class="demo-tile" style="border-width: 6px;">6px</div>
+        </div>
+        <p class="card-title" style="margin-top: 28px;">Radii</p>
+        <p class="card-sub">RT = 0px always. TS = 4–8px.</p>
+        <div class="border-grid">
+          <div class="demo-tile" style="border-radius: 0;">0px ★</div>
+          <div class="demo-tile" style="border-radius: 4px;">4px</div>
+          <div class="demo-tile" style="border-radius: 8px;">8px</div>
+          <div class="demo-tile" style="border-radius: 12px;">12px</div>
+          <div class="demo-tile" style="border-radius: 999px;">pill</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card wide" style="margin-top: 24px;">
+      <p class="card-title">Shadow language</p>
+      <p class="card-sub">Two shadow worlds. Pick one per surface and don't mix.</p>
+      <div class="shadow-grid">
+        <div class="shadow-tile" style="box-shadow: var(--shadow-stamp-sm);">stamp-sm · 3px</div>
+        <div class="shadow-tile" style="box-shadow: var(--shadow-stamp);">stamp · 6px ★ RT</div>
+        <div class="shadow-tile" style="box-shadow: var(--shadow-stamp-lg);">stamp-lg · 10px</div>
+        <div class="shadow-tile" style="border: 1px solid var(--rt-ink-200); box-shadow: var(--shadow-paper-sm);">paper-sm</div>
+        <div class="shadow-tile" style="border: 1px solid var(--rt-ink-200); box-shadow: var(--shadow-paper);">paper ★ TS</div>
+        <div class="shadow-tile" style="border: 1px solid var(--rt-ink-200); box-shadow: var(--shadow-paper-lg);">paper-lg</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ICONOGRAPHY ========== -->
+  <section class="section">
+    <p class="section-eyebrow">05 · Iconography</p>
+    <h2 class="section-title">Hand-drawn, sticker-style, single weight.</h2>
+    <p class="section-lede">Built around three primitives: arrows, tags/banners, tools. Single-color. 3px stroke. Rounded joins for the hand-drawn cue. Lucide stands in until the custom set ships.</p>
+    <div class="section-rule"></div>
+
+    <div class="grid">
+      <div class="card wide">
+        <p class="card-title">Status glyphs · the only "emoji" in product UI</p>
+        <p class="card-sub">Text characters, not images. Color via CSS. Use anywhere a status needs a visual prefix.</p>
+        <div class="glyph-grid">
+          <div class="glyph-tile ok"><span class="g">✓</span><span>Complete<br>Shipped · Live</span></div>
+          <div class="glyph-tile build"><span class="g">▲</span><span>Building<br>In progress</span></div>
+          <div class="glyph-tile next"><span class="g">→</span><span>Next<br>Outbound</span></div>
+          <div class="glyph-tile queue"><span class="g">●</span><span>Pending<br>Backlog</span></div>
+        </div>
+      </div>
+
+      <div class="card wide">
+        <p class="card-title">Icon set · placeholder (Lucide-style, 2.5–3px stroke)</p>
+        <p class="card-sub">Until a custom set is commissioned. Single ink color, never two-tone.</p>
+        <div class="icon-grid">
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="icon-label">arrow-right</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M3 12c4-7 14-7 18 0M12 8v8M8 12l4 4 4-4"/></svg><span class="icon-label">ship</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M3 21l6-6m0 0l6-6m-6 6V9m0 6h6m-2-12l8 8-10 10H3v-6L13 3z"/></svg><span class="icon-label">build</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M4 4h6l8 8-6 6-8-8V4zM7.5 7.5h.01"/></svg><span class="icon-label">tag</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="icon-label">queue</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg><span class="icon-label">growth</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 010 7H6"/></svg><span class="icon-label">money</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M3 9l9-6 9 6v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9zM9 22V12h6v10"/></svg><span class="icon-label">shop</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span class="icon-label">check-task</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM14 2v6h6M9 13h6M9 17h6"/></svg><span class="icon-label">doc</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14M22 4l-10 10-3-3"/></svg><span class="icon-label">verified</span></div>
+          <div class="icon-tile"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M5 9l4-4 4 4M9 5v14M19 15l-4 4-4-4M15 19V5"/></svg><span class="icon-label">sort</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COMPONENTS ========== -->
+  <section class="section">
+    <p class="section-eyebrow">06 · Components</p>
+    <h2 class="section-title">Buttons, tags, stamps, inputs.</h2>
+    <p class="section-lede">Both brand variants for each component. Pick the one that matches your surface — never both on one screen.</p>
+    <div class="section-rule"></div>
+
+    <div class="grid">
+      <div class="card">
+        <p class="card-title">Buttons · Right Thurr</p>
+        <p class="card-sub">Stamp shadow. Hover translates element toward shadow. Click flattens it.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+          <button class="btn">Get it built <span class="arrow">→</span></button>
+          <button class="btn ink">Ship it</button>
+          <button class="btn ghost">Cancel</button>
+          <button class="btn sm">Small</button>
+        </div>
+      </div>
+      <div class="card" style="background: white; border: 1px solid var(--rt-ink-200); box-shadow: var(--shadow-paper);">
+        <p class="card-title">Buttons · Thurr Solutions</p>
+        <p class="card-sub">Hairline border, soft paper shadow, restrained.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+          <button class="ts-btn">Start a project →</button>
+          <button class="ts-btn orange">Talk to us</button>
+          <button class="ts-btn outline">Read case study</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Hang tags &amp; stamps · RT</p>
+        <p class="card-sub">Always rotated 1–4°. Always with an offset shadow.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; padding: 24px 8px;">
+          <span class="hang-tag">SHIP IT</span>
+          <span class="hang-tag" style="background: var(--rt-ink-900); color: var(--rt-orange-500); transform: rotate(2deg);">$49 / mo</span>
+          <span class="stamp">Built<br>Right<br>Thurr</span>
+        </div>
+      </div>
+      <div class="card">
+        <p class="card-title">Status badges</p>
+        <p class="card-sub">Glyph + label. Use status accents only here, not in body type.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 8px;">
+          <span class="status"><span class="dot"></span>Live</span>
+          <span class="status warn"><span class="dot"></span>Building</span>
+          <span class="status info"><span class="dot"></span>Queued</span>
+          <span class="status danger"><span class="dot"></span>Snag</span>
+        </div>
+        <div style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <span class="tag-stamp">New</span>
+          <span class="tag-stamp" style="background: var(--rt-ink-900);">Pre-order</span>
+          <span class="tag-stamp" style="background: var(--rt-paper-cold); color: var(--rt-ink-900);">v0.1</span>
+        </div>
+      </div>
+
+      <div class="card wide">
+        <p class="card-title">Inputs &amp; navigation</p>
+        <p class="card-sub">Right Thurr inputs lift on focus, casting a stamp shadow.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;">
+          <div>
+            <label class="eyebrow" style="display:block; margin-bottom: 8px;">Idea</label>
+            <input class="input" placeholder="I want to start a pressure washing side hustle in Atlanta">
+            <div style="margin-top: 12px; display: flex; gap: 12px;">
+              <button class="btn">Build it <span class="arrow">→</span></button>
+              <button class="btn ghost">Need an idea?</button>
+            </div>
+          </div>
+          <div class="nav">
+            <div class="brand-mark"><img src="assets/rt-monogram-clean.png" alt=""></div>
+            <div class="nav-title">Right Thurr</div>
+            <div class="nav-links">
+              <span class="nav-link active">Build</span>
+              <span class="nav-link">Tasks</span>
+              <span class="nav-link">Money</span>
+              <span class="nav-link">Page</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LOGOS / LOCKUPS ========== -->
+  <section class="section">
+    <p class="section-eyebrow">07 · Logos &amp; lockups</p>
+    <h2 class="section-title">The marks, in the wild.</h2>
+    <p class="section-lede">Primary, secondary, monochrome variants. The R+T monogram is the only mark allowed at small sizes (favicons, app chrome).</p>
+    <div class="section-rule"></div>
+
+    <div class="grid">
+      <div class="card wide">
+        <p class="card-title">Primary lockup · Right Thurr</p>
+        <div class="logo-row">
+          <img src="assets/right-thurr-wordmark-clean.png" alt="Right Thurr primary logo" style="max-height: 120px;">
+          <img src="assets/rt-monogram-clean.png" alt="R+T monogram" style="max-height: 100px;">
+        </div>
+        <div class="logo-row" style="margin-top: 16px; background: #4548B8; border-color: var(--rt-ink-900);">
+          <img src="assets/right-thurr-wordmark-clean.png" alt="On brand-blue mockup background (per Right Thurr.png)" style="max-height: 120px;">
+          <div style="color: var(--rt-paper-cold); font-family: var(--font-mono); font-size: 11px; max-width: 30ch; line-height: 1.5;">The royal-blue field is a presentation backdrop seen in source mockups — not a third brand color. Use sparingly for poster / merch / social hero shots only.</div>
+        </div>
+        <div class="caveat" style="margin-top: 16px;">
+          <strong>Asset caveat</strong>
+          Logos shown are raster crops from uploaded screenshots. Replace with vector SVGs before production. Monochrome variants are CSS-filter approximations and should be authored properly in a vector tool.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="doc-footer">
+    <div>RIGHT THURR · THURR SOLUTIONS · DESIGN SYSTEM v0.1</div>
+    <div>SEE ALSO · right-thurr-ui-kit.html · thurr-solutions-ui-kit.html · README.md</div>
+  </footer>
+
+</div>
+</body>
+</html>

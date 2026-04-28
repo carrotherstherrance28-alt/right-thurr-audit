@@ -1,0 +1,340 @@
+/* ============================================================
+   Right Thurr / Thurr Solutions — Design Tokens
+   Two sibling brands, one palette + monogram + arrow language.
+   ============================================================ */
+
+/* ------- Web fonts (Google Fonts substitutions, see README) ---- */
+@import url('https://fonts.googleapis.com/css2?family=Rye&family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* ----------------------------------------------------------
+     CORE PALETTE  (shared by both brands)
+     Three-color system: rust/clay orange, ink black, off-white.
+     ---------------------------------------------------------- */
+
+  /* Brand orange — clay/rust, NOT cyber-orange. Pulled from logo tag. */
+  --rt-orange-50:  #FCEFE6;
+  --rt-orange-100: #F8DCC4;
+  --rt-orange-200: #F1B68A;
+  --rt-orange-300: #EA8F50;
+  --rt-orange-400: #E2742B;   /* hover/lift */
+  --rt-orange-500: #D9621F;   /* PRIMARY — the brand orange */
+  --rt-orange-600: #B84F18;   /* press/active */
+  --rt-orange-700: #8E3C12;
+  --rt-orange-800: #5E280C;
+
+  /* Ink — warmer than pure black, like sumi/india ink */
+  --rt-ink-900:    #1A1714;   /* PRIMARY ink */
+  --rt-ink-800:    #2A2520;
+  --rt-ink-700:    #3D3630;
+  --rt-ink-600:    #574E45;
+  --rt-ink-500:    #7A6E62;
+  --rt-ink-400:    #A89A8B;
+  --rt-ink-300:    #CFC3B4;
+  --rt-ink-200:    #E5DCCD;
+  --rt-ink-100:    #EFE7D9;
+
+  /* Off-white — paper / parchment, never cool gray */
+  --rt-paper:      #F5EFE2;   /* PRIMARY canvas */
+  --rt-paper-warm: #EFE5D2;   /* slightly tanned */
+  --rt-paper-cold: #FAF7EE;   /* near-white */
+  --rt-paper-deep: #E5D9C0;   /* aged */
+
+  /* Pure white & black for borders, stickers, posters */
+  --rt-white:      #FFFFFF;
+  --rt-black:      #000000;
+
+  /* Semantic accents — used sparingly for status, not decoration */
+  --rt-success:    #4F7A3A;   /* mossy green, not cyber-green */
+  --rt-warning:    #E2A12B;   /* mustard */
+  --rt-danger:    #B33A2A;    /* barn red */
+  --rt-info:       #2F5D6E;   /* teal-slate */
+
+  /* ----------------------------------------------------------
+     SEMANTIC TOKENS — light theme, paper canvas
+     ---------------------------------------------------------- */
+  --bg:            var(--rt-paper);
+  --bg-raised:     var(--rt-paper-cold);
+  --bg-sunken:     var(--rt-paper-deep);
+  --bg-inverse:    var(--rt-ink-900);
+
+  --fg:            var(--rt-ink-900);     /* primary text */
+  --fg-muted:      var(--rt-ink-600);     /* secondary text */
+  --fg-subtle:     var(--rt-ink-500);     /* labels, captions */
+  --fg-on-orange:  var(--rt-paper-cold);  /* text on orange */
+  --fg-on-ink:     var(--rt-paper);
+
+  --accent:        var(--rt-orange-500);
+  --accent-hover:  var(--rt-orange-400);
+  --accent-press:  var(--rt-orange-600);
+
+  --border:        var(--rt-ink-900);     /* the bold black border */
+  --border-thin:   var(--rt-ink-300);
+  --border-paper:  var(--rt-ink-200);
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY
+     Right Thurr leads with Rye (western display); Thurr Solutions
+     leads with Alfa Slab One (refined slab). Both share Archivo
+     for UI/body and JetBrains Mono for code/data.
+     ---------------------------------------------------------- */
+
+  /* Right Thurr — bold, hand-drawn, saloon poster */
+  --font-display-rt:      'Rye', 'Alfa Slab One', Georgia, serif;
+
+  /* Thurr Solutions — refined, professional, slab-confident */
+  --font-display-ts:      'Alfa Slab One', 'Rockwell', Georgia, serif;
+
+  /* Subhead — narrower grotesk, condensed posters */
+  --font-subhead:         'Archivo Narrow', 'Oswald', Impact, sans-serif;
+
+  /* Body / UI — workhorse grotesk */
+  --font-body:            'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Monospace — money trackers, task IDs, code */
+  --font-mono:            'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+
+  /* Type scale — modular ratio ~1.25 (major third) */
+  --text-xs:    12px;
+  --text-sm:    14px;
+  --text-base:  16px;
+  --text-md:    18px;
+  --text-lg:    22px;
+  --text-xl:    28px;
+  --text-2xl:   36px;
+  --text-3xl:   48px;
+  --text-4xl:   64px;
+  --text-5xl:   84px;
+  --text-6xl:   112px;
+
+  --leading-tight:  1.05;
+  --leading-snug:   1.2;
+  --leading-normal: 1.45;
+  --leading-loose:  1.65;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.06em;
+  --tracking-loud:   0.14em;     /* used for ALL CAPS LABELS */
+
+  /* ----------------------------------------------------------
+     SPACING — 4px base
+     ---------------------------------------------------------- */
+  --s-0:   0px;
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:   12px;
+  --s-4:   16px;
+  --s-5:   20px;
+  --s-6:   24px;
+  --s-8:   32px;
+  --s-10:  40px;
+  --s-12:  48px;
+  --s-16:  64px;
+  --s-20:  80px;
+  --s-24:  96px;
+  --s-32:  128px;
+
+  /* ----------------------------------------------------------
+     RADII — sharp + functional, not rounded-fluffy.
+     RT prefers near-zero radii on cards (poster feel).
+     TS prefers small radii (4-8px) for trust without softness.
+     ---------------------------------------------------------- */
+  --r-none: 0px;
+  --r-xs:   2px;
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-xl:   18px;
+  --r-pill: 999px;
+
+  /* ----------------------------------------------------------
+     BORDERS — bold border language is core to brand
+     ---------------------------------------------------------- */
+  --bw-hair:   1px;
+  --bw-thin:   2px;
+  --bw-bold:   3px;
+  --bw-loud:   4px;     /* default brand border */
+  --bw-poster: 6px;     /* poster / sticker outlines */
+
+  /* ----------------------------------------------------------
+     SHADOWS — hard-offset poster shadows, NOT soft drop.
+     Right Thurr has stamped, sticker-like shadows.
+     ---------------------------------------------------------- */
+  --shadow-stamp-sm:  3px 3px 0 0 var(--rt-ink-900);
+  --shadow-stamp:     6px 6px 0 0 var(--rt-ink-900);
+  --shadow-stamp-lg:  10px 10px 0 0 var(--rt-ink-900);
+  --shadow-stamp-orange: 6px 6px 0 0 var(--rt-orange-500);
+
+  /* Subtle paper depth (Thurr Solutions) */
+  --shadow-paper-sm:  0 1px 0 var(--rt-ink-200), 0 2px 6px rgba(26,23,20,0.06);
+  --shadow-paper:     0 2px 0 var(--rt-ink-200), 0 6px 18px rgba(26,23,20,0.10);
+  --shadow-paper-lg:  0 3px 0 var(--rt-ink-200), 0 18px 36px rgba(26,23,20,0.14);
+
+  /* Inset stamp (pressed-in) */
+  --shadow-inset:     inset 0 2px 0 var(--rt-ink-200), inset 0 -2px 0 var(--rt-paper-cold);
+
+  /* ----------------------------------------------------------
+     MOTION — minimal, mechanical. Things SNAP, they don't glide.
+     ---------------------------------------------------------- */
+  --ease-snap:     cubic-bezier(0.2, 0.9, 0.3, 1.2);  /* slight overshoot */
+  --ease-out:      cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in:       cubic-bezier(0.5, 0, 0.9, 0.4);
+  --ease-stamp:    cubic-bezier(0.6, -0.05, 0.2, 1.4);
+
+  --dur-instant:   60ms;
+  --dur-fast:      120ms;
+  --dur-base:      180ms;
+  --dur-slow:      280ms;
+  --dur-stamp:     360ms;
+}
+
+/* ------------------------------------------------------------
+   DARK / NIGHT MODE — leather + lantern, not flat dark.
+   ------------------------------------------------------------ */
+[data-theme="night"] {
+  --bg:           var(--rt-ink-900);
+  --bg-raised:    var(--rt-ink-800);
+  --bg-sunken:    #100D0A;
+  --bg-inverse:   var(--rt-paper);
+
+  --fg:           var(--rt-paper-cold);
+  --fg-muted:     var(--rt-ink-300);
+  --fg-subtle:    var(--rt-ink-400);
+
+  --border:       var(--rt-paper-cold);
+  --border-thin:  var(--rt-ink-700);
+  --border-paper: var(--rt-ink-700);
+
+  --shadow-stamp-sm:  3px 3px 0 0 var(--rt-orange-500);
+  --shadow-stamp:     6px 6px 0 0 var(--rt-orange-500);
+  --shadow-stamp-lg:  10px 10px 0 0 var(--rt-orange-500);
+}
+
+/* ============================================================
+   ELEMENT DEFAULTS — semantic styles applied to bare HTML
+   ============================================================ */
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 {
+  font-family: var(--font-display-rt);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-normal);
+  font-weight: 400;  /* Rye is a single-weight display face */
+  color: var(--fg);
+  margin: 0 0 var(--s-6);
+}
+h2, .h2 {
+  font-family: var(--font-display-ts);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 400;
+  color: var(--fg);
+  margin: 0 0 var(--s-5);
+}
+h3, .h3 {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--s-4);
+}
+h4, .h4 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-md);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-loud);
+  margin: 0 0 var(--s-3);
+}
+
+p {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--fg);
+  margin: 0 0 var(--s-4);
+  text-wrap: pretty;
+}
+
+.eyebrow, .label {
+  font-family: var(--font-subhead);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-loud);
+  color: var(--fg-muted);
+}
+
+.tag-stamp {
+  display: inline-block;
+  font-family: var(--font-subhead);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-loud);
+  font-size: var(--text-xs);
+  padding: 4px 10px;
+  background: var(--rt-orange-500);
+  color: var(--rt-paper-cold);
+  border: var(--bw-thin) solid var(--rt-ink-900);
+  transform: rotate(-1.5deg);
+}
+
+code, kbd, pre, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: var(--accent-press);
+}
+
+/* Selection — orange highlight */
+::selection {
+  background: var(--rt-orange-500);
+  color: var(--rt-paper-cold);
+}
+
+/* ============================================================
+   BRAND-SPECIFIC SCOPES
+   Wrap content in [data-brand="right-thurr"] or [data-brand="thurr-solutions"]
+   to shift visual mood without changing tokens.
+   ============================================================ */
+
+[data-brand="right-thurr"] h1,
+[data-brand="right-thurr"] .display {
+  font-family: var(--font-display-rt);
+}
+
+[data-brand="thurr-solutions"] h1,
+[data-brand="thurr-solutions"] .display {
+  font-family: var(--font-display-ts);
+  letter-spacing: var(--tracking-tight);
+}
+
+[data-brand="right-thurr"] {
+  --card-radius: var(--r-none);
+  --card-border: var(--bw-loud) solid var(--rt-ink-900);
+  --card-shadow: var(--shadow-stamp);
+}
+
+[data-brand="thurr-solutions"] {
+  --card-radius: var(--r-md);
+  --card-border: var(--bw-thin) solid var(--rt-ink-200);
+  --card-shadow: var(--shadow-paper);
+}

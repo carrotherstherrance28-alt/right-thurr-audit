@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en" data-brand="thurr-solutions">
+<head>
+<meta charset="utf-8">
+<title>Thurr Solutions — UI Kit</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  body { margin: 0; background: var(--rt-paper-cold); }
+  .frame { max-width: 1280px; margin: 0 auto; padding: 32px; }
+
+  /* ============ TS — soft, professional, slab-confident ============ */
+  .doc {
+    background: white;
+    border: 1px solid var(--rt-ink-200);
+    border-radius: 8px;
+    box-shadow: var(--shadow-paper-lg);
+    overflow: hidden;
+  }
+
+  /* Top nav */
+  .ts-nav {
+    display: flex; align-items: center; gap: 24px;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--rt-ink-200);
+    background: white;
+  }
+  .ts-nav .logo { display: flex; align-items: center; gap: 10px; }
+  .ts-nav .logo img { height: 36px; }
+  .ts-nav .logo .wm { font-family: var(--font-display-ts); font-size: 22px; line-height: 1; letter-spacing: -0.02em; color: var(--rt-ink-900); }
+  .ts-nav .logo .wm small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-muted); margin-top: 2px; }
+  .ts-nav .links { display: flex; gap: 4px; margin-left: 24px; }
+  .ts-nav .links a {
+    font-family: var(--font-body); font-weight: 500; font-size: 14px;
+    color: var(--fg-muted); text-decoration: none;
+    padding: 8px 12px; border-radius: 6px;
+  }
+  .ts-nav .links a:hover { background: var(--rt-paper-cold); color: var(--rt-ink-900); }
+  .ts-nav .links a.active { color: var(--rt-ink-900); font-weight: 600; }
+  .ts-nav .right { margin-left: auto; display: flex; gap: 10px; }
+
+  .ts-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-weight: 600;
+    font-size: 14px; padding: 10px 16px;
+    border-radius: 6px; border: 1px solid var(--rt-ink-900);
+    background: var(--rt-ink-900); color: var(--rt-paper-cold);
+    cursor: pointer; text-decoration: none;
+  }
+  .ts-btn.outline { background: transparent; color: var(--rt-ink-900); }
+  .ts-btn.orange { background: var(--rt-orange-500); border-color: var(--rt-orange-600); color: white; }
+  .ts-btn.lg { padding: 14px 22px; font-size: 16px; border-radius: 8px; }
+
+  /* HERO */
+  .ts-hero {
+    padding: 88px 64px 72px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 64px;
+    align-items: center;
+    border-bottom: 1px solid var(--rt-ink-200);
+    background:
+      radial-gradient(ellipse 600px 400px at 110% 0%, var(--rt-orange-50), transparent 70%),
+      white;
+  }
+  .ts-hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-weight: 600;
+    font-size: 13px; letter-spacing: 0.04em;
+    color: var(--rt-orange-600);
+    background: var(--rt-orange-50);
+    border: 1px solid var(--rt-orange-200);
+    border-radius: 999px;
+    padding: 6px 14px 6px 8px;
+    margin-bottom: 24px;
+  }
+  .ts-hero-eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rt-orange-500); }
+  .ts-hero h1 {
+    font-family: var(--font-display-ts);
+    font-size: 64px; line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin: 0 0 20px;
+    color: var(--rt-ink-900);
+    max-width: 14ch;
+  }
+  .ts-hero h1 em { font-style: normal; color: var(--rt-orange-500); }
+  .ts-hero p { font-size: 18px; line-height: 1.55; color: var(--fg-muted); max-width: 50ch; margin: 0 0 28px; }
+  .ts-hero .cta-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .ts-hero .trust { display: flex; align-items: center; gap: 12px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rt-ink-200); font-size: 13px; color: var(--fg-muted); }
+  .ts-hero .trust strong { color: var(--rt-ink-900); }
+
+  /* Hero side: a "system diagram" card */
+  .sys-card {
+    background: white;
+    border: 1px solid var(--rt-ink-200);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-paper-lg);
+    position: relative;
+  }
+  .sys-card::before {
+    content: ""; position: absolute; top: -10px; left: 24px;
+    background: var(--rt-ink-900); color: var(--rt-paper-cold);
+    padding: 4px 10px;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border-radius: 4px;
+    content: "Live · client.system.ts";
+  }
+  .sys-step {
+    display: grid; grid-template-columns: 32px 1fr auto;
+    align-items: center; gap: 14px;
+    padding: 14px 12px;
+    background: var(--rt-paper-cold);
+    border: 1px solid var(--rt-ink-200);
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .sys-step .num { width: 28px; height: 28px; border-radius: 50%; background: white; border: 1px solid var(--rt-ink-300); font-family: var(--font-mono); font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; color: var(--rt-ink-900); }
+  .sys-step.done .num { background: var(--rt-success); color: white; border-color: var(--rt-success); }
+  .sys-step.live .num { background: var(--rt-orange-500); color: white; border-color: var(--rt-orange-600); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(217,98,31,0.4); } 50% { box-shadow: 0 0 0 6px rgba(217,98,31,0); } }
+  .sys-step .l { font-family: var(--font-body); font-weight: 600; font-size: 14px; }
+  .sys-step .l small { display: block; font-weight: 400; color: var(--fg-muted); font-size: 12px; margin-top: 2px; }
+  .sys-step .t { font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); text-transform: uppercase; letter-spacing: 0.06em; }
+  .sys-saved { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 12px 14px; background: var(--rt-ink-900); color: white; border-radius: 8px; font-family: var(--font-mono); font-size: 12px; }
+  .sys-saved strong { font-size: 18px; color: var(--rt-orange-300); font-family: var(--font-mono); }
+
+  /* SERVICES GRID */
+  .ts-section { padding: 80px 64px; border-bottom: 1px solid var(--rt-ink-200); }
+  .ts-section:last-child { border-bottom: 0; }
+  .ts-eyebrow { font-family: var(--font-body); font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--rt-orange-600); margin: 0 0 8px; }
+  .ts-h2 { font-family: var(--font-display-ts); font-size: 44px; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 16px; color: var(--rt-ink-900); max-width: 22ch; }
+  .ts-lede { font-size: 17px; line-height: 1.55; color: var(--fg-muted); max-width: 56ch; margin: 0 0 40px; }
+
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .svc {
+    background: white; border: 1px solid var(--rt-ink-200); border-radius: 10px;
+    padding: 28px; box-shadow: var(--shadow-paper-sm);
+    transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+  }
+  .svc:hover { transform: translateY(-2px); box-shadow: var(--shadow-paper); }
+  .svc .icon {
+    width: 44px; height: 44px;
+    background: var(--rt-orange-50);
+    border: 1px solid var(--rt-orange-200);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .svc .icon svg { stroke: var(--rt-orange-600); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .svc h3 { font-family: var(--font-display-ts); font-size: 22px; line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 8px; color: var(--rt-ink-900); }
+  .svc p { font-size: 14px; line-height: 1.55; color: var(--fg-muted); margin: 0 0 16px; }
+  .svc .meta { display: flex; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); text-transform: uppercase; letter-spacing: 0.08em; padding-top: 14px; border-top: 1px solid var(--rt-ink-200); }
+  .svc .meta strong { color: var(--rt-ink-900); margin-left: 4px; }
+
+  /* CASE STUDIES */
+  .case-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; }
+  .case {
+    background: white; border: 1px solid var(--rt-ink-200); border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-paper-sm);
+  }
+  .case .preview {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, var(--rt-ink-900) 0%, var(--rt-ink-700) 100%);
+    border-bottom: 1px solid var(--rt-ink-200);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .case .preview .grid-bg {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .case .preview .stat {
+    position: relative; z-index: 1; text-align: center;
+    color: var(--rt-paper-cold);
+  }
+  .case .preview .stat .big { font-family: var(--font-display-ts); font-size: 88px; line-height: 1; letter-spacing: -0.04em; color: var(--rt-orange-400); }
+  .case .preview .stat .lab { font-family: var(--font-body); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rt-ink-300); margin-top: 6px; }
+  .case .body { padding: 24px; }
+  .case .client {
+    font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  .case h3 { font-family: var(--font-display-ts); font-size: 24px; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 8px; color: var(--rt-ink-900); }
+  .case p { font-size: 14px; line-height: 1.55; color: var(--fg-muted); margin: 0 0 14px; }
+  .case .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .case .tags span { font-family: var(--font-body); font-weight: 500; font-size: 11px; padding: 3px 8px; background: var(--rt-paper-cold); border: 1px solid var(--rt-ink-200); border-radius: 999px; color: var(--rt-ink-700); }
+
+  /* PROPOSAL CARD */
+  .proposal {
+    background: white; border: 1px solid var(--rt-ink-200); border-radius: 12px;
+    box-shadow: var(--shadow-paper);
+    overflow: hidden;
+  }
+  .prop-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 32px;
+    background: var(--rt-paper-cold);
+    border-bottom: 1px solid var(--rt-ink-200);
+  }
+  .prop-head .meta { font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .prop-head .meta strong { display: block; color: var(--rt-ink-900); font-family: var(--font-body); font-weight: 700; font-size: 18px; text-transform: none; letter-spacing: 0; margin-top: 4px; }
+  .prop-head img { height: 40px; }
+  .prop-body { padding: 32px; display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+  .scope h4 { font-family: var(--font-display-ts); font-size: 26px; letter-spacing: -0.01em; margin: 0 0 12px; }
+  .scope p { font-size: 14px; line-height: 1.6; color: var(--fg-muted); margin: 0 0 20px; }
+  .deliverables {
+    list-style: none; padding: 0; margin: 0;
+    border: 1px solid var(--rt-ink-200); border-radius: 8px;
+    overflow: hidden;
+  }
+  .deliverables li {
+    display: grid; grid-template-columns: 28px 1fr auto auto;
+    gap: 12px; padding: 14px 16px;
+    border-bottom: 1px solid var(--rt-ink-200);
+    align-items: center;
+    font-size: 14px;
+  }
+  .deliverables li:last-child { border-bottom: 0; }
+  .deliverables li .num { font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); }
+  .deliverables li .name strong { display: block; font-weight: 600; color: var(--rt-ink-900); }
+  .deliverables li .name small { font-size: 12px; color: var(--fg-muted); }
+  .deliverables li .week { font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .deliverables li .price { font-family: var(--font-mono); font-weight: 700; font-size: 13px; color: var(--rt-ink-900); }
+
+  .invoice {
+    background: var(--rt-ink-900); color: white;
+    border-radius: 10px; padding: 24px;
+  }
+  .invoice .row { display: flex; justify-content: space-between; padding: 6px 0; font-family: var(--font-mono); font-size: 13px; color: var(--rt-ink-300); }
+  .invoice .row strong { color: var(--rt-paper-cold); font-weight: 500; }
+  .invoice .total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--rt-ink-700); }
+  .invoice .total .lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rt-orange-300); }
+  .invoice .total .amt { font-family: var(--font-display-ts); font-size: 40px; line-height: 1; letter-spacing: -0.02em; color: var(--rt-paper-cold); }
+  .invoice .actions { margin-top: 20px; display: flex; gap: 8px; }
+  .invoice .actions .ts-btn { flex: 1; justify-content: center; }
+
+  /* TESTIMONIAL STRIP */
+  .testimonial {
+    background: var(--rt-paper);
+    padding: 64px;
+    text-align: center;
+    border-top: 1px solid var(--rt-ink-200);
+  }
+  .testimonial blockquote {
+    font-family: var(--font-display-ts);
+    font-size: 32px; line-height: 1.25;
+    letter-spacing: -0.01em;
+    max-width: 28ch; margin: 0 auto 24px;
+    color: var(--rt-ink-900);
+  }
+  .testimonial blockquote::before { content: "“"; color: var(--rt-orange-500); font-size: 1.2em; margin-right: 4px; }
+  .testimonial blockquote::after { content: "”"; color: var(--rt-orange-500); font-size: 1.2em; margin-left: 4px; }
+  .testimonial cite { font-style: normal; font-family: var(--font-body); font-size: 14px; color: var(--fg-muted); }
+  .testimonial cite strong { color: var(--rt-ink-900); display: inline; font-weight: 700; }
+
+  /* FOOTER */
+  .ts-foot {
+    padding: 32px 64px;
+    background: var(--rt-ink-900); color: var(--rt-ink-300);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .ts-foot strong { color: var(--rt-paper-cold); font-family: var(--font-body); font-weight: 700; text-transform: none; letter-spacing: 0; font-size: 14px; }
+
+  .caveat {
+    margin-top: 24px;
+    background: var(--rt-orange-50); border: 1px solid var(--rt-orange-200); border-radius: 8px;
+    padding: 14px 18px; font-size: 13px; color: var(--rt-orange-800);
+  }
+  .caveat strong { display: block; font-family: var(--font-body); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 11px; margin-bottom: 4px; color: var(--rt-orange-700); }
+
+  .doc-foot {
+    margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--rt-ink-200);
+    font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <div>
+      <div style="font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; color: var(--rt-orange-600);">UI Kit · Thurr Solutions</div>
+      <h1 style="font-family: var(--font-display-ts); font-size: 40px; margin: 4px 0 0; line-height: 1.05; letter-spacing: -0.02em;">The B2B sibling. Calmer, cleaner, capable.</h1>
+    </div>
+    <div style="font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); text-align: right;">
+      Marketing site · Services · Case studies · Proposal<br>
+      <a href="design-system.html" style="color: var(--rt-orange-600);">→ tokens reference</a> · 
+      <a href="right-thurr-ui-kit.html" style="color: var(--rt-orange-600);">→ Right Thurr</a>
+    </div>
+  </div>
+
+  <!-- ============ MARKETING SITE ============ -->
+  <div class="doc">
+    <!-- NAV -->
+    <header class="ts-nav">
+      <div class="logo">
+        <img src="assets/rt-monogram-clean.png" alt="">
+        <div class="wm">Thurr Solutions<small>Automation · AI · Systems</small></div>
+      </div>
+      <nav class="links">
+        <a class="active">Work</a>
+        <a>Services</a>
+        <a>Approach</a>
+        <a>Writing</a>
+        <a>About</a>
+      </nav>
+      <div class="right">
+        <a class="ts-btn outline">Sign in</a>
+        <a class="ts-btn">Book a call →</a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="ts-hero">
+      <div>
+        <span class="ts-hero-eyebrow"><span class="dot"></span>Booking April–June engagements</span>
+        <h1>The systems that <em>quietly run</em> small businesses.</h1>
+        <p>We design and build the automations, internal tools, and AI workflows that take 200 hours off your year. Six-week engagements. Senior team. No agency overhead.</p>
+        <div class="cta-row">
+          <a class="ts-btn lg orange">Start a project →</a>
+          <a class="ts-btn lg outline">See our work</a>
+        </div>
+        <div class="trust">
+          <span><strong>32 engagements</strong> shipped</span>
+          <span style="opacity:0.4">·</span>
+          <span><strong>$1.4M</strong> client revenue unlocked</span>
+          <span style="opacity:0.4">·</span>
+          <span><strong>6.2 weeks</strong> avg build</span>
+        </div>
+      </div>
+      <div>
+        <div class="sys-card">
+          <div style="height: 16px;"></div>
+          <div class="sys-step done"><div class="num">1</div><div class="l">Lead form to CRM<small>n8n · Hubspot · Slack alert</small></div><div class="t">Live</div></div>
+          <div class="sys-step done"><div class="num">2</div><div class="l">Auto-quote PDF<small>OpenAI · DocuSign · Stripe link</small></div><div class="t">Live</div></div>
+          <div class="sys-step live"><div class="num">3</div><div class="l">Customer onboarding email<small>Drafting · awaiting your review</small></div><div class="t">Now</div></div>
+          <div class="sys-step"><div class="num">4</div><div class="l">Quarterly retention digest<small>Scheduled · ships May 12</small></div><div class="t">Queued</div></div>
+          <div class="sys-saved">
+            <span>HOURS SAVED THIS QUARTER</span>
+            <strong>184 hrs</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="ts-section">
+      <p class="ts-eyebrow">What we build</p>
+      <h2 class="ts-h2">Four practices, one team.</h2>
+      <p class="ts-lede">We pick fixed-scope engagements where we can ship something measurable in six weeks. No retainers, no monthly drip work — just systems that keep paying off after we leave.</p>
+
+      <div class="svc-grid">
+        <div class="svc">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg></div>
+          <h3>Automation builds</h3>
+          <p>Zapier, n8n, custom Node — whatever fits. Lead routing, quoting, onboarding, billing, reporting. The work that runs your business while you don't.</p>
+          <div class="meta"><span>From <strong>$8k</strong></span><span>·</span><span>4 wks <strong>typical</strong></span></div>
+        </div>
+        <div class="svc">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.2 4.2l4.3 4.3m6.9 6.9l4.3 4.3M1 12h6m10 0h6M4.2 19.8l4.3-4.3m6.9-6.9l4.3-4.3"/></svg></div>
+          <h3>AI consulting</h3>
+          <p>Where to deploy LLMs (and where not to). We audit your workflow, prototype 2–3 high-leverage applications, and hand you a roadmap your team can build.</p>
+          <div class="meta"><span>From <strong>$12k</strong></span><span>·</span><span>3 wks <strong>typical</strong></span></div>
+        </div>
+        <div class="svc">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h3>Internal tools</h3>
+          <p>Custom dashboards, ops tooling, admin panels. Retool / Next.js / Supabase, depending on data. Replace the spreadsheet that everyone's afraid of.</p>
+          <div class="meta"><span>From <strong>$18k</strong></span><span>·</span><span>6 wks <strong>typical</strong></span></div>
+        </div>
+        <div class="svc">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 19l7-7-7-7M19 12H5"/></svg></div>
+          <h3>Brand &amp; landing</h3>
+          <p>Identity, narrative, and a one-pager that converts. We write the copy, design the page, and ship it on Framer or your stack of choice.</p>
+          <div class="meta"><span>From <strong>$9k</strong></span><span>·</span><span>3 wks <strong>typical</strong></span></div>
+        </div>
+        <div class="svc">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg></div>
+          <h3>Workshops</h3>
+          <p>One-day on-site with your team. We map your workflow, find the three highest-leverage automations, and leave you with a build-or-buy doc.</p>
+          <div class="meta"><span>Flat <strong>$4.5k</strong></span><span>·</span><span>1 day</span></div>
+        </div>
+        <div class="svc">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <h3>Audit &amp; fix</h3>
+          <p>Inherit a half-built automation? We diagnose, document, and fix what's there before you sink another $20k into a rebuild.</p>
+          <div class="meta"><span>From <strong>$3k</strong></span><span>·</span><span>1–2 wks</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section class="ts-section">
+      <p class="ts-eyebrow">Recent work</p>
+      <h2 class="ts-h2">Receipts.</h2>
+      <p class="ts-lede">Three projects from the last quarter. Each one shipped, measured, and still running.</p>
+
+      <div class="case-grid">
+        <div class="case">
+          <div class="preview">
+            <div class="grid-bg"></div>
+            <div class="stat"><div class="big">−72%</div><div class="lab">Quote turnaround time</div></div>
+          </div>
+          <div class="body">
+            <div class="client">Cobalt HVAC · Atlanta · 14 employees</div>
+            <h3>From 3-day quotes to 3-hour quotes.</h3>
+            <p>We wired their lead form to an LLM-drafted quote PDF, with a senior tech reviewing on mobile. Time-to-quote dropped from 72 hours to 3 — and close rate climbed 18%.</p>
+            <div class="tags"><span>Automation</span><span>OpenAI</span><span>DocuSign</span><span>4 weeks</span></div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="preview" style="background: linear-gradient(135deg, var(--rt-orange-700), var(--rt-orange-500));">
+            <div class="grid-bg"></div>
+            <div class="stat"><div class="big" style="color: white;">$340k</div><div class="lab" style="color: var(--rt-orange-100);">Recovered ARR</div></div>
+          </div>
+          <div class="body">
+            <div class="client">Junebug Studio · Brand · 6 employees</div>
+            <h3>A retention engine for a burning subscription base.</h3>
+            <p>We built a churn-risk model on their Stripe data, plus a four-step rescue sequence in n8n. Recovered $340k ARR in 90 days against a $14k engagement.</p>
+            <div class="tags"><span>AI</span><span>Stripe</span><span>n8n</span><span>5 weeks</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROPOSAL -->
+    <section class="ts-section">
+      <p class="ts-eyebrow">How we engage</p>
+      <h2 class="ts-h2">A proposal you'll actually read.</h2>
+      <p class="ts-lede">Every engagement starts with a one-pager like this. Fixed scope, fixed weeks, fixed price. If we don't ship it, you don't pay.</p>
+
+      <div class="proposal">
+        <div class="prop-head">
+          <div class="meta">PROPOSAL · TS-0142<strong>Cobalt HVAC — Quoting Automation v2</strong></div>
+          <img src="assets/rt-monogram-clean.png" alt="">
+        </div>
+        <div class="prop-body">
+          <div class="scope">
+            <h4>What we'll build</h4>
+            <p>A second-generation quoting system that handles fleet contracts (not just residential). The current automation has driven a 72% reduction in quote turnaround on residential — we extend it to commercial in six weeks.</p>
+            <ul class="deliverables">
+              <li><span class="num">01</span><span class="name"><strong>Discovery &amp; data audit</strong><small>3 site visits · 1 ride-along</small></span><span class="week">Wk 1</span><span class="price">Included</span></li>
+              <li><span class="num">02</span><span class="name"><strong>Fleet quote prompt &amp; eval suite</strong><small>OpenAI · 40 historical fleet quotes</small></span><span class="week">Wk 2</span><span class="price">$4,800</span></li>
+              <li><span class="num">03</span><span class="name"><strong>n8n workflow + DocuSign integration</strong><small>End-to-end · payment link auto-attached</small></span><span class="week">Wk 3–4</span><span class="price">$8,400</span></li>
+              <li><span class="num">04</span><span class="name"><strong>Senior-tech mobile review UI</strong><small>One-tap approve / edit / reject</small></span><span class="week">Wk 5</span><span class="price">$5,600</span></li>
+              <li><span class="num">05</span><span class="name"><strong>Rollout, training, 30-day support</strong><small>Includes one bug-fix sprint</small></span><span class="week">Wk 6</span><span class="price">$2,200</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="invoice">
+              <div class="row"><span>Subtotal</span><strong>$21,000.00</strong></div>
+              <div class="row"><span>Loyalty credit (v1 client)</span><strong style="color: var(--rt-orange-300);">−$2,100.00</strong></div>
+              <div class="row"><span>Travel (3 site visits)</span><strong>$900.00</strong></div>
+              <div class="total">
+                <div><div class="lab">Total · fixed</div></div>
+                <div class="amt">$19,800</div>
+              </div>
+              <div class="actions">
+                <a class="ts-btn orange" style="flex:1;">Accept proposal →</a>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--rt-ink-400); margin-top: 12px; line-height: 1.4;">50% on accept · 50% on go-live · valid through May 15</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section class="testimonial">
+      <blockquote>They shipped in five weeks what our last vendor swore was a six-month build. And it actually works.</blockquote>
+      <cite><strong>Devon Reyes</strong> · COO, Junebug Studio</cite>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="ts-foot">
+      <div><strong>Thurr Solutions</strong></div>
+      <div>© 2026 · Atlanta, GA · hello@thurrsolutions.com</div>
+      <div>The studio behind <a href="right-thurr-ui-kit.html" style="color: var(--rt-orange-300);">Right Thurr</a></div>
+    </footer>
+  </div>
+
+  <div class="caveat">
+    <strong>Caveats</strong>
+    Display lettering uses Google Font <code>Alfa Slab One</code> as a stand-in for the licensed slab face the Thurr Solutions wordmark would use in production. The R+T monogram is a raster crop — replace with vector SVG. Client names, statistics, and project copy are illustrative.
+  </div>
+
+  <div class="doc-foot">
+    THURR SOLUTIONS · UI KIT v0.1 · CONTENT IS ILLUSTRATIVE
+  </div>
+</div>
+</body>
+</html>

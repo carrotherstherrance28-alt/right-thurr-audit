@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Right Thurr Homepage Options</title>
+    <link rel="stylesheet" href="../src/styles/brand-tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--rt-paper);
+        color: var(--rt-ink-900);
+        font-family: var(--font-body);
+      }
+      .option {
+        min-height: 100vh;
+        display: none;
+        grid-template-rows: auto 1fr;
+        border-bottom: 8px solid var(--rt-ink-900);
+      }
+      .option:target {
+        display: grid;
+      }
+      body:not(:has(.option:target)) #option-a {
+        display: grid;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px 34px;
+        border-bottom: 4px solid var(--rt-ink-900);
+      }
+      .mark {
+        width: 54px;
+        height: 54px;
+        object-fit: contain;
+      }
+      nav {
+        display: flex;
+        gap: 22px;
+        font-family: var(--font-subhead);
+        font-weight: 700;
+        letter-spacing: .14em;
+        font-size: 12px;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, .72fr);
+        gap: 58px;
+        align-items: center;
+        padding: 64px;
+      }
+      .eyebrow {
+        font-family: var(--font-subhead);
+        font-weight: 700;
+        letter-spacing: .14em;
+        color: var(--rt-orange-600);
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+      h1 {
+        margin: 0 0 22px;
+        font-family: var(--font-display-rt);
+        font-size: clamp(64px, 8vw, 118px);
+        line-height: .98;
+        letter-spacing: 0;
+      }
+      p {
+        margin: 0;
+        color: var(--rt-ink-700);
+        font-size: 21px;
+        line-height: 1.48;
+        max-width: 680px;
+      }
+      .actions {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 32px;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 62px;
+        padding: 0 24px;
+        background: var(--rt-orange-500);
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 6px 6px 0 var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+        font-family: var(--font-subhead);
+        font-weight: 700;
+        letter-spacing: .14em;
+      }
+      .textlink {
+        font-family: var(--font-subhead);
+        font-weight: 700;
+        letter-spacing: .14em;
+        color: var(--rt-ink-900);
+      }
+      .panel {
+        min-height: 560px;
+        padding: 34px;
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 8px 8px 0 var(--rt-ink-900);
+        background: var(--rt-paper-cold);
+      }
+      .panel.dark {
+        background: var(--rt-ink-900);
+        color: var(--rt-paper);
+      }
+      .panel.dark p { color: var(--rt-paper); }
+      .tag {
+        display: inline-block;
+        padding: 8px 14px;
+        background: var(--rt-orange-500);
+        border: 3px solid var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+        font-family: var(--font-subhead);
+        font-weight: 700;
+        letter-spacing: .14em;
+        transform: rotate(-2deg);
+      }
+      .mini-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 42px;
+      }
+      .mini {
+        padding: 18px;
+        border: 2px solid currentColor;
+      }
+      .mini span {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--rt-orange-400);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .mini strong {
+        font-size: 24px;
+      }
+      .feed {
+        display: grid;
+        gap: 12px;
+        margin-top: 34px;
+      }
+      .feed div {
+        display: grid;
+        grid-template-columns: 70px 24px 1fr;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        background: var(--rt-paper-cold);
+        border: 3px solid var(--rt-ink-900);
+      }
+      .feed time {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--rt-ink-600);
+      }
+      .option-b {
+        background:
+          linear-gradient(90deg, rgba(26,23,20,.05) 1px, transparent 1px) 0 0 / 52px 52px,
+          linear-gradient(rgba(26,23,20,.05) 1px, transparent 1px) 0 0 / 52px 52px,
+          var(--rt-paper);
+      }
+      .option-b h1 {
+        font-family: var(--font-display-ts);
+        letter-spacing: -.02em;
+      }
+      .option-c {
+        background: var(--rt-ink-900);
+        color: var(--rt-paper);
+      }
+      .option-c header {
+        border-color: rgba(245,239,226,.4);
+      }
+      .option-c h1 {
+        color: var(--rt-paper);
+      }
+      .option-c p,
+      .option-c .textlink {
+        color: var(--rt-paper);
+      }
+      .option-c .panel {
+        background: var(--rt-paper);
+        color: var(--rt-ink-900);
+        box-shadow: 8px 8px 0 var(--rt-orange-500);
+      }
+      .brand-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 36px;
+      }
+      .brand-split div {
+        padding: 22px;
+        border: 3px solid var(--rt-ink-900);
+      }
+      .label {
+        position: absolute;
+        top: 100px;
+        left: 34px;
+        padding: 8px 12px;
+        background: var(--rt-ink-900);
+        color: var(--rt-paper);
+        font-family: var(--font-mono);
+        font-size: 12px;
+      }
+      .option { position: relative; }
+    </style>
+  </head>
+  <body>
+    <section class="option option-a" id="option-a">
+      <div class="label">OPTION A · STAMPED PRODUCT HERO</div>
+      <header>
+        <img class="mark" src="../src/assets/rt-monogram-clean.png" alt="" />
+        <nav><span>HOME</span><span>BUILDOUT PLAN</span><span>APP PREVIEW</span></nav>
+      </header>
+      <main class="hero">
+        <div>
+          <div class="eyebrow">AI BUSINESS BUILDOUT PLAN</div>
+          <h1>See what business Thurr could build for you in 5 minutes.</h1>
+          <p>Drop the idea. We map the opportunity, offer, funnel, automation stack, agents, and first 30 days of execution.</p>
+          <div class="actions"><div class="button">GET MY BUILDOUT PLAN</div><div class="textlink">SEE THE MACHINE WORKING</div></div>
+        </div>
+        <aside class="panel dark">
+          <span class="tag">AUTOPILOT BLUEPRINT</span>
+          <div class="mini-grid">
+            <div class="mini"><span>Best first offer</span><strong>$149 express detail</strong></div>
+            <div class="mini"><span>Launch path</span><strong>30 days</strong></div>
+            <div class="mini"><span>First system</span><strong>Lead capture + follow-up</strong></div>
+          </div>
+        </aside>
+      </main>
+    </section>
+
+    <section class="option option-b" id="option-b">
+      <div class="label">OPTION B · MACHINE ACTIVITY FIRST</div>
+      <header>
+        <img class="mark" src="../src/assets/rt-monogram-clean.png" alt="" />
+        <nav><span>HOME</span><span>BUILDOUT PLAN</span><span>ACTIVITY</span></nav>
+      </header>
+      <main class="hero">
+        <div>
+          <div class="eyebrow">YOUR SYSTEM IS ALREADY MOVING</div>
+          <h1>Ideas do not pay you. Systems do.</h1>
+          <p>Right Thurr turns the idea into visible action: blueprint, offer, page copy, automations, tasks, and the next move.</p>
+          <div class="actions"><div class="button">BUILD MY FIRST SYSTEM</div><div class="textlink">VIEW BLUEPRINT</div></div>
+        </div>
+        <aside class="panel">
+          <span class="tag">WHAT HAPPENED TODAY</span>
+          <div class="feed">
+            <div><time>10:42</time><b>✓</b><strong>Created business blueprint</strong></div>
+            <div><time>11:15</time><b>✓</b><strong>Drafted starter offer</strong></div>
+            <div><time>12:03</time><b>▲</b><strong>Mapped lead capture workflow</strong></div>
+            <div><time>01:20</time><b>→</b><strong>Queued launch roadmap</strong></div>
+          </div>
+        </aside>
+      </main>
+    </section>
+
+    <section class="option option-c" id="option-c">
+      <div class="label">OPTION C · OWNED BRANDS SPLIT</div>
+      <header>
+        <img class="mark" src="../src/assets/rt-monogram-clean.png" alt="" />
+        <nav><span>RIGHT THURR</span><span>THURR SOLUTIONS</span><span>DIAGNOSTICS</span></nav>
+      </header>
+      <main class="hero">
+        <div>
+          <div class="eyebrow">PRODUCT + B2B SYSTEMS</div>
+          <h1>Build the business. Then show the machine working.</h1>
+          <p>Right Thurr is the product. Thurr Solutions is the implementation arm. Client funnels use the same engine, re-skinned to the client.</p>
+          <div class="actions"><div class="button">GET MY BUILDOUT PLAN</div><div class="textlink">START A PROJECT</div></div>
+        </div>
+        <aside class="panel">
+          <span class="tag">BRAND ARCHITECTURE</span>
+          <div class="brand-split">
+            <div><strong>Right Thurr</strong><p>Product/app/public brand.</p></div>
+            <div><strong>Thurr Solutions</strong><p>B2B services and client systems.</p></div>
+          </div>
+          <div class="mini-grid">
+            <div class="mini"><span>Client rule</span><strong>Same engine. Re-skinned brand.</strong></div>
+          </div>
+        </aside>
+      </main>
+    </section>
+  </body>
+</html>

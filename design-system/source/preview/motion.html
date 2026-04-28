@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg);font-family:var(--font-body);}
+  .row{display:flex;gap:24px;flex-wrap:wrap;align-items:center;}
+  .box{width:90px;height:90px;background:var(--rt-orange-500);border:3px solid var(--rt-ink-900);box-shadow:6px 6px 0 0 var(--rt-ink-900);cursor:pointer;}
+  .name{font-family:var(--font-subhead);font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--fg);margin-top:8px;display:block;}
+  .desc{font-family:var(--font-mono);font-size:10.5px;color:var(--fg-muted);margin-top:2px;}
+  .a-snap{transition:transform 120ms cubic-bezier(.2,.9,.3,1.2), box-shadow 120ms cubic-bezier(.2,.9,.3,1.2);}
+  .a-snap:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 0 var(--rt-ink-900);}
+  .a-snap:active{transform:translate(0,0);box-shadow:0 0 0 0 var(--rt-ink-900);transition-duration:60ms;}
+  .a-stamp{animation:stamp 1.6s ease-out infinite;}
+  @keyframes stamp{0%{transform:scale(.4) rotate(-6deg);opacity:0;}40%{transform:scale(1.06) rotate(2deg);opacity:1;}55%{transform:scale(1) rotate(0);}100%{transform:scale(1) rotate(0);opacity:1;}}
+  .a-tick{font-family:var(--font-mono);font-size:22px;font-weight:700;color:var(--fg);}
+</style></head><body>
+<div class="row">
+  <div><div class="box a-snap"></div><span class="name">Hover · lift snap</span><div class="desc">120ms · pick up</div></div>
+  <div><div class="box a-stamp"></div><span class="name">Stamp on enter</span><div class="desc">360ms overshoot</div></div>
+  <div style="text-align:center;">
+    <div class="a-tick" id="tick">$1,247</div>
+    <span class="name">Money tick</span><div class="desc">280ms ease-out</div>
+  </div>
+</div>
+<script>
+  const el=document.getElementById('tick');let v=1247;setInterval(()=>{v+=Math.floor(Math.random()*40+8);el.textContent='$'+v.toLocaleString();},1200);
+</script>
+</body></html>

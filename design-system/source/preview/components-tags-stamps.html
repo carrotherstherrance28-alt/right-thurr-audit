@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg);font-family:var(--font-body);}
+  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .stamp{display:inline-block;font-family:var(--font-subhead);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11px;padding:5px 12px;border:2px solid var(--rt-ink-900);background:var(--rt-orange-500);color:var(--rt-paper-cold);transform:rotate(-2deg);}
+  .stamp.flat{transform:none;}
+  .stamp.tag{padding:7px 14px 7px 22px;clip-path:polygon(8px 50%,16px 0,100% 0,100% 100%,16px 100%);background:var(--rt-orange-500);}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);font-weight:600;font-size:12px;padding:4px 10px;border-radius:999px;background:var(--rt-paper-cold);border:1.5px solid var(--rt-ink-900);}
+  .chip .dot{width:8px;height:8px;border-radius:999px;background:var(--rt-success);}
+  .chip.warn .dot{background:var(--rt-warning);}
+  .chip.danger .dot{background:var(--rt-danger);}
+  .label{font-family:var(--font-mono);font-size:10.5px;color:var(--fg-muted);width:100%;margin-top:8px;}
+</style></head><body>
+<div class="row">
+  <span class="stamp">NEW</span>
+  <span class="stamp flat" style="background:var(--rt-ink-900)">SHIPPED</span>
+  <span class="stamp" style="background:var(--rt-paper-cold);color:var(--rt-ink-900);transform:rotate(1.5deg);">BETA</span>
+  <span class="chip"><span class="dot"></span>Live</span>
+  <span class="chip warn"><span class="dot"></span>Pending</span>
+  <span class="chip danger"><span class="dot"></span>Blocked</span>
+</div>
+<div class="label">Stamps rotate 1.5–3°. Chips stay flat — used for status only.</div>
+</body></html>

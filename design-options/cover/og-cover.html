@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Right Thurr Cover</title>
+    <link rel="stylesheet" href="../../src/styles/brand-tokens.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(26, 23, 20, 0.06) 1px, transparent 1px) 0 0 / 56px 56px,
+          linear-gradient(rgba(26, 23, 20, 0.06) 1px, transparent 1px) 0 0 / 56px 56px,
+          #f5efe2;
+        color: #1a1714;
+        font-family: var(--font-body);
+      }
+
+      .cover {
+        position: relative;
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 64px;
+        align-items: center;
+        width: 1200px;
+        height: 630px;
+        padding: 58px 78px;
+      }
+
+      .mark-wrap {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 340px;
+        height: 340px;
+        background: #1a1714;
+        border: 8px solid #1a1714;
+        box-shadow: 14px 14px 0 #d9621f;
+        transform: rotate(-2deg);
+      }
+
+      .mark-wrap::before {
+        position: absolute;
+        inset: 28px;
+        content: "";
+        border: 2px solid rgba(245, 239, 226, 0.28);
+      }
+
+      img {
+        width: 235px;
+        height: 235px;
+        object-fit: contain;
+        filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.22));
+      }
+
+      .eyebrow {
+        margin-bottom: 20px;
+        color: #b84f18;
+        font-family: var(--font-subhead);
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+      }
+
+      h1 {
+        margin: 0 0 24px;
+        font-family: var(--font-display-rt);
+        font-size: 76px;
+        line-height: 0.96;
+        letter-spacing: 0;
+      }
+
+      p {
+        max-width: 610px;
+        margin: 0;
+        color: #3d3630;
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1.22;
+      }
+
+    </style>
+  </head>
+  <body>
+    <main class="cover">
+      <div class="mark-wrap">
+        <img src="../../src/assets/rt-monogram-clean.png" alt="" />
+      </div>
+      <section>
+        <div class="eyebrow">RIGHT THURR</div>
+        <h1>Turn your idea into a business system.</h1>
+        <p>AI buildout plans, systems, activity, and execution.</p>
+      </section>
+    </main>
+  </body>
+</html>

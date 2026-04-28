@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:22px 24px;background:var(--bg);font-family:var(--font-body);}
+  .group{display:flex;flex-direction:column;gap:10px;max-width:360px;}
+  label{font-family:var(--font-subhead);text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:11px;color:var(--fg-muted);}
+  .input-rt{font-family:var(--font-body);font-size:15px;padding:12px 14px;background:var(--rt-paper-cold);border:3px solid var(--rt-ink-900);border-radius:4px;outline:none;}
+  .input-rt:focus{box-shadow:4px 4px 0 0 var(--rt-orange-500);}
+  .input-ts{font-family:var(--font-body);font-size:14px;padding:11px 14px;background:#fff;border:1.5px solid var(--rt-ink-300);border-radius:8px;outline:none;}
+  .input-ts:focus{border-color:var(--rt-orange-500);box-shadow:0 0 0 3px rgba(217,98,31,.18);}
+  .row{display:flex;gap:24px;flex-wrap:wrap;}
+  .meta{font-family:var(--font-mono);font-size:10.5px;color:var(--fg-muted);}
+</style></head><body>
+<div class="row">
+  <div class="group">
+    <label>Idea · Thurr Solutions LLC</label>
+    <input class="input-rt" placeholder="A lawn-care side hustle in Austin" />
+    <div class="meta">3px border · focus = orange stamp shadow</div>
+  </div>
+  <div class="group">
+    <label>Email · Thurr Solutions LLC</label>
+    <input class="input-ts" placeholder="therrance@thurrsolutions.com" value="therrance@thurrsolutions.com" />
+    <div class="meta">1.5px border · focus = ring</div>
+  </div>
+</div>
+</body></html>

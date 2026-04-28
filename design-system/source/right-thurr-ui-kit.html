@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en" data-brand="right-thurr">
+<head>
+<meta charset="utf-8">
+<title>Right Thurr — UI Kit</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  body { margin: 0; background: var(--rt-paper); }
+  .frame { max-width: 1280px; margin: 0 auto; padding: 32px; }
+
+  /* ============ APP SHELL ============ */
+  .app {
+    background: var(--rt-paper-cold);
+    border: 5px solid var(--rt-ink-900);
+    box-shadow: 16px 16px 0 0 var(--rt-ink-900);
+    overflow: hidden;
+  }
+
+  /* Top bar */
+  .topbar {
+    display: flex; align-items: stretch;
+    border-bottom: 4px solid var(--rt-ink-900);
+    background: var(--rt-paper);
+  }
+  .topbar .mark {
+    width: 64px; background: var(--rt-orange-500);
+    border-right: 4px solid var(--rt-ink-900);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .topbar .mark img { width: 44px; height: 44px; }
+  .topbar .wordmark {
+    padding: 14px 24px;
+    font-family: var(--font-display-rt);
+    font-size: 28px; line-height: 1;
+    border-right: 4px solid var(--rt-ink-900);
+    display: flex; align-items: center;
+  }
+  .topbar nav {
+    display: flex; align-items: stretch;
+  }
+  .topbar nav a {
+    display: flex; align-items: center;
+    padding: 0 22px;
+    font-family: var(--font-body); font-weight: 800;
+    text-transform: uppercase; letter-spacing: var(--tracking-loud);
+    font-size: 13px;
+    color: var(--rt-ink-900);
+    border-right: 2px solid var(--rt-ink-200);
+    text-decoration: none;
+  }
+  .topbar nav a.active { background: var(--rt-ink-900); color: var(--rt-paper-cold); border-right-color: var(--rt-ink-900); }
+  .topbar .right { margin-left: auto; display: flex; align-items: center; gap: 12px; padding: 0 16px; }
+  .topbar .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono); font-size: 12px;
+    padding: 4px 10px; background: var(--rt-paper-cold);
+    border: 2px solid var(--rt-ink-900);
+    text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
+  }
+  .topbar .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rt-success); }
+  .topbar .avatar {
+    width: 36px; height: 36px;
+    border: 3px solid var(--rt-ink-900);
+    background: var(--rt-orange-200);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display-rt); font-size: 16px;
+    color: var(--rt-ink-900);
+  }
+
+  /* ============ HERO PANEL ============ */
+  .hero-panel {
+    padding: 56px 48px 40px;
+    background: var(--rt-paper);
+    border-bottom: 4px solid var(--rt-ink-900);
+    position: relative;
+  }
+  .hero-panel::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(var(--rt-ink-200) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.5; pointer-events: none;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; position: relative; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-block;
+    background: var(--rt-orange-500); color: var(--rt-paper-cold);
+    padding: 5px 12px; border: 2px solid var(--rt-ink-900);
+    font-family: var(--font-subhead); font-weight: 700;
+    text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 12px;
+    transform: rotate(-1.5deg); margin-bottom: 20px;
+  }
+  .hero-h {
+    font-family: var(--font-display-rt);
+    font-size: 88px; line-height: 0.92;
+    margin: 0 0 20px; color: var(--rt-ink-900);
+    max-width: 12ch;
+  }
+  .hero-h em { font-style: normal; color: var(--rt-orange-500); position: relative; }
+  .hero-sub { font-size: 20px; line-height: 1.4; color: var(--fg-muted); max-width: 50ch; margin: 0 0 28px; }
+
+  /* Idea input */
+  .idea-card {
+    background: var(--rt-paper-cold);
+    border: 4px solid var(--rt-ink-900);
+    box-shadow: var(--shadow-stamp);
+    padding: 20px;
+  }
+  .idea-card label {
+    font-family: var(--font-subhead); font-weight: 700;
+    text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 12px;
+    color: var(--rt-orange-500); display: block; margin-bottom: 10px;
+  }
+  .idea-card textarea {
+    width: 100%; min-height: 90px; resize: vertical;
+    border: 3px solid var(--rt-ink-900);
+    background: var(--rt-paper);
+    font-family: var(--font-body); font-size: 17px; line-height: 1.4;
+    padding: 14px;
+    color: var(--rt-ink-900);
+    box-sizing: border-box;
+  }
+  .idea-card textarea:focus { outline: none; box-shadow: var(--shadow-stamp-sm); }
+  .idea-actions { display: flex; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-body); font-weight: 800;
+    text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 14px;
+    padding: 14px 22px;
+    border: 3px solid var(--rt-ink-900);
+    background: var(--rt-orange-500); color: var(--rt-paper-cold);
+    box-shadow: var(--shadow-stamp-sm);
+    cursor: pointer;
+    transition: transform 120ms var(--ease-snap), box-shadow 120ms var(--ease-snap);
+  }
+  .btn:hover { transform: translate(2px,2px); box-shadow: 1px 1px 0 0 var(--rt-ink-900); }
+  .btn .arrow { font-size: 18px; }
+  .btn.ghost { background: transparent; color: var(--rt-ink-900); box-shadow: none; }
+  .btn.ghost:hover { background: var(--rt-ink-100); transform: none; }
+  .btn.sm { padding: 9px 14px; font-size: 12px; }
+  .btn.ink { background: var(--rt-ink-900); color: var(--rt-paper-cold); }
+
+  /* Hero side stamp */
+  .ship-stamp {
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: var(--rt-paper-cold);
+    border: 4px solid var(--rt-ink-900);
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(-12deg);
+    box-shadow: var(--shadow-stamp);
+    text-align: center;
+    margin-left: auto;
+    position: relative;
+    font-family: var(--font-display-rt);
+    color: var(--rt-ink-900);
+    line-height: 1;
+  }
+  .ship-stamp::before, .ship-stamp::after {
+    content: ""; position: absolute; inset: 12px;
+    border: 2px dashed var(--rt-ink-900); border-radius: 50%;
+  }
+  .ship-stamp::after { inset: 22px; border-style: solid; border-width: 1px; }
+  .ship-stamp .inner { position: relative; z-index: 1; }
+  .ship-stamp .top { font-size: 14px; letter-spacing: 0.1em; color: var(--rt-orange-500); font-family: var(--font-subhead); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+  .ship-stamp .big { font-size: 38px; line-height: 0.95; }
+  .ship-stamp .small { font-family: var(--font-mono); font-size: 11px; margin-top: 8px; letter-spacing: 0.1em; }
+
+  /* ============ MAIN GRID ============ */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0;
+    border-top: 0;
+  }
+  .col { padding: 32px 36px; }
+  .col.left { border-right: 4px solid var(--rt-ink-900); }
+
+  /* Section heading inside app */
+  .sec-h {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin: 0 0 18px;
+    border-bottom: 3px solid var(--rt-ink-900);
+    padding-bottom: 8px;
+  }
+  .sec-h h3 {
+    font-family: var(--font-display-rt);
+    font-size: 32px; line-height: 1; margin: 0;
+  }
+  .sec-h .step {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.12em;
+  }
+  .sec + .sec { margin-top: 36px; }
+
+  /* Blueprint cards */
+  .blueprint {
+    background: var(--rt-paper-cold);
+    border: 3px solid var(--rt-ink-900);
+    padding: 18px;
+    box-shadow: var(--shadow-stamp-sm);
+    margin-bottom: 16px;
+  }
+  .blueprint .row { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 8px 0; border-bottom: 1px dashed var(--rt-ink-300); }
+  .blueprint .row:last-child { border-bottom: 0; }
+  .blueprint .k {
+    font-family: var(--font-subhead); font-weight: 700;
+    text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 11px;
+    color: var(--fg-muted);
+  }
+  .blueprint .v {
+    font-family: var(--font-body); font-size: 16px; color: var(--rt-ink-900); font-weight: 500;
+  }
+  .blueprint .v strong { font-weight: 800; }
+  .price-row { display: flex; align-items: baseline; gap: 12px; }
+  .price-row .price {
+    font-family: var(--font-display-rt); font-size: 40px; line-height: 1; color: var(--rt-ink-900);
+  }
+  .price-row .unit { font-family: var(--font-body); font-weight: 700; text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 12px; color: var(--fg-muted); }
+
+  /* Tasks */
+  .task {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 14px;
+    align-items: start;
+    padding: 14px 16px;
+    background: var(--rt-paper-cold);
+    border: 3px solid var(--rt-ink-900);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-stamp-sm);
+  }
+  .task .check {
+    width: 22px; height: 22px;
+    border: 3px solid var(--rt-ink-900); background: var(--rt-paper);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display-rt); font-size: 14px; color: transparent;
+    margin-top: 1px;
+  }
+  .task.done .check { background: var(--rt-success); color: var(--rt-paper-cold); }
+  .task.done .title { text-decoration: line-through; color: var(--fg-muted); }
+  .task .title { font-weight: 700; font-size: 16px; line-height: 1.3; color: var(--rt-ink-900); margin-bottom: 4px; }
+  .task .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .task .id {
+    font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted);
+    background: var(--rt-paper); padding: 4px 8px; border: 2px solid var(--rt-ink-300);
+    height: fit-content;
+  }
+  .task.next { border-color: var(--rt-orange-500); box-shadow: 4px 4px 0 0 var(--rt-orange-500); }
+  .task.next .check { background: var(--rt-orange-500); color: var(--rt-paper-cold); }
+
+  /* Activity feed */
+  .feed-item {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--rt-ink-300);
+    align-items: start;
+  }
+  .feed-item:last-child { border-bottom: 0; }
+  .feed-item .glyph {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 18px; line-height: 1.2; text-align: center;
+  }
+  .feed-item.ok .glyph { color: var(--rt-success); }
+  .feed-item.build .glyph { color: var(--rt-warning); }
+  .feed-item.next .glyph { color: var(--rt-orange-500); }
+  .feed-item.queue .glyph { color: var(--rt-ink-500); }
+  .feed-item .body { font-size: 14px; line-height: 1.4; color: var(--rt-ink-900); }
+  .feed-item .body span { color: var(--fg-muted); }
+  .feed-item .body code { background: var(--rt-orange-50); border: 1px solid var(--rt-orange-200); padding: 1px 5px; font-size: 12px; color: var(--rt-orange-700); }
+  .feed-item .ts {
+    font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle);
+    text-transform: uppercase;
+  }
+
+  /* Money tracker */
+  .money {
+    background: var(--rt-ink-900); color: var(--rt-paper-cold);
+    border: 3px solid var(--rt-ink-900);
+    padding: 24px;
+    box-shadow: 6px 6px 0 0 var(--rt-orange-500);
+  }
+  .money .label {
+    font-family: var(--font-subhead); font-weight: 700;
+    text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 11px;
+    color: var(--rt-orange-300); margin-bottom: 4px;
+  }
+  .money .amt {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 44px; line-height: 1; margin-bottom: 4px;
+    color: var(--rt-paper-cold);
+  }
+  .money .delta { font-family: var(--font-mono); font-size: 12px; color: var(--rt-success); }
+  .money .delta.down { color: var(--rt-orange-300); }
+  .money-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--rt-ink-700); }
+  .money-grid div { font-family: var(--font-mono); font-size: 12px; color: var(--rt-ink-300); }
+  .money-grid div strong { display: block; color: var(--rt-paper-cold); font-size: 16px; margin-top: 2px; }
+
+  /* Sparkline (CSS only) */
+  .spark {
+    height: 56px; margin-top: 16px;
+    background: linear-gradient(180deg, transparent 0%, transparent 100%);
+    position: relative;
+  }
+  .spark svg { width: 100%; height: 100%; display: block; }
+
+  /* Landing page card preview */
+  .landing-card {
+    background: var(--rt-paper-cold);
+    border: 4px solid var(--rt-ink-900);
+    padding: 0;
+    box-shadow: var(--shadow-stamp);
+    overflow: hidden;
+  }
+  .landing-card .browser {
+    background: var(--rt-ink-900); color: var(--rt-paper-cold);
+    display: flex; align-items: center; padding: 8px 12px; gap: 8px;
+    border-bottom: 3px solid var(--rt-ink-900);
+  }
+  .landing-card .dots { display: flex; gap: 5px; }
+  .landing-card .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--rt-ink-700); }
+  .landing-card .url {
+    flex: 1; background: var(--rt-ink-800); padding: 4px 12px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--rt-paper-cold);
+  }
+  .landing-card .lp {
+    padding: 28px 24px;
+  }
+  .landing-card .lp h1 {
+    font-family: var(--font-display-rt); font-size: 40px; line-height: 0.95; margin: 0 0 10px; color: var(--rt-ink-900);
+  }
+  .landing-card .lp p { font-size: 14px; color: var(--fg-muted); margin: 0 0 14px; max-width: 36ch; }
+  .landing-card .lp .row { display: flex; gap: 8px; margin-bottom: 14px; }
+  .landing-card .lp .price { font-family: var(--font-display-rt); font-size: 32px; line-height: 1; color: var(--rt-orange-500); }
+  .landing-card .lp .price-meta { font-family: var(--font-mono); font-size: 10px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.1em; align-self: end; padding-bottom: 4px; }
+  .landing-card .lp .features { list-style: none; padding: 0; margin: 0 0 14px; font-size: 13px; }
+  .landing-card .lp .features li { padding: 4px 0; border-bottom: 1px dashed var(--rt-ink-300); }
+  .landing-card .lp .features li::before { content: "✓ "; color: var(--rt-success); font-weight: 700; }
+
+  /* Caveat & footer */
+  .caveat {
+    margin-top: 24px;
+    background: var(--rt-orange-50); border: 3px solid var(--rt-orange-500);
+    padding: 14px 18px; font-size: 13px; color: var(--rt-orange-800);
+  }
+  .caveat strong { display: block; font-family: var(--font-body); font-weight: 800; text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 11px; margin-bottom: 4px; color: var(--rt-orange-700); }
+
+  .doc-foot {
+    margin-top: 32px; padding-top: 16px; border-top: 4px solid var(--rt-ink-900);
+    font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); text-align: center;
+  }
+
+  /* ============ SECONDARY: HANG-TAG PRICING ROW ============ */
+  .pricing-strip {
+    margin-top: 64px;
+    background: var(--rt-ink-900); color: var(--rt-paper-cold);
+    border: 5px solid var(--rt-ink-900);
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: center;
+    box-shadow: 12px 12px 0 0 var(--rt-orange-500);
+  }
+  .pricing-strip h2 {
+    font-family: var(--font-display-rt); font-size: 56px; line-height: 0.95; margin: 0 0 12px;
+    color: var(--rt-paper-cold);
+  }
+  .pricing-strip p { font-size: 16px; color: var(--rt-ink-300); margin: 0; max-width: 32ch; }
+  .tags-row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: flex-end; }
+  .price-tag {
+    background: var(--rt-orange-500); color: var(--rt-paper-cold);
+    border: 4px solid var(--rt-paper-cold);
+    padding: 22px 26px;
+    font-family: var(--font-display-rt);
+    text-align: center;
+    transform: rotate(-3deg);
+    position: relative;
+    box-shadow: 6px 6px 0 0 var(--rt-paper-cold), 6px 6px 0 4px var(--rt-paper-cold);
+    min-width: 160px;
+  }
+  .price-tag.b { background: var(--rt-paper-cold); color: var(--rt-ink-900); border-color: var(--rt-orange-500); transform: rotate(2deg); }
+  .price-tag .name { font-family: var(--font-subhead); font-weight: 700; text-transform: uppercase; letter-spacing: var(--tracking-loud); font-size: 12px; margin-bottom: 6px; }
+  .price-tag .num { font-size: 44px; line-height: 0.95; }
+  .price-tag .note { font-family: var(--font-mono); font-size: 11px; margin-top: 6px; letter-spacing: 0.06em; opacity: 0.8; }
+
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <div>
+      <div style="font-family: var(--font-subhead); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; color: var(--rt-orange-500);">UI Kit · Right Thurr</div>
+      <h1 style="font-family: var(--font-display-rt); font-size: 44px; margin: 4px 0 0; line-height: 1;">The product, in the wild.</h1>
+    </div>
+    <div style="font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); text-align: right;">
+      App shell · Hero · Blueprint · Tasks · Activity · Money<br>
+      <a href="design-system.html" style="color: var(--rt-orange-500);">→ tokens reference</a> · 
+      <a href="thurr-solutions-ui-kit.html" style="color: var(--rt-orange-500);">→ Thurr Solutions</a>
+    </div>
+  </div>
+
+  <!-- ============ APP SHELL ============ -->
+  <div class="app">
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="mark"><img src="assets/rt-monogram-clean.png" alt="R+T"></div>
+      <div class="wordmark">Right Thurr</div>
+      <nav>
+        <a class="active">Build</a>
+        <a>Tasks · 7</a>
+        <a>Activity</a>
+        <a>Money</a>
+        <a>Page</a>
+      </nav>
+      <div class="right">
+        <span class="pill"><span class="dot"></span>Live</span>
+        <span class="pill" style="background: var(--rt-orange-100);">v0.1</span>
+        <div class="avatar">M</div>
+      </div>
+    </header>
+
+    <!-- Hero panel -->
+    <section class="hero-panel">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-eyebrow">Step 01 · Drop your idea</span>
+          <h1 class="hero-h">Turn your idea into a <em>business system.</em></h1>
+          <p class="hero-sub">Tell us what you're trying to build. We'll wire up the offer, the page, and the next ten things to do — by the time your coffee's done.</p>
+
+          <div class="idea-card">
+            <label>Your idea</label>
+            <textarea>I want to start a pressure washing side hustle in Atlanta. Driveways and fleet trucks, weekends only.</textarea>
+            <div class="idea-actions">
+              <button class="btn">Build it <span class="arrow">→</span></button>
+              <button class="btn ghost">Need an idea?</button>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); margin-left: auto; text-transform: uppercase; letter-spacing: 0.08em;">Avg build · 38s</span>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 24px;">
+          <img src="assets/right-thurr-wordmark-clean.png" alt="Right Thurr" style="max-width: 280px; transform: rotate(-3deg);">
+          <div class="ship-stamp">
+            <div class="inner">
+              <div class="top">Shipped</div>
+              <div class="big">Day 01<br>Live</div>
+              <div class="small">04 / 28 / 26</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main grid -->
+    <div class="main-grid">
+      <!-- LEFT COLUMN -->
+      <div class="col left">
+
+        <!-- Blueprint -->
+        <div class="sec">
+          <div class="sec-h">
+            <h3>The Blueprint</h3>
+            <span class="step">Step 02 · Wired</span>
+          </div>
+          <div class="blueprint">
+            <div class="row"><div class="k">For who</div><div class="v">Atlanta homeowners with <strong>long driveways</strong> &amp; small fleet operators (HVAC, landscaping, food trucks).</div></div>
+            <div class="row"><div class="k">The offer</div><div class="v"><strong>"Driveway Day"</strong> — flat-rate weekend pressure wash, booked online in 30 seconds. Fleet packages added on.</div></div>
+            <div class="row"><div class="k">Why now</div><div class="v">Spring pollen + Memorial Day cookouts = 6-week peak demand. <strong>Book it before April 30.</strong></div></div>
+            <div class="row">
+              <div class="k">Pricing</div>
+              <div class="v">
+                <div class="price-row"><span class="price">$189</span><span class="unit">Per driveway</span></div>
+                <div class="price-row" style="margin-top: 6px;"><span class="price" style="font-size: 28px;">$540</span><span class="unit">Fleet · 5 trucks</span></div>
+              </div>
+            </div>
+            <div class="row"><div class="k">First win</div><div class="v">3 driveways at $189 = <strong>$567 in your first weekend</strong>. We've added them as Tasks 01–03.</div></div>
+          </div>
+        </div>
+
+        <!-- Tasks -->
+        <div class="sec">
+          <div class="sec-h">
+            <h3>What to do next</h3>
+            <span class="step">Step 03 · 7 tasks queued</span>
+          </div>
+
+          <div class="task done">
+            <div class="check">✓</div>
+            <div>
+              <div class="title">Pick a name &amp; lock the domain</div>
+              <div class="meta">Auto-completed · driveway-day.com bought · $12</div>
+            </div>
+            <div class="id">TASK-001</div>
+          </div>
+
+          <div class="task done">
+            <div class="check">✓</div>
+            <div>
+              <div class="title">Generate the landing page copy</div>
+              <div class="meta">Auto-completed · 4 sections · ready to deploy</div>
+            </div>
+            <div class="id">TASK-002</div>
+          </div>
+
+          <div class="task next">
+            <div class="check">→</div>
+            <div>
+              <div class="title">Post 3 driveway-before-after videos to your IG</div>
+              <div class="meta">Up next · we drafted captions · ~12 min · OPEN →</div>
+            </div>
+            <div class="id">TASK-003</div>
+          </div>
+
+          <div class="task">
+            <div class="check"></div>
+            <div>
+              <div class="title">Buy a $349 surface cleaner attachment from Northern Tool</div>
+              <div class="meta">Cuts wash time 4× · we've added the link</div>
+            </div>
+            <div class="id">TASK-004</div>
+          </div>
+
+          <div class="task">
+            <div class="check"></div>
+            <div>
+              <div class="title">DM 5 HVAC fleet operators in Marietta</div>
+              <div class="meta">We drafted the message · just hit send</div>
+            </div>
+            <div class="id">TASK-005</div>
+          </div>
+
+          <div class="task">
+            <div class="check"></div>
+            <div>
+              <div class="title">List "Driveway Day" on Nextdoor — Buckhead, Decatur, Smyrna</div>
+              <div class="meta">~6 min · estimated 30 leads / week</div>
+            </div>
+            <div class="id">TASK-006</div>
+          </div>
+
+          <div class="task">
+            <div class="check"></div>
+            <div>
+              <div class="title">Set up Stripe payment link · $189 default</div>
+              <div class="meta">Pre-filled · click to confirm</div>
+            </div>
+            <div class="id">TASK-007</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col">
+
+        <!-- Money -->
+        <div class="sec">
+          <div class="sec-h">
+            <h3>The Money</h3>
+            <span class="step">Live · 4:14p</span>
+          </div>
+          <div class="money">
+            <div class="label">Projected · Week 01</div>
+            <div class="amt">$1,134.00</div>
+            <div class="delta">↑ Based on 6 booked driveways</div>
+            <div class="spark">
+              <svg viewBox="0 0 200 56" preserveAspectRatio="none">
+                <polyline fill="none" stroke="#D9621F" stroke-width="2.5" points="0,48 20,42 40,46 60,32 80,30 100,22 120,24 140,16 160,12 180,10 200,4"/>
+                <polyline fill="rgba(217,98,31,0.18)" stroke="none" points="0,48 20,42 40,46 60,32 80,30 100,22 120,24 140,16 160,12 180,10 200,4 200,56 0,56"/>
+              </svg>
+            </div>
+            <div class="money-grid">
+              <div>BOOKED<strong>6</strong></div>
+              <div>QUEUED<strong>3</strong></div>
+              <div>COSTS<strong>$361</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity feed -->
+        <div class="sec">
+          <div class="sec-h">
+            <h3>What we built for you</h3>
+            <span class="step">Live feed</span>
+          </div>
+          <div class="feed-item ok">
+            <div class="glyph">✓</div>
+            <div class="body">Bought <code>driveway-day.com</code> · DNS pointed to your page <span>· $12 charged to card on file</span></div>
+            <div class="ts">14s ago</div>
+          </div>
+          <div class="feed-item ok">
+            <div class="glyph">✓</div>
+            <div class="body">Wrote landing page copy &amp; deployed at <code>driveway-day.com</code></div>
+            <div class="ts">28s ago</div>
+          </div>
+          <div class="feed-item ok">
+            <div class="glyph">✓</div>
+            <div class="body">Created Stripe payment link · <code>$189</code> default · <code>$540</code> fleet</div>
+            <div class="ts">41s ago</div>
+          </div>
+          <div class="feed-item build">
+            <div class="glyph">▲</div>
+            <div class="body">Drafting 3 IG captions in your voice <span>· using examples you uploaded</span></div>
+            <div class="ts">now</div>
+          </div>
+          <div class="feed-item next">
+            <div class="glyph">→</div>
+            <div class="body">Queued · DM template for HVAC fleet operators <span>· you review before send</span></div>
+            <div class="ts">queued</div>
+          </div>
+          <div class="feed-item queue">
+            <div class="glyph">●</div>
+            <div class="body">Listing "Driveway Day" on Nextdoor (3 zip codes)</div>
+            <div class="ts">backlog</div>
+          </div>
+        </div>
+
+        <!-- Landing page preview -->
+        <div class="sec">
+          <div class="sec-h">
+            <h3>Your landing page</h3>
+            <span class="step">Deployed · 28s ago</span>
+          </div>
+          <div class="landing-card">
+            <div class="browser">
+              <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="url">https://driveway-day.com</div>
+            </div>
+            <div class="lp">
+              <h1>Your driveway, back to brand new — by Sunday.</h1>
+              <p>Flat-rate pressure washing for Atlanta homes. Book in 30 seconds. We show up, we wash, you grill.</p>
+              <div class="row">
+                <span class="price">$189</span>
+                <span class="price-meta">Per driveway · all-in</span>
+              </div>
+              <ul class="features">
+                <li>Up to 1,500 sq ft, oil &amp; pollen removed</li>
+                <li>Saturday or Sunday slots, weekly</li>
+                <li>If we miss a stain, we come back free</li>
+              </ul>
+              <button class="btn sm" style="width: 100%;">Book my driveway <span class="arrow">→</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PRICING / TAGS STRIP ============ -->
+  <div class="pricing-strip">
+    <div>
+      <h2>Three plans.<br>One promise.</h2>
+      <p>Pick one. We'll wire your business to match. Cancel anytime — but you won't.</p>
+    </div>
+    <div class="tags-row">
+      <div class="price-tag">
+        <div class="name">Starter</div>
+        <div class="num">$0</div>
+        <div class="note">7-day build, on us</div>
+      </div>
+      <div class="price-tag b">
+        <div class="name">Operator ★</div>
+        <div class="num">$49<span style="font-size: 16px;">/mo</span></div>
+        <div class="note">Most pick this</div>
+      </div>
+      <div class="price-tag">
+        <div class="name">Crew</div>
+        <div class="num">$149<span style="font-size: 16px;">/mo</span></div>
+        <div class="note">For 3+ side hustles</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caveat">
+    <strong>Caveats</strong>
+    Logos used here are raster crops from the uploaded brand screenshots — replace with vector SVGs before any deployment. Display lettering is approximated with the Google Font <code>Rye</code>; the actual wordmark is custom-lettered. The pressure-washing scenario is illustrative — swap in real product copy when wiring this UI to data.
+  </div>
+
+  <div class="doc-foot">
+    RIGHT THURR · UI KIT v0.1 · CONTENT IS ILLUSTRATIVE
+  </div>
+</div>
+</body>
+</html>
