@@ -8,7 +8,9 @@ Use the Right Thurr / Thurr Solutions design system only for our owned brands.
 
 Client diagnostic funnels can use the same backend engine, but they must stay visually re-skinnable and should not inherit Right Thurr styling unless the work is a Thurr Solutions case study or sales asset.
 
-Public visitors should only see the sales, buildout intake, Thurr Solutions, and sample blueprint views. Operator screens such as Activity Feed, Systems, Money, and AI Engine are owner/admin views and should stay out of the public navigation until real authentication exists.
+Public visitors should only see `Home`, `Buildout Plan`, and `Thurr Solutions` in the main navigation. Sample blueprint/report views are reached from the buildout flow, not top-level tabs.
+
+Operator preview should stay narrow: `Command Center` for activity, AI, money, alerts, and next moves; `Systems` for individual business workspaces. Real owner authentication is required before private client/operator data is stored or shown.
 
 Before coding major visual changes, create 3 different example screenshots/options for review. The user chooses one direction or combines parts, then implementation starts.
 
@@ -69,6 +71,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Create Discord `#leads-alerts` webhook.
 - [x] Add Discord buildout request alert to n8n.
 - [x] Hide owner/operator screens from public website navigation.
+- [x] Consolidate repetitive owner tabs into Command Center and Systems.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
@@ -157,6 +160,7 @@ Daily session:
 - [x] Moved MVP mock app data into `src/data/rightThurrMockData.js`.
 - [x] Split public website navigation from owner/operator preview screens.
 - [x] Added export-ready Autopilot Blueprint report view using Option A.
+- [x] Narrowed navigation to public website tabs plus owner Command Center/Systems.
 
 ## Next Task
 

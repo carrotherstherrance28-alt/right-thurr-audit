@@ -182,7 +182,9 @@ main {
 }
 
 .activity-page h1,
-.activity-page h2 {
+.activity-page h2,
+.command-page h1,
+.command-page h2 {
   color: var(--rt-paper-cold);
 }
 
@@ -2505,7 +2507,8 @@ dd {
     font-size: 46px;
   }
 
-  .activity-page h1 {
+  .activity-page h1,
+  .command-page h1 {
     font-size: 46px;
   }
 

@@ -47,14 +47,11 @@ const publicNavItems = [
   ['Home', 'home'],
   ['Buildout Plan', 'buildout'],
   ['Thurr Solutions', 'solutions'],
-  ['Blueprint Report', 'report'],
 ];
 
 const operatorNavItems = [
-  ['Activity Feed', 'activity'],
+  ['Command Center', 'command'],
   ['Systems', 'systems'],
-  ['Money', 'money'],
-  ['AI Engine', 'ai'],
 ];
 
 const operatorPages = operatorNavItems.map(([, target]) => target);
@@ -239,13 +236,6 @@ function App() {
                 {label}
               </button>
             ))}
-          {page === 'home' && (
-            <>
-              <a className="nav-tab" href="#blueprint">Blueprint</a>
-              <a className="nav-tab" href="#machine">Machine</a>
-              <a className="nav-tab" href="#app-preview">App Preview</a>
-            </>
-          )}
         </nav>
         <div className="system-live">
           <span className="live-dot" />
@@ -258,75 +248,42 @@ function App() {
       {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
       {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
       {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
-      {isOperatorPreview && page === 'activity' && <ActivityFeedPage setPage={navigateToPage} />}
+      {isOperatorPreview && page === 'command' && <CommandCenterPage setPage={navigateToPage} />}
       {isOperatorPreview && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
-      {isOperatorPreview && page === 'money' && <MoneyPage setPage={navigateToPage} />}
-      {isOperatorPreview && page === 'ai' && <AIEnginePage setPage={navigateToPage} />}
     </div>
   );
 }
 
-function AIEnginePage({ setPage }) {
+function CommandCenterPage({ setPage }) {
   return (
-    <main className="ai-engine-page" id="top">
-      <section className="ai-engine-hero">
+    <main className="command-page" id="top">
+      <section className="activity-hero">
         <div className="hero-copy">
-          <div className="eyebrow">AI ENGINE ACTIVE</div>
-          <h1>The agents turn requests into systems.</h1>
+          <div className="eyebrow">OWNER COMMAND CENTER</div>
+          <h1>One place to see what the machine is doing.</h1>
           <p>
-            Right Thurr routes a user request through the Orchestrator, specialized agents, local
-            models, tool actions, database updates, and visible UI progress.
-          </p>
-          <div className="hero-actions">
-            <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-              QUEUE A MISSION
-              <ArrowUpRight size={18} strokeWidth={3} />
-            </button>
-            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('systems')}>
-              View systems
-            </button>
-          </div>
-        </div>
-        <aside className="ai-engine-hero-stamp">
-          <span>Current Mission</span>
-          <strong>Build lead funnel</strong>
-          <p>128 tasks completed today.</p>
-        </aside>
-      </section>
-
-      <AIEngineOrchestra />
-    </main>
-  );
-}
-
-function MoneyPage({ setPage }) {
-  return (
-    <main className="money-page" id="top">
-      <section className="money-hero">
-        <div className="hero-copy">
-          <div className="eyebrow">MONEY TRACKING</div>
-          <h1>Know what the machine made.</h1>
-          <p>
-            V1 tracks manual revenue, expenses, profit, payouts, and projected monthly revenue.
-            Later this connects to Stripe, PayPal, Square, Shopify, Gumroad, and Printify.
+            Activity, AI orchestration, revenue signals, issues, and next moves belong together.
+            Systems stay separate because that is where each business workspace lives.
           </p>
           <div className="hero-actions">
             <button className="stamp-button link-button" type="button" onClick={() => setPage('systems')}>
               VIEW SYSTEMS
               <ArrowUpRight size={18} strokeWidth={3} />
             </button>
-            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('activity')}>
-              View money activity
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('buildout')}>
+              Queue buildout
             </button>
           </div>
         </div>
-        <aside className="money-hero-stamp">
-          <span>Profit Tracked</span>
-          <strong>$1,648</strong>
-          <p>Finance Agent watching the money path.</p>
+        <aside className="activity-hero-stamp">
+          <span>Autopilot Active</span>
+          <strong>Current Mission</strong>
+          <p>Build lead capture system</p>
         </aside>
       </section>
 
+      <MissionActivityFeed />
+      <AIEngineOrchestra />
       <FinanceCommandCenter />
     </main>
   );
@@ -351,8 +308,8 @@ function SystemsPage({ setPage }) {
               START A NEW SYSTEM
               <ArrowUpRight size={18} strokeWidth={3} />
             </button>
-            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('activity')}>
-              View activity feed
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('command')}>
+              View command center
             </button>
           </div>
         </div>
@@ -368,39 +325,6 @@ function SystemsPage({ setPage }) {
         selectedSystemId={selectedSystemId}
         setSelectedSystemId={setSelectedSystemId}
       />
-    </main>
-  );
-}
-
-function ActivityFeedPage({ setPage }) {
-  return (
-    <main className="activity-page" id="top">
-      <section className="activity-hero">
-        <div className="hero-copy">
-          <div className="eyebrow">WHAT YOUR SYSTEM DID TODAY</div>
-          <h1>The machine should show its work.</h1>
-          <p>
-            Every workflow, agent action, issue, and revenue event becomes a visible operator feed
-            so the owner can see the business-building system moving.
-          </p>
-          <div className="hero-actions">
-            <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-              QUEUE A BUILDOUT
-              <ArrowUpRight size={18} strokeWidth={3} />
-            </button>
-            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('report')}>
-              View blueprint report
-            </button>
-          </div>
-        </div>
-        <aside className="activity-hero-stamp">
-          <span>AI Engine Active</span>
-          <strong>Current Mission</strong>
-          <p>Build lead capture system</p>
-        </aside>
-      </section>
-
-      <MissionActivityFeed />
     </main>
   );
 }
