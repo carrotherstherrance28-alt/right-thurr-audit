@@ -14,7 +14,7 @@ https://right-thurr-audit.vercel.app/?operator=1
 ```
 
 - Without a valid owner session, the page shows an owner sign-in form.
-- With a valid owner session and allowlisted email, the page opens `Command Center`.
+- With a valid owner session and server-side allowlisted email, the page opens `Command Center`.
 - Operator tabs are limited to `Command Center` and `Systems`.
 
 ## Vercel Environment Variables
@@ -24,13 +24,13 @@ Add these to the Vercel project, Production environment:
 ```txt
 VITE_SUPABASE_URL=https://xplfryahxdegfvxmymco.supabase.co
 VITE_SUPABASE_ANON_KEY=<anon key already stored in Vercel>
-VITE_OWNER_EMAILS=<your owner email>
+OWNER_EMAILS=<your owner email>
 ```
 
 For multiple owner emails:
 
 ```txt
-VITE_OWNER_EMAILS=first@example.com,second@example.com
+OWNER_EMAILS=first@example.com,second@example.com
 ```
 
 Redeploy Production after changing these.

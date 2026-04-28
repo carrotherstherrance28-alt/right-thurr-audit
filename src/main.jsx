@@ -69,19 +69,7 @@ const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabaseBuildoutUrl = supabaseUrl ? `${supabaseUrl}/rest/v1/buildout_requests` : '';
-const ownerEmails = (import.meta.env.VITE_OWNER_EMAILS || '')
-  .split(',')
-  .map((email) => email.trim().toLowerCase())
-  .filter(Boolean);
 const authClient = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
-
-function isAllowedOwner(session) {
-  if (!session?.user?.email) {
-    return false;
-  }
-
-  return ownerEmails.includes(session.user.email.toLowerCase());
-}
 
 function mapBuildoutPayloadToSupabaseRow(payload) {
   return {
@@ -160,8 +148,9 @@ function App() {
   const [submissionState, setSubmissionState] = useState('idle');
   const [authSession, setAuthSession] = useState(null);
   const [authReady, setAuthReady] = useState(!authClient);
+  const [ownerAccess, setOwnerAccess] = useState({ status: 'idle', allowed: false, message: '' });
   const isOperatorPreview = getIsOperatorPreview();
-  const canViewOperator = isOperatorPreview && isAllowedOwner(authSession);
+  const canViewOperator = isOperatorPreview && ownerAccess.allowed;
   const currentStep = useMemo(() => buildSteps[form.idea.length % buildSteps.length], [form.idea]);
 
   useEffect(() => {
@@ -196,6 +185,54 @@ function App() {
       setPage('command');
     }
   }, [canViewOperator, page]);
+
+  useEffect(() => {
+    if (!isOperatorPreview) {
+      return undefined;
+    }
+
+    if (!authSession?.access_token) {
+      setOwnerAccess({ status: 'idle', allowed: false, message: '' });
+      return undefined;
+    }
+
+    const controller = new AbortController();
+    setOwnerAccess({ status: 'checking', allowed: false, message: '' });
+
+    fetch('/api/owner-access', {
+      headers: {
+        Authorization: `Bearer ${authSession.access_token}`,
+      },
+      signal: controller.signal,
+    })
+      .then(async (ownerResponse) => {
+        const data = await ownerResponse.json().catch(() => ({}));
+
+        if (!ownerResponse.ok || !data.allowed) {
+          setOwnerAccess({
+            status: 'denied',
+            allowed: false,
+            message: data.error || 'This account is not on the owner allowlist.',
+          });
+          return;
+        }
+
+        setOwnerAccess({ status: 'allowed', allowed: true, message: '' });
+      })
+      .catch((error) => {
+        if (error.name !== 'AbortError') {
+          setOwnerAccess({
+            status: 'denied',
+            allowed: false,
+            message: 'Owner access could not be verified.',
+          });
+        }
+      });
+
+    return () => {
+      controller.abort();
+    };
+  }, [authSession, isOperatorPreview]);
 
   function navigateToPage(target) {
     if (!canViewOperator && operatorPages.includes(target)) {
@@ -294,7 +331,7 @@ function App() {
       </header>
 
       {isOperatorPreview && !canViewOperator ? (
-        <OwnerAccessGate authReady={authReady} authSession={authSession} />
+        <OwnerAccessGate authReady={authReady} authSession={authSession} ownerAccess={ownerAccess} />
       ) : (
         <>
           {page === 'home' && <HomePage {...sharedProps} />}
@@ -310,13 +347,12 @@ function App() {
   );
 }
 
-function OwnerAccessGate({ authReady, authSession }) {
+function OwnerAccessGate({ authReady, authSession, ownerAccess }) {
   const [email, setEmail] = useState('');
   const [authMessage, setAuthMessage] = useState('');
   const [authStatus, setAuthStatus] = useState('idle');
   const signedInEmail = authSession?.user?.email || '';
-  const isRejectedOwner = signedInEmail && !isAllowedOwner(authSession);
-  const isAllowlistMissing = ownerEmails.length === 0;
+  const isRejectedOwner = signedInEmail && ownerAccess.status === 'denied';
 
   async function handleOwnerSignIn(event) {
     event.preventDefault();
@@ -367,16 +403,14 @@ function OwnerAccessGate({ authReady, authSession }) {
 
         {!authReady && <p className="form-note">Checking owner session...</p>}
 
-        {isAllowlistMissing && (
-          <p className="form-note error-note">
-            Add VITE_OWNER_EMAILS in Vercel before using owner access in production.
-          </p>
+        {ownerAccess.status === 'checking' && (
+          <p className="form-note">Verifying owner access...</p>
         )}
 
         {isRejectedOwner && (
           <div className="owner-auth-warning">
             <strong>{signedInEmail}</strong>
-            <span>This account is signed in, but it is not on the owner allowlist.</span>
+            <span>{ownerAccess.message || 'This account is not on the owner allowlist.'}</span>
             <button className="text-link dark-link button-link" type="button" onClick={handleSignOut}>
               Sign out
             </button>

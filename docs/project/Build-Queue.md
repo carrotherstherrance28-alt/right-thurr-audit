@@ -163,8 +163,8 @@ Daily session:
 - [x] Split public website navigation from owner/operator preview screens.
 - [x] Added export-ready Autopilot Blueprint report view using Option A.
 - [x] Narrowed navigation to public website tabs plus owner Command Center/Systems.
-- [x] Added Supabase email magic-link gate for `?operator=1`.
+- [x] Added Supabase email magic-link gate for `?operator=1` with server-side owner email allowlist.
 
 ## Next Task
 
-Add `VITE_OWNER_EMAILS` in Vercel, configure Supabase Auth redirect URLs, redeploy, then test owner login at `/?operator=1`.
+Configure Supabase Auth redirect URLs, then test owner login at `/?operator=1`.

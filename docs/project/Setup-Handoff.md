@@ -58,7 +58,7 @@ Environment variables:
 VITE_N8N_BUILDOUT_WEBHOOK_URL=
 VITE_SUPABASE_URL=https://xplfryahxdegfvxmymco.supabase.co
 VITE_SUPABASE_ANON_KEY=<stored in .env.local and Vercel env>
-VITE_OWNER_EMAILS=<owner email allowlist>
+OWNER_EMAILS=<owner email allowlist>
 ```
 
 Leave the webhook variable empty until the n8n workflow exists.
