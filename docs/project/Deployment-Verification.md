@@ -38,6 +38,17 @@ After n8n webhook is configured:
 - Buildout form should POST to `VITE_N8N_BUILDOUT_WEBHOOK_URL`.
 - Success state should say the blueprint is queued.
 - Error state should show if webhook fails.
+- Production webhook should return `201` from:
+
+```text
+https://therrancecarrothers.app.n8n.cloud/webhook/right-thurr/buildout-intake
+```
+
+- n8n should forward to:
+
+```text
+https://right-thurr-audit.vercel.app/api/buildout-request
+```
 
 Verified production URL:
 
@@ -55,6 +66,7 @@ Verified result:
 
 ```text
 Live browser form submission saved a fake QA request to Supabase.
+Direct n8n production webhook test returned 201 and saved a fake QA request to Supabase.
 ```
 
 ## Domain Checks

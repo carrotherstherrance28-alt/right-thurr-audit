@@ -43,6 +43,18 @@ The serverless API route reads `SUPABASE_URL` and `SUPABASE_ANON_KEY` at runtime
 
 After adding or changing environment variables, redeploy the latest `main` deployment.
 
+Current n8n production webhook:
+
+```text
+https://therrancecarrothers.app.n8n.cloud/webhook/right-thurr/buildout-intake
+```
+
+This is set in Vercel Production as:
+
+```text
+VITE_N8N_BUILDOUT_WEBHOOK_URL
+```
+
 ## 2. Supabase Tables
 
 SQL editor:

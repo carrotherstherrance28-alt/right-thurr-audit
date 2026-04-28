@@ -48,7 +48,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Create Vercel project for Right Thurr.
 - [x] Create/import Vercel project for Right Thurr.
 - [x] Verify live Vercel deployment URL.
-- [ ] Add Vercel environment variable `VITE_N8N_BUILDOUT_WEBHOOK_URL`.
+- [x] Add Vercel environment variable `VITE_N8N_BUILDOUT_WEBHOOK_URL`.
 - [x] Add Vercel environment variables for Supabase intake after Supabase exists.
 - [x] Redeploy Vercel after environment variables are added.
 - [ ] Create Supabase project.
@@ -59,8 +59,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add live account setup checklist for Vercel, Supabase, n8n, and domains.
 - [x] Add n8n workflow build sheet and AI prompt chain.
 - [x] Create Supabase tables for leads/buildout requests/activity logs.
-- [ ] Create n8n workflow `Right Thurr - Buildout Plan Intake`.
-- [ ] Create n8n production webhook URL and add it to Vercel/local env.
+- [x] Create n8n workflow `Right Thurr - Buildout Plan Intake`.
+- [x] Create n8n production webhook URL and add it to Vercel/local env.
 - [x] Test form submission against Supabase or n8n.
 - [ ] Connect Slack alert after n8n intake works.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
