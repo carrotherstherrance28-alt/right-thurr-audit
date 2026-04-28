@@ -100,7 +100,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add Money screen with manual entries.
 - [x] Create 3 AI Engine screen options before coding.
 - [x] Add AI Engine screen.
-- [ ] Add mock local data store.
+- [x] Add mock local data store.
 - [ ] Add exportable report layout.
 
 ## Phase 4: Backend Execution Engine
@@ -148,7 +148,9 @@ Daily session:
 - [x] Sent a live QA Right Thurr buildout request through n8n.
 - [x] Verified n8n execution finished successfully.
 - [x] Verified the Discord `#leads-alerts` node ran in the successful execution.
+- [x] Deployed and verified the AI Engine screen.
+- [x] Moved MVP mock app data into `src/data/rightThurrMockData.js`.
 
 ## Next Task
 
-Deploy the AI Engine screen, verify it live, then add a mock local data store so app views share one structured data source.
+Create 3 exportable report layout options, choose the strongest direction, then add a printable/export-ready Autopilot Blueprint report view.

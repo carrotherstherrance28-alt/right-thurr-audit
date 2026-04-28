@@ -21,296 +21,27 @@ import {
 import './styles/brand-tokens.css';
 import './styles/app.css';
 import monogram from './assets/rt-monogram-clean.png';
+import { fieldDefaults, rightThurrMockData } from './data/rightThurrMockData.js';
 
-const buildSteps = [
-  'Reading business idea',
-  'Mapping business opportunity',
-  'Drafting starter offer',
-  'Building funnel strategy',
-  'Planning automations',
-  'Writing 30-day roadmap',
-];
-
-const blueprintSections = [
-  'Your Business Opportunity',
-  'Best Business Model For You',
-  'Revenue Potential',
-  'What To Build First',
-  'Your Funnel Strategy',
-  'Automation Stack Needed',
-  'AI Agents Needed',
-  '30-Day Launch Roadmap',
-  'Biggest Bottlenecks',
-  'Recommended Next Step',
-];
-
-const reportMetrics = [
-  ['Confidence', '87%'],
-  ['Launch Path', '30 days'],
-  ['Money Path', 'Booked jobs'],
-];
-
-const roadmapWeeks = [
-  ['W1', 'Offer, landing page, intake form, CRM fields'],
-  ['W2', 'n8n lead routing, email/SMS follow-up, owner alerts'],
-  ['W3', 'Local lead sources, outreach list, content starter pack'],
-  ['W4', 'Revenue review, bottleneck fix, second offer test'],
-];
-
-const reportCards = [
-  {
-    label: 'Your Business Opportunity',
-    title: 'Local service demand with urgent buyer intent.',
-    text: 'Mobile detailing has search intent, repeat potential, and a clear before/after offer. The first system should make the business easy to understand and easy to book.',
-  },
-  {
-    label: 'Best Business Model',
-    title: 'Service revenue first, recurring packages second.',
-    text: 'Start with a simple express-detail offer, then add memberships and fleet packages after the lead-to-booking path proves reliable.',
-  },
-  {
-    label: 'Funnel Strategy',
-    title: 'One page, one offer, one action.',
-    text: 'Use a local landing page with proof, pricing anchor, booking CTA, and fast response automation for leads that do not book immediately.',
-  },
-  {
-    label: 'Automation Stack',
-    title: 'Webhook, CRM, alerts, follow-up, daily summary.',
-    text: 'n8n receives the form, saves the lead, tags the opportunity, triggers email/SMS follow-up, and sends an operator summary.',
-  },
-];
-
-const initialEvents = [
-  {
-    time: '04:42',
-    glyph: '✓',
-    agent: 'Opportunity Agent',
-    text: 'Identified Dallas mobile detailing as the fastest first System.',
-    impact: 'Blueprint',
-  },
-  {
-    time: '04:45',
-    glyph: '✓',
-    agent: 'Funnel Agent',
-    text: 'Drafted premium express detail offer and booking path.',
-    impact: 'Offer',
-  },
-  {
-    time: '04:49',
-    glyph: '▲',
-    agent: 'Automation Agent',
-    text: 'Mapped lead capture, follow-up, CRM, and daily summary workflows.',
-    impact: 'n8n',
-  },
-  {
-    time: '04:52',
-    glyph: '→',
-    agent: 'Execution Agent',
-    text: 'Queued first 10 launch tasks for the 30-day roadmap.',
-    impact: 'Tasks',
-  },
-];
-
-const activityMetrics = [
-  ['Tasks Done', '89'],
-  ['Issues Found', '1'],
-  ['Revenue Today', '$427'],
-];
-
-const attentionItems = [
-  {
-    label: 'Issue Found',
-    title: 'Slack credential is noisy.',
-    text: 'Discord is now the V1 leads alert path. Slack can wait until the workspace access is worth fixing.',
-  },
-  {
-    label: 'Next Move',
-    title: 'Review blueprint draft.',
-    text: 'Approve the offer before generating client-facing copy or outreach assets.',
-  },
-];
-
-const systemCards = [
-  {
-    id: 'detailing',
-    name: 'Dallas Mobile Detailing Engine',
-    status: 'Building',
-    revenue: '$0',
-    action: 'Autopilot Blueprint generated',
-    mission: 'Launch the first lead capture and booking system.',
-    offer: '$149 Express Detail',
-    page: 'Landing page draft ready',
-    crm: 'Lead table connected',
-    automations: 'Discord alert live',
-    agents: '5 agents assigned',
-    logs: '4 events today',
-    next: 'Approve starter offer and service area.',
-  },
-  {
-    id: 'roofing',
-    name: 'Roofing Lead Engine',
-    status: 'Needs Review',
-    revenue: '$427',
-    action: 'Lead follow-up sequence drafted',
-    mission: 'Turn estimate requests into booked inspection calls.',
-    offer: 'Free storm damage inspection',
-    page: 'Hero and proof section drafted',
-    crm: 'Pipeline fields mapped',
-    automations: 'Follow-up sequence queued',
-    agents: 'Funnel + Revenue active',
-    logs: '3 events today',
-    next: 'Review follow-up script before outreach.',
-  },
-  {
-    id: 'cleaning',
-    name: 'Cleaning Booking Engine',
-    status: 'Live',
-    revenue: '$1,280',
-    action: 'Daily revenue summary sent',
-    mission: 'Keep booking flow live and find the next upsell.',
-    offer: 'Recurring clean starter package',
-    page: 'Published',
-    crm: 'Booking tracker active',
-    automations: 'Daily summary running',
-    agents: 'Operator + Finance active',
-    logs: '6 events today',
-    next: 'Add referral request automation.',
-  },
-  {
-    id: 'content',
-    name: 'Content Brand Engine',
-    status: 'Paused',
-    revenue: '$0',
-    action: 'Niche research waiting',
-    mission: 'Choose the content angle before building the calendar.',
-    offer: 'Audience-first content system',
-    page: 'Not started',
-    crm: 'Audience list pending',
-    automations: 'Paused',
-    agents: 'Research assigned',
-    logs: '1 event today',
-    next: 'Pick niche and publishing cadence.',
-  },
-];
-
-const systemAssetKeys = [
-  ['Offer', 'offer'],
-  ['Landing Page', 'page'],
-  ['CRM', 'crm'],
-  ['Automations', 'automations'],
-  ['AI Agents', 'agents'],
-  ['Logs', 'logs'],
-];
-
-const moneyMetrics = [
-  ['Revenue', '$2,134'],
-  ['Expenses', '$486'],
-  ['Profit', '$1,648'],
-  ['Payouts', '$900'],
-  ['Projected Monthly', '$8.5k'],
-];
-
-const moneyEvents = [
-  {
-    time: '02:44',
-    event: 'Logged $327 cleaning payment',
-    system: 'Cleaning Booking Engine',
-    impact: 'Revenue',
-  },
-  {
-    time: '01:20',
-    event: 'Updated starter offer to $149',
-    system: 'Dallas Mobile Detailing Engine',
-    impact: 'Projection',
-  },
-  {
-    time: '11:15',
-    event: 'Found ad spend leak in roofing test',
-    system: 'Roofing Lead Engine',
-    impact: 'Expense',
-  },
-  {
-    time: '10:42',
-    event: 'Projected 30-day revenue from active systems',
-    system: 'Right Thurr Finance Agent',
-    impact: 'Forecast',
-  },
-];
-
-const financeAttentionItems = [
-  {
-    label: 'Review',
-    title: 'Roofing ad spend rose 18%.',
-    text: 'Finance Agent recommends reviewing the offer before raising budget.',
-  },
-  {
-    label: 'Next Move',
-    title: 'Add manual revenue entry.',
-    text: 'Log today’s payments before the daily summary runs.',
-  },
-];
-
-const aiAgents = [
-  {
-    glyph: '✓',
-    name: 'Business Architect',
-    text: 'Turns the idea into a structured business model.',
-  },
-  {
-    glyph: '✓',
-    name: 'Build Agent',
-    text: 'Creates the first assets and system structure.',
-  },
-  {
-    glyph: '→',
-    name: 'Revenue Agent',
-    text: 'Maps offer, profit path, and monthly projection.',
-  },
-  {
-    glyph: '▲',
-    name: 'Automation Agent',
-    text: 'Defines n8n workflows, tool actions, and alerts.',
-  },
-  {
-    glyph: '✓',
-    name: 'Operator Agent',
-    text: 'Reports what happened and what needs attention.',
-  },
-];
-
-const aiExecutionPath = [
-  'User Request',
-  'n8n Webhook',
-  'Orchestrator Agent',
-  'Ollama Model',
-  'Tool/API Action',
-  'Database Update',
-  'UI Update',
-];
-
-const aiStats = [
-  ['Model', 'Hermes / LLaMA'],
-  ['Coder', 'Qwen Coder'],
-  ['Tasks Today', '128'],
-  ['Current Mission', 'Build lead funnel'],
-];
-
-const tasks = [
-  'Approve starter offer',
-  'Review landing page copy',
-  'Connect lead form to CRM',
-  'Create first outreach list',
-  'Log first manual revenue entry',
-];
-
-const fieldDefaults = {
-  name: '',
-  email: '',
-  idea: 'I want to start a mobile detailing business in Dallas.',
-  industry: 'Local service',
-  goal: 'Get leads and launch my first system',
-  link: '',
-};
+const {
+  activityEvents,
+  activityMetrics,
+  aiAgents,
+  aiExecutionPath,
+  aiStats,
+  attentionItems,
+  blueprintSections,
+  buildSteps,
+  financeAttentionItems,
+  moneyEvents,
+  moneyMetrics,
+  reportCards,
+  reportMetrics,
+  roadmapWeeks,
+  systemAssetKeys,
+  systems,
+  tasks,
+} = rightThurrMockData;
 
 const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -565,8 +296,8 @@ function MoneyPage({ setPage }) {
 }
 
 function SystemsPage({ setPage }) {
-  const [selectedSystemId, setSelectedSystemId] = useState(systemCards[0].id);
-  const selectedSystem = systemCards.find((system) => system.id === selectedSystemId) ?? systemCards[0];
+  const [selectedSystemId, setSelectedSystemId] = useState(systems[0].id);
+  const selectedSystem = systems.find((system) => system.id === selectedSystemId) ?? systems[0];
 
   return (
     <main className="systems-page" id="top">
@@ -590,7 +321,7 @@ function SystemsPage({ setPage }) {
         </div>
         <aside className="systems-hero-stamp">
           <span>Systems Running</span>
-          <strong>{systemCards.length}</strong>
+          <strong>{systems.length}</strong>
           <p>One workspace per business build.</p>
         </aside>
       </section>
@@ -1120,7 +851,7 @@ function BlueprintCommandReport() {
 
       <aside className="report-activity-rail">
         <div className="eyebrow">WHAT THE SYSTEM DID</div>
-        {initialEvents.map((event) => (
+        {activityEvents.map((event) => (
           <article className="report-feed-item" key={`${event.time}-${event.agent}`}>
             <time>{event.time}</time>
             <div>
@@ -1171,7 +902,7 @@ function ActivityPanel() {
         What Your System Did Today
       </div>
       <div className="activity-list">
-        {initialEvents.map((event) => (
+        {activityEvents.map((event) => (
           <article className="activity-item" key={`${event.time}-${event.text}`}>
             <time>{event.time}</time>
             <span className="activity-glyph">{event.glyph}</span>
@@ -1212,7 +943,7 @@ function MissionActivityFeed() {
           <span>RIGHT THURR ACTIVITY LOG</span>
           <span className="activity-glyph">✓</span>
         </div>
-        {initialEvents.map((event) => (
+        {activityEvents.map((event) => (
           <article className="mission-feed-row" key={`${event.time}-${event.agent}-mission`}>
             <time>{event.time}</time>
             <span className="activity-glyph">{event.glyph}</span>
@@ -1245,7 +976,7 @@ function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }
       <aside className="system-selector-panel">
         <div className="eyebrow">SYSTEMS</div>
         <div className="system-selector-list">
-          {systemCards.map((system) => (
+          {systems.map((system) => (
             <button
               className={system.id === selectedSystemId ? 'system-selector active' : 'system-selector'}
               key={system.id}
@@ -1429,7 +1160,7 @@ function HeroActivityPanel() {
         </div>
       </div>
       <div className="hero-feed">
-        {initialEvents.map((event) => (
+        {activityEvents.map((event) => (
           <article className="hero-feed-item" key={`${event.time}-${event.agent}`}>
             <time>{event.time}</time>
             <div>
@@ -1457,7 +1188,7 @@ function AppPreview() {
             My Systems
           </div>
           <div className="system-grid">
-            {systemCards.map((system) => (
+            {systems.map((system) => (
               <article className="system-card" key={system.name}>
                 <div className="status-stamp">{system.status}</div>
                 <h3>{system.name}</h3>
