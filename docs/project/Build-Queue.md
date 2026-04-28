@@ -64,6 +64,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Test form submission against Supabase or n8n.
 - [x] Draft Slack status update after n8n intake works.
 - [ ] Fix n8n Slack credential/channel access for buildout request alerts.
+- [ ] Create Discord `#buildout-requests` webhook.
+- [ ] Add Discord buildout request alert to n8n.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
@@ -106,7 +108,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Build n8n intake workflow.
 - [ ] Add AI blueprint generation prompt chain.
 - [ ] Add email delivery step.
-- [ ] Add Slack notification step.
+- [ ] Add Discord notification step.
+- [ ] Add Slack notification step later if needed.
 - [ ] Add CRM tagging step.
 
 ## Phase 5: Client-Ready Diagnostic Engine
@@ -138,4 +141,4 @@ Daily session:
 
 ## Next Task
 
-Deploy the generated Autopilot Blueprint view to Vercel, then verify the live Blueprint Report tab and form submission path.
+Create the Discord buildout webhook, connect it in n8n, then test one live Right Thurr form submission.

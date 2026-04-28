@@ -76,6 +76,67 @@ Recommended channel:
 new-clients
 ```
 
+## Discord Alert Status
+
+Discord is the recommended V1 operator alert channel because the user already uses it and n8n can
+post to a Discord channel with a simple webhook.
+
+Recommended server/channel setup:
+
+```text
+Right Thurr HQ
+#buildout-requests
+#system-activity
+#errors
+#revenue-alerts
+#daily-summary
+```
+
+Recommended first channel:
+
+```text
+#buildout-requests
+```
+
+Recommended n8n node:
+
+```text
+HTTP Request: Discord Buildout Alert
+Method: POST
+URL: Discord channel webhook URL
+Continue On Fail: true
+```
+
+Recommended privacy-safe V1 message:
+
+```json
+{
+  "content": "New Right Thurr buildout request queued.",
+  "embeds": [
+    {
+      "title": "Right Thurr Buildout Request",
+      "description": "A new AI Business Buildout Plan request was saved and queued for review.",
+      "color": 14246431,
+      "fields": [
+        { "name": "Industry", "value": "Local service", "inline": true },
+        { "name": "Goal", "value": "Get leads and launch my first system", "inline": false },
+        { "name": "Status", "value": "Saved to Supabase", "inline": true },
+        { "name": "Report Type", "value": "Right Thurr Autopilot Blueprint", "inline": true }
+      ]
+    }
+  ]
+}
+```
+
+Privacy rule:
+
+```text
+Do not post lead email, phone, or other sensitive lead data into Discord by default. Keep those in Supabase.
+```
+
+If the user explicitly wants lead contact info in Discord later, add it only after confirming the
+channel is private and the webhook is controlled.
+
 ## V1 Importable Workflow
 
 Starter import file:
@@ -89,6 +150,7 @@ V1 flow:
 ```text
 Webhook Trigger
 -> HTTP Request to https://right-thurr-audit.vercel.app/api/buildout-request
+-> HTTP Request to Discord webhook
 -> Respond to Webhook
 ```
 
@@ -131,8 +193,9 @@ intake.main_goal
 13. Supabase: Insert launch tasks
 14. Supabase: Insert activity_log "Blueprint generated"
 15. Email: Send confirmation or report link
-16. Slack: Notify Thurr Solutions
-17. Respond to Webhook
+16. Discord: Notify Right Thurr HQ
+17. Slack: Notify Thurr Solutions later if needed
+18. Respond to Webhook
 ```
 
 ## Validation Error Response
@@ -232,6 +295,7 @@ Blueprint generated
 Starter system created
 Launch tasks created
 Report delivery queued
+Discord notification sent
 Slack notification sent
 ```
 

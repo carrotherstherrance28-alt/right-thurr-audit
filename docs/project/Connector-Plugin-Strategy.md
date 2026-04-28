@@ -10,7 +10,7 @@ Use a lean core stack first:
 GitHub -> Vercel -> Right Thurr frontend
 Right Thurr form -> Supabase intake fallback
 Right Thurr form -> n8n production webhook
-n8n -> Supabase, email, Slack, and later CRM
+n8n -> Supabase, Discord alerts, email, and later CRM
 ```
 
 This keeps the MVP simple enough to finish while still proving the real product promise: Right Thurr can take an idea, turn it into a System, and show what the System is doing.
@@ -125,7 +125,7 @@ Create `Right Thurr - Buildout Plan Intake` first. Use production webhook only a
 
 ### Slack
 
-Use Slack for internal alerts, not as the source of truth.
+Use Slack later for client/team operations, not as the source of truth.
 
 Pros:
 
@@ -139,13 +139,37 @@ Cons:
 
 Recommendation:
 
-Add Slack after Supabase and n8n are working. Send concise alerts with links to Supabase/report records.
+Keep Slack optional for now. Use Discord for V1 internal alerts, then add Slack later only if client
+operations or a team workspace truly needs it.
 
 Current status:
 
 The n8n Slack node is non-blocking so blueprint intake keeps working even when Slack fails. The
 current n8n Slack credential returned `channel_not_found` for both `general` and `new-clients`, so
 fix channel access later instead of blocking the app build.
+
+### Discord
+
+Use Discord as the V1 internal command center.
+
+Pros:
+
+- The user already uses it, so alerts are more likely to be seen.
+- n8n can post to Discord with a simple channel webhook.
+- Easy to organize by alert type with channels such as `#buildout-requests`, `#system-activity`,
+  `#errors`, `#revenue-alerts`, and `#daily-summary`.
+
+Cons:
+
+- Discord is less standard for B2B client-facing operations than Slack.
+- A Discord webhook URL is sensitive because anyone with it can post into that channel.
+- Lead contact details should not be posted by default unless the channel is private and approved.
+
+Recommendation:
+
+Use Discord now for internal alerts. Keep Supabase as the source of truth and post privacy-safe
+summaries into Discord. Do not duplicate the same alert into Slack and Discord unless there is a
+specific operational reason.
 
 ### Gmail
 
@@ -286,7 +310,7 @@ Design the app as if Ollama is part of the AI Engine, but build the first MVP ar
 2. Vercel environment variables.
 3. n8n production webhook.
 4. Form submission test.
-5. Slack alert from n8n.
+5. Discord alert from n8n.
 6. Email/report delivery draft.
 7. Manual revenue entry.
 8. Stripe read-only revenue sync.

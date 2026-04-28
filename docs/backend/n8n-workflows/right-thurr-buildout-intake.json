@@ -58,9 +58,37 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        560,
+        840,
         0
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://discord.com/api/webhooks/REPLACE_WITH_BUILDOUT_REQUESTS_WEBHOOK",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ content: 'New Right Thurr buildout request queued.', embeds: [{ title: 'Right Thurr Buildout Request', description: 'A new AI Business Buildout Plan request was saved and queued for review.', color: 14246431, fields: [{ name: 'Industry', value: $node['Buildout Intake Webhook'].json.body?.intake?.industry || 'Not provided', inline: true }, { name: 'Goal', value: $node['Buildout Intake Webhook'].json.body?.intake?.main_goal || 'Not provided', inline: false }, { name: 'Status', value: 'Saved to Supabase', inline: true }, { name: 'Report Type', value: 'Right Thurr Autopilot Blueprint', inline: true }] }] }) }}",
+        "options": {}
+      },
+      "id": "401b2674-d156-4eba-9460-1f1384a82b77",
+      "name": "Discord Buildout Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        0
+      ],
+      "continueOnFail": true
     }
   ],
   "pinData": {},
@@ -77,6 +105,17 @@
       ]
     },
     "Save Request Through Vercel API": {
+      "main": [
+        [
+          {
+            "node": "Discord Buildout Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Discord Buildout Alert": {
       "main": [
         [
           {
