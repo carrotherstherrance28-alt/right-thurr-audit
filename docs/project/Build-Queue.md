@@ -8,7 +8,7 @@ Use the Right Thurr / Thurr Solutions design system only for our owned brands.
 
 Client diagnostic funnels can use the same backend engine, but they must stay visually re-skinnable and should not inherit Right Thurr styling unless the work is a Thurr Solutions case study or sales asset.
 
-Public visitors should see the offer under `Thurr Solutions LLC`. Right Thurr can stay as an internal/product-engine name in backend/workflow language until the brand architecture is finalized.
+Public visitors should see the offer under `Thurr`, with `Thurr Solutions` as the top-left company lockup. Right Thurr can stay as an internal/product-engine name in backend/workflow language until the brand architecture is finalized.
 
 Operator preview should stay narrow: `Command Center` for activity, AI, money, alerts, and next moves; `Systems` for individual business workspaces. Real owner authentication is required before private client/operator data is stored or shown.
 
@@ -75,6 +75,11 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add Supabase owner email auth gate for operator preview.
 - [x] Add local Thurnos/Ollama smoke test and bridge documentation.
 - [x] Reposition public website copy around Thurr Solutions LLC instead of Right Thurr.
+- [x] Reposition public website copy around Thurr instead of Thurr Solutions LLC.
+- [x] Add top-right dropdown navigation for Home, Buildout Plan, Thurr, and About Therrance.
+- [x] Add founder/operator trust section for Therrance Carrothers.
+- [x] Document Thurnos OpenAI brain swap and Discord prototype command path.
+- [x] Install Remotion and add first branded vertical intro composition.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
@@ -91,7 +96,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Add brand boundary notes to reusable client template docs.
 - [ ] Create shared website header/footer components.
 - [ ] Add basic SEO metadata.
-- [ ] Add founder/operator trust section for Thurr Solutions.
+- [x] Add founder/operator trust section for Thurr Solutions.
 - [ ] Add full accessibility and mobile QA pass.
 - [ ] Add analytics event plan for CTA/form/report/booked-call tracking.
 - [ ] Add LinkedIn-first B2B content plan.
@@ -170,7 +175,10 @@ Daily session:
 - [x] Added Supabase email magic-link gate for `?operator=1` with server-side owner email allowlist.
 - [x] Verified local `thurnos:latest` responds through Ollama.
 - [x] Updated public site positioning to `Thurr Solutions LLC`.
+- [x] Updated public site positioning to `Thurr` and added Therrance Carrothers section.
+- [x] Added Thurnos OpenAI/Discord orchestration notes.
+- [x] Installed Remotion with `ThurrIntro` vertical content starter.
 
 ## Next Task
 
-Wait for Supabase email rate limit to clear, test owner login at `/?operator=1`, then add the n8n -> Thurnos draft blueprint step.
+Add the n8n -> Thurnos draft blueprint step and decide whether Discord prototype requests should live in `#leads-alerts` threads or a dedicated `#prototype-requests` channel.

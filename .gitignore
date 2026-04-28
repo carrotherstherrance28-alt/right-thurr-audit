@@ -9,3 +9,4 @@ dist/
 .vite/
 .aidesigner/runs/
 .vercel
+out/

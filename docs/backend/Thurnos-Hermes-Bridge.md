@@ -61,6 +61,68 @@ THURNOS_MODEL=thurnos:latest
 THURNOS_SHARED_SECRET=
 ```
 
+## OpenAI Brain Option
+
+If you want Thurnos to use OpenAI instead of local Ollama, keep the same agent
+role and swap the model provider behind it.
+
+Recommended environment shape:
+
+```txt
+THURNOS_PROVIDER=openai
+OPENAI_API_KEY=
+THURNOS_OPENAI_MODEL=gpt-5.2
+```
+
+As of this build, the public OpenAI API model list shows GPT-5.2 as the current
+frontier coding/agentic model. If a `gpt-5.5` API model becomes available later,
+the only required change should be:
+
+```txt
+THURNOS_OPENAI_MODEL=gpt-5.5
+```
+
+Do not put the OpenAI key in the Vite client environment. Keep it in n8n
+credentials, a private server route, or another server-only secret store.
+
+## Discord Prototype Command Path
+
+Current Discord status:
+
+```txt
+n8n buildout intake -> Discord #leads-alerts notification
+```
+
+Recommended next path for mobile prototype requests:
+
+```txt
+Discord channel/thread
+-> n8n Discord trigger or Discord bot webhook
+-> Thurnos Orchestrator
+-> OpenAI or Ollama brain
+-> GitHub/Linear task creation
+-> prototype summary sent back to Discord
+```
+
+Use a separate Discord channel such as `#prototype-requests` or a dedicated
+thread under `#leads-alerts` so real lead alerts do not get mixed with build
+commands.
+
+Minimum command format:
+
+```txt
+/prototype
+Goal:
+Audience:
+Brand:
+Deadline:
+Notes:
+```
+
+First implementation should create a draft task and summary only. Do not let
+Discord commands deploy production changes until the approval workflow is
+tested.
+
 ## Safety Rules
 
 - Never expose local Ollama directly to the public web.

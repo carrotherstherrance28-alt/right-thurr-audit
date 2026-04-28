@@ -6,14 +6,18 @@ import {
   ArrowUpRight,
   Bot,
   BriefcaseBusiness,
+  ChevronDown,
   ClipboardCheck,
   DollarSign,
   Factory,
   FileText,
   Gauge,
   Hammer,
+  Instagram,
+  Linkedin,
   Mail,
   MapPinned,
+  Menu,
   Send,
   Sparkles,
   Target,
@@ -47,8 +51,13 @@ const {
 const publicNavItems = [
   ['Home', 'home'],
   ['Buildout Plan', 'buildout'],
-  ['Thurr Solutions LLC', 'solutions'],
+  ['Thurr', 'solutions'],
 ];
+
+const socialLinks = {
+  linkedin: 'https://www.linkedin.com/in/therrancecarrothers',
+  instagram: 'https://www.instagram.com/thurrsolutions/',
+};
 
 const operatorNavItems = [
   ['Command Center', 'command'],
@@ -149,6 +158,7 @@ function App() {
   const [authSession, setAuthSession] = useState(null);
   const [authReady, setAuthReady] = useState(!authClient);
   const [ownerAccess, setOwnerAccess] = useState({ status: 'idle', allowed: false, message: '' });
+  const [menuOpen, setMenuOpen] = useState(false);
   const isOperatorPreview = getIsOperatorPreview();
   const canViewOperator = isOperatorPreview && ownerAccess.allowed;
   const currentStep = useMemo(() => buildSteps[form.idea.length % buildSteps.length], [form.idea]);
@@ -237,10 +247,20 @@ function App() {
   function navigateToPage(target) {
     if (!canViewOperator && operatorPages.includes(target)) {
       setPage('home');
+      setMenuOpen(false);
       return;
     }
 
     setPage(target);
+    setMenuOpen(false);
+  }
+
+  function navigateToAbout() {
+    setPage('home');
+    setMenuOpen(false);
+    window.setTimeout(() => {
+      document.getElementById('about-therrance')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 0);
   }
 
   function updateField(field, value) {
@@ -300,18 +320,57 @@ function App() {
       <header className="topbar">
         <button className="brand-lockup brand-button" type="button" onClick={() => navigateToPage('home')}>
           <img src={monogram} alt="" className="brand-mark" />
+          <span className="brand-name">Thurr Solutions</span>
         </button>
-        <nav className="nav-tabs" aria-label="Primary navigation">
-          {publicNavItems.map(([label, target]) => (
+
+        <div className="topbar-actions">
+          <div className={canViewOperator ? 'system-live owner-live' : 'system-live'}>
+            <span className="live-dot" />
+            {canViewOperator ? 'OWNER MODE' : 'SYSTEM LIVE'}
+          </div>
+          <div className="nav-menu">
             <button
-              className={page === target ? 'nav-tab active' : 'nav-tab'}
-              key={label}
+              className={menuOpen ? 'menu-trigger active' : 'menu-trigger'}
               type="button"
-              onClick={() => navigateToPage(target)}
+              aria-expanded={menuOpen}
+              aria-controls="primary-menu"
+              onClick={() => setMenuOpen((current) => !current)}
             >
-              {label}
+              <Menu size={18} strokeWidth={3} />
+              Menu
+              <ChevronDown size={16} strokeWidth={3} />
             </button>
-          ))}
+            {menuOpen && (
+              <nav className="nav-dropdown" id="primary-menu" aria-label="Primary navigation">
+                {publicNavItems.map(([label, target]) => (
+                  <button
+                    className={page === target ? 'nav-tab active' : 'nav-tab'}
+                    key={label}
+                    type="button"
+                    onClick={() => navigateToPage(target)}
+                  >
+                    {label}
+                  </button>
+                ))}
+                <button className="nav-tab" type="button" onClick={navigateToAbout}>
+                  About Therrance
+                </button>
+                {canViewOperator &&
+                  operatorNavItems.map(([label, target]) => (
+                    <button
+                      className={page === target ? 'nav-tab active operator-nav-tab' : 'nav-tab operator-nav-tab'}
+                      key={label}
+                      type="button"
+                      onClick={() => navigateToPage(target)}
+                    >
+                      {label}
+                    </button>
+                  ))}
+              </nav>
+            )}
+          </div>
+        </div>
+        <nav className="nav-tabs desktop-nav" aria-label="Primary navigation">
           {canViewOperator &&
             operatorNavItems.map(([label, target]) => (
               <button
@@ -324,10 +383,6 @@ function App() {
               </button>
             ))}
         </nav>
-        <div className={canViewOperator ? 'system-live owner-live' : 'system-live'}>
-          <span className="live-dot" />
-          {canViewOperator ? 'OWNER MODE' : 'SYSTEM LIVE'}
-        </div>
       </header>
 
       {isOperatorPreview && !canViewOperator ? (
@@ -398,7 +453,7 @@ function OwnerAccessGate({ authReady, authSession, ownerAccess }) {
         <h1>Sign in to view the operator machine.</h1>
         <p>
           Command Center and Systems are private owner screens. Public visitors only see the
-          website, buildout intake, and Thurr Solutions LLC service pages.
+          website, buildout intake, and Thurr service pages.
         </p>
 
         {!authReady && <p className="form-note">Checking owner session...</p>}
@@ -527,7 +582,7 @@ function BlueprintReportPage({ setPage }) {
           <div className="eyebrow">GENERATED AUTOPILOT BLUEPRINT</div>
           <h1>Your first system is a lead-to-booking engine.</h1>
           <p>
-            This is the client-facing report view Thurr Solutions LLC can generate after the intake. It
+            This is the client-facing report view Thurr can generate after the intake. It
             turns an idea into a model, revenue path, funnel, automation plan, agent map, and launch
             queue.
           </p>
@@ -628,7 +683,7 @@ function SolutionsPage({ setPage }) {
           <div className="eyebrow">HOW IT WORKS</div>
           <h2>Strategy first. Systems second. Proof always.</h2>
           <p>
-            Thurr Solutions LLC starts with the business case, then builds the workflow around the
+            Thurr starts with the business case, then builds the workflow around the
             outcome. The goal is not more tools. The goal is fewer leaks.
           </p>
         </div>
@@ -656,9 +711,9 @@ function SolutionsPage({ setPage }) {
       <section className="brand-boundary solutions-boundary">
         <div>
           <div className="eyebrow">BRAND SPLIT</div>
-          <h2>Thurr Solutions LLC builds the systems. The client keeps the brand.</h2>
+          <h2>Thurr builds the systems. The client keeps the brand.</h2>
           <p>
-            Client diagnostic funnels are built by Thurr Solutions LLC and can use the same backend
+            Client diagnostic funnels are built by Thurr and can use the same backend
             engine, but the visual system stays client-owned unless the asset is a Thurr Solutions
             sales page, proposal, or case study.
           </p>
@@ -683,7 +738,7 @@ function HomePage({ form, updateField, handleSubmit, submissionState, currentSte
           <div className="eyebrow">YOUR SYSTEM IS ALREADY MOVING</div>
           <h1 id="hero-title">Ideas do not pay you. Systems do.</h1>
           <p>
-            Thurr Solutions LLC turns business ideas and missed-lead problems into visible action:
+            Thurr turns business ideas and missed-lead problems into visible action:
             blueprint, offer, page copy, automations, tasks, and the next move.
           </p>
           <div className="hero-actions">
@@ -753,7 +808,46 @@ function HomePage({ form, updateField, handleSubmit, submissionState, currentSte
       </section>
 
       <AppPreview />
+      <AboutTherranceSection />
     </main>
+  );
+}
+
+function AboutTherranceSection() {
+  return (
+    <section className="founder-section" id="about-therrance">
+      <div className="founder-stamp">
+        <span>Founder / Operator</span>
+        <strong>Therrance Carrothers</strong>
+      </div>
+      <div className="founder-copy">
+        <div className="eyebrow">ABOUT THERRANCE CARROTHERS</div>
+        <h2>Finance-minded automation builder for businesses that need systems, not more busywork.</h2>
+        <p>
+          Therrance Carrothers builds AI automation systems across lead intake, sales workflows,
+          client onboarding, reporting, and owner visibility. The work starts with the business
+          numbers, then turns repeatable manual steps into production-ready workflows.
+        </p>
+        <p>
+          Thurr is the public buildout engine. Thurr Solutions is the implementation arm behind the
+          systems, proposals, client automations, and private operator workflows.
+        </p>
+        <div className="founder-socials" aria-label="Therrance Carrothers social links">
+          <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
+            <Linkedin size={18} strokeWidth={3} />
+            LinkedIn
+          </a>
+          <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
+            <Instagram size={18} strokeWidth={3} />
+            Instagram
+          </a>
+          <a href="mailto:hello@thurrsolutions.com">
+            <Mail size={18} strokeWidth={3} />
+            Email
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -765,7 +859,7 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
           <div className="eyebrow">FREE AI BUSINESS BUILDOUT PLAN</div>
           <h1>Get the blueprint before you build.</h1>
           <p>
-            Thurr Solutions LLC analyzes your idea, niche, goal, and current assets, then maps the
+            Thurr analyzes your idea, niche, goal, and current assets, then maps the
             private AI system we would build first.
           </p>
           <div className="hero-actions">
@@ -962,7 +1056,7 @@ function BlueprintPanel() {
     <section className="blueprint-panel">
       <div className="section-title">
         <FileText size={22} strokeWidth={3} />
-        Thurr Solutions LLC Autopilot Blueprint
+        Thurr Autopilot Blueprint
       </div>
       <div className="blueprint-list">
         {blueprintSections.map((section, index) => (
@@ -1076,10 +1170,10 @@ function ExportReportPage({ setPage }) {
         </button>
       </section>
 
-      <article className="export-report-sheet" aria-label="Export-ready Thurr Solutions LLC Autopilot Blueprint">
+      <article className="export-report-sheet" aria-label="Export-ready Thurr Autopilot Blueprint">
         <header className="export-report-cover">
           <div>
-            <div className="eyebrow">Thurr Solutions LLC Autopilot Blueprint</div>
+            <div className="eyebrow">Thurr Autopilot Blueprint</div>
             <h1>Build the system that captures leads before they cool off.</h1>
           </div>
           <div className="export-report-status">Ready for Review</div>
@@ -1105,7 +1199,7 @@ function ExportReportPage({ setPage }) {
           <aside className="export-report-panel dark">
             <h2>Recommended Next Step</h2>
             <p>
-              Approve the starter offer and let Thurr Solutions LLC build the first lead-to-booking
+              Approve the starter offer and let Thurr build the first lead-to-booking
               system.
             </p>
           </aside>
@@ -1138,7 +1232,7 @@ function ExportReportPage({ setPage }) {
 
         <section className="export-report-cta">
           <strong>Ideas do not pay you. Systems do.</strong>
-          <p>Your blueprint shows what to build. Thurr Solutions LLC builds the first system for you.</p>
+          <p>Your blueprint shows what to build. Thurr builds the first system for you.</p>
         </section>
       </article>
     </main>
@@ -1196,7 +1290,7 @@ function ActivityPanel() {
 
 function MissionActivityFeed() {
   return (
-    <section className="mission-feed-grid" aria-label="Thurr Solutions LLC mission activity feed">
+    <section className="mission-feed-grid" aria-label="Thurr mission activity feed">
       <aside className="mission-status-panel">
         <div className="eyebrow">CURRENT MISSION</div>
         <h2>Build lead capture system.</h2>
@@ -1248,7 +1342,7 @@ function MissionActivityFeed() {
 
 function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }) {
   return (
-    <section className="system-cockpit" aria-label="Thurr Solutions LLC system workspace">
+    <section className="system-cockpit" aria-label="Thurr system workspace">
       <aside className="system-selector-panel">
         <div className="eyebrow">SYSTEMS</div>
         <div className="system-selector-list">
@@ -1284,7 +1378,7 @@ function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }
         <div className="eyebrow">NEXT ACTION</div>
         <h3>{selectedSystem.next}</h3>
         <p>
-          Thurr Solutions LLC keeps the workspace organized so the next build step is always visible.
+          Thurr keeps the workspace organized so the next build step is always visible.
         </p>
         <div className="system-mini-stats">
           <div>
@@ -1303,7 +1397,7 @@ function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }
 
 function FinanceCommandCenter() {
   return (
-    <section className="finance-command-grid" aria-label="Thurr Solutions LLC finance command center">
+    <section className="finance-command-grid" aria-label="Thurr finance command center">
       <aside className="finance-summary-panel">
         <div className="eyebrow">FINANCE AGENT</div>
         <h2>$1,648</h2>
@@ -1362,7 +1456,7 @@ function FinanceCommandCenter() {
 
 function AIEngineOrchestra() {
   return (
-    <section className="ai-orchestra-grid" aria-label="Thurr Solutions LLC AI Engine orchestration">
+    <section className="ai-orchestra-grid" aria-label="Thurr AI Engine orchestration">
       <aside className="ai-mission-panel">
         <div className="eyebrow">ORCHESTRATOR</div>
         <h2>Build lead funnel.</h2>
@@ -1557,7 +1651,7 @@ function BrandBoundary() {
         </div>
         <div>
           <div className="eyebrow">BRAND BOUNDARY</div>
-          <h2>Thurr Solutions LLC builds the system. Client brands stay client-owned.</h2>
+          <h2>Thurr builds the system. Client brands stay client-owned.</h2>
           <p>
             The same execution engine can power owned products, B2B services, and client
             diagnostics. The brand layer changes depending on who the system is for.
@@ -1566,7 +1660,7 @@ function BrandBoundary() {
         <div className="brand-lane-grid">
           <article>
             <Target size={24} strokeWidth={3} />
-            <h3>Thurr Solutions LLC</h3>
+            <h3>Thurr</h3>
             <p>Public buildout plan, B2B services, and private automation systems.</p>
           </article>
           <article>
