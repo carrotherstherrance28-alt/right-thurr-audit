@@ -73,6 +73,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Hide owner/operator screens from public website navigation.
 - [x] Consolidate repetitive owner tabs into Command Center and Systems.
 - [x] Add Supabase owner email auth gate for operator preview.
+- [x] Add local Thurnos/Ollama smoke test and bridge documentation.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
@@ -164,7 +165,8 @@ Daily session:
 - [x] Added export-ready Autopilot Blueprint report view using Option A.
 - [x] Narrowed navigation to public website tabs plus owner Command Center/Systems.
 - [x] Added Supabase email magic-link gate for `?operator=1` with server-side owner email allowlist.
+- [x] Verified local `thurnos:latest` responds through Ollama.
 
 ## Next Task
 
-Configure Supabase Auth redirect URLs, then test owner login at `/?operator=1`.
+Wait for Supabase email rate limit to clear, test owner login at `/?operator=1`, then add the n8n -> Thurnos draft blueprint step.
