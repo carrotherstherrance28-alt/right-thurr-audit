@@ -33,6 +33,13 @@ Production status:
 Active
 ```
 
+Verified:
+
+```text
+Direct POST to production webhook returned 201 and saved a fake QA row to Supabase.
+Vercel Production is configured with VITE_N8N_BUILDOUT_WEBHOOK_URL.
+```
+
 ## V1 Importable Workflow
 
 Starter import file:

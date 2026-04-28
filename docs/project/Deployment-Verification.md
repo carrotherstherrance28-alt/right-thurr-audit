@@ -67,6 +67,8 @@ Verified result:
 ```text
 Live browser form submission saved a fake QA request to Supabase.
 Direct n8n production webhook test returned 201 and saved a fake QA request to Supabase.
+End-to-end n8n webhook test returned 201 after Vercel was configured with VITE_N8N_BUILDOUT_WEBHOOK_URL.
+Slack status update was drafted in #general for manual review/send.
 ```
 
 ## Domain Checks
