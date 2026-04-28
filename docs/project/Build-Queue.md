@@ -21,6 +21,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add dedicated AI Business Buildout Plan page/view.
 - [x] Define n8n webhook payload contract.
 - [x] Wire buildout form for optional n8n webhook URL.
+- [x] Add temporary Supabase direct-intake fallback when n8n is not connected.
 - [x] Add first Thurr Solutions services page/view.
 - [x] Connect local repo to GitHub remote `right-thurr-audit`.
 - [x] Add domain strategy for Right Thurr, Thurr Solutions, diagnostics, and backups.
@@ -47,6 +48,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Verify live Vercel deployment URL.
 - [ ] Add Vercel environment variable `VITE_N8N_BUILDOUT_WEBHOOK_URL`.
 - [ ] Add Vercel environment variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` after Supabase exists.
+- [ ] Redeploy Vercel after environment variables are added.
 - [ ] Create Supabase project.
 - [x] Create Supabase project.
 - [x] Store Supabase project URL and anon key locally in ignored `.env.local`.
@@ -55,6 +57,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Create Supabase tables for leads/buildout requests/activity logs.
 - [ ] Create n8n workflow `Right Thurr - Buildout Plan Intake`.
 - [ ] Create n8n production webhook URL and add it to Vercel/local env.
+- [ ] Test form submission against Supabase or n8n.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
 - [ ] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
 - [ ] Future domain: use `diagnostic.thurrsolutions.com` for client diagnostic funnels.

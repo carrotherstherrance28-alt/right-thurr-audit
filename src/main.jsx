@@ -114,6 +114,66 @@ const fieldDefaults = {
 };
 
 const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseBuildoutUrl = supabaseUrl ? `${supabaseUrl}/rest/v1/buildout_requests` : '';
+
+function mapBuildoutPayloadToSupabaseRow(payload) {
+  return {
+    source: payload.source,
+    brand: payload.brand,
+    name: payload.lead.name,
+    email: payload.lead.email,
+    phone: payload.lead.phone,
+    website_or_social: payload.lead.website_or_social,
+    business_idea: payload.intake.business_idea,
+    industry: payload.intake.industry,
+    main_goal: payload.intake.main_goal,
+    location: payload.intake.location,
+    budget_level: payload.intake.budget_level,
+    timeline: payload.intake.timeline,
+    biggest_bottleneck: payload.intake.biggest_bottleneck,
+    report_type: payload.routing.report_type,
+    status: 'requested',
+  };
+}
+
+async function submitBuildoutRequest(payload) {
+  if (buildoutWebhookUrl) {
+    const response = await fetch(buildoutWebhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error('Webhook request failed');
+    }
+
+    return 'queued';
+  }
+
+  if (supabaseBuildoutUrl && supabaseAnonKey) {
+    const response = await fetch(supabaseBuildoutUrl, {
+      method: 'POST',
+      headers: {
+        apikey: supabaseAnonKey,
+        Authorization: `Bearer ${supabaseAnonKey}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify(mapBuildoutPayloadToSupabaseRow(payload)),
+    });
+
+    if (!response.ok) {
+      throw new Error('Supabase request failed');
+    }
+
+    return 'queued-supabase';
+  }
+
+  return 'queued-local';
+}
 
 function App() {
   const [page, setPage] = useState('home');
@@ -156,23 +216,9 @@ function App() {
       },
     };
 
-    if (!buildoutWebhookUrl) {
-      setSubmissionState('queued-local');
-      return;
-    }
-
     try {
-      const response = await fetch(buildoutWebhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error('Webhook request failed');
-      }
-
-      setSubmissionState('queued');
+      const nextState = await submitBuildoutRequest(payload);
+      setSubmissionState(nextState);
     } catch {
       setSubmissionState('error');
     }
@@ -504,6 +550,7 @@ function BuildoutForm({ form, updateField, handleSubmit, submissionState }) {
           value={form.name}
           onChange={(event) => updateField('name', event.target.value)}
           placeholder="Therrance"
+          required
         />
       </label>
       <label>
@@ -513,6 +560,7 @@ function BuildoutForm({ form, updateField, handleSubmit, submissionState }) {
           value={form.email}
           onChange={(event) => updateField('email', event.target.value)}
           placeholder="you@example.com"
+          required
         />
       </label>
       <label className="wide-field">
@@ -521,6 +569,7 @@ function BuildoutForm({ form, updateField, handleSubmit, submissionState }) {
           value={form.idea}
           onChange={(event) => updateField('idea', event.target.value)}
           rows={4}
+          required
         />
       </label>
       <label>
@@ -529,11 +578,12 @@ function BuildoutForm({ form, updateField, handleSubmit, submissionState }) {
           value={form.industry}
           onChange={(event) => updateField('industry', event.target.value)}
           placeholder="Local service"
+          required
         />
       </label>
       <label>
         Main goal
-        <select value={form.goal} onChange={(event) => updateField('goal', event.target.value)}>
+        <select value={form.goal} onChange={(event) => updateField('goal', event.target.value)} required>
           <option>Get leads and launch my first system</option>
           <option>Turn my idea into an offer</option>
           <option>Build a funnel</option>
@@ -560,7 +610,13 @@ function BuildoutForm({ form, updateField, handleSubmit, submissionState }) {
       )}
       {submissionState === 'queued-local' && (
         <p className="form-note wide-field">
-          Blueprint queued locally. Add the n8n webhook URL to send live requests.
+          Blueprint queued locally. Add the n8n webhook URL or Supabase env vars to send live
+          requests.
+        </p>
+      )}
+      {submissionState === 'queued-supabase' && (
+        <p className="form-note wide-field">
+          Blueprint request saved. Connect n8n next to generate and deliver the report.
         </p>
       )}
       {submissionState === 'queued' && (

@@ -14,6 +14,12 @@ Temporary frontend behavior:
 Form submit -> local queued state
 ```
 
+Supabase-ready frontend behavior:
+
+```text
+Form submit -> Supabase REST insert into buildout_requests
+```
+
 Production frontend behavior:
 
 ```text
@@ -24,7 +30,15 @@ Environment variable:
 
 ```text
 VITE_N8N_BUILDOUT_WEBHOOK_URL=
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
 ```
+
+Priority order:
+
+1. If `VITE_N8N_BUILDOUT_WEBHOOK_URL` exists, submit to n8n.
+2. If n8n is not configured but Supabase variables exist, insert into `buildout_requests`.
+3. If neither exists, show local queued state for demo only.
 
 ## Request Payload
 
@@ -105,7 +119,34 @@ Real app:
 
 Recommended:
 
-Start with Google Sheet if speed matters, but design the payload so it can move to Supabase cleanly.
+Use n8n as the orchestration layer once the webhook exists. Until then, the frontend can save
+requests directly into Supabase as a temporary MVP intake path.
+
+## Supabase Insert Shape
+
+When n8n is not configured, the frontend maps the request payload into `buildout_requests`:
+
+```json
+{
+  "source": "right-thurr-buildout-page",
+  "brand": "right-thurr",
+  "name": "Therrance",
+  "email": "you@example.com",
+  "phone": "",
+  "website_or_social": "https://example.com",
+  "business_idea": "I want to start a mobile detailing business in Dallas.",
+  "industry": "Local service",
+  "main_goal": "Get leads and launch my first system",
+  "location": "",
+  "budget_level": "",
+  "timeline": "",
+  "biggest_bottleneck": "",
+  "report_type": "right-thurr-autopilot-blueprint",
+  "status": "requested"
+}
+```
+
+This requires `docs/backend/Supabase-Schema.sql` to be run first.
 
 ## Expected n8n Response
 
