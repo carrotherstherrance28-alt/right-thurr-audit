@@ -31,6 +31,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add secondary R+T logo as favicon and website/social preview cover.
 - [x] Add robots.txt, sitemap.xml, web app manifest, theme color, and Apple touch icon.
 - [x] Add direct setup checklist for GitHub, Vercel, n8n, Supabase, and domains.
+- [x] Add deployment verification checklist.
 - [ ] Run app locally and verify the first screen.
 - [ ] Fix responsive/layout issues from browser review.
 - [ ] Create clean repo branch and first commit.
@@ -41,6 +42,8 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Confirm whether GitHub repo should stay `right-thurr-audit` or be renamed to `right-thurr`.
 - [ ] Push local repo to GitHub after first commit.
 - [ ] Create Vercel project for Right Thurr.
+- [x] Create/import Vercel project for Right Thurr.
+- [ ] Verify live Vercel deployment URL.
 - [ ] Add Vercel environment variable `VITE_N8N_BUILDOUT_WEBHOOK_URL`.
 - [ ] Add Vercel environment variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` after Supabase exists.
 - [ ] Create Supabase project.
