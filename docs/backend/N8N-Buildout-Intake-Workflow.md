@@ -21,6 +21,31 @@ Expected production URL:
 https://therrancecarrothers.app.n8n.cloud/webhook/right-thurr/buildout-intake
 ```
 
+## V1 Importable Workflow
+
+Starter import file:
+
+```text
+docs/backend/n8n-workflows/right-thurr-buildout-intake.json
+```
+
+V1 flow:
+
+```text
+Webhook Trigger
+-> HTTP Request to https://right-thurr-audit.vercel.app/api/buildout-request
+-> Respond to Webhook
+```
+
+This keeps the first n8n workflow simple. Supabase saving is already handled by the Vercel API
+route, so n8n does not need Supabase credentials yet.
+
+After importing, activate the workflow and copy the production webhook URL into Vercel:
+
+```text
+VITE_N8N_BUILDOUT_WEBHOOK_URL=https://therrancecarrothers.app.n8n.cloud/webhook/right-thurr/buildout-intake
+```
+
 ## Required Payload Checks
 
 Reject with validation error if any are missing:

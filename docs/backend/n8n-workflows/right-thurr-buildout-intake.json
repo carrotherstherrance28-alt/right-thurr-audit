@@ -1,0 +1,101 @@
+{
+  "name": "Right Thurr - Buildout Plan Intake",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "right-thurr/buildout-intake",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "0f05db4b-4a84-4739-93e8-a6d29a50f778",
+      "name": "Buildout Intake Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "right-thurr-buildout-intake"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://right-thurr-audit.vercel.app/api/buildout-request",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body || $json) }}",
+        "options": {}
+      },
+      "id": "7c33aa69-c874-4cb0-9546-adb98ee1140b",
+      "name": "Save Request Through Vercel API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        280,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 201
+        }
+      },
+      "id": "05dd2ffd-491e-4f84-a4a1-8ffb3859b8c4",
+      "name": "Respond Blueprint Queued",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Buildout Intake Webhook": {
+      "main": [
+        [
+          {
+            "node": "Save Request Through Vercel API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Request Through Vercel API": {
+      "main": [
+        [
+          {
+            "node": "Respond Blueprint Queued",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "right-thurr-buildout-intake-v1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "right-thurr-buildout-intake",
+  "tags": []
+}
