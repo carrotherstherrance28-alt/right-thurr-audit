@@ -20,7 +20,6 @@ import {
 } from 'lucide-react';
 import './styles/brand-tokens.css';
 import './styles/app.css';
-import wordmark from './assets/right-thurr-wordmark-clean.png';
 import monogram from './assets/rt-monogram-clean.png';
 
 const buildSteps = [
@@ -351,50 +350,31 @@ function SolutionsPage({ setPage }) {
 function HomePage({ form, updateField, handleSubmit, submissionState, currentStep, setPage }) {
   return (
     <main id="top">
-      <section className="landing-hero" aria-labelledby="hero-title">
+      <section className="landing-hero machine-first-hero" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <div className="eyebrow">AI BUSINESS BUILDOUT PLAN</div>
-          <h1 id="hero-title">See what business Thurr could build for you in 5 minutes.</h1>
+          <div className="eyebrow">YOUR SYSTEM IS ALREADY MOVING</div>
+          <h1 id="hero-title">Ideas do not pay you. Systems do.</h1>
           <p>
-            Drop the idea. Right Thurr maps the opportunity, offer, funnel, automation stack,
-            agents, and first 30 days of execution.
+            Right Thurr turns the idea into visible action: blueprint, offer, page copy,
+            automations, tasks, and the next move.
           </p>
           <div className="hero-actions">
             <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
               GET MY BUILDOUT PLAN
               <ArrowUpRight size={18} strokeWidth={3} />
             </button>
-            <a className="text-link dark-link" href="#app-preview">
-              See the machine working
+            <a className="text-link dark-link" href="#machine">
+              Watch the system work
             </a>
+          </div>
+          <div className="hero-pulse-row" aria-label="Live system proof">
+            <span>Blueprint generated</span>
+            <span>Tasks queued</span>
+            <span>Revenue tracked</span>
           </div>
         </div>
 
-        <aside className="hero-proof-card" aria-label="Autopilot Blueprint sample">
-          <div className="proof-header">
-            <span>RIGHT THURR AUTOPILOT BLUEPRINT</span>
-            <span className="activity-glyph">✓</span>
-          </div>
-          <h2>Dallas Mobile Detailing Engine</h2>
-          <div className="proof-stats">
-            <div>
-              <span>Best first offer</span>
-              <strong>$149 express detail</strong>
-            </div>
-            <div>
-              <span>Launch path</span>
-              <strong>30 days</strong>
-            </div>
-            <div>
-              <span>First build</span>
-              <strong>Lead capture system</strong>
-            </div>
-          </div>
-          <p>
-            Ideas do not pay you. Systems do. Your blueprint shows what to build. Right Thurr
-            builds it for you.
-          </p>
-        </aside>
+        <HeroActivityPanel />
       </section>
 
       <section className="buildout-section" id="buildout" aria-labelledby="buildout-title">
@@ -666,6 +646,50 @@ function ActivityPanel() {
   );
 }
 
+function HeroActivityPanel() {
+  return (
+    <aside className="hero-activity-card" aria-label="Live system activity sample">
+      <div className="proof-header">
+        <span>AUTOPILOT STATUS: ACTIVE</span>
+        <span className="activity-glyph">✓</span>
+      </div>
+      <div className="hero-command-grid">
+        <div>
+          <span>Systems Running</span>
+          <strong>4</strong>
+        </div>
+        <div>
+          <span>Revenue Today</span>
+          <strong>$427</strong>
+        </div>
+        <div>
+          <span>Tasks Done</span>
+          <strong>89</strong>
+        </div>
+        <div>
+          <span>Issues Found</span>
+          <strong>1</strong>
+        </div>
+      </div>
+      <div className="hero-feed">
+        {initialEvents.map((event) => (
+          <article className="hero-feed-item" key={`${event.time}-${event.agent}`}>
+            <time>{event.time}</time>
+            <div>
+              <strong>{event.agent}</strong>
+              <p>{event.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div className="hero-current-mission">
+        <span>CURRENT MISSION</span>
+        <strong>Build lead capture system</strong>
+      </div>
+    </aside>
+  );
+}
+
 function AppPreview() {
   return (
     <section className="workspace-grid" id="app-preview">
@@ -763,35 +787,34 @@ function BackendMap() {
 function BrandBoundary() {
   return (
     <>
-      <section className="split-proof">
-        <FlowCard icon={Target} title="Right Thurr" text="Product/app/public brand. Builds Systems from ideas." />
-        <FlowCard
-          icon={BriefcaseBusiness}
-          title="Thurr Solutions"
-          text="B2B services and implementation arm. Builds client automations and diagnostics."
-        />
-        <FlowCard
-          icon={MapPinned}
-          title="Client Funnels"
-          text="Same backend engine, re-skinned to the client brand by default."
-        />
-      </section>
-
-      <section className="brand-boundary" id="brand-boundary">
+      <section className="brand-boundary architecture-boundary" id="brand-boundary">
         <div className="watermark-panel" aria-label="R plus T watermark preview">
           <img src={monogram} alt="" />
         </div>
         <div>
           <div className="eyebrow">BRAND BOUNDARY</div>
-          <h2>Owned brand system only.</h2>
+          <h2>Right Thurr is the product. Thurr Solutions is the builder.</h2>
           <p>
-            Right Thurr and Thurr Solutions use this orange, ink, paper, arrow, border, and R+T
-            language. Client diagnostic funnels can use the same backend engine, but they stay
-            structurally reusable and visually re-skinnable.
+            The same execution engine can power owned products, B2B services, and client
+            diagnostics. The brand layer changes depending on who the system is for.
           </p>
-          <a className="text-link" href="mailto:hello@rightthurr.com">
-            Launch first System <Mail size={18} strokeWidth={3} />
-          </a>
+        </div>
+        <div className="brand-lane-grid">
+          <article>
+            <Target size={24} strokeWidth={3} />
+            <h3>Right Thurr</h3>
+            <p>Product, app, public buildout plan, and owned systems from ideas.</p>
+          </article>
+          <article>
+            <BriefcaseBusiness size={24} strokeWidth={3} />
+            <h3>Thurr Solutions</h3>
+            <p>B2B services, implementation, proposals, case studies, and client delivery.</p>
+          </article>
+          <article>
+            <MapPinned size={24} strokeWidth={3} />
+            <h3>Client Funnels</h3>
+            <p>Same backend engine, re-skinned to the client brand by default.</p>
+          </article>
         </div>
       </section>
     </>

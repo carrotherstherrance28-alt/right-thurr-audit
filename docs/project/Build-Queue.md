@@ -28,6 +28,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Distill marketing fundamentals into project strategy notes.
 - [x] Apply browser comments: remove header wordmark, revise hero headline, convert brand image to watermark treatment.
 - [x] Create 3 homepage screenshot options before coding the next visual direction.
+- [x] Implement selected direction: Option B homepage, Option A buildout page, Option C brand architecture.
 - [x] Add secondary R+T logo as favicon and website/social preview cover.
 - [x] Add robots.txt, sitemap.xml, web app manifest, theme color, and Apple touch icon.
 - [x] Add direct setup checklist for GitHub, Vercel, n8n, Supabase, and domains.
@@ -125,4 +126,4 @@ Daily session:
 
 ## Next Task
 
-Create clean environment and setup instructions for GitHub/Vercel/n8n handoff.
+Run browser QA on the deployed Vercel URL, then connect Supabase tables and the first n8n intake webhook.
