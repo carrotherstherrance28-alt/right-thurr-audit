@@ -118,4 +118,7 @@ for insert
 to anon
 with check (brand = 'right-thurr');
 
+grant usage on schema public to anon;
+grant insert on public.buildout_requests to anon;
+
 -- n8n/admin reads should use server-side credentials or authenticated policies later.

@@ -60,7 +60,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Create Supabase tables for leads/buildout requests/activity logs.
 - [ ] Create n8n workflow `Right Thurr - Buildout Plan Intake`.
 - [ ] Create n8n production webhook URL and add it to Vercel/local env.
-- [ ] Test form submission against Supabase or n8n.
+- [x] Test form submission against Supabase or n8n.
 - [ ] Connect Slack alert after n8n intake works.
 - [ ] Decide whether to expose/use Linear after the current build queue is stable.
 - [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
