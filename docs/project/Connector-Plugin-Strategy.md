@@ -156,7 +156,7 @@ Pros:
 
 - The user already uses it, so alerts are more likely to be seen.
 - n8n can post to Discord with a simple channel webhook.
-- Easy to organize by alert type with channels such as `#general`, `#system-activity`,
+- Easy to organize by alert type with channels such as `#leads-alerts`, `#system-activity`,
   `#errors`, `#revenue-alerts`, and `#daily-summary`.
 
 Cons:

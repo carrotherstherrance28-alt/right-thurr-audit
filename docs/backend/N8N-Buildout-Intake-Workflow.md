@@ -85,7 +85,7 @@ Recommended server/channel setup:
 
 ```text
 Right Thurr HQ
-#general
+#leads-alerts
 #system-activity
 #errors
 #revenue-alerts
@@ -95,7 +95,7 @@ Right Thurr HQ
 Recommended first channel:
 
 ```text
-#general
+#leads-alerts
 ```
 
 Recommended n8n node:

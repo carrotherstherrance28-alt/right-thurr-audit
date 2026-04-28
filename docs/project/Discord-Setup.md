@@ -6,7 +6,7 @@ Use Discord as the V1 internal operator feed. Supabase remains the source of tru
 
 ```text
 Right Thurr HQ
-#general
+#leads-alerts
 #system-activity
 #errors
 #revenue-alerts
@@ -18,14 +18,14 @@ Right Thurr HQ
 Use this existing channel first:
 
 ```text
-#general
+#leads-alerts
 ```
 
 ## Create The Webhook
 
 In Discord:
 
-1. Open the `#general` channel.
+1. Open the `#leads-alerts` channel.
 2. Open channel settings.
 3. Go to Integrations.
 4. Create a Webhook.
