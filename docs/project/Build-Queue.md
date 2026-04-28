@@ -36,7 +36,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Add direct setup checklist for GitHub, Vercel, n8n, Supabase, and domains.
 - [x] Add deployment verification checklist.
 - [x] Add connector/plugin strategy with pros, cons, and recommended order.
-- [ ] Run app locally and verify the first screen.
+- [x] Run app locally and verify the first screen.
 - [ ] Fix responsive/layout issues from browser review.
 - [ ] Create clean repo branch and first commit.
 - [ ] Connect repo to GitHub `right-thurr`.
@@ -47,10 +47,10 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Push local repo to GitHub after first commit.
 - [ ] Create Vercel project for Right Thurr.
 - [x] Create/import Vercel project for Right Thurr.
-- [ ] Verify live Vercel deployment URL.
+- [x] Verify live Vercel deployment URL.
 - [ ] Add Vercel environment variable `VITE_N8N_BUILDOUT_WEBHOOK_URL`.
-- [ ] Add Vercel environment variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` after Supabase exists.
-- [ ] Redeploy Vercel after environment variables are added.
+- [x] Add Vercel environment variables for Supabase intake after Supabase exists.
+- [x] Redeploy Vercel after environment variables are added.
 - [ ] Create Supabase project.
 - [x] Create Supabase project.
 - [x] Store Supabase project URL and anon key locally in ignored `.env.local`.

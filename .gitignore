@@ -8,3 +8,4 @@ dist/
 # Local editor and tool output
 .vite/
 .aidesigner/runs/
+.vercel

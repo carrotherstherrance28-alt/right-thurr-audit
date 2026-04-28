@@ -26,15 +26,36 @@ Check:
 
 ## Form Behavior
 
-Before n8n webhook is configured:
+Current production fallback:
 
-- Buildout form should show local queued state.
+- Buildout form should POST to `/api/buildout-request`.
+- Vercel API route should save the request into Supabase `buildout_requests`.
+- Success state should say `Blueprint request saved. Connect n8n next to generate and deliver the report.`
+- The browser bundle should not expose the Supabase anon key.
 
 After n8n webhook is configured:
 
 - Buildout form should POST to `VITE_N8N_BUILDOUT_WEBHOOK_URL`.
 - Success state should say the blueprint is queued.
 - Error state should show if webhook fails.
+
+Verified production URL:
+
+```text
+https://right-thurr-audit.vercel.app
+```
+
+Verified production API route:
+
+```text
+https://right-thurr-audit.vercel.app/api/buildout-request
+```
+
+Verified result:
+
+```text
+Live browser form submission saved a fake QA request to Supabase.
+```
 
 ## Domain Checks
 
