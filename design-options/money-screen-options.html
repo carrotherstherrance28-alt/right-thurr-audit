@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Right Thurr Money Screen Options</title>
+    <link rel="stylesheet" href="../src/styles/brand-tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background:
+          linear-gradient(90deg, rgba(26, 23, 20, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(26, 23, 20, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          var(--rt-paper);
+        color: var(--rt-ink-900);
+        font-family: var(--font-body);
+      }
+      .option { display: none; min-height: 100vh; padding: 28px; }
+      .option:target { display: block; }
+      body:not(:has(.option:target)) #option-a { display: block; }
+      .label {
+        position: fixed;
+        z-index: 5;
+        top: 14px;
+        left: 14px;
+        padding: 8px 12px;
+        background: var(--rt-ink-900);
+        border: 2px solid var(--rt-orange-500);
+        color: var(--rt-paper);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .switcher {
+        position: fixed;
+        z-index: 5;
+        top: 14px;
+        right: 14px;
+        display: flex;
+        gap: 8px;
+      }
+      .switcher a {
+        padding: 9px 12px;
+        background: var(--rt-paper-cold);
+        border: 2px solid var(--rt-ink-900);
+        color: var(--rt-ink-900);
+        font-family: var(--font-subhead);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .12em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .shell { width: min(1380px, 100%); margin: 0 auto; padding-top: 58px; }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-bottom: 20px;
+        border-bottom: 4px solid var(--rt-ink-900);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .brand img { width: 52px; height: 52px; object-fit: contain; }
+      .status {
+        color: var(--rt-success);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 {
+        margin-bottom: 18px;
+        font-family: var(--font-display-rt);
+        font-size: clamp(58px, 7vw, 106px);
+        line-height: .98;
+        letter-spacing: 0;
+      }
+      h2 {
+        margin-bottom: 12px;
+        font-family: var(--font-display-ts);
+        font-size: clamp(34px, 4vw, 58px);
+        line-height: 1;
+      }
+      h3 {
+        margin-bottom: 8px;
+        font-family: var(--font-display-ts);
+        font-size: 24px;
+        line-height: 1.05;
+      }
+      p { color: var(--rt-ink-700); font-size: 18px; line-height: 1.45; }
+      .eyebrow,
+      .tag,
+      .small-label {
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .eyebrow { margin-bottom: 14px; color: var(--rt-orange-600); font-size: 13px; }
+      .tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 7px 12px;
+        background: var(--rt-orange-500);
+        border: 2px solid var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+        font-size: 11px;
+      }
+      .card,
+      .panel,
+      .table {
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 6px 6px 0 var(--rt-ink-900);
+        background: var(--rt-paper-cold);
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .metric {
+        min-height: 150px;
+        padding: 18px;
+      }
+      .metric span,
+      .small-label,
+      time {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--rt-ink-500);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .metric strong {
+        font-family: var(--font-display-ts);
+        font-size: 34px;
+        line-height: 1;
+      }
+      .option-a .layout {
+        display: grid;
+        gap: 22px;
+        padding-top: 34px;
+      }
+      .money-row {
+        display: grid;
+        grid-template-columns: 110px minmax(180px, 1fr) 120px 120px minmax(200px, .8fr);
+        gap: 14px;
+        align-items: center;
+        padding: 18px;
+        border-bottom: 2px solid var(--rt-ink-200);
+      }
+      .money-row.header {
+        color: var(--rt-orange-600);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .option-b {
+        background:
+          linear-gradient(90deg, rgba(245, 239, 226, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          linear-gradient(rgba(245, 239, 226, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+          var(--rt-ink-900);
+        color: var(--rt-paper);
+      }
+      .option-b header { border-color: rgba(245,239,226,.34); }
+      .option-b h1, .option-b h2, .option-b h3 { color: var(--rt-paper-cold); }
+      .option-b p { color: var(--rt-paper); }
+      .option-b .dashboard {
+        display: grid;
+        grid-template-columns: minmax(280px, .36fr) minmax(0, 1fr) minmax(280px, .34fr);
+        gap: 20px;
+        padding-top: 34px;
+      }
+      .option-b .panel,
+      .option-b .card,
+      .option-b .table {
+        background: rgba(245,239,226,.06);
+        border-color: rgba(245,239,226,.32);
+        box-shadow: 6px 6px 0 var(--rt-orange-500);
+      }
+      .option-b .panel { padding: 24px; }
+      .option-b .metric-grid { grid-template-columns: 1fr; }
+      .option-b .metric {
+        background: rgba(42,37,32,.82);
+        border: 2px solid rgba(245,239,226,.24);
+        box-shadow: none;
+      }
+      .option-b .metric strong { color: var(--rt-paper-cold); }
+      .option-b .money-row {
+        grid-template-columns: 70px minmax(180px, 1fr) 110px;
+        border-color: rgba(245,239,226,.2);
+      }
+      .option-b .money-row.header { color: var(--rt-orange-300); }
+      .finance-note {
+        display: grid;
+        gap: 14px;
+      }
+      .note {
+        padding: 18px;
+        border: 2px solid rgba(245,239,226,.24);
+        background: rgba(42,37,32,.82);
+      }
+      .option-c .ledger {
+        display: grid;
+        grid-template-columns: minmax(280px, .36fr) minmax(0, 1fr);
+        gap: 20px;
+        padding-top: 34px;
+      }
+      .form-panel { padding: 24px; }
+      .form-grid {
+        display: grid;
+        gap: 12px;
+      }
+      .fake-input {
+        min-height: 56px;
+        padding: 16px;
+        border: 3px solid var(--rt-ink-900);
+        background: var(--rt-paper);
+        font-weight: 800;
+      }
+      @media (max-width: 980px) {
+        .option { padding: 18px; }
+        .label, .switcher { position: static; margin-bottom: 12px; flex-wrap: wrap; }
+        .metric-grid,
+        .option-b .dashboard,
+        .option-c .ledger { grid-template-columns: 1fr; }
+        .money-row { grid-template-columns: 1fr; }
+        .money-row.header { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="switcher" aria-label="Option navigation">
+      <a href="#option-a">Option A</a>
+      <a href="#option-b">Option B</a>
+      <a href="#option-c">Option C</a>
+    </nav>
+
+    <section class="option option-a" id="option-a">
+      <div class="label">OPTION A · FINANCE SNAPSHOT</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Money</div><div class="status">Manual Tracking V1</div></header>
+        <main class="layout">
+          <div><div class="eyebrow">MONEY TRACKING</div><h1>Know what the machine made.</h1><p>Clear owner-level metrics: revenue, expenses, profit, payouts, and projected monthly revenue.</p></div>
+          <section class="metric-grid">
+            <article class="card metric"><span>Revenue</span><strong>$2,134</strong></article>
+            <article class="card metric"><span>Expenses</span><strong>$486</strong></article>
+            <article class="card metric"><span>Profit</span><strong>$1,648</strong></article>
+            <article class="card metric"><span>Payouts</span><strong>$900</strong></article>
+            <article class="card metric"><span>Projected Monthly</span><strong>$8.5k</strong></article>
+          </section>
+          <section class="table">
+            <div class="money-row header"><span>Date</span><span>System</span><span>Type</span><span>Amount</span><span>Note</span></div>
+            <div class="money-row"><time>Apr 28</time><strong>Cleaning Booking Engine</strong><span>Revenue</span><strong>$327</strong><span>Manual client payment</span></div>
+            <div class="money-row"><time>Apr 28</time><strong>Roofing Lead Engine</strong><span>Revenue</span><strong>$427</strong><span>Lead deposit logged</span></div>
+            <div class="money-row"><time>Apr 27</time><strong>Cleaning Booking Engine</strong><span>Expense</span><strong>$86</strong><span>Ad test spend</span></div>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section class="option option-b" id="option-b">
+      <div class="label">OPTION B · FINANCE AGENT COMMAND</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Finance Agent</div><div class="status">Money Moving</div></header>
+        <main class="dashboard">
+          <aside class="panel">
+            <div class="eyebrow">FINANCE AGENT</div>
+            <h1>$1,648</h1>
+            <p>Profit after tracked expenses. The screen explains where money came from and what needs attention.</p>
+            <section class="metric-grid">
+              <article class="metric"><span>Revenue</span><strong>$2,134</strong></article>
+              <article class="metric"><span>Expenses</span><strong>$486</strong></article>
+              <article class="metric"><span>Projected</span><strong>$8.5k</strong></article>
+            </section>
+          </aside>
+          <section class="table">
+            <div class="money-row header"><span>Time</span><span>Event</span><span>Impact</span></div>
+            <div class="money-row"><time>02:44</time><strong>Logged $327 cleaning payment</strong><span>Revenue</span></div>
+            <div class="money-row"><time>01:20</time><strong>Updated starter offer to $149</strong><span>Projection</span></div>
+            <div class="money-row"><time>11:15</time><strong>Found ad spend leak in roofing test</strong><span>Expense</span></div>
+            <div class="money-row"><time>10:42</time><strong>Projected 30-day revenue from active systems</strong><span>Forecast</span></div>
+          </section>
+          <aside class="panel finance-note">
+            <div class="eyebrow">NEEDS ATTENTION</div>
+            <div class="note"><span class="tag">Review</span><h3>Roofing ad spend rose 18%.</h3><p>Finance Agent recommends reviewing the offer before raising budget.</p></div>
+            <div class="note"><span class="tag">Next Move</span><h3>Add manual revenue entry.</h3><p>Log today’s payments before the daily summary runs.</p></div>
+          </aside>
+        </main>
+      </div>
+    </section>
+
+    <section class="option option-c" id="option-c">
+      <div class="label">OPTION C · MANUAL MONEY LEDGER</div>
+      <div class="shell">
+        <header><div class="brand"><img src="../src/assets/rt-monogram-clean.png" alt="" />Right Thurr Ledger</div><div class="status">MVP Input Mode</div></header>
+        <main class="ledger">
+          <aside class="panel form-panel">
+            <div class="eyebrow">ADD ENTRY</div>
+            <h2>Log money manually.</h2>
+            <p>Best for V1 because it proves tracking before Stripe, PayPal, Square, Shopify, or Gumroad are connected.</p>
+            <div class="form-grid">
+              <div class="fake-input">Cleaning Booking Engine</div>
+              <div class="fake-input">Revenue</div>
+              <div class="fake-input">$327</div>
+              <div class="fake-input">Manual client payment</div>
+              <span class="tag">Save Entry</span>
+            </div>
+          </aside>
+          <section class="table">
+            <div class="money-row header"><span>Date</span><span>System</span><span>Category</span><span>Amount</span><span>Status</span></div>
+            <div class="money-row"><time>Apr 28</time><strong>Cleaning Booking Engine</strong><span>Revenue</span><strong>$327</strong><span>Logged</span></div>
+            <div class="money-row"><time>Apr 28</time><strong>Roofing Lead Engine</strong><span>Revenue</span><strong>$427</strong><span>Needs source</span></div>
+            <div class="money-row"><time>Apr 27</time><strong>Cleaning Booking Engine</strong><span>Expense</span><strong>$86</strong><span>Logged</span></div>
+            <div class="money-row"><time>Apr 27</time><strong>Content Brand Engine</strong><span>Expense</span><strong>$42</strong><span>Needs category</span></div>
+          </section>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>

@@ -202,6 +202,54 @@ const systemAssetKeys = [
   ['Logs', 'logs'],
 ];
 
+const moneyMetrics = [
+  ['Revenue', '$2,134'],
+  ['Expenses', '$486'],
+  ['Profit', '$1,648'],
+  ['Payouts', '$900'],
+  ['Projected Monthly', '$8.5k'],
+];
+
+const moneyEvents = [
+  {
+    time: '02:44',
+    event: 'Logged $327 cleaning payment',
+    system: 'Cleaning Booking Engine',
+    impact: 'Revenue',
+  },
+  {
+    time: '01:20',
+    event: 'Updated starter offer to $149',
+    system: 'Dallas Mobile Detailing Engine',
+    impact: 'Projection',
+  },
+  {
+    time: '11:15',
+    event: 'Found ad spend leak in roofing test',
+    system: 'Roofing Lead Engine',
+    impact: 'Expense',
+  },
+  {
+    time: '10:42',
+    event: 'Projected 30-day revenue from active systems',
+    system: 'Right Thurr Finance Agent',
+    impact: 'Forecast',
+  },
+];
+
+const financeAttentionItems = [
+  {
+    label: 'Review',
+    title: 'Roofing ad spend rose 18%.',
+    text: 'Finance Agent recommends reviewing the offer before raising budget.',
+  },
+  {
+    label: 'Next Move',
+    title: 'Add manual revenue entry.',
+    text: 'Log today’s payments before the daily summary runs.',
+  },
+];
+
 const tasks = [
   'Approve starter offer',
   'Review landing page copy',
@@ -367,6 +415,7 @@ function App() {
             ['Blueprint Report', 'report'],
             ['Activity Feed', 'activity'],
             ['Systems', 'systems'],
+            ['Money', 'money'],
           ].map(([label, target]) => (
             <button
               className={page === target ? 'nav-tab active' : 'nav-tab'}
@@ -397,7 +446,41 @@ function App() {
       {page === 'report' && <BlueprintReportPage setPage={setPage} />}
       {page === 'activity' && <ActivityFeedPage setPage={setPage} />}
       {page === 'systems' && <SystemsPage setPage={setPage} />}
+      {page === 'money' && <MoneyPage setPage={setPage} />}
     </div>
+  );
+}
+
+function MoneyPage({ setPage }) {
+  return (
+    <main className="money-page" id="top">
+      <section className="money-hero">
+        <div className="hero-copy">
+          <div className="eyebrow">MONEY TRACKING</div>
+          <h1>Know what the machine made.</h1>
+          <p>
+            V1 tracks manual revenue, expenses, profit, payouts, and projected monthly revenue.
+            Later this connects to Stripe, PayPal, Square, Shopify, Gumroad, and Printify.
+          </p>
+          <div className="hero-actions">
+            <button className="stamp-button link-button" type="button" onClick={() => setPage('systems')}>
+              VIEW SYSTEMS
+              <ArrowUpRight size={18} strokeWidth={3} />
+            </button>
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('activity')}>
+              View money activity
+            </button>
+          </div>
+        </div>
+        <aside className="money-hero-stamp">
+          <span>Profit Tracked</span>
+          <strong>$1,648</strong>
+          <p>Finance Agent watching the money path.</p>
+        </aside>
+      </section>
+
+      <FinanceCommandCenter />
+    </main>
   );
 }
 
@@ -1125,6 +1208,65 @@ function SystemCockpit({ selectedSystem, selectedSystemId, setSelectedSystemId }
             <span>Last Action</span>
             <strong>{selectedSystem.action}</strong>
           </div>
+        </div>
+      </aside>
+    </section>
+  );
+}
+
+function FinanceCommandCenter() {
+  return (
+    <section className="finance-command-grid" aria-label="Right Thurr finance command center">
+      <aside className="finance-summary-panel">
+        <div className="eyebrow">FINANCE AGENT</div>
+        <h2>$1,648</h2>
+        <p>
+          Profit after tracked expenses. The screen explains where money came from and what needs
+          attention before the next system move.
+        </p>
+        <div className="finance-metric-stack">
+          {moneyMetrics.slice(0, 3).map(([label, value]) => (
+            <div className="finance-metric" key={label}>
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </div>
+      </aside>
+
+      <section className="money-events-panel">
+        <div className="proof-header">
+          <span>MONEY EVENTS</span>
+          <span className="activity-glyph">$</span>
+        </div>
+        {moneyEvents.map((event) => (
+          <article className="money-event-row" key={`${event.time}-${event.event}`}>
+            <time>{event.time}</time>
+            <div>
+              <strong>{event.event}</strong>
+              <p>{event.system}</p>
+            </div>
+            <span>{event.impact}</span>
+          </article>
+        ))}
+      </section>
+
+      <aside className="finance-attention-panel">
+        <div className="eyebrow">NEEDS ATTENTION</div>
+        {financeAttentionItems.map((item) => (
+          <article className="finance-note-card" key={item.title}>
+            <span>{item.label}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+        <div className="finance-mini-grid">
+          {moneyMetrics.slice(3).map(([label, value]) => (
+            <div key={label}>
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
         </div>
       </aside>
     </section>
