@@ -250,6 +250,51 @@ const financeAttentionItems = [
   },
 ];
 
+const aiAgents = [
+  {
+    glyph: '✓',
+    name: 'Business Architect',
+    text: 'Turns the idea into a structured business model.',
+  },
+  {
+    glyph: '✓',
+    name: 'Build Agent',
+    text: 'Creates the first assets and system structure.',
+  },
+  {
+    glyph: '→',
+    name: 'Revenue Agent',
+    text: 'Maps offer, profit path, and monthly projection.',
+  },
+  {
+    glyph: '▲',
+    name: 'Automation Agent',
+    text: 'Defines n8n workflows, tool actions, and alerts.',
+  },
+  {
+    glyph: '✓',
+    name: 'Operator Agent',
+    text: 'Reports what happened and what needs attention.',
+  },
+];
+
+const aiExecutionPath = [
+  'User Request',
+  'n8n Webhook',
+  'Orchestrator Agent',
+  'Ollama Model',
+  'Tool/API Action',
+  'Database Update',
+  'UI Update',
+];
+
+const aiStats = [
+  ['Model', 'Hermes / LLaMA'],
+  ['Coder', 'Qwen Coder'],
+  ['Tasks Today', '128'],
+  ['Current Mission', 'Build lead funnel'],
+];
+
 const tasks = [
   'Approve starter offer',
   'Review landing page copy',
@@ -416,6 +461,7 @@ function App() {
             ['Activity Feed', 'activity'],
             ['Systems', 'systems'],
             ['Money', 'money'],
+            ['AI Engine', 'ai'],
           ].map(([label, target]) => (
             <button
               className={page === target ? 'nav-tab active' : 'nav-tab'}
@@ -447,7 +493,41 @@ function App() {
       {page === 'activity' && <ActivityFeedPage setPage={setPage} />}
       {page === 'systems' && <SystemsPage setPage={setPage} />}
       {page === 'money' && <MoneyPage setPage={setPage} />}
+      {page === 'ai' && <AIEnginePage setPage={setPage} />}
     </div>
+  );
+}
+
+function AIEnginePage({ setPage }) {
+  return (
+    <main className="ai-engine-page" id="top">
+      <section className="ai-engine-hero">
+        <div className="hero-copy">
+          <div className="eyebrow">AI ENGINE ACTIVE</div>
+          <h1>The agents turn requests into systems.</h1>
+          <p>
+            Right Thurr routes a user request through the Orchestrator, specialized agents, local
+            models, tool actions, database updates, and visible UI progress.
+          </p>
+          <div className="hero-actions">
+            <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
+              QUEUE A MISSION
+              <ArrowUpRight size={18} strokeWidth={3} />
+            </button>
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('systems')}>
+              View systems
+            </button>
+          </div>
+        </div>
+        <aside className="ai-engine-hero-stamp">
+          <span>Current Mission</span>
+          <strong>Build lead funnel</strong>
+          <p>128 tasks completed today.</p>
+        </aside>
+      </section>
+
+      <AIEngineOrchestra />
+    </main>
   );
 }
 
@@ -1268,6 +1348,56 @@ function FinanceCommandCenter() {
             </div>
           ))}
         </div>
+      </aside>
+    </section>
+  );
+}
+
+function AIEngineOrchestra() {
+  return (
+    <section className="ai-orchestra-grid" aria-label="Right Thurr AI Engine orchestration">
+      <aside className="ai-mission-panel">
+        <div className="eyebrow">ORCHESTRATOR</div>
+        <h2>Build lead funnel.</h2>
+        <p>
+          The Orchestrator routes the mission to the right agent, model, memory, and tool action.
+        </p>
+        <div className="ai-stat-stack">
+          {aiStats.map(([label, value]) => (
+            <div className="ai-stat" key={label}>
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </div>
+      </aside>
+
+      <section className="ai-agent-panel">
+        <div className="proof-header">
+          <span>SPECIALIZED AGENTS</span>
+          <span className="activity-glyph">✓</span>
+        </div>
+        <div className="ai-agent-list">
+          {aiAgents.map((agent) => (
+            <article className="ai-agent-card" key={agent.name}>
+              <b>{agent.glyph}</b>
+              <div>
+                <h3>{agent.name}</h3>
+                <p>{agent.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <aside className="ai-path-panel">
+        <div className="eyebrow">EXECUTION PATH</div>
+        {aiExecutionPath.map((step, index) => (
+          <div className="ai-path-step" key={step}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{step}</strong>
+          </div>
+        ))}
       </aside>
     </section>
   );
