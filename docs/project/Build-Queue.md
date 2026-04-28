@@ -51,6 +51,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Create Supabase project.
 - [x] Store Supabase project URL and anon key locally in ignored `.env.local`.
 - [x] Add Supabase MVP schema and setup docs.
+- [x] Add live account setup checklist for Vercel, Supabase, n8n, and domains.
 - [ ] Create Supabase tables for leads/buildout requests/activity logs.
 - [ ] Create n8n workflow `Right Thurr - Buildout Plan Intake`.
 - [ ] Create n8n production webhook URL and add it to Vercel/local env.
