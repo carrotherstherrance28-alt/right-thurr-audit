@@ -214,6 +214,8 @@ Daily session:
 - [x] Verified live Vercel `/api/buildout-request` to `/api/thurnos-blueprint` persistence writes generated report, system, tasks, and activity rows.
 - [x] Ran n8n production webhook test after Supabase grants; intake saved successfully.
 - [x] Confirmed the active n8n workflow still needs the Thurnos blueprint HTTP Request node; manually called Thurnos for the n8n QA request and verified report/system/tasks/activity persistence.
+- [x] Updated active n8n workflow to call the Thurnos blueprint bridge automatically after intake save.
+- [x] Reran n8n production webhook test and verified Supabase received generated report, system, 10 tasks, and activity log without manual intervention.
 - [x] Added `We build. You profit.` Option B to the Thurr Solutions proof card.
 - [x] Replaced visible `Thurr Solutions LLC` labels with `Thurr` while keeping the top-left `Thurr Solutions` lockup.
 - [x] Ran desktop/mobile accessibility QA for the Thurr Solutions page: accessible names, image alt text, heading structure, tap target size, and horizontal overflow all passed.
@@ -221,4 +223,4 @@ Daily session:
 
 ## Next Task
 
-Update the active n8n workflow to call `https://right-thurr-audit.vercel.app/api/thurnos-blueprint` after the intake save node, then rerun the n8n production webhook test and confirm generated report/system/task/activity rows are created without manual intervention.
+Choose the next backend workflow step: add CRM tagging, add email delivery, or add manual review mode before reports send.

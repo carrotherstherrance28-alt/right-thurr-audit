@@ -39,25 +39,28 @@ Verified:
 Direct POST to production webhook returned 201 and saved a fake QA row to Supabase.
 Vercel Production is configured with VITE_N8N_BUILDOUT_WEBHOOK_URL.
 2026-04-29: Production webhook returned 201 after Supabase service-role grants were applied.
+2026-04-29: Active workflow was updated to call the Thurnos blueprint bridge automatically.
+2026-04-29: End-to-end production webhook test created buildout request, generated report, system,
+10 tasks, and 1 activity log without manual intervention.
 ```
 
-Current gap:
+Current production flow:
 
 ```text
-The active n8n workflow saves the intake request, but it does not yet call
-https://right-thurr-audit.vercel.app/api/thurnos-blueprint.
+Buildout Intake Webhook
+-> Save Request Through Vercel API
+-> Generate Thurnos Blueprint Draft
+-> Discord: Leads Alert
+-> Respond Blueprint Queued
 
-Evidence: the n8n-created QA request was saved with status requested and had no generated_reports
-or activity_logs until the Thurnos endpoint was called manually.
+Slack: Buildout Request Alert remains a non-blocking side branch after the save step.
 ```
 
-Next workflow update:
+Thurnos workflow node:
 
 ```text
-Add an HTTP Request node after the Vercel intake save node:
-
 POST https://right-thurr-audit.vercel.app/api/thurnos-blueprint
-Header: x-thurnos-secret = {{ $env.THURNOS_SHARED_SECRET }}
+Header: x-thurnos-secret = configured in n8n HTTP Request node
 Body:
 {
   "buildout_request_id": "{{ $node['Save Request Through Vercel API'].json.buildout_request_id }}",
