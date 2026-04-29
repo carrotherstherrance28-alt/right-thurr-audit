@@ -14,6 +14,16 @@ Operator preview should stay narrow: `Command Center` for activity, AI, money, a
 
 Before coding major visual changes, create 3 different example screenshots/options for review. The user chooses one direction or combines parts, then implementation starts.
 
+All tasks should use a plan-first automation loop before build work starts:
+
+1. Create a short task plan.
+2. Refine the plan at least twice, or until it is clear enough to execute without guessing.
+3. For visual work, create 3 screenshot/options before coding.
+4. Build only the selected/refined direction.
+5. Run the relevant check.
+6. Update this queue.
+7. Stop with the next task clearly marked.
+
 ## Phase 1: Foundation
 
 - [x] Import Right Thurr / Thurr Solutions design system zip into repo.
@@ -152,11 +162,12 @@ Before coding major visual changes, create 3 different example screenshots/optio
 Hourly session:
 
 1. Pick one task from the current phase.
-2. For visual work, create 3 screenshot options before coding.
-3. Implement the selected direction.
-4. Run the relevant check.
-5. Update this queue.
-6. Stop with the next task clearly marked.
+2. Create a short plan and refine it twice before building.
+3. For visual work, create 3 screenshot options before coding.
+4. Implement the selected/refined direction.
+5. Run the relevant check.
+6. Update this queue.
+7. Stop with the next task clearly marked.
 
 Daily session:
 
