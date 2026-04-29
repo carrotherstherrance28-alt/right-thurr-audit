@@ -1,0 +1,7 @@
+Idea,Category,Source,Status,Next Action,Related Task,Related Content
+Wedding branding diagnostic funnel,Client Offer,Codex,Review,Choose if wedding/event niche is first,Choose first client diagnostic niche,docs/product/Lead-Gen-Niche-Prompt-Packs.md
+Funeral home follow-up automation offer,Client Offer,Codex,Review,Validate compliance-sensitive follow-up boundaries,Choose first client diagnostic niche,docs/product/Lead-Gen-Niche-Prompt-Packs.md
+Mobile detailing quote workflow demo,Automation,Codex,Approved,Turn into first public diagnostic example,Build client diagnostic V1,docs/product/Lead-Gen-Niche-Prompt-Packs.md
+Client report-to-content repurposing,Content,Codex,Review,Map report sections to LinkedIn posts,Create first LinkedIn content batch,docs/project/LinkedIn-First-B2B-Content-Plan.md
+Daily owner summary automation,Automation,Codex,Review,Add after owner auth/RLS is stable,Finalize owner auth and RLS,docs/project/Notion-Command-Center-Alignment.md
+Prototype requests through Discord,Product,Codex,Review,Keep private until auth and routing are safe,Finalize owner auth and RLS,docs/backend/Thurnos-Hermes-Bridge.md

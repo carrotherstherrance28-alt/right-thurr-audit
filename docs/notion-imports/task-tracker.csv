@@ -1,0 +1,8 @@
+Name,Status,Phase,Priority,Owner,Type,Blocked By,Repo Link,Due Date,Last Updated
+Finalize owner auth and RLS,Planned,Backend,High,Codex,Backend,Supabase auth/RLS decision,docs/backend/Supabase-Owner-Auth.md,,2026-04-29
+Connect owner queue to CRM lifecycle fields,Planned,CRM,High,Codex,Code,Owner auth and RLS,src/main.jsx,,2026-04-29
+Build client diagnostic V1,Planned,Client Diagnostic,High,Codex,Docs,First niche decision,docs/product/Thurr-Solutions-Diagnostic-Sales-Version.md,,2026-04-29
+Choose first client diagnostic niche,Planned,Client Diagnostic,High,Therrance,Setup,,docs/product/Lead-Gen-Niche-Prompt-Packs.md,,2026-04-29
+Create first LinkedIn content batch,Planned,Content,Medium,Therrance,Content,First niche decision,docs/project/LinkedIn-First-B2B-Content-Plan.md,,2026-04-29
+Decide Notion sync path,Planned,Automation,Medium,Therrance,Setup,Notion write access or n8n Notion credential,docs/project/Notion-Command-Center-Alignment.md,,2026-04-29
+Decide Linear mirror scope,Planned,Setup,Low,Therrance,Setup,Linear connector access,docs/project/Linear-Update-2026-04-29.md,,2026-04-29
