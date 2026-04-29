@@ -1,0 +1,26 @@
+{
+  "source": "right-thurr-buildout-page",
+  "brand": "right-thurr",
+  "submitted_at": "2026-04-28T00:00:00.000Z",
+  "lead": {
+    "name": "QA Lead",
+    "email": "qa@example.com",
+    "phone": "",
+    "website_or_social": "https://example.com"
+  },
+  "intake": {
+    "business_idea": "I want to start a mobile detailing business in Dallas and need a way to capture leads, quote jobs, and follow up automatically.",
+    "industry": "Local service",
+    "main_goal": "Get leads and launch my first system",
+    "location": "Dallas, TX",
+    "budget_level": "Starter",
+    "timeline": "30 days",
+    "biggest_bottleneck": "I do not have a repeatable lead capture or follow-up process."
+  },
+  "routing": {
+    "report_type": "right-thurr-autopilot-blueprint",
+    "demo_niche": "mobile-detailing",
+    "owned_brand_design": true,
+    "client_reskin_required": false
+  }
+}

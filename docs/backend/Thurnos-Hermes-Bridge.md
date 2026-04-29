@@ -140,3 +140,20 @@ Buildout Intake -> Supabase Save -> Thurnos Blueprint Draft -> Supabase Report S
 ```
 
 The first Thurnos output should be a draft Autopilot Blueprint, not an automatically sent client PDF.
+
+## Blueprint Draft Artifact
+
+Local blueprint draft script:
+
+```bash
+npm run thurnos:blueprint -- docs/backend/sample-buildout-intake.json
+```
+
+Implementation guide:
+
+```text
+docs/backend/Thurnos-Blueprint-Draft.md
+```
+
+This produces the draft `generated_reports.sections` JSON shape plus starter
+system, launch tasks, and activity log entries for n8n/Supabase mapping.

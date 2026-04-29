@@ -9,6 +9,7 @@
     "preview": "vite preview --host 0.0.0.0",
     "remotion:studio": "remotion studio src/remotion/index.jsx",
     "remotion:render:intro": "remotion render src/remotion/index.jsx ThurrIntro out/thurr-intro.mp4",
+    "thurnos:blueprint": "node scripts/thurnos-blueprint-draft.mjs",
     "thurnos:test": "node scripts/thurnos-smoke-test.mjs"
   },
   "dependencies": {

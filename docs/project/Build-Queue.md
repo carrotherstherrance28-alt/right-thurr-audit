@@ -132,7 +132,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [ ] Create Supabase table schema.
 - [ ] Create Activity Log event schema.
 - [ ] Build n8n intake workflow.
-- [ ] Add AI blueprint generation prompt chain.
+- [x] Add AI blueprint generation prompt chain.
 - [ ] Add email delivery step.
 - [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
@@ -181,7 +181,8 @@ Daily session:
 - [x] Updated public site positioning to `Thurr` and added Therrance Carrothers section.
 - [x] Added Thurnos OpenAI/Discord orchestration notes.
 - [x] Installed Remotion with `ThurrIntro` vertical content starter.
+- [x] Added Thurnos blueprint draft script and n8n mapping guide.
 
 ## Next Task
 
-Add the n8n -> Thurnos draft blueprint step and decide whether Discord prototype requests should live in `#leads-alerts` threads or a dedicated `#prototype-requests` channel.
+Add the private n8n -> Thurnos bridge endpoint, then save generated report/system/task/activity draft records after a buildout request.

@@ -159,12 +159,15 @@ V1 flow:
 ```text
 Webhook Trigger
 -> HTTP Request to https://right-thurr-audit.vercel.app/api/buildout-request
+-> HTTP Request to private Thurnos blueprint bridge
+-> Save generated_report draft
 -> HTTP Request to Discord webhook
 -> Respond to Webhook
 ```
 
 This keeps the first n8n workflow simple. Supabase saving is already handled by the Vercel API
-route, so n8n does not need Supabase credentials yet.
+route, so n8n does not need Supabase credentials until the generated report, starter system,
+launch task, and activity log inserts are moved into n8n.
 
 After importing, activate the workflow and copy the production webhook URL into Vercel:
 
@@ -229,6 +232,21 @@ intake.main_goal
 ```
 
 ## AI Prompt Chain
+
+Local draft script:
+
+```bash
+npm run thurnos:blueprint -- docs/backend/sample-buildout-intake.json
+```
+
+Implementation guide:
+
+```text
+docs/backend/Thurnos-Blueprint-Draft.md
+```
+
+The script is designed for a private bridge or internal worker, not direct public browser calls.
+It defaults to local Ollama `thurnos:latest` and can switch to OpenAI with server-only env vars.
 
 ### Opportunity Agent
 
