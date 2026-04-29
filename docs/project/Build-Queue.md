@@ -108,14 +108,14 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Build AI Business Buildout Plan landing page first pass.
 - [x] Build Thurr Solutions B2B services page first pass.
 - [x] Add brand boundary notes to reusable client template docs.
-- [ ] Create shared website header/footer components.
+- [x] Create shared website header/footer components.
 - [x] Add basic SEO metadata.
 - [x] Add founder/operator trust section for Thurr Solutions.
 - [x] Add full accessibility and mobile QA pass.
 - [x] Add analytics event plan for CTA/form/report/booked-call tracking.
 - [x] Add LinkedIn-first B2B content plan.
 - [x] Create inspiration tracker for Nate Herk and other AI automation/content references.
-- [ ] Add future community roadmap for Thurr brand after consistent content exists.
+- [x] Add future community roadmap for Thurr brand after consistent content exists.
 
 ## Phase 3: Right Thurr App MVP
 
@@ -181,6 +181,8 @@ Daily session:
 
 ## Latest Completed
 
+- [x] Added future Thurr community roadmap for launching only after consistent content, proof assets, and support capacity exist.
+- [x] Extracted shared public site header/footer chrome and added the `We build. You profit.` footer.
 - [x] Added AI automation/content inspiration tracker for Nate Herk reference patterns and future Thurr Solutions content/community planning.
 - [x] Updated basic SEO metadata, canonical URL, sitemap, robots, and web manifest for Thurr Solutions.
 - [x] Added analytics event plan for CTA, buildout form, blueprint report, booked-call intent, social, owner, and backend activity tracking.

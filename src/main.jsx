@@ -6,7 +6,6 @@ import {
   ArrowUpRight,
   Bot,
   BriefcaseBusiness,
-  ChevronDown,
   ClipboardCheck,
   DollarSign,
   Factory,
@@ -17,7 +16,6 @@ import {
   Linkedin,
   Mail,
   MapPinned,
-  Menu,
   Send,
   Sparkles,
   Target,
@@ -26,6 +24,7 @@ import {
 import './styles/brand-tokens.css';
 import './styles/app.css';
 import monogram from './assets/rt-monogram-clean.png';
+import { SiteFooter, SiteHeader } from './components/SiteChrome.jsx';
 import { fieldDefaults, rightThurrMockData } from './data/rightThurrMockData.js';
 
 const {
@@ -391,76 +390,20 @@ function App() {
     currentStep,
     setPage: navigateToPage,
   };
+  const shouldShowFooter = !isOperatorPreview && page !== 'export';
 
   return (
     <div className="app-shell">
-      <header className="topbar">
-        <button className="brand-lockup brand-button" type="button" onClick={() => navigateToPage('home')}>
-          <img src={monogram} alt="" className="brand-mark" />
-          <span className="brand-name">Thurr Solutions</span>
-        </button>
-
-        <div className="topbar-actions">
-          <div className={canViewOperator ? 'system-live owner-live' : 'system-live'}>
-            <span className="live-dot" />
-            {canViewOperator ? 'OWNER MODE' : 'SYSTEM LIVE'}
-          </div>
-          <div className="nav-menu">
-            <button
-              className={menuOpen ? 'menu-trigger active' : 'menu-trigger'}
-              type="button"
-              aria-expanded={menuOpen}
-              aria-controls="primary-menu"
-              onClick={() => setMenuOpen((current) => !current)}
-            >
-              <Menu size={18} strokeWidth={3} />
-              Menu
-              <ChevronDown size={16} strokeWidth={3} />
-            </button>
-            {menuOpen && (
-              <nav className="nav-dropdown" id="primary-menu" aria-label="Primary navigation">
-                {publicNavItems.map(([label, target]) => (
-                  <button
-                    className={page === target ? 'nav-tab active' : 'nav-tab'}
-                    key={label}
-                    type="button"
-                    onClick={() => navigateToPage(target)}
-                  >
-                    {label}
-                  </button>
-                ))}
-                <button className="nav-tab" type="button" onClick={navigateToAbout}>
-                  About Therrance
-                </button>
-                {canViewOperator &&
-                  operatorNavItems.map(([label, target]) => (
-                    <button
-                      className={page === target ? 'nav-tab active operator-nav-tab' : 'nav-tab operator-nav-tab'}
-                      key={label}
-                      type="button"
-                      onClick={() => navigateToPage(target)}
-                    >
-                      {label}
-                    </button>
-                  ))}
-              </nav>
-            )}
-          </div>
-        </div>
-        <nav className="nav-tabs desktop-nav" aria-label="Primary navigation">
-          {canViewOperator &&
-            operatorNavItems.map(([label, target]) => (
-              <button
-                className={page === target ? 'nav-tab active operator-nav-tab' : 'nav-tab operator-nav-tab'}
-                key={label}
-                type="button"
-                onClick={() => navigateToPage(target)}
-              >
-                {label}
-              </button>
-            ))}
-        </nav>
-      </header>
+      <SiteHeader
+        canViewOperator={canViewOperator}
+        menuOpen={menuOpen}
+        navigateToAbout={navigateToAbout}
+        navigateToPage={navigateToPage}
+        operatorNavItems={operatorNavItems}
+        page={page}
+        publicNavItems={publicNavItems}
+        setMenuOpen={setMenuOpen}
+      />
 
       {isOperatorPreview && !canViewOperator ? (
         <OwnerAccessGate
@@ -479,6 +422,9 @@ function App() {
           {canViewOperator && page === 'command' && <CommandCenterPage setPage={navigateToPage} />}
           {canViewOperator && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
         </>
+      )}
+      {shouldShowFooter && (
+        <SiteFooter navigateToAbout={navigateToAbout} navigateToPage={navigateToPage} socialLinks={socialLinks} />
       )}
     </div>
   );
@@ -1706,7 +1652,7 @@ function AppPreview() {
           </div>
           {tasks.map((task, index) => (
             <label className="task-row" key={task}>
-              <input type="checkbox" defaultChecked={index === 0} />
+              <input type="checkbox" defaultChecked={index === 0} aria-label={task} />
               <span>{task}</span>
             </label>
           ))}
