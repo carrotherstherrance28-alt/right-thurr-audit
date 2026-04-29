@@ -106,10 +106,15 @@ await loadEnvFile('.env.local');
 const baseUrl = getArg('base-url', process.env.APP_BASE_URL || 'https://right-thurr-audit.vercel.app');
 const testEmail = getArg('email', process.env.REPORT_TEST_EMAIL);
 const sendEmail = hasFlag('send-email') || process.env.REPORT_TEST_SEND_EMAIL === 'true';
-const secret = process.env.REPORT_APPROVAL_SECRET || process.env.THURNOS_SHARED_SECRET;
+const thurnosSecret = process.env.THURNOS_SHARED_SECRET;
+const approvalSecret = process.env.REPORT_APPROVAL_SECRET || process.env.THURNOS_SHARED_SECRET;
 
-if (!secret) {
-  throw new Error('REPORT_APPROVAL_SECRET or THURNOS_SHARED_SECRET is required.');
+if (!thurnosSecret) {
+  throw new Error('THURNOS_SHARED_SECRET is required to generate the QA blueprint.');
+}
+
+if (!approvalSecret) {
+  throw new Error('REPORT_APPROVAL_SECRET or THURNOS_SHARED_SECRET is required to approve the QA report.');
 }
 
 if (sendEmail && !testEmail) {
@@ -132,7 +137,7 @@ const blueprint = await postJson(
     payload,
   },
   {
-    'x-thurnos-secret': secret,
+    'x-thurnos-secret': thurnosSecret,
   },
 );
 const reportId = blueprint.persistence?.generated_report_id || blueprint.generated_report_id || blueprint.report_id;
@@ -148,8 +153,8 @@ const approval = await postJson(
     send_email: sendEmail,
   },
   {
-    'x-report-approval-secret': secret,
-    'x-thurnos-secret': secret,
+    'x-report-approval-secret': approvalSecret,
+    'x-thurnos-secret': thurnosSecret,
   },
 );
 

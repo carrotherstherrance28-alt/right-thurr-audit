@@ -149,6 +149,15 @@ The send test requires Resend to be configured in Vercel first. It creates a fre
 request, generates a manual-review blueprint, approves it, sends to the test email, and confirms
 the final Supabase statuses.
 
+Production env status:
+
+```text
+REPORT_APPROVAL_SECRET: configured
+REPORT_EMAIL_FROM: configured
+REPORT_EMAIL_REPLY_TO: configured
+RESEND_API_KEY: pending
+```
+
 ## n8n Shape
 
 Manual review workflow:

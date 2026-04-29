@@ -23,7 +23,7 @@ Discord alerts are already working.
 | Slack | Optional / blocked | Slack node exists in n8n as a non-blocking side branch, so failed Slack delivery does not break intake. | Current n8n Slack credential returned `channel_not_found` for `general` and `new-clients`. Needs Slack workspace/channel access cleanup. | Leave optional until team/client operations need it; reconnect credential and test `new-clients` later. |
 | Notion | Pending | Repo docs map the desired Notion Command Center databases and page IDs. Planning can continue from pasted content. | Notion connector can search, but the linked pages/databases are not visible yet. Needs user connector/page access. | When access is fixed, sync Build Queue tasks and workspace URLs into Notion. |
 | Cloudflare / domain | Live for Thurr Solutions | `thurrsolutions.com`, `www.thurrsolutions.com`, and `build.thurrsolutions.com` resolve to Vercel with issued certificates. DNS is gray-cloud / DNS-only. | Future domain changes require Cloudflare login. `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com` are still future decisions/work. | Keep current DNS stable; decide later when to attach `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com`. |
-| Email provider / Resend | Next / blocked | `/api/approve-report` supports approval-only mode and Resend-backed send mode. Production approval-only QA passed with no email sent. | Needs provider setup and Vercel env vars: `REPORT_APPROVAL_SECRET`, `RESEND_API_KEY`, `REPORT_EMAIL_FROM`, `REPORT_EMAIL_REPLY_TO`. Branded sender needs SPF, DKIM, and DMARC. | Configure Resend/domain DNS, redeploy Vercel, approve a QA report with `send_email: true`, then verify `report_email_sent` activity. |
+| Email provider / Resend | Next / blocked | `/api/approve-report` supports approval-only mode and Resend-backed send mode. Production approval-only QA passed with no email sent. `REPORT_APPROVAL_SECRET`, `REPORT_EMAIL_FROM`, and `REPORT_EMAIL_REPLY_TO` are configured in Vercel. | Needs Resend domain setup, DNS verification, and `RESEND_API_KEY`. Branded sender needs SPF, DKIM, and DMARC. | Configure Resend/domain DNS, add `RESEND_API_KEY`, redeploy Vercel, approve a QA report with `send_email: true`, then verify `report_email_sent` activity. |
 | Thurnos / Hermes / GPT | Live bridge | Local Ollama notes exist for `thurnos:latest`/`hermes3:latest`. Production bridge currently supports OpenAI provider with server-only `OPENAI_API_KEY` and `THURNOS_OPENAI_MODEL`. End-to-end n8n tests generated report/system/tasks/activity. | OpenAI key and bridge secret are server-only. Local Ollama should not be exposed directly to the public web. | Keep generated reports in manual review mode; improve prompt/report quality from reviewed examples. |
 
 ## Working Production Path
@@ -54,7 +54,7 @@ Public buildout form
 Do next:
 
 ```text
-Configure email provider env vars, redeploy Vercel, then test /api/approve-report with send_email: true using an approved test recipient.
+Create and verify the Resend sending domain, add `RESEND_API_KEY` to Vercel, redeploy, then test /api/approve-report with send_email: true using an approved test recipient.
 ```
 
 Do not do yet:
