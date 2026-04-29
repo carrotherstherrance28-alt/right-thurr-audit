@@ -112,7 +112,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add founder/operator trust section for Thurr Solutions.
 - [ ] Add full accessibility and mobile QA pass.
 - [x] Add analytics event plan for CTA/form/report/booked-call tracking.
-- [ ] Add LinkedIn-first B2B content plan.
+- [x] Add LinkedIn-first B2B content plan.
 - [x] Create inspiration tracker for Nate Herk and other AI automation/content references.
 - [ ] Add future community roadmap for Thurr brand after consistent content exists.
 
@@ -183,6 +183,7 @@ Daily session:
 - [x] Added AI automation/content inspiration tracker for Nate Herk reference patterns and future Thurr Solutions content/community planning.
 - [x] Updated basic SEO metadata, canonical URL, sitemap, robots, and web manifest for Thurr Solutions.
 - [x] Added analytics event plan for CTA, buildout form, blueprint report, booked-call intent, social, owner, and backend activity tracking.
+- [x] Added LinkedIn-first B2B content plan with 4-week starter calendar, post formats, CTA rules, and measurement loop.
 - [x] Sent a live QA Right Thurr buildout request through n8n.
 - [x] Verified n8n execution finished successfully.
 - [x] Verified the Discord `#leads-alerts` node ran in the successful execution.
