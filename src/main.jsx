@@ -708,7 +708,7 @@ function SolutionsPage({ setPage }) {
     <main className="solutions-page" data-brand="thurr-solutions">
       <section className="solutions-hero">
         <div className="hero-copy">
-          <div className="eyebrow">THURR SOLUTIONS LLC</div>
+          <div className="eyebrow">THURR</div>
           <h1>Private AI systems for local service businesses.</h1>
           <p>
             Custom AI agents, automations, lead intake, follow-up, and backend systems that help
@@ -727,10 +727,13 @@ function SolutionsPage({ setPage }) {
         </div>
         <aside className="solutions-proof">
           <div className="proof-header">
-            <span>OPERATING SYSTEM</span>
+            <span>OPERATING PROMISE</span>
             <span className="activity-glyph">✓</span>
           </div>
-          <h2>Lead-to-close automation</h2>
+          <h2 className="profit-promise">
+            We build.
+            <span>You profit.</span>
+          </h2>
           <p>
             Capture the lead, qualify the job, notify the team, trigger follow-up, and keep the
             owner updated without adding another manual handoff.
@@ -1179,7 +1182,7 @@ function BlueprintCommandReport() {
 
       <section className="report-command-center" id="report-body">
         <div className="proof-header">
-          <span>THURR SOLUTIONS LLC REPORT ENGINE</span>
+          <span>THURR REPORT ENGINE</span>
           <span className="activity-glyph">✓</span>
         </div>
         <div className="eyebrow">AI BUSINESS BUILDOUT PLAN</div>
@@ -1405,7 +1408,7 @@ function MissionActivityFeed() {
 
       <section className="mission-feed-panel">
         <div className="proof-header">
-          <span>THURR SOLUTIONS LLC ACTIVITY LOG</span>
+          <span>THURR ACTIVITY LOG</span>
           <span className="activity-glyph">✓</span>
         </div>
         {activityEvents.map((event) => (

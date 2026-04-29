@@ -111,7 +111,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [ ] Create shared website header/footer components.
 - [x] Add basic SEO metadata.
 - [x] Add founder/operator trust section for Thurr Solutions.
-- [ ] Add full accessibility and mobile QA pass.
+- [x] Add full accessibility and mobile QA pass.
 - [x] Add analytics event plan for CTA/form/report/booked-call tracking.
 - [x] Add LinkedIn-first B2B content plan.
 - [x] Create inspiration tracker for Nate Herk and other AI automation/content references.
@@ -207,7 +207,10 @@ Daily session:
 - [x] Verified OpenAI-provider blueprint generation locally.
 - [x] Added local private bridge dry-run command and Supabase secret-key fallback support.
 - [x] Added Supabase service-role grant SQL for server-side report/system/task/activity persistence.
+- [x] Added `We build. You profit.` Option B to the Thurr Solutions proof card.
+- [x] Replaced visible `Thurr Solutions LLC` labels with `Thurr` while keeping the top-left `Thurr Solutions` lockup.
+- [x] Ran desktop/mobile accessibility QA for the Thurr Solutions page: accessible names, image alt text, heading structure, tap target size, and horizontal overflow all passed.
 
 ## Next Task
 
-Run `docs/backend/Supabase-Service-Role-Grants.sql` in Supabase SQL Editor, retest the live `/api/buildout-request` -> `/api/thurnos-blueprint` persistence path, then update the active n8n workflow.
+Run `docs/backend/Supabase-Service-Role-Grants.sql` in Supabase SQL Editor, retest the live `/api/buildout-request` -> `/api/thurnos-blueprint` persistence path, redeploy production after the Vercel daily deployment limit resets, then update the active n8n workflow.

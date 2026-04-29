@@ -54,6 +54,7 @@ button {
 }
 
 .brand-button {
+  min-height: 44px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -697,23 +698,31 @@ h1 {
   display: grid;
   gap: var(--s-5);
   padding: var(--s-8);
-  background: var(--rt-paper-cold);
-  border: var(--bw-thin) solid var(--rt-ink-300);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-paper-lg);
+  background:
+    linear-gradient(135deg, rgba(255, 106, 0, 0.16), transparent 48%),
+    var(--rt-paper-cold);
+  border: var(--bw-loud) solid var(--rt-ink-900);
+  border-radius: 0;
+  box-shadow: var(--shadow-stamp-orange);
 }
 
 .solutions-proof h2 {
   margin: 0;
-  font-family: var(--font-display-rt);
-  font-size: clamp(38px, 4.5vw, 64px);
-  line-height: 1.05;
+  font-family: var(--font-display-ts);
+  font-size: clamp(58px, 6vw, 96px);
+  line-height: 0.9;
+  text-transform: uppercase;
 }
 
 .solutions-proof p {
   color: var(--rt-ink-700);
   font-size: var(--text-lg);
   line-height: var(--leading-normal);
+}
+
+.profit-promise span {
+  display: block;
+  color: var(--rt-orange-600);
 }
 
 .report-card h2 {
@@ -1092,6 +1101,7 @@ textarea:focus {
   font-family: var(--font-display-rt);
   font-size: clamp(48px, 5vw, 78px);
   line-height: 0.96;
+  overflow-wrap: anywhere;
 }
 
 .founder-copy {
@@ -2469,7 +2479,9 @@ dd {
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
+  min-height: 44px;
   margin-top: var(--s-4);
+  padding: var(--s-2) 0;
   color: var(--rt-orange-300);
   font-family: var(--font-subhead);
   font-weight: 700;
@@ -2883,6 +2895,14 @@ dd {
 
   .stamp-button {
     min-height: 64px;
+  }
+
+  .solutions-proof {
+    padding: var(--s-5);
+  }
+
+  .solutions-proof h2 {
+    font-size: 52px;
   }
 
   .build-panel {
