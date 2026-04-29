@@ -140,9 +140,9 @@ All tasks should use a plan-first automation loop before build work starts:
 
 - [ ] Define n8n webhook payload.
 - [x] Define n8n webhook payload.
-- [ ] Create Supabase table schema.
-- [ ] Create Activity Log event schema.
-- [ ] Build n8n intake workflow.
+- [x] Create Supabase table schema.
+- [x] Create Activity Log event schema.
+- [x] Build n8n intake workflow.
 - [x] Add AI blueprint generation prompt chain.
 - [x] Add private n8n -> Thurnos bridge endpoint.
 - [x] Add generated report/system/task/activity draft persistence path.
@@ -209,6 +209,11 @@ Daily session:
 - [x] Verified OpenAI-provider blueprint generation locally.
 - [x] Added local private bridge dry-run command and Supabase secret-key fallback support.
 - [x] Added Supabase service-role grant SQL for server-side report/system/task/activity persistence.
+- [x] Ran Supabase service-role grants successfully.
+- [x] Verified local `/api/buildout-request` to `/api/thurnos-blueprint` persistence writes buildout request, generated report, system, task, and activity rows.
+- [x] Verified live Vercel `/api/buildout-request` to `/api/thurnos-blueprint` persistence writes generated report, system, tasks, and activity rows.
+- [x] Ran n8n production webhook test after Supabase grants; intake saved successfully.
+- [x] Confirmed the active n8n workflow still needs the Thurnos blueprint HTTP Request node; manually called Thurnos for the n8n QA request and verified report/system/tasks/activity persistence.
 - [x] Added `We build. You profit.` Option B to the Thurr Solutions proof card.
 - [x] Replaced visible `Thurr Solutions LLC` labels with `Thurr` while keeping the top-left `Thurr Solutions` lockup.
 - [x] Ran desktop/mobile accessibility QA for the Thurr Solutions page: accessible names, image alt text, heading structure, tap target size, and horizontal overflow all passed.
@@ -216,4 +221,4 @@ Daily session:
 
 ## Next Task
 
-Run `docs/backend/Supabase-Service-Role-Grants.sql` in Supabase SQL Editor, retest the live `/api/buildout-request` -> `/api/thurnos-blueprint` persistence path, redeploy production after the Vercel daily deployment limit resets, then update the active n8n workflow.
+Update the active n8n workflow to call `https://right-thurr-audit.vercel.app/api/thurnos-blueprint` after the intake save node, then rerun the n8n production webhook test and confirm generated report/system/task/activity rows are created without manual intervention.

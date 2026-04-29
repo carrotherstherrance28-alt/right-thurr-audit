@@ -38,6 +38,31 @@ Verified:
 ```text
 Direct POST to production webhook returned 201 and saved a fake QA row to Supabase.
 Vercel Production is configured with VITE_N8N_BUILDOUT_WEBHOOK_URL.
+2026-04-29: Production webhook returned 201 after Supabase service-role grants were applied.
+```
+
+Current gap:
+
+```text
+The active n8n workflow saves the intake request, but it does not yet call
+https://right-thurr-audit.vercel.app/api/thurnos-blueprint.
+
+Evidence: the n8n-created QA request was saved with status requested and had no generated_reports
+or activity_logs until the Thurnos endpoint was called manually.
+```
+
+Next workflow update:
+
+```text
+Add an HTTP Request node after the Vercel intake save node:
+
+POST https://right-thurr-audit.vercel.app/api/thurnos-blueprint
+Header: x-thurnos-secret = {{ $env.THURNOS_SHARED_SECRET }}
+Body:
+{
+  "buildout_request_id": "{{ $node['Save Request Through Vercel API'].json.buildout_request_id }}",
+  "payload": "{{ $node['Buildout Intake Webhook'].json.body }}"
+}
 ```
 
 ## Slack Alert Status
