@@ -72,8 +72,9 @@ Result if email provider is configured:
 - `activity_logs.action_type = report_email_sent`
 - prospect receives the approved email
 
-If email provider env vars are missing, the report is approved but the email is skipped and an
-activity log records that delivery needs attention.
+If email provider env vars are missing, the report stays `approved_for_delivery`; the email is
+skipped and an activity log records that delivery needs attention. A report only becomes
+`delivered` after the email provider confirms the send.
 
 ## Email Provider
 
@@ -119,14 +120,22 @@ trust boundary between generated draft and client-facing communication.
 
 ## Test Checklist
 
-- [ ] Create a fake QA buildout request.
-- [ ] Generate a blueprint draft.
-- [ ] Confirm report starts as `needs_review`.
-- [ ] Call `/api/approve-report` with `send_email: false`.
-- [ ] Confirm report becomes `approved_for_delivery`.
-- [ ] Confirm request becomes `approved_for_delivery`.
-- [ ] Confirm activity log contains `report_approved_for_delivery`.
+- [x] Create a fake QA buildout request.
+- [x] Generate a blueprint draft.
+- [x] Confirm report starts as `needs_review`.
+- [x] Call `/api/approve-report` with `send_email: false`.
+- [x] Confirm report becomes `approved_for_delivery`.
+- [x] Confirm request becomes `approved_for_delivery`.
+- [x] Confirm activity log contains `report_approved_for_delivery`.
 - [ ] Add email provider env vars.
 - [ ] Call `/api/approve-report` with `send_email: true` only for an approved test recipient.
 - [ ] Confirm activity log contains `report_email_sent`.
 
+Production approval-only verification:
+
+```text
+request_status: approved_for_delivery
+report_status: approved_for_delivery
+email_delivery_status: not_requested
+activity: report_approved_for_delivery
+```

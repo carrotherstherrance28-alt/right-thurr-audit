@@ -73,6 +73,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add generated reports table to Supabase MVP schema.
 - [x] Add live account setup checklist for Vercel, Supabase, n8n, and domains.
 - [x] Add n8n workflow build sheet and AI prompt chain.
+- [x] Add concise connector/task status doc for Vercel, Supabase, n8n, Discord, Slack, Notion, Cloudflare/domain, Resend, and Thurnos/Hermes/GPT.
 - [x] Create Supabase tables for leads/buildout requests/activity logs.
 - [x] Create n8n workflow `Right Thurr - Buildout Plan Intake`.
 - [x] Create n8n production webhook URL and add it to Vercel/local env.
@@ -147,6 +148,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add private n8n -> Thurnos bridge endpoint.
 - [x] Add generated report/system/task/activity draft persistence path.
 - [x] Add approved email delivery endpoint.
+- [x] Verify production approval-only report delivery path.
 - [ ] Configure email provider and test approved email delivery.
 - [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
@@ -225,6 +227,9 @@ Daily session:
 - [x] Replaced visible `Thurr Solutions LLC` labels with `Thurr` while keeping the top-left `Thurr Solutions` lockup.
 - [x] Ran desktop/mobile accessibility QA for the Thurr Solutions page: accessible names, image alt text, heading structure, tap target size, and horizontal overflow all passed.
 - [x] Fixed home metric card alignment and cleaned up the Therrance Carrothers founder stamp so the name is readable.
+- [x] Added concise connector/task status doc for the current Vercel, Supabase, n8n, Discord, Slack, Notion, Cloudflare/domain, Resend, and Thurnos/Hermes/GPT state.
+- [x] Fixed approved-report delivery status so records only become `delivered` after a confirmed email send.
+- [x] Verified production `/api/approve-report` approval-only mode: request/report moved to `approved_for_delivery`, activity logged, and no email was sent.
 
 ## Next Task
 
