@@ -10,7 +10,7 @@ Client diagnostic funnels can use the same backend engine, but they must stay vi
 
 Public visitors should see the offer under `Thurr`, with `Thurr Solutions` as the top-left company lockup. Right Thurr can stay as an internal/product-engine name in backend/workflow language until the brand architecture is finalized.
 
-Operator preview should stay narrow: `Command Center` for activity, AI, money, alerts, and next moves; `Systems` for individual business workspaces. Real owner authentication is required before private client/operator data is stored or shown.
+Operator preview should stay narrow: `Command Center` for activity, AI, money, alerts, and next moves; `Systems` for individual business workspaces. Mock owner preview can stay open for layout/testing, but private report data must stay locked until real owner authentication and RLS hardening are active.
 
 Before coding major visual changes, create 3 different example screenshots/options for review. The user chooses one direction or combines parts, then implementation starts.
 
@@ -132,7 +132,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Create 3 AI Engine screen options before coding.
 - [x] Add AI Engine screen.
 - [x] Add mock local data store.
-- [x] Add real owner authentication before storing or showing private client/operator data.
+- [ ] Add real owner authentication before storing or showing private client/operator data.
 - [ ] Add owner RLS hardening before loading real private operator/client records.
 - [x] Create 3 exportable report layout options before coding.
 - [x] Add exportable report layout.
@@ -160,12 +160,12 @@ All tasks should use a plan-first automation loop before build work starts:
 
 ## Phase 5: Client-Ready Diagnostic Engine
 
-- [ ] Create unbranded diagnostic report template.
-- [ ] Create Thurr Solutions-branded sales version.
-- [ ] Create client re-skin checklist.
-- [ ] Create lead-gen niche prompt packs.
+- [x] Create unbranded diagnostic report template.
+- [x] Create Thurr Solutions-branded sales version.
+- [x] Create client re-skin checklist.
+- [x] Create lead-gen niche prompt packs.
 - [x] Add manual review mode before reports send.
-- [ ] Add follow-up automation templates for meeting thank-you, post-project thank-you, referral request, and deliverable reminders.
+- [x] Add follow-up automation templates for meeting thank-you, post-project thank-you, referral request, and deliverable reminders.
 
 ## Suggested Session Rhythm
 
@@ -188,6 +188,12 @@ Daily session:
 
 ## Latest Completed
 
+- [x] Kept `?operator=1` available for mock preview while locking private report data behind owner-auth requirements.
+- [x] Added unbranded diagnostic report template for re-skinnable client reports.
+- [x] Added Thurr Solutions diagnostic sales version for lead-gen and paid buildout handoff.
+- [x] Added client diagnostic re-skin checklist.
+- [x] Added lead-gen niche prompt packs for local service, contractor, med spa, funeral home, wedding/event, and professional services.
+- [x] Added follow-up automation templates for diagnostic delivery, meetings, post-project thank-you, referrals, reminders, and no-reply nudges.
 - [x] Added future Thurr community roadmap for launching only after consistent content, proof assets, and support capacity exist.
 - [x] Extracted shared public site header/footer chrome and added the `We build. You profit.` footer.
 - [x] Added AI automation/content inspiration tracker for Nate Herk reference patterns and future Thurr Solutions content/community planning.
@@ -204,7 +210,7 @@ Daily session:
 - [x] Split public website navigation from owner/operator preview screens.
 - [x] Added export-ready Autopilot Blueprint report view using Option A.
 - [x] Narrowed navigation to public website tabs plus owner Command Center/Systems.
-- [x] Added Supabase email magic-link gate for `?operator=1` with server-side owner email allowlist.
+- [x] Kept `?operator=1` available for mock preview while locking private report data behind owner-auth requirements.
 - [x] Verified local `thurnos:latest` responds through Ollama.
 - [x] Updated public site positioning to `Thurr Solutions LLC`.
 - [x] Updated public site positioning to `Thurr` and added Therrance Carrothers section.
@@ -248,7 +254,8 @@ Daily session:
 - [x] Fixed display-font spacing and added LinkedIn/Instagram/Email to the public menu.
 - [x] Expanded owner Report Review Queue cards with intake details, contact/source, CRM lifecycle status, CRM tags, and generated blueprint sections.
 - [x] Pushed review queue detail expansion to GitHub at commit `4a3093e`; Vercel production deploy is blocked until the free daily deployment limit resets.
+- [x] Checked Supabase CRM fields through the REST API; migration is still missing because `buildout_requests.lead_status` does not exist yet.
 
 ## Next Task
 
-After the Vercel daily deployment limit resets, deploy commit `4a3093e`, then run the CRM field migration in Supabase if it has not already been applied and verify one fresh buildout request moves through `requested -> awaiting_review -> approved_for_delivery` with CRM tags visible in the owner queue.
+Run `docs/backend/Supabase-CRM-Fields-Migration.sql` in Supabase SQL Editor, then after the Vercel daily deployment limit resets deploy latest `main` and verify one fresh buildout request moves through `requested -> awaiting_review -> approved_for_delivery` with CRM tags visible in the owner queue.

@@ -7,11 +7,17 @@ export default async function handler(request, response) {
 
   const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  const ownerAuthMode = process.env.OWNER_AUTH_MODE || 'supabase';
   const ownerEmails = (process.env.OWNER_EMAILS || '')
     .split(',')
     .map((email) => email.trim().toLowerCase())
     .filter(Boolean);
   const authorization = request.headers.authorization || '';
+
+  if (ownerAuthMode === 'preview') {
+    response.status(200).json({ allowed: true, mode: 'preview' });
+    return;
+  }
 
   if (!supabaseUrl || !supabaseAnonKey || ownerEmails.length === 0) {
     response.status(503).json({ allowed: false, error: 'Owner access is not configured.' });

@@ -6,7 +6,7 @@ Last updated: 2026-04-29
 
 ## Current Priority
 
-Verify the CRM field migration and owner review queue detail path with one fresh buildout request.
+Run the CRM field migration, then verify the owner review queue detail path with one fresh buildout request.
 
 This is the next trust-boundary task because intake, blueprint generation, manual review status,
 Discord alerts, approval-only review, and approved Resend delivery are already working.
@@ -16,7 +16,7 @@ Discord alerts, approval-only review, and approved Resend delivery are already w
 | Area | Status | Complete | Blocked By | Next Action |
 | --- | --- | --- | --- | --- |
 | Vercel | Live / deploy-limited | `right-thurr-audit` deploy is live, production env includes Supabase, n8n webhook, Thurnos/OpenAI, Resend, and bridge secrets. `/api/buildout-request`, `/api/thurnos-blueprint`, `/api/approve-report`, and `/api/review-reports` exist. The owner Report Review Queue detail expansion is pushed to GitHub but not live yet. | Vercel free daily deployment limit returned `api-deployments-free-per-day` on 2026-04-29 after the direct production deploy attempt. | After the deployment limit resets, deploy commit `4a3093e`, then visually verify the owner Report Review Queue after owner sign-in. |
-| Supabase | Live | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, owner auth gate, RLS, and persistence for requests/reports/systems/tasks/activity are in place. CRM tagging writes verified `crm_tag_applied` activity events and can update optional `lead_status`, `crm_tags`, and `last_activity_at` fields after the migration is run. | User-owned Supabase login for dashboard changes; server-only keys must stay out of docs and client env. CRM field migration still needs to be run in Supabase. | Run CRM field migration, then keep Supabase as the source of truth; harden owner RLS before loading real private operator/client records in the UI. |
+| Supabase | Live / migration needed | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, RLS, and persistence for requests/reports/systems/tasks/activity are in place. CRM tagging writes verified `crm_tag_applied` activity events. REST verification on 2026-04-29 showed `buildout_requests.lead_status` does not exist yet, so optional CRM fields are not installed. | User-owned Supabase login for SQL Editor changes; server-only keys must stay out of docs and client env. | Run `docs/backend/Supabase-CRM-Fields-Migration.sql`, then keep Supabase as the source of truth; harden owner RLS before loading real private operator/client records in the UI. |
 | n8n | Live | Workflow `Right Thurr - Buildout Plan Intake` is active. Production webhook saves intake, calls the Thurnos blueprint bridge, creates draft report/system/tasks/activity, and returns queued status. | n8n login/credentials for workflow edits; production webhook and bridge secret must stay private. | Add approval/email delivery workflow after Resend is configured. |
 | Discord | Live | `#leads-alerts` webhook is connected through n8n as a non-blocking privacy-safe alert. Live QA showed the Discord node ran successfully. | Discord webhook URL is sensitive; channel privacy must be confirmed before posting contact details. | Keep V1 alerts privacy-safe; optionally add review/delivery confirmation alerts. |
 | Slack | Optional / blocked | Slack node exists in n8n as a non-blocking side branch, so failed Slack delivery does not break intake. | Current n8n Slack credential returned `channel_not_found` for `general` and `new-clients`. Needs Slack workspace/channel access cleanup. | Leave optional until team/client operations need it; reconnect credential and test `new-clients` later. |
@@ -53,7 +53,7 @@ Public buildout form
 Do next:
 
 ```text
-Run the CRM field migration in Supabase if it has not already been applied, then verify a fresh buildout request writes CRM tags and lifecycle status visible in the owner queue.
+Run `docs/backend/Supabase-CRM-Fields-Migration.sql` in Supabase SQL Editor, then verify a fresh buildout request writes CRM tags and lifecycle status visible in the owner queue.
 ```
 
 Do not do yet:

@@ -9,7 +9,7 @@ This repo is the home for Right Thurr product strategy, brand direction, website
 ```text
 docs/
   brand/    Brand architecture, logos, watermark rules, merch direction
-  product/  Product spec, MVP scope, screen map, backend logic
+  product/  Product spec, MVP scope, screen map, diagnostic templates
   repo/     Repo organization and operating notes
 ```
 
@@ -19,6 +19,7 @@ docs/
 - Logo sheet direction for Claude Design
 - MVP product spec for the Right Thurr business system builder
 - AI Business Buildout Plan diagnostic engine
+- Client-ready diagnostic templates, prompt packs, and follow-up automations
 - Website and brand foundation before app build
 
 ## Brand Split

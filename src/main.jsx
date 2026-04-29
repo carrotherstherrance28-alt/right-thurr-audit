@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createClient } from '@supabase/supabase-js';
 import {
   Activity,
   ArrowUpRight,
@@ -76,28 +75,10 @@ function getIsOperatorPreview() {
   );
 }
 
-function getOwnerCallbackUrl() {
-  if (typeof window === 'undefined') {
-    return '';
-  }
-
-  return `${window.location.origin}/owner/callback?operator=1`;
-}
-
 const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabaseBuildoutUrl = supabaseUrl ? `${supabaseUrl}/rest/v1/buildout_requests` : '';
-const authClient =
-  supabaseUrl && supabaseAnonKey
-    ? createClient(supabaseUrl, supabaseAnonKey, {
-        auth: {
-          detectSessionInUrl: true,
-          persistSession: true,
-          autoRefreshToken: true,
-        },
-      })
-    : null;
 
 function mapBuildoutPayloadToSupabaseRow(payload) {
   return {
@@ -174,62 +155,15 @@ function App() {
   const [page, setPage] = useState('home');
   const [form, setForm] = useState(fieldDefaults);
   const [submissionState, setSubmissionState] = useState('idle');
-  const [authSession, setAuthSession] = useState(null);
-  const [authReady, setAuthReady] = useState(!authClient);
-  const [authCallbackStatus, setAuthCallbackStatus] = useState('idle');
-  const [ownerAccess, setOwnerAccess] = useState({ status: 'idle', allowed: false, message: '' });
   const [menuOpen, setMenuOpen] = useState(false);
   const isOperatorPreview = getIsOperatorPreview();
-  const canViewOperator = isOperatorPreview && ownerAccess.allowed;
+  const canViewOperator = isOperatorPreview;
   const currentStep = useMemo(() => buildSteps[form.idea.length % buildSteps.length], [form.idea]);
 
   useEffect(() => {
-    if (!authClient) {
-      return undefined;
+    if (window.location.pathname === '/owner/callback') {
+      window.history.replaceState({}, '', '/?operator=1');
     }
-
-    let mounted = true;
-    const searchParams = new URLSearchParams(window.location.search);
-    const tokenHash = searchParams.get('token_hash');
-    const otpType = searchParams.get('type') || 'magiclink';
-
-    async function hydrateAuthSession() {
-      if (window.location.pathname === '/owner/callback' && tokenHash) {
-        setAuthCallbackStatus('verifying');
-        const { error } = await authClient.auth.verifyOtp({
-          token_hash: tokenHash,
-          type: otpType,
-        });
-
-        if (error) {
-          setAuthCallbackStatus('error');
-          setAuthReady(true);
-          return;
-        }
-
-        setAuthCallbackStatus('verified');
-      }
-
-      const { data } = await authClient.auth.getSession();
-      if (mounted) {
-        setAuthSession(data.session);
-        setAuthReady(true);
-      }
-    }
-
-    hydrateAuthSession();
-
-    const {
-      data: { subscription },
-    } = authClient.auth.onAuthStateChange((_event, session) => {
-      setAuthSession(session);
-      setAuthReady(true);
-    });
-
-    return () => {
-      mounted = false;
-      subscription.unsubscribe();
-    };
   }, []);
 
   useEffect(() => {
@@ -257,58 +191,6 @@ function App() {
 
     return () => window.clearTimeout(timeout);
   }, [page]);
-
-  useEffect(() => {
-    if (!isOperatorPreview) {
-      return undefined;
-    }
-
-    if (!authSession?.access_token) {
-      setOwnerAccess({ status: 'idle', allowed: false, message: '' });
-      return undefined;
-    }
-
-    const controller = new AbortController();
-    setOwnerAccess({ status: 'checking', allowed: false, message: '' });
-
-    fetch('/api/owner-access', {
-      headers: {
-        Authorization: `Bearer ${authSession.access_token}`,
-      },
-      signal: controller.signal,
-    })
-      .then(async (ownerResponse) => {
-        const data = await ownerResponse.json().catch(() => ({}));
-
-        if (!ownerResponse.ok || !data.allowed) {
-          setOwnerAccess({
-            status: 'denied',
-            allowed: false,
-            message: data.error || 'This account is not on the owner allowlist.',
-          });
-          return;
-        }
-
-        setOwnerAccess({ status: 'allowed', allowed: true, message: '' });
-
-        if (window.location.pathname === '/owner/callback') {
-          window.history.replaceState({}, '', '/?operator=1');
-        }
-      })
-      .catch((error) => {
-        if (error.name !== 'AbortError') {
-          setOwnerAccess({
-            status: 'denied',
-            allowed: false,
-            message: 'Owner access could not be verified.',
-          });
-        }
-      });
-
-    return () => {
-      controller.abort();
-    };
-  }, [authSession, isOperatorPreview]);
 
   function navigateToPage(target) {
     if (!canViewOperator && operatorPages.includes(target)) {
@@ -406,26 +288,13 @@ function App() {
         socialLinks={socialLinks}
       />
 
-      {isOperatorPreview && !canViewOperator ? (
-        <OwnerAccessGate
-          authCallbackStatus={authCallbackStatus}
-          authReady={authReady}
-          authSession={authSession}
-          ownerAccess={ownerAccess}
-        />
-      ) : (
-        <>
-          {page === 'home' && <HomePage {...sharedProps} />}
-          {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
-          {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
-          {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
-          {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
-          {canViewOperator && page === 'command' && (
-            <CommandCenterPage authSession={authSession} setPage={navigateToPage} />
-          )}
-          {canViewOperator && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
-        </>
-      )}
+      {page === 'home' && <HomePage {...sharedProps} />}
+      {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
+      {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
+      {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
+      {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
+      {canViewOperator && page === 'command' && <CommandCenterPage setPage={navigateToPage} />}
+      {canViewOperator && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
       {shouldShowFooter && (
         <SiteFooter navigateToAbout={navigateToAbout} navigateToPage={navigateToPage} socialLinks={socialLinks} />
       )}
@@ -433,114 +302,7 @@ function App() {
   );
 }
 
-function OwnerAccessGate({ authCallbackStatus, authReady, authSession, ownerAccess }) {
-  const [email, setEmail] = useState('');
-  const [authMessage, setAuthMessage] = useState('');
-  const [authStatus, setAuthStatus] = useState('idle');
-  const signedInEmail = authSession?.user?.email || '';
-  const isRejectedOwner = signedInEmail && ownerAccess.status === 'denied';
-
-  async function handleOwnerSignIn(event) {
-    event.preventDefault();
-
-    if (!authClient) {
-      setAuthStatus('error');
-      setAuthMessage('Supabase Auth is not configured yet.');
-      return;
-    }
-
-    setAuthStatus('sending');
-    setAuthMessage('');
-
-    const { error } = await authClient.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: getOwnerCallbackUrl(),
-      },
-    });
-
-    if (error) {
-      setAuthStatus('error');
-      setAuthMessage(error.message);
-      return;
-    }
-
-    setAuthStatus('sent');
-    setAuthMessage('Check your email for the owner access link. It should open the owner callback page.');
-  }
-
-  async function handleSignOut() {
-    if (!authClient) {
-      return;
-    }
-
-    await authClient.auth.signOut();
-  }
-
-  return (
-    <main className="owner-access-page">
-      <section className="owner-access-card">
-        <div className="eyebrow">OWNER ACCESS</div>
-        <h1>Sign in to view the operator machine.</h1>
-        <p>
-          Command Center and Systems are private owner screens. Public visitors only see the
-          website, buildout intake, and Thurr service pages.
-        </p>
-
-        {!authReady && <p className="form-note">Checking owner session...</p>}
-
-        {authCallbackStatus === 'verifying' && (
-          <p className="form-note">Finishing owner sign-in...</p>
-        )}
-
-        {authCallbackStatus === 'error' && (
-          <p className="form-note error-note">
-            Owner sign-in link could not be verified. Request a fresh link from this page.
-          </p>
-        )}
-
-        {ownerAccess.status === 'checking' && (
-          <p className="form-note">Verifying owner access...</p>
-        )}
-
-        {isRejectedOwner && (
-          <div className="owner-auth-warning">
-            <strong>{signedInEmail}</strong>
-            <span>{ownerAccess.message || 'This account is not on the owner allowlist.'}</span>
-            <button className="text-link dark-link button-link" type="button" onClick={handleSignOut}>
-              Sign out
-            </button>
-          </div>
-        )}
-
-        <form className="owner-access-form" onSubmit={handleOwnerSignIn}>
-          <label>
-            Owner email
-            <input
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="you@example.com"
-              required
-            />
-          </label>
-          <button className="stamp-button" type="submit" disabled={authStatus === 'sending'}>
-            {authStatus === 'sending' ? 'SENDING ACCESS LINK' : 'SEND OWNER ACCESS LINK'}
-            <ArrowUpRight size={18} strokeWidth={3} />
-          </button>
-        </form>
-
-        {authMessage && (
-          <p className={authStatus === 'error' ? 'form-note error-note' : 'form-note'}>
-            {authMessage}
-          </p>
-        )}
-      </section>
-    </main>
-  );
-}
-
-function CommandCenterPage({ authSession, setPage }) {
+function CommandCenterPage({ setPage }) {
   return (
     <main className="command-page" id="top">
       <section className="activity-hero">
@@ -568,7 +330,7 @@ function CommandCenterPage({ authSession, setPage }) {
         </aside>
       </section>
 
-      <ReportReviewQueue authSession={authSession} />
+      <ReportReviewQueue />
       <MissionActivityFeed />
       <AIEngineOrchestra />
       <FinanceCommandCenter />
@@ -630,77 +392,23 @@ function getExternalHref(value) {
   return /^https?:\/\//i.test(value) ? value : `https://${value}`;
 }
 
-function ReportReviewQueue({ authSession }) {
+function ReportReviewQueue() {
   const [reports, setReports] = useState([]);
-  const [reviewStatus, setReviewStatus] = useState('loading');
+  const [reviewStatus, setReviewStatus] = useState('auth_required');
   const [reviewMessage, setReviewMessage] = useState('');
-  const accessToken = authSession?.access_token;
 
   async function loadReports() {
-    if (!accessToken) {
-      setReviewStatus('idle');
-      return;
-    }
-
-    setReviewStatus('loading');
-    setReviewMessage('');
-
-    try {
-      const response = await fetch('/api/review-reports', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Review queue could not load.');
-      }
-
-      setReports(data.reports || []);
-      setReviewStatus('ready');
-    } catch (error) {
-      setReviewStatus('error');
-      setReviewMessage(error.message);
-    }
+    setReviewStatus('auth_required');
+    setReviewMessage('Owner report details stay locked until Supabase owner auth is re-enabled.');
   }
 
   useEffect(() => {
     loadReports();
-  }, [accessToken]);
+  }, []);
 
   async function approveReport(reportId) {
-    if (!accessToken) {
-      return;
-    }
-
-    setReviewStatus('approving');
-    setReviewMessage('');
-
-    try {
-      const response = await fetch('/api/approve-report', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          report_id: reportId,
-          send_email: false,
-        }),
-      });
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Report could not be approved.');
-      }
-
-      setReviewMessage('Report approved for delivery. Email was not sent.');
-      await loadReports();
-    } catch (error) {
-      setReviewStatus('error');
-      setReviewMessage(error.message);
-    }
+    setReviewStatus('auth_required');
+    setReviewMessage(`Owner auth must be re-enabled before report ${reportId} can be approved from the UI.`);
   }
 
   return (
@@ -715,6 +423,16 @@ function ReportReviewQueue({ authSession }) {
       </div>
 
       <div className="review-queue-list">
+        {reviewStatus === 'auth_required' && (
+          <article className="review-empty-state">
+            <span>PRIVATE QUEUE LOCKED</span>
+            <strong>Owner auth required before loading lead reports.</strong>
+            <p>
+              The Command Center preview stays open for layout and workflow review. The real report
+              queue will load after the Supabase owner gate is re-enabled.
+            </p>
+          </article>
+        )}
         {reviewStatus === 'loading' && <p className="form-note">Loading review queue...</p>}
         {reviewStatus === 'error' && <p className="form-note error-note">{reviewMessage}</p>}
         {reviewStatus === 'ready' && reports.length === 0 && (
