@@ -240,8 +240,9 @@ Daily session:
 - [x] Added private owner Report Review Queue to Command Center with owner-session API access and approve-without-send action.
 - [x] Verified the review queue Supabase filter and rechecked production approval-only delivery QA.
 - [x] Sent approved Resend QA email to `therrance@thurrsolutions.com` and verified request/report moved to `delivered` with `report_email_sent` activity.
-- [ ] Deploy owner Report Review Queue after Vercel daily deployment limit resets.
+- [x] Deploy owner Report Review Queue after Vercel daily deployment limit resets.
+- [x] Smoke-test `/api/review-reports` on production and `build.thurrsolutions.com`; unauthenticated requests return `401`.
 
 ## Next Task
 
-After Vercel deployment limit resets, deploy the owner Report Review Queue and smoke-test `/api/review-reports` behind owner auth.
+Open the owner Command Center at `/?operator=1`, sign in, and visually verify the Report Review Queue card. Then choose whether to add CRM tagging or owner-side report detail/editing next.
