@@ -196,7 +196,9 @@ Daily session:
 - [x] Installed Remotion with `ThurrIntro` vertical content starter.
 - [x] Added Thurnos blueprint draft script and n8n mapping guide.
 - [x] Added private Thurnos blueprint bridge API and Supabase persistence path.
+- [x] Added Vercel production env for Thurnos provider, OpenAI model, OpenAI API key, and bridge shared secret.
+- [x] Verified OpenAI-provider blueprint generation locally.
 
 ## Next Task
 
-Add `SUPABASE_SERVICE_ROLE_KEY` and `THURNOS_SHARED_SECRET` to Vercel, then update the active n8n workflow to call `/api/thurnos-blueprint` after `/api/buildout-request`.
+Add `SUPABASE_SERVICE_ROLE_KEY` to Vercel, redeploy production, then update the active n8n workflow to call `/api/thurnos-blueprint` after `/api/buildout-request`.

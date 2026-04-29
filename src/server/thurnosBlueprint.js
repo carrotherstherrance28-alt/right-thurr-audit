@@ -240,7 +240,15 @@ async function generateWithOpenAI(prompt) {
   }
 
   const data = await response.json();
-  return data.output_text || '';
+  if (data.output_text) {
+    return data.output_text;
+  }
+
+  return (data.output || [])
+    .flatMap((item) => item.content || [])
+    .filter((content) => content.type === 'output_text' && content.text)
+    .map((content) => content.text)
+    .join('\n');
 }
 
 export async function generateBlueprintDraft(payload) {
