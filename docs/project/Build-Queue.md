@@ -108,12 +108,12 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Build Thurr Solutions B2B services page first pass.
 - [ ] Add brand boundary notes to reusable client template docs.
 - [ ] Create shared website header/footer components.
-- [ ] Add basic SEO metadata.
+- [x] Add basic SEO metadata.
 - [x] Add founder/operator trust section for Thurr Solutions.
 - [ ] Add full accessibility and mobile QA pass.
 - [ ] Add analytics event plan for CTA/form/report/booked-call tracking.
 - [ ] Add LinkedIn-first B2B content plan.
-- [ ] Create inspiration tracker for Nate Herk and other AI automation/content references.
+- [x] Create inspiration tracker for Nate Herk and other AI automation/content references.
 - [ ] Add future community roadmap for Thurr brand after consistent content exists.
 
 ## Phase 3: Right Thurr App MVP
@@ -180,6 +180,8 @@ Daily session:
 
 ## Latest Completed
 
+- [x] Added AI automation/content inspiration tracker for Nate Herk reference patterns and future Thurr Solutions content/community planning.
+- [x] Updated basic SEO metadata, canonical URL, sitemap, robots, and web manifest for Thurr Solutions.
 - [x] Sent a live QA Right Thurr buildout request through n8n.
 - [x] Verified n8n execution finished successfully.
 - [x] Verified the Discord `#leads-alerts` node ran in the successful execution.

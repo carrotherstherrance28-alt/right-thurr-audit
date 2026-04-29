@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rightthurr.com/sitemap.xml
+Sitemap: https://thurrsolutions.com/sitemap.xml
