@@ -151,6 +151,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Verify production approval-only report delivery path.
 - [x] Add repeatable approved report delivery QA script.
 - [x] Configure Vercel report approval secret and report sender/reply-to variables.
+- [x] Add Resend API key to Vercel production and redeploy.
 - [ ] Configure email provider and test approved email delivery.
 - [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
@@ -234,7 +235,8 @@ Daily session:
 - [x] Verified production `/api/approve-report` approval-only mode: request/report moved to `approved_for_delivery`, activity logged, and no email was sent.
 - [x] Added `npm run report:delivery:test` for repeatable approval-only and approved email-send QA.
 - [x] Added production `REPORT_APPROVAL_SECRET`, `REPORT_EMAIL_FROM`, and `REPORT_EMAIL_REPLY_TO`, redeployed, and reverified approval-only QA with the stricter two-secret flow.
+- [x] Added production `RESEND_API_KEY`, redeployed, and reverified approval-only QA after the email provider key was installed.
 
 ## Next Task
 
-Create/verify Resend sending domain, add `RESEND_API_KEY` to Vercel production, redeploy, then test `/api/approve-report` with `send_email: true` using an approved test recipient.
+Run `/api/approve-report` with `send_email: true` using one approved test recipient, then verify Resend delivery and `report_email_sent` activity.

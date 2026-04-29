@@ -155,7 +155,7 @@ Production env status:
 REPORT_APPROVAL_SECRET: configured
 REPORT_EMAIL_FROM: configured
 REPORT_EMAIL_REPLY_TO: configured
-RESEND_API_KEY: pending
+RESEND_API_KEY: configured
 ```
 
 ## n8n Shape
