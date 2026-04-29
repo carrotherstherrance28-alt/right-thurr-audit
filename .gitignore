@@ -10,3 +10,5 @@ dist/
 .aidesigner/runs/
 .vercel
 out/
+docs/resume/ql/
+docs/resume/rendered/

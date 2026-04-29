@@ -51,7 +51,7 @@ const {
 const publicNavItems = [
   ['Home', 'home'],
   ['Buildout Plan', 'buildout'],
-  ['Thurr', 'solutions'],
+  ['Thurr Solutions', 'solutions'],
 ];
 
 const socialLinks = {
@@ -822,15 +822,17 @@ function AboutTherranceSection() {
       </div>
       <div className="founder-copy">
         <div className="eyebrow">ABOUT THERRANCE CARROTHERS</div>
-        <h2>Finance-minded automation builder for businesses that need systems, not more busywork.</h2>
+        <h2>AI automation builder with finance, operations, and design-system instincts.</h2>
         <p>
-          Therrance Carrothers builds AI automation systems across lead intake, sales workflows,
-          client onboarding, reporting, and owner visibility. The work starts with the business
-          numbers, then turns repeatable manual steps into production-ready workflows.
+          Therrance Carrothers designs and deploys automation systems using n8n, LLMs, APIs,
+          Supabase, and workflow logic that turns manual business processes into repeatable
+          operating systems.
         </p>
         <p>
-          Thurr is the public buildout engine. Thurr Solutions is the implementation arm behind the
-          systems, proposals, client automations, and private operator workflows.
+          His background blends AI automation, trucking operations, finance, lead intelligence,
+          proposal automation, onboarding systems, and brand-aware UI design. Thurr is the public
+          buildout engine; Thurr Solutions is the implementation arm behind client systems,
+          diagnostic funnels, content assets, and private operator workflows.
         </p>
         <div className="founder-socials" aria-label="Therrance Carrothers social links">
           <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
