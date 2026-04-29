@@ -58,9 +58,41 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        840,
+        1120,
         0
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://right-thurr-audit.vercel.app/api/thurnos-blueprint",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "x-thurnos-secret",
+              "value": "REPLACE_WITH_THURNOS_SHARED_SECRET"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ buildout_request_id: $node['Save Request Through Vercel API'].json.buildout_request_id, payload: $node['Buildout Intake Webhook'].json.body || $node['Buildout Intake Webhook'].json }) }}",
+        "options": {}
+      },
+      "id": "32df5ba8-f979-4e83-a7b8-78b01d9175c7",
+      "name": "Generate Thurnos Blueprint Draft",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        0
+      ],
+      "continueOnFail": true
     },
     {
       "parameters": {
@@ -85,7 +117,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        560,
+        840,
         0
       ],
       "continueOnFail": true
@@ -105,6 +137,17 @@
       ]
     },
     "Save Request Through Vercel API": {
+      "main": [
+        [
+          {
+            "node": "Generate Thurnos Blueprint Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Thurnos Blueprint Draft": {
       "main": [
         [
           {

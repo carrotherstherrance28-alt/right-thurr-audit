@@ -10,10 +10,18 @@ function getNestedValue(source, path) {
   return path.reduce((value, key) => value?.[key], source);
 }
 
+function getPayload(request) {
+  if (typeof request.body === 'string') {
+    return JSON.parse(request.body);
+  }
+
+  return request.body || {};
+}
+
 function mapBuildoutPayloadToSupabaseRow(payload) {
   return {
-    source: payload.source,
-    brand: payload.brand,
+    source: payload.source || 'right-thurr-buildout-page',
+    brand: payload.brand || 'right-thurr',
     name: payload.lead.name,
     email: payload.lead.email,
     phone: payload.lead.phone,
@@ -25,7 +33,7 @@ function mapBuildoutPayloadToSupabaseRow(payload) {
     budget_level: payload.intake.budget_level,
     timeline: payload.intake.timeline,
     biggest_bottleneck: payload.intake.biggest_bottleneck,
-    report_type: payload.routing.report_type,
+    report_type: payload.routing?.report_type || 'right-thurr-autopilot-blueprint',
     status: 'requested',
   };
 }
@@ -47,7 +55,7 @@ export default async function handler(request, response) {
     return;
   }
 
-  const payload = request.body;
+  const payload = getPayload(request);
   const missingFields = requiredFields.filter((path) => !getNestedValue(payload, path));
 
   if (missingFields.length > 0) {
@@ -61,8 +69,11 @@ export default async function handler(request, response) {
 
   const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const supabaseServerKey = supabaseServiceRoleKey || supabaseAnonKey;
+  const preferHeader = supabaseServiceRoleKey ? 'return=representation' : 'return=minimal';
 
-  if (!supabaseUrl || !supabaseAnonKey) {
+  if (!supabaseUrl || !supabaseServerKey) {
     sendJson(response, 500, {
       ok: false,
       status: 'missing_configuration',
@@ -74,10 +85,10 @@ export default async function handler(request, response) {
   const supabaseResponse = await fetch(`${supabaseUrl}/rest/v1/buildout_requests`, {
     method: 'POST',
     headers: {
-      apikey: supabaseAnonKey,
-      Authorization: `Bearer ${supabaseAnonKey}`,
+      apikey: supabaseServerKey,
+      Authorization: `Bearer ${supabaseServerKey}`,
       'Content-Type': 'application/json',
-      Prefer: 'return=minimal',
+      Prefer: preferHeader,
     },
     body: JSON.stringify(mapBuildoutPayloadToSupabaseRow(payload)),
   });
@@ -91,9 +102,13 @@ export default async function handler(request, response) {
     return;
   }
 
+  const savedRows = supabaseServiceRoleKey ? await supabaseResponse.json() : [];
+  const savedRequest = Array.isArray(savedRows) ? savedRows[0] : null;
+
   sendJson(response, 201, {
     ok: true,
     status: 'queued',
     message: 'Blueprint request saved.',
+    buildout_request_id: savedRequest?.id,
   });
 }

@@ -160,14 +160,43 @@ V1 flow:
 Webhook Trigger
 -> HTTP Request to https://right-thurr-audit.vercel.app/api/buildout-request
 -> HTTP Request to private Thurnos blueprint bridge
--> Save generated_report draft
 -> HTTP Request to Discord webhook
 -> Respond to Webhook
 ```
 
 This keeps the first n8n workflow simple. Supabase saving is already handled by the Vercel API
-route, so n8n does not need Supabase credentials until the generated report, starter system,
-launch task, and activity log inserts are moved into n8n.
+routes, so n8n does not need Supabase credentials for V1.
+
+Private bridge URL:
+
+```text
+https://right-thurr-audit.vercel.app/api/thurnos-blueprint
+```
+
+Private bridge header:
+
+```text
+x-thurnos-secret: {{ $env.THURNOS_SHARED_SECRET }}
+```
+
+Private bridge body:
+
+```json
+{
+  "buildout_request_id": "{{ $node['Save Request Through Vercel API'].json.buildout_request_id }}",
+  "payload": "{{ $node['Buildout Intake Webhook'].json.body }}"
+}
+```
+
+Required Vercel server env:
+
+```text
+SUPABASE_SERVICE_ROLE_KEY=
+THURNOS_SHARED_SECRET=
+THURNOS_PROVIDER=openai
+OPENAI_API_KEY=
+THURNOS_OPENAI_MODEL=gpt-5.2
+```
 
 After importing, activate the workflow and copy the production webhook URL into Vercel:
 

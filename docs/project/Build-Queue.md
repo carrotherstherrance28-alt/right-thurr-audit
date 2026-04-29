@@ -143,6 +143,8 @@ All tasks should use a plan-first automation loop before build work starts:
 - [ ] Create Activity Log event schema.
 - [ ] Build n8n intake workflow.
 - [x] Add AI blueprint generation prompt chain.
+- [x] Add private n8n -> Thurnos bridge endpoint.
+- [x] Add generated report/system/task/activity draft persistence path.
 - [ ] Add email delivery step.
 - [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
@@ -193,7 +195,8 @@ Daily session:
 - [x] Added Thurnos OpenAI/Discord orchestration notes.
 - [x] Installed Remotion with `ThurrIntro` vertical content starter.
 - [x] Added Thurnos blueprint draft script and n8n mapping guide.
+- [x] Added private Thurnos blueprint bridge API and Supabase persistence path.
 
 ## Next Task
 
-Add the private n8n -> Thurnos bridge endpoint, then save generated report/system/task/activity draft records after a buildout request.
+Add `SUPABASE_SERVICE_ROLE_KEY` and `THURNOS_SHARED_SECRET` to Vercel, then update the active n8n workflow to call `/api/thurnos-blueprint` after `/api/buildout-request`.

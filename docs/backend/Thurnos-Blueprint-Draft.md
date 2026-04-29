@@ -79,32 +79,101 @@ Recommended first n8n implementation:
 Buildout Intake Webhook
 -> Save Request Through Vercel API
 -> HTTP Request: Thurnos Blueprint Draft
--> Supabase/API: Save generated_report draft
 -> Discord: Blueprint Draft Ready
 -> Respond Blueprint Queued
 ```
 
-### HTTP Request: Thurnos Blueprint Draft
+The private bridge saves the generated report, starter system, launch tasks, and activity log
+records. n8n does not need direct Supabase credentials for V1.
 
-Use this only after a private bridge exists.
+### HTTP Request: Thurnos Blueprint Draft
 
 ```txt
 Method: POST
-URL: {{ $env.THURNOS_BLUEPRINT_URL }}
-Authentication: Header Auth or signed secret
+URL: https://right-thurr-audit.vercel.app/api/thurnos-blueprint
+Authentication: Header Auth
+Header Name: x-thurnos-secret
+Header Value: {{ $env.THURNOS_SHARED_SECRET }}
 Send Body: JSON
-Body: {{ $node["Buildout Intake Webhook"].json.body }}
+Body:
+{
+  "buildout_request_id": "{{ $node['Save Request Through Vercel API'].json.buildout_request_id }}",
+  "payload": {{ $node["Buildout Intake Webhook"].json.body }}
+}
 Continue On Fail: true during first tests
 ```
 
-Required private bridge env:
+Required Vercel server env:
 
 ```txt
-THURNOS_BLUEPRINT_URL=
+SUPABASE_SERVICE_ROLE_KEY=
 THURNOS_SHARED_SECRET=
+THURNOS_PROVIDER=openai
+OPENAI_API_KEY=
+THURNOS_OPENAI_MODEL=gpt-5.2
 ```
 
 Do not call local Ollama directly from public Vercel.
+
+For a local/private worker version later, point n8n to a private machine endpoint that runs the
+same `generateBlueprintDraft` logic against Ollama.
+
+## Private Bridge Endpoint
+
+Live route:
+
+```txt
+POST /api/thurnos-blueprint
+```
+
+Security:
+
+```txt
+x-thurnos-secret: <same value as THURNOS_SHARED_SECRET in Vercel>
+```
+
+Request:
+
+```json
+{
+  "buildout_request_id": "uuid-from-buildout-request-save",
+  "payload": {
+    "lead": {},
+    "intake": {},
+    "routing": {}
+  }
+}
+```
+
+Dry-run test without saving:
+
+```json
+{
+  "dry_run": true,
+  "payload": {
+    "lead": {},
+    "intake": {},
+    "routing": {}
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "ok": true,
+  "status": "draft_generated_and_saved",
+  "buildout_request_id": "",
+  "draft": {},
+  "persistence": {
+    "system_id": "",
+    "generated_report_id": "",
+    "task_ids": [],
+    "activity_log_ids": []
+  }
+}
+```
 
 ## Supabase Mapping
 
