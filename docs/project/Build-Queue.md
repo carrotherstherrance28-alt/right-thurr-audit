@@ -58,15 +58,15 @@ All tasks should use a plan-first automation loop before build work starts:
 
 ## External Setup Tasks
 
-- [ ] Confirm whether GitHub repo should stay `right-thurr-audit` or be renamed to `right-thurr`.
-- [ ] Push local repo to GitHub after first commit.
-- [ ] Create Vercel project for Right Thurr.
+- [x] Confirm repo can stay `right-thurr-audit` for the current buildout MVP.
+- [x] Push local repo to GitHub after first commit.
+- [x] Create Vercel project for Right Thurr.
 - [x] Create/import Vercel project for Right Thurr.
 - [x] Verify live Vercel deployment URL.
 - [x] Add Vercel environment variable `VITE_N8N_BUILDOUT_WEBHOOK_URL`.
 - [x] Add Vercel environment variables for Supabase intake after Supabase exists.
 - [x] Redeploy Vercel after environment variables are added.
-- [ ] Create Supabase project.
+- [x] Create Supabase project.
 - [x] Create Supabase project.
 - [x] Store Supabase project URL and anon key locally in ignored `.env.local`.
 - [x] Add Supabase MVP schema and setup docs.
@@ -120,7 +120,7 @@ All tasks should use a plan-first automation loop before build work starts:
 
 ## Phase 3: Right Thurr App MVP
 
-- [ ] Add Start Build onboarding form.
+- [x] Add Start Build onboarding form.
 - [x] Create 3 generated Autopilot Blueprint report screenshot options.
 - [x] Add generated Autopilot Blueprint view.
 - [x] Create 3 Activity Feed screen options before coding.
@@ -139,7 +139,7 @@ All tasks should use a plan-first automation loop before build work starts:
 
 ## Phase 4: Backend Execution Engine
 
-- [ ] Define n8n webhook payload.
+- [x] Define n8n webhook payload.
 - [x] Define n8n webhook payload.
 - [x] Create Supabase table schema.
 - [x] Create Activity Log event schema.

@@ -210,7 +210,7 @@ sending email.
 - [x] Confirm report becomes `approved_for_delivery`.
 - [x] Confirm request becomes `approved_for_delivery`.
 - [x] Confirm activity log contains `report_approved_for_delivery`.
-- [ ] Add email provider env vars.
+- [x] Add email provider env vars.
 - [x] Call `/api/approve-report` with `send_email: true` only for an approved test recipient.
 - [x] Confirm activity log contains `report_email_sent`.
 
