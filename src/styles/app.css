@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 120px;
 }
 
 body {
@@ -1031,6 +1032,7 @@ textarea:focus {
 }
 
 .founder-section {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(280px, 0.34fr) minmax(0, 1fr);
   gap: var(--s-8);
@@ -1041,9 +1043,25 @@ textarea:focus {
   border: var(--bw-loud) solid var(--rt-ink-900);
   box-shadow: var(--shadow-stamp-orange);
   color: var(--rt-paper-cold);
+  overflow: hidden;
+  scroll-margin-top: 120px;
+}
+
+.founder-watermark {
+  position: absolute;
+  right: clamp(-80px, -4vw, -32px);
+  bottom: clamp(-70px, -4vw, -24px);
+  width: min(52vw, 600px);
+  max-width: 70%;
+  opacity: 0.13;
+  filter: grayscale(1) contrast(1.25);
+  pointer-events: none;
+  transform: rotate(-9deg);
 }
 
 .founder-stamp {
+  position: relative;
+  z-index: 1;
   display: grid;
   align-content: end;
   gap: var(--s-3);
@@ -1077,6 +1095,8 @@ textarea:focus {
 }
 
 .founder-copy {
+  position: relative;
+  z-index: 1;
   display: grid;
   align-content: center;
   padding: var(--s-4) var(--s-2);
@@ -2874,10 +2894,20 @@ dd {
   .founder-section {
     padding: var(--s-4);
     transform: none;
+    scroll-margin-top: 110px;
   }
 
   .founder-stamp {
     min-height: 260px;
+  }
+
+  .founder-watermark {
+    right: -84px;
+    bottom: auto;
+    top: 92px;
+    width: 360px;
+    max-width: none;
+    opacity: 0.12;
   }
 
   .founder-copy h2 {

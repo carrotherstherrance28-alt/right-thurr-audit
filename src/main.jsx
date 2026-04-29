@@ -240,6 +240,26 @@ function App() {
   }, [canViewOperator, page]);
 
   useEffect(() => {
+    if (page !== 'home' || window.location.hash !== '#about-therrance') {
+      return undefined;
+    }
+
+    const timeout = window.setTimeout(() => {
+      const target = document.getElementById('about-therrance');
+      const topbarHeight = document.querySelector('.topbar')?.getBoundingClientRect().height || 0;
+
+      if (target) {
+        window.scrollTo({
+          top: target.getBoundingClientRect().top + window.scrollY - topbarHeight - 40,
+          behavior: 'smooth',
+        });
+      }
+    }, 80);
+
+    return () => window.clearTimeout(timeout);
+  }, [page]);
+
+  useEffect(() => {
     if (!isOperatorPreview) {
       return undefined;
     }
@@ -306,7 +326,17 @@ function App() {
     setPage('home');
     setMenuOpen(false);
     window.setTimeout(() => {
-      document.getElementById('about-therrance')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const target = document.getElementById('about-therrance');
+      const topbarHeight = document.querySelector('.topbar')?.getBoundingClientRect().height || 0;
+
+      if (!target) {
+        return;
+      }
+
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - topbarHeight - 40,
+        behavior: 'smooth',
+      });
     }, 0);
   }
 
@@ -878,6 +908,7 @@ function HomePage({ form, updateField, handleSubmit, submissionState, currentSte
 function AboutTherranceSection() {
   return (
     <section className="founder-section" id="about-therrance">
+      <img className="founder-watermark" src={monogram} alt="" aria-hidden="true" />
       <div className="founder-stamp">
         <span>Founder / Operator</span>
         <strong>Therrance Carrothers</strong>
