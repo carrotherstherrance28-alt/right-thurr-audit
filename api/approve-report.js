@@ -203,10 +203,10 @@ export default async function handler(request, response) {
     );
 
     await patchRows(`generated_reports?id=eq.${encodeURIComponent(reportId)}`, {
-      report_status: sendEmail ? 'delivered' : 'approved_for_delivery',
+      report_status: 'approved_for_delivery',
     });
     await patchRows(`buildout_requests?id=eq.${encodeURIComponent(buildoutRequestId)}`, {
-      status: sendEmail ? 'delivered' : 'approved_for_delivery',
+      status: 'approved_for_delivery',
     });
 
     await insertActivityLog({
@@ -225,6 +225,13 @@ export default async function handler(request, response) {
       : { status: 'not_requested' };
 
     if (sendEmail && emailDelivery.status === 'sent') {
+      await patchRows(`generated_reports?id=eq.${encodeURIComponent(reportId)}`, {
+        report_status: 'delivered',
+      });
+      await patchRows(`buildout_requests?id=eq.${encodeURIComponent(buildoutRequestId)}`, {
+        status: 'delivered',
+      });
+
       await insertActivityLog({
         system_id: report.system_id,
         buildout_request_id: buildoutRequestId,
