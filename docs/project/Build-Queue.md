@@ -106,7 +106,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Build Right Thurr product landing page first pass.
 - [x] Build AI Business Buildout Plan landing page first pass.
 - [x] Build Thurr Solutions B2B services page first pass.
-- [ ] Add brand boundary notes to reusable client template docs.
+- [x] Add brand boundary notes to reusable client template docs.
 - [ ] Create shared website header/footer components.
 - [x] Add basic SEO metadata.
 - [x] Add founder/operator trust section for Thurr Solutions.
@@ -184,6 +184,7 @@ Daily session:
 - [x] Updated basic SEO metadata, canonical URL, sitemap, robots, and web manifest for Thurr Solutions.
 - [x] Added analytics event plan for CTA, buildout form, blueprint report, booked-call intent, social, owner, and backend activity tracking.
 - [x] Added LinkedIn-first B2B content plan with 4-week starter calendar, post formats, CTA rules, and measurement loop.
+- [x] Added client template brand boundary rules for owned Thurr assets vs re-skinned client funnels.
 - [x] Sent a live QA Right Thurr buildout request through n8n.
 - [x] Verified n8n execution finished successfully.
 - [x] Verified the Discord `#leads-alerts` node ran in the successful execution.
