@@ -255,7 +255,8 @@ Daily session:
 - [x] Expanded owner Report Review Queue cards with intake details, contact/source, CRM lifecycle status, CRM tags, and generated blueprint sections.
 - [x] Pushed review queue detail expansion to GitHub at commit `4a3093e`; Vercel production deploy is blocked until the free daily deployment limit resets.
 - [x] Checked Supabase CRM fields through the REST API; migration is still missing because `buildout_requests.lead_status` does not exist yet.
+- [x] Deployed latest `main` at commit `93b4088` and verified unauthenticated `/api/review-reports` returns `401` on both production aliases.
 
 ## Next Task
 
-Run `docs/backend/Supabase-CRM-Fields-Migration.sql` in Supabase SQL Editor, then after the Vercel daily deployment limit resets deploy latest `main` and verify one fresh buildout request moves through `requested -> awaiting_review -> approved_for_delivery` with CRM tags visible in the owner queue.
+Run `docs/backend/Supabase-CRM-Fields-Migration.sql` in Supabase SQL Editor, then verify one fresh buildout request moves through `requested -> awaiting_review -> approved_for_delivery` with CRM tags visible in Supabase and ready for the owner queue once owner auth/RLS is finalized.
