@@ -243,6 +243,7 @@ Daily session:
 - [x] Deploy owner Report Review Queue after Vercel daily deployment limit resets.
 - [x] Smoke-test `/api/review-reports` on production and `build.thurrsolutions.com`; unauthenticated requests return `401`.
 - [x] Added CRM tagging through `crm_tag_applied` activity events and optional `buildout_requests` CRM fields (`lead_status`, `crm_tags`, `last_activity_at`) when the Supabase migration is installed.
+- [x] Deployed CRM tagging code and verified production approval-only QA writes three `crm_tag_applied` events.
 
 ## Next Task
 

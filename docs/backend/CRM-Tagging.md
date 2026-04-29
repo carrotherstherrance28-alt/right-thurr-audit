@@ -113,3 +113,19 @@ Supabase activity_logs crm_tag_applied
 
 Keep contact details in Supabase by default. External tools should receive only the data needed for
 the workflow they own.
+
+## Production Verification
+
+2026-04-29 production approval-only QA confirmed the activity-log CRM path:
+
+```text
+crm_tag_applied:completed
+blueprint_draft_generated:draft
+crm_tag_applied:completed
+manual_review_required:needs_review
+report_approved_for_delivery:completed
+crm_tag_applied:completed
+```
+
+The optional `lead_status`, `crm_tags`, and `last_activity_at` fields still require the Supabase
+CRM field migration before they persist on `buildout_requests`.
