@@ -576,6 +576,60 @@ function CommandCenterPage({ authSession, setPage }) {
   );
 }
 
+function formatReviewDate(value) {
+  if (!value) {
+    return 'Not stamped yet';
+  }
+
+  return new Date(value).toLocaleString();
+}
+
+function formatReportSectionTitle(key) {
+  return key
+    .replaceAll('_', ' ')
+    .replaceAll('-', ' ')
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function formatReportSectionValue(value) {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => (typeof item === 'object' ? Object.values(item).filter(Boolean).join(' — ') : item))
+      .filter(Boolean)
+      .join('\n');
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.entries(value)
+      .map(([key, entryValue]) => `${formatReportSectionTitle(key)}: ${formatReportSectionValue(entryValue)}`)
+      .filter(Boolean)
+      .join('\n');
+  }
+
+  return String(value || '').trim();
+}
+
+function getReportSections(sections) {
+  if (!sections || typeof sections !== 'object') {
+    return [];
+  }
+
+  return Object.entries(sections)
+    .map(([key, value]) => ({
+      title: formatReportSectionTitle(key),
+      body: formatReportSectionValue(value),
+    }))
+    .filter((section) => section.body);
+}
+
+function getExternalHref(value) {
+  if (!value) {
+    return '';
+  }
+
+  return /^https?:\/\//i.test(value) ? value : `https://${value}`;
+}
+
 function ReportReviewQueue({ authSession }) {
   const [reports, setReports] = useState([]);
   const [reviewStatus, setReviewStatus] = useState('loading');
@@ -670,22 +724,36 @@ function ReportReviewQueue({ authSession }) {
             <p>New blueprint drafts will appear here after intake and generation finish.</p>
           </article>
         )}
-        {reports.map((report) => (
-          <article className="review-report-card" key={report.id}>
-            <div className="review-report-meta">
-              <span>{report.report_status.replaceAll('_', ' ')}</span>
-              <time>{new Date(report.updated_at || report.created_at).toLocaleString()}</time>
-            </div>
-            <h3>{report.title}</h3>
-            <p>{report.summary}</p>
+        {reports.map((report) => {
+          const sections = getReportSections(report.sections);
+          const crmTags = report.request?.crm_tags || [];
+          const leadStatus = report.request?.lead_status || report.request?.status || 'awaiting review';
+          const sourceHref = getExternalHref(report.request?.website_or_social);
+
+          return (
+            <article className="review-report-card" key={report.id}>
+              <div className="review-report-meta">
+                <span>{report.report_status.replaceAll('_', ' ')}</span>
+                <time>{formatReviewDate(report.updated_at || report.created_at)}</time>
+              </div>
+              <h3>{report.title}</h3>
+              <p>{report.summary}</p>
             <div className="review-report-grid">
               <div>
                 <span>Lead</span>
                 <strong>{report.request?.name || 'Unknown lead'}</strong>
               </div>
               <div>
+                <span>Contact</span>
+                <strong>{report.request?.email || report.request?.phone || 'Not set'}</strong>
+              </div>
+              <div>
                 <span>Industry</span>
                 <strong>{report.request?.industry || 'Not set'}</strong>
+              </div>
+              <div>
+                <span>Goal</span>
+                <strong>{report.request?.main_goal || 'Not set'}</strong>
               </div>
               <div>
                 <span>System</span>
@@ -696,6 +764,48 @@ function ReportReviewQueue({ authSession }) {
                 <strong>{report.system?.next_move || report.request?.main_goal || 'Review draft'}</strong>
               </div>
             </div>
+              <div className="review-intake-details">
+                <div>
+                  <span>Idea / Request</span>
+                  <p>{report.request?.business_idea || 'No intake idea captured.'}</p>
+                </div>
+                <div>
+                  <span>Bottleneck</span>
+                  <p>{report.request?.biggest_bottleneck || 'No bottleneck captured.'}</p>
+                </div>
+                <div>
+                  <span>Source</span>
+                  {sourceHref ? (
+                    <a href={sourceHref} target="_blank" rel="noreferrer">
+                      Open source link
+                      <ArrowUpRight size={15} strokeWidth={3} />
+                    </a>
+                  ) : (
+                    <p>No website/social link captured.</p>
+                  )}
+                </div>
+              </div>
+              <div className="review-crm-strip" aria-label="CRM status">
+                <span>{leadStatus.replaceAll('_', ' ')}</span>
+                {crmTags.length > 0 ? (
+                  crmTags.map((tag) => <span key={tag}>{tag}</span>)
+                ) : (
+                  <span>crm tags pending</span>
+                )}
+              </div>
+              {sections.length > 0 && (
+                <details className="review-report-sections">
+                  <summary>Review generated blueprint sections</summary>
+                  <div className="review-section-grid">
+                    {sections.slice(0, 8).map((section) => (
+                      <section key={section.title}>
+                        <span>{section.title}</span>
+                        <p>{section.body}</p>
+                      </section>
+                    ))}
+                  </div>
+                </details>
+              )}
             <div className="review-report-actions">
               {report.report_status === 'needs_review' ? (
                 <button
@@ -712,8 +822,9 @@ function ReportReviewQueue({ authSession }) {
               )}
               <small>Email send waits for one approved test recipient.</small>
             </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
 
       {reviewMessage && reviewStatus !== 'error' && <p className="form-note">{reviewMessage}</p>}

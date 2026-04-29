@@ -1794,6 +1794,10 @@ textarea:focus {
 .review-empty-state span,
 .review-report-meta span,
 .review-report-grid span,
+.review-intake-details span,
+.review-crm-strip span,
+.review-report-sections summary,
+.review-section-grid span,
 .review-ready-stamp {
   color: var(--rt-orange-700);
   font-family: var(--font-subhead);
@@ -1852,6 +1856,76 @@ textarea:focus {
 .review-report-grid strong {
   font-size: var(--text-base);
   line-height: var(--leading-tight);
+}
+
+.review-intake-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.review-intake-details div {
+  display: grid;
+  gap: var(--s-2);
+  min-height: 116px;
+  padding: var(--s-4);
+  border: var(--bw-thin) solid rgba(26, 24, 21, 0.22);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.review-intake-details a {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: var(--s-1);
+  color: var(--rt-ink-900);
+  font-weight: 800;
+}
+
+.review-crm-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.review-crm-strip span {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  padding: 0 var(--s-3);
+  border: var(--bw-thin) solid rgba(217, 98, 31, 0.48);
+  background: rgba(217, 98, 31, 0.1);
+  color: var(--rt-orange-700);
+}
+
+.review-report-sections {
+  border: var(--bw-thin) solid var(--rt-ink-200);
+  background: var(--rt-paper-cold);
+}
+
+.review-report-sections summary {
+  cursor: pointer;
+  padding: var(--s-4);
+  color: var(--rt-ink-900);
+}
+
+.review-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+  padding: 0 var(--s-4) var(--s-4);
+}
+
+.review-section-grid section {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  border: var(--bw-thin) solid rgba(26, 24, 21, 0.18);
+  background: var(--rt-paper);
+}
+
+.review-section-grid p {
+  white-space: pre-line;
 }
 
 .review-ready-stamp {
@@ -3018,6 +3092,10 @@ dd {
   .founder-section {
     grid-template-columns: 1fr;
   }
+
+  .review-intake-details {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -3123,6 +3201,8 @@ dd {
   .buildout-form,
   .report-metric-grid,
   .report-card-grid,
+  .review-report-grid,
+  .review-section-grid,
   .system-asset-grid,
   .export-report-summary,
   .export-report-metrics,

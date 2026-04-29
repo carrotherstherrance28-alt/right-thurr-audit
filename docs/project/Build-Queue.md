@@ -244,7 +244,10 @@ Daily session:
 - [x] Smoke-test `/api/review-reports` on production and `build.thurrsolutions.com`; unauthenticated requests return `401`.
 - [x] Added CRM tagging through `crm_tag_applied` activity events and optional `buildout_requests` CRM fields (`lead_status`, `crm_tags`, `last_activity_at`) when the Supabase migration is installed.
 - [x] Deployed CRM tagging code and verified production approval-only QA writes three `crm_tag_applied` events.
+- [x] Cleaned stale local Paperclip and old dashboard files into the Mac Trash while keeping the Paperclip JSON archive.
+- [x] Fixed display-font spacing and added LinkedIn/Instagram/Email to the public menu.
+- [x] Expanded owner Report Review Queue cards with intake details, contact/source, CRM lifecycle status, CRM tags, and generated blueprint sections.
 
 ## Next Task
 
-Run the CRM field migration in Supabase, then deploy and verify a fresh buildout request writes CRM tags and lifecycle status.
+Run the CRM field migration in Supabase if it has not already been applied, then verify one fresh buildout request moves through `requested -> awaiting_review -> approved_for_delivery` with CRM tags visible in the owner queue.
