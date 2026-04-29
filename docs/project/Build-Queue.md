@@ -218,6 +218,7 @@ Daily session:
 - [x] Reran n8n production webhook test and verified Supabase received generated report, system, 10 tasks, and activity log without manual intervention.
 - [x] Added manual review mode to the Thurnos bridge: new reports default to `needs_review`, requests to `awaiting_review`, systems to `review`, and first task to operator approval.
 - [x] Verified manual review mode locally with Supabase persistence.
+- [x] Verified manual review mode in production through the active n8n webhook.
 - [x] Added `We build. You profit.` Option B to the Thurr Solutions proof card.
 - [x] Replaced visible `Thurr Solutions LLC` labels with `Thurr` while keeping the top-left `Thurr Solutions` lockup.
 - [x] Ran desktop/mobile accessibility QA for the Thurr Solutions page: accessible names, image alt text, heading structure, tap target size, and horizontal overflow all passed.
@@ -225,4 +226,4 @@ Daily session:
 
 ## Next Task
 
-Deploy manual review mode, run one live n8n webhook test to confirm production now writes `awaiting_review`, then add approved email delivery.
+Add approved email delivery: only send a prospect email after a report is approved for delivery.

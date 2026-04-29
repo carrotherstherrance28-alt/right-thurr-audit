@@ -44,6 +44,9 @@ Vercel Production is configured with VITE_N8N_BUILDOUT_WEBHOOK_URL.
 10 tasks, and 1 activity log without manual intervention.
 2026-04-29: Manual review mode was added to the bridge. New reports default to `needs_review`
 and requests default to `awaiting_review` before external delivery is added.
+2026-04-29: Full n8n production webhook test confirmed manual review mode end to end:
+request `awaiting_review`, report `needs_review`, system `review`, operator review task created,
+and `manual_review_required` activity log written.
 ```
 
 Current production flow:
