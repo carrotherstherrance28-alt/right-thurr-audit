@@ -11,6 +11,7 @@ export function SiteHeader({
   page,
   publicNavItems,
   setMenuOpen,
+  socialLinks,
 }) {
   return (
     <header className="topbar">
@@ -51,6 +52,20 @@ export function SiteHeader({
               <button className="nav-tab" type="button" onClick={navigateToAbout}>
                 About Therrance
               </button>
+              <div className="nav-social-links" aria-label="Therrance Carrothers social links">
+                <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
+                  <Linkedin size={16} strokeWidth={3} />
+                  LinkedIn
+                </a>
+                <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
+                  <Instagram size={16} strokeWidth={3} />
+                  Instagram
+                </a>
+                <a href="mailto:hello@thurrsolutions.com">
+                  <Mail size={16} strokeWidth={3} />
+                  Email
+                </a>
+              </div>
               {canViewOperator &&
                 operatorNavItems.map(([label, target]) => (
                   <button

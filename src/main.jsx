@@ -403,6 +403,7 @@ function App() {
         page={page}
         publicNavItems={publicNavItems}
         setMenuOpen={setMenuOpen}
+        socialLinks={socialLinks}
       />
 
       {isOperatorPreview && !canViewOperator ? (
@@ -1008,7 +1009,10 @@ function AboutTherranceSection() {
       <img className="founder-watermark" src={monogram} alt="" aria-hidden="true" />
       <div className="founder-stamp">
         <span>Founder / Operator</span>
-        <strong>Therrance Carrothers</strong>
+        <strong>
+          <span className="founder-name-line">Therrance</span>
+          <span className="founder-name-line">Carrothers</span>
+        </strong>
       </div>
       <div className="founder-copy">
         <div className="eyebrow">ABOUT THERRANCE CARROTHERS</div>
