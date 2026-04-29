@@ -6,7 +6,7 @@ Last updated: 2026-04-29
 
 ## Current Priority
 
-Run the CRM field migration, then verify the owner review queue detail path with one fresh buildout request.
+Finalize owner auth/RLS before showing real private lead/report data in the owner UI.
 
 This is the next trust-boundary task because intake, blueprint generation, manual review status,
 Discord alerts, approval-only review, and approved Resend delivery are already working.
@@ -15,8 +15,8 @@ Discord alerts, approval-only review, and approved Resend delivery are already w
 
 | Area | Status | Complete | Blocked By | Next Action |
 | --- | --- | --- | --- | --- |
-| Vercel | Live | `right-thurr-audit` deploy is live at commit `93b4088`, production env includes Supabase, n8n webhook, Thurnos/OpenAI, Resend, and bridge secrets. `/api/buildout-request`, `/api/thurnos-blueprint`, `/api/approve-report`, `/api/review-reports`, and `/api/owner-access` exist. Unauthenticated `/api/review-reports` returns `401` on both `right-thurr-audit.vercel.app` and `build.thurrsolutions.com`. | None right now. Future deploys may still hit the free daily deployment limit if we push too often. | Run the Supabase CRM field migration, then verify a fresh buildout request after owner auth/RLS direction is decided. |
-| Supabase | Live / migration needed | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, RLS, and persistence for requests/reports/systems/tasks/activity are in place. CRM tagging writes verified `crm_tag_applied` activity events. REST verification on 2026-04-29 showed `buildout_requests.lead_status` does not exist yet, so optional CRM fields are not installed. | User-owned Supabase login for SQL Editor changes; server-only keys must stay out of docs and client env. | Run `docs/backend/Supabase-CRM-Fields-Migration.sql`, then keep Supabase as the source of truth; harden owner RLS before loading real private operator/client records in the UI. |
+| Vercel | Live | `right-thurr-audit` deploy is live at commit `93b4088`, production env includes Supabase, n8n webhook, Thurnos/OpenAI, Resend, and bridge secrets. `/api/buildout-request`, `/api/thurnos-blueprint`, `/api/approve-report`, `/api/review-reports`, and `/api/owner-access` exist. Unauthenticated `/api/review-reports` returns `401` on both `right-thurr-audit.vercel.app` and `build.thurrsolutions.com`. | None right now. Future deploys may still hit the free daily deployment limit if we push too often. | Finalize owner auth/RLS before loading real private report data in the UI. |
+| Supabase | Live | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, RLS, and persistence for requests/reports/systems/tasks/activity are in place. CRM fields are installed; REST verification on 2026-04-29 returned `lead_status`, `crm_tags`, and `last_activity_at`. A fresh lifecycle QA request moved from intake to `awaiting_review` to `approved_for_delivery`, with `approved_for_follow_up` and `blueprint-approved` / `approved-for-follow-up` tags. | User-owned Supabase login for future SQL/RLS changes; server-only keys must stay out of docs and client env. | Harden owner RLS before loading real private operator/client records in the UI. |
 | n8n | Live | Workflow `Right Thurr - Buildout Plan Intake` is active. Production webhook saves intake, calls the Thurnos blueprint bridge, creates draft report/system/tasks/activity, and returns queued status. | n8n login/credentials for workflow edits; production webhook and bridge secret must stay private. | Add approval/email delivery workflow after Resend is configured. |
 | Discord | Live | `#leads-alerts` webhook is connected through n8n as a non-blocking privacy-safe alert. Live QA showed the Discord node ran successfully. | Discord webhook URL is sensitive; channel privacy must be confirmed before posting contact details. | Keep V1 alerts privacy-safe; optionally add review/delivery confirmation alerts. |
 | Slack | Optional / blocked | Slack node exists in n8n as a non-blocking side branch, so failed Slack delivery does not break intake. | Current n8n Slack credential returned `channel_not_found` for `general` and `new-clients`. Needs Slack workspace/channel access cleanup. | Leave optional until team/client operations need it; reconnect credential and test `new-clients` later. |
@@ -53,7 +53,7 @@ Public buildout form
 Do next:
 
 ```text
-Run `docs/backend/Supabase-CRM-Fields-Migration.sql` in Supabase SQL Editor, then verify a fresh buildout request writes CRM tags and lifecycle status visible in the owner queue.
+Finalize owner auth/RLS, then connect the owner queue to the verified CRM lifecycle fields.
 ```
 
 Do not do yet:

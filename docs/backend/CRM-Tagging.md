@@ -51,7 +51,7 @@ On blueprint generation with manual review:
 
 ```text
 lead_status: blueprint_ready_for_review
-blueprint-needs-review
+blueprint-ready-for-review
 report-draft-ready
 ```
 
@@ -60,7 +60,7 @@ On approval without sending:
 ```text
 lead_status: approved_for_follow_up
 blueprint-approved
-ready-for-delivery
+approved-for-follow-up
 ```
 
 On approval with requested delivery:

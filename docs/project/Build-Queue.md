@@ -256,7 +256,9 @@ Daily session:
 - [x] Pushed review queue detail expansion to GitHub at commit `4a3093e`; Vercel production deploy is blocked until the free daily deployment limit resets.
 - [x] Checked Supabase CRM fields through the REST API; migration is still missing because `buildout_requests.lead_status` does not exist yet.
 - [x] Deployed latest `main` at commit `93b4088` and verified unauthenticated `/api/review-reports` returns `401` on both production aliases.
+- [x] Ran Supabase CRM field migration and verified REST reads now return `lead_status`, `crm_tags`, and `last_activity_at`.
+- [x] Verified a fresh CRM lifecycle request: intake wrote request tags, blueprint generation moved it to `awaiting_review`, approval-only mode moved it to `approved_for_delivery`, and Supabase showed `approved_for_follow_up` with `blueprint-approved` / `approved-for-follow-up` tags.
 
 ## Next Task
 
-Run `docs/backend/Supabase-CRM-Fields-Migration.sql` in Supabase SQL Editor, then verify one fresh buildout request moves through `requested -> awaiting_review -> approved_for_delivery` with CRM tags visible in Supabase and ready for the owner queue once owner auth/RLS is finalized.
+Finalize owner auth/RLS before showing real private lead/report data in the owner UI, then wire the owner queue to the now-verified CRM lifecycle fields.

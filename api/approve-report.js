@@ -286,7 +286,7 @@ export default async function handler(request, response) {
       action_type: 'crm_tag_applied',
       summary: sendEmail
         ? 'Lead tagged: blueprint-approved, delivery-requested'
-        : 'Lead tagged: blueprint-approved, ready-for-delivery',
+        : 'Lead tagged: blueprint-approved, approved-for-follow-up',
       status: 'completed',
     });
 

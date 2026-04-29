@@ -175,7 +175,7 @@ async function persistBlueprintDraft({ buildoutRequestId, draft, payload, manual
         {
           agent_name: 'CRM Agent',
           action_type: 'crm_tag_applied',
-          summary: 'Lead tagged: blueprint-needs-review, report-draft-ready',
+          summary: 'Lead tagged: blueprint-ready-for-review, report-draft-ready',
           status: 'completed',
         },
         {
