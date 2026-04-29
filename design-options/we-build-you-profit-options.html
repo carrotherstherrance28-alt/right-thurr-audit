@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We Build. You Profit. Placement Options</title>
+    <link rel="stylesheet" href="../src/styles/brand-tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--rt-paper);
+        color: var(--rt-ink-900);
+        font-family: var(--font-body);
+      }
+      .option {
+        position: relative;
+        min-height: 100vh;
+        display: none;
+        grid-template-rows: auto 1fr;
+        overflow: hidden;
+        border-bottom: 8px solid var(--rt-ink-900);
+      }
+      .option:target { display: grid; }
+      body:not(:has(.option:target)) #option-a { display: grid; }
+      .option-label {
+        position: absolute;
+        top: 94px;
+        left: 32px;
+        z-index: 5;
+        padding: 8px 12px;
+        background: var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px 34px;
+        border-bottom: 4px solid var(--rt-ink-900);
+        background: rgba(245, 239, 226, 0.96);
+        color: var(--rt-ink-900);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .mark {
+        width: 54px;
+        height: 54px;
+        object-fit: contain;
+      }
+      nav {
+        display: flex;
+        gap: 22px;
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        font-size: 12px;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.72fr);
+        gap: 58px;
+        align-items: center;
+        padding: 76px 64px 64px;
+      }
+      .eyebrow {
+        margin-bottom: 18px;
+        color: var(--rt-orange-600);
+        font-family: var(--font-subhead);
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0 0 22px;
+        font-family: var(--font-display-rt);
+        font-size: clamp(68px, 8vw, 118px);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+      p {
+        max-width: 680px;
+        margin: 0;
+        color: var(--rt-ink-700);
+        font-size: 21px;
+        line-height: 1.48;
+      }
+      .actions {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 32px;
+      }
+      .button,
+      .textlink,
+      .profit-badge,
+      .profit-ribbon,
+      .profit-card span,
+      .metric span,
+      .feed time {
+        font-family: var(--font-subhead);
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 62px;
+        padding: 0 24px;
+        background: var(--rt-orange-500);
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 6px 6px 0 var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+      }
+      .textlink {
+        color: var(--rt-ink-900);
+        font-size: 13px;
+      }
+      .panel {
+        min-height: 560px;
+        padding: 34px;
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 8px 8px 0 var(--rt-ink-900);
+        background: var(--rt-paper-cold);
+      }
+      .dark-panel {
+        background: var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+      }
+      .dark-panel p { color: var(--rt-paper); }
+      .profit-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
+        padding: 10px 14px;
+        background: var(--rt-ink-900);
+        border: 3px solid var(--rt-orange-500);
+        color: var(--rt-paper-cold);
+        box-shadow: 5px 5px 0 var(--rt-orange-500);
+        transform: rotate(-1.4deg);
+      }
+      .profit-badge b,
+      .profit-ribbon b,
+      .profit-card b {
+        color: var(--rt-orange-500);
+      }
+      .profit-ribbon {
+        width: fit-content;
+        margin: 26px 0 0;
+        padding: 12px 18px;
+        background: var(--rt-ink-900);
+        border: 3px solid var(--rt-orange-500);
+        color: var(--rt-paper-cold);
+        box-shadow: 7px 7px 0 var(--rt-orange-500);
+        transform: rotate(-2deg);
+      }
+      .proof-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 42px;
+      }
+      .metric {
+        display: grid;
+        gap: 8px;
+        padding: 18px;
+        border: 2px solid currentColor;
+      }
+      .metric span {
+        color: var(--rt-orange-400);
+        font-size: 12px;
+      }
+      .metric strong {
+        font-size: 24px;
+      }
+      .feed {
+        display: grid;
+        gap: 12px;
+        margin-top: 34px;
+      }
+      .feed div {
+        display: grid;
+        grid-template-columns: 70px 24px 1fr;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        background: var(--rt-paper-cold);
+        border: 3px solid var(--rt-ink-900);
+      }
+      .feed time {
+        color: var(--rt-ink-600);
+        font-size: 12px;
+      }
+      .option-a {
+        background:
+          linear-gradient(90deg, rgba(26, 23, 20, 0.05) 1px, transparent 1px) 0 0 / 52px 52px,
+          linear-gradient(rgba(26, 23, 20, 0.05) 1px, transparent 1px) 0 0 / 52px 52px,
+          var(--rt-paper);
+      }
+      .option-b {
+        background: var(--rt-ink-900);
+        color: var(--rt-paper-cold);
+      }
+      .option-b header {
+        background: var(--rt-paper);
+      }
+      .option-b h1,
+      .option-b p,
+      .option-b .textlink {
+        color: var(--rt-paper-cold);
+      }
+      .option-b h1 {
+        font-size: clamp(58px, 6vw, 92px);
+      }
+      .option-b .hero {
+        grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.8fr);
+        gap: 44px;
+        padding-top: 54px;
+      }
+      .option-b .panel {
+        box-shadow: 8px 8px 0 var(--rt-orange-500);
+      }
+      .profit-card {
+        display: grid;
+        align-content: space-between;
+        gap: 34px;
+        min-height: 500px;
+        padding: 34px;
+        background:
+          linear-gradient(135deg, rgba(255, 106, 0, 0.18), transparent 46%),
+          var(--rt-paper-cold);
+        border: 4px solid var(--rt-ink-900);
+        box-shadow: 8px 8px 0 var(--rt-orange-500);
+      }
+      .profit-card h2 {
+        margin: 0;
+        font-family: var(--font-display-ts);
+        font-size: clamp(58px, 6vw, 88px);
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+      .profit-card span {
+        color: var(--rt-orange-600);
+        font-size: 13px;
+      }
+      .option-c {
+        background:
+          linear-gradient(90deg, rgba(26, 23, 20, 0.05) 1px, transparent 1px) 0 0 / 52px 52px,
+          linear-gradient(rgba(26, 23, 20, 0.05) 1px, transparent 1px) 0 0 / 52px 52px,
+          var(--rt-paper);
+      }
+      .option-c .hero {
+        grid-template-columns: minmax(0, 0.85fr) minmax(420px, 1fr);
+        padding-top: 54px;
+      }
+      .option-c h1 {
+        font-size: clamp(58px, 6vw, 94px);
+      }
+      .cta-band {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 28px;
+        align-items: center;
+        margin-top: 36px;
+        padding: 24px;
+        background: var(--rt-ink-900);
+        border: 4px solid var(--rt-orange-500);
+        color: var(--rt-paper-cold);
+        box-shadow: 8px 8px 0 var(--rt-orange-500);
+      }
+      .cta-band strong {
+        font-family: var(--font-display-ts);
+        font-size: clamp(34px, 4vw, 54px);
+        line-height: 0.92;
+        text-transform: uppercase;
+      }
+      .cta-band p {
+        color: var(--rt-paper);
+        font-size: 18px;
+      }
+      @media (max-width: 860px) {
+        nav { display: none; }
+        .hero,
+        .option-c .hero,
+        .cta-band {
+          grid-template-columns: 1fr;
+          padding-inline: 22px;
+        }
+        h1 { font-size: 62px; }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="option option-a" id="option-a">
+      <div class="option-label">Option A - Hero stamp</div>
+      <header>
+        <div class="brand">
+          <img class="mark" src="../src/assets/rt-monogram-clean.png" alt="" />
+          <span>Thurr Solutions</span>
+        </div>
+        <nav><span>Home</span><span>Buildout Plan</span><span>Thurr Solutions</span></nav>
+      </header>
+      <main class="hero">
+        <div>
+          <div class="eyebrow">Your system is already moving</div>
+          <div class="profit-badge">We build. <b>You profit.</b></div>
+          <h1>Ideas do not pay you. Systems do.</h1>
+          <p>
+            Thurr turns business ideas and missed-lead problems into visible action:
+            blueprint, offer, page copy, automations, tasks, and the next move.
+          </p>
+          <div class="actions">
+            <div class="button">Get my buildout plan</div>
+            <div class="textlink">Watch the system work</div>
+          </div>
+        </div>
+        <aside class="panel">
+          <div class="feed">
+            <div><time>10:42</time><b>✓</b><strong>Created business blueprint</strong></div>
+            <div><time>11:15</time><b>✓</b><strong>Drafted starter offer</strong></div>
+            <div><time>12:03</time><b>▲</b><strong>Mapped lead capture workflow</strong></div>
+            <div><time>01:20</time><b>→</b><strong>Queued launch roadmap</strong></div>
+          </div>
+        </aside>
+      </main>
+    </section>
+
+    <section class="option option-b" id="option-b">
+      <div class="option-label">Option B - Services proof card</div>
+      <header>
+        <div class="brand">
+          <img class="mark" src="../src/assets/rt-monogram-clean.png" alt="" />
+          <span>Thurr Solutions</span>
+        </div>
+        <nav><span>Home</span><span>Buildout Plan</span><span>Thurr Solutions</span></nav>
+      </header>
+      <main class="hero">
+        <div>
+          <div class="eyebrow">Thurr Solutions LLC</div>
+          <h1>Private AI systems for local service businesses.</h1>
+          <p>
+            Custom AI agents, automations, lead intake, follow-up, and backend systems
+            that help service companies stop losing money from missed leads and manual work.
+          </p>
+          <div class="actions">
+            <div class="button">Start a project</div>
+            <div class="textlink">View buildout plan</div>
+          </div>
+        </div>
+        <aside class="profit-card">
+          <span>Operating promise</span>
+          <h2>We build.<br /><b>You profit.</b></h2>
+          <p>
+            Capture the lead, qualify the job, notify the owner, trigger follow-up,
+            and show the next move.
+          </p>
+        </aside>
+      </main>
+    </section>
+
+    <section class="option option-c" id="option-c">
+      <div class="option-label">Option C - CTA conversion band</div>
+      <header>
+        <div class="brand">
+          <img class="mark" src="../src/assets/rt-monogram-clean.png" alt="" />
+          <span>Thurr Solutions</span>
+        </div>
+        <nav><span>Home</span><span>Buildout Plan</span><span>Thurr Solutions</span></nav>
+      </header>
+      <main class="hero">
+        <div>
+          <div class="eyebrow">How it works</div>
+          <h1>Strategy first. Systems second. Proof always.</h1>
+          <p>
+            Thurr starts with the business case, then builds the workflow around the outcome.
+            The goal is fewer leaks, faster follow-up, and clearer next moves.
+          </p>
+          <div class="profit-ribbon">We build. <b>You profit.</b></div>
+        </div>
+        <aside class="dark-panel panel">
+          <div class="proof-grid">
+            <div class="metric"><span>01</span><strong>Audit the leak</strong></div>
+            <div class="metric"><span>02</span><strong>Build the system</strong></div>
+            <div class="metric"><span>03</span><strong>Track the outcome</strong></div>
+          </div>
+          <div class="cta-band">
+            <strong>Ready for buildout?</strong>
+            <p>Start with the workflow that stops the biggest leak.</p>
+          </div>
+        </aside>
+      </main>
+    </section>
+  </body>
+</html>
