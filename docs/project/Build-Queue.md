@@ -247,7 +247,8 @@ Daily session:
 - [x] Cleaned stale local Paperclip and old dashboard files into the Mac Trash while keeping the Paperclip JSON archive.
 - [x] Fixed display-font spacing and added LinkedIn/Instagram/Email to the public menu.
 - [x] Expanded owner Report Review Queue cards with intake details, contact/source, CRM lifecycle status, CRM tags, and generated blueprint sections.
+- [x] Pushed review queue detail expansion to GitHub at commit `4a3093e`; Vercel production deploy is blocked until the free daily deployment limit resets.
 
 ## Next Task
 
-Run the CRM field migration in Supabase if it has not already been applied, then verify one fresh buildout request moves through `requested -> awaiting_review -> approved_for_delivery` with CRM tags visible in the owner queue.
+After the Vercel daily deployment limit resets, deploy commit `4a3093e`, then run the CRM field migration in Supabase if it has not already been applied and verify one fresh buildout request moves through `requested -> awaiting_review -> approved_for_delivery` with CRM tags visible in the owner queue.
