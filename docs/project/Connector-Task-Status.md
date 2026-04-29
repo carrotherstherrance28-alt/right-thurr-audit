@@ -23,7 +23,7 @@ Discord alerts are already working.
 | Slack | Optional / blocked | Slack node exists in n8n as a non-blocking side branch, so failed Slack delivery does not break intake. | Current n8n Slack credential returned `channel_not_found` for `general` and `new-clients`. Needs Slack workspace/channel access cleanup. | Leave optional until team/client operations need it; reconnect credential and test `new-clients` later. |
 | Notion | Pending | Repo docs map the desired Notion Command Center databases and page IDs. Planning can continue from pasted content. | Notion connector can search, but the linked pages/databases are not visible yet. Needs user connector/page access. | When access is fixed, sync Build Queue tasks and workspace URLs into Notion. |
 | Cloudflare / domain | Live for Thurr Solutions | `thurrsolutions.com`, `www.thurrsolutions.com`, and `build.thurrsolutions.com` resolve to Vercel with issued certificates. DNS is gray-cloud / DNS-only. | Future domain changes require Cloudflare login. `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com` are still future decisions/work. | Keep current DNS stable; decide later when to attach `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com`. |
-| Email provider / Resend | Ready for send QA | `/api/approve-report` supports approval-only mode and Resend-backed send mode. Production approval-only QA passed with no email sent. `REPORT_APPROVAL_SECRET`, `REPORT_EMAIL_FROM`, `REPORT_EMAIL_REPLY_TO`, and `RESEND_API_KEY` are configured in Vercel. Owner Command Center can now show reviewable reports and approve without sending. | Needs one approved test recipient and confirmed Resend domain DNS verification before prospect delivery. | Run approved QA with `send_email: true`, then verify `report_email_sent` activity. |
+| Email provider / Resend | Live | `/api/approve-report` supports approval-only mode and Resend-backed send mode. Production send QA to `therrance@thurrsolutions.com` passed: Resend returned `sent`, request/report moved to `delivered`, and `report_email_sent` activity was logged. Owner Command Center can now show reviewable reports and approve without sending once deployed. | Prospect delivery should still stay manual-review only. Owner Report Review Queue is pushed but waiting on Vercel deployment limit reset. | Deploy the pushed owner Review Queue after Vercel limit resets, then keep send tests limited to approved recipients until report quality is reviewed. |
 | Thurnos / Hermes / GPT | Live bridge | Local Ollama notes exist for `thurnos:latest`/`hermes3:latest`. Production bridge currently supports OpenAI provider with server-only `OPENAI_API_KEY` and `THURNOS_OPENAI_MODEL`. End-to-end n8n tests generated report/system/tasks/activity. | OpenAI key and bridge secret are server-only. Local Ollama should not be exposed directly to the public web. | Keep generated reports in manual review mode; improve prompt/report quality from reviewed examples. |
 
 ## Working Production Path
@@ -54,7 +54,7 @@ Public buildout form
 Do next:
 
 ```text
-Run /api/approve-report with send_email: true using one approved test recipient, then verify Resend delivery and `report_email_sent` activity.
+Deploy the pushed owner Report Review Queue after the Vercel limit resets, then smoke-test `/api/review-reports` behind owner auth.
 ```
 
 Do not do yet:

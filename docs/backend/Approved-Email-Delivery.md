@@ -211,8 +211,8 @@ sending email.
 - [x] Confirm request becomes `approved_for_delivery`.
 - [x] Confirm activity log contains `report_approved_for_delivery`.
 - [ ] Add email provider env vars.
-- [ ] Call `/api/approve-report` with `send_email: true` only for an approved test recipient.
-- [ ] Confirm activity log contains `report_email_sent`.
+- [x] Call `/api/approve-report` with `send_email: true` only for an approved test recipient.
+- [x] Confirm activity log contains `report_email_sent`.
 
 Production approval-only verification:
 
@@ -221,4 +221,14 @@ request_status: approved_for_delivery
 report_status: approved_for_delivery
 email_delivery_status: not_requested
 activity: report_approved_for_delivery
+```
+
+Production send verification:
+
+```text
+request_status: delivered
+report_status: delivered
+email_delivery_status: sent
+email_provider: resend
+activity: report_email_sent
 ```
