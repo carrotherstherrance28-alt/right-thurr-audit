@@ -239,7 +239,8 @@ Daily session:
 - [x] Added production `RESEND_API_KEY`, redeployed, and reverified approval-only QA after the email provider key was installed.
 - [x] Added private owner Report Review Queue to Command Center with owner-session API access and approve-without-send action.
 - [x] Verified the review queue Supabase filter and rechecked production approval-only delivery QA.
+- [ ] Deploy owner Report Review Queue after Vercel daily deployment limit resets.
 
 ## Next Task
 
-Run `/api/approve-report` with `send_email: true` using one approved test recipient, then verify Resend delivery and `report_email_sent` activity.
+After Vercel deployment limit resets, deploy the owner Report Review Queue. Then run `/api/approve-report` with `send_email: true` using one approved test recipient and verify Resend delivery plus `report_email_sent` activity.
