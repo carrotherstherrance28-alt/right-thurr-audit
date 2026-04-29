@@ -146,7 +146,8 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add AI blueprint generation prompt chain.
 - [x] Add private n8n -> Thurnos bridge endpoint.
 - [x] Add generated report/system/task/activity draft persistence path.
-- [ ] Add email delivery step.
+- [x] Add approved email delivery endpoint.
+- [ ] Configure email provider and test approved email delivery.
 - [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
 - [ ] Add CRM tagging step.
@@ -219,6 +220,7 @@ Daily session:
 - [x] Added manual review mode to the Thurnos bridge: new reports default to `needs_review`, requests to `awaiting_review`, systems to `review`, and first task to operator approval.
 - [x] Verified manual review mode locally with Supabase persistence.
 - [x] Verified manual review mode in production through the active n8n webhook.
+- [x] Added approved email delivery endpoint with approval-only mode and Resend-backed send mode.
 - [x] Added `We build. You profit.` Option B to the Thurr Solutions proof card.
 - [x] Replaced visible `Thurr Solutions LLC` labels with `Thurr` while keeping the top-left `Thurr Solutions` lockup.
 - [x] Ran desktop/mobile accessibility QA for the Thurr Solutions page: accessible names, image alt text, heading structure, tap target size, and horizontal overflow all passed.
@@ -226,4 +228,4 @@ Daily session:
 
 ## Next Task
 
-Add approved email delivery: only send a prospect email after a report is approved for delivery.
+Configure email provider env vars, then test `/api/approve-report` with `send_email: true` using an approved test recipient.
