@@ -193,7 +193,7 @@ def make_resume():
 
     section_heading(doc, "Education & Certifications")
     para(doc, "Bachelor in Business Administration (Finance), University of Missouri - Columbia, Trulaske College of Business", spacing_after=2)
-    para(doc, "AI Automation Specialist, Careerist.com | AWS Certified Cloud Practitioner (in progress)", spacing_after=0)
+    para(doc, "AI Automation Specialist Program, Careerist.com (completed)", spacing_after=0)
 
     return doc
 
