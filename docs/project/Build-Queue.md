@@ -199,7 +199,8 @@ Daily session:
 - [x] Added Vercel production env for Thurnos provider, OpenAI model, OpenAI API key, and bridge shared secret.
 - [x] Verified OpenAI-provider blueprint generation locally.
 - [x] Added local private bridge dry-run command and Supabase secret-key fallback support.
+- [x] Added Supabase service-role grant SQL for server-side report/system/task/activity persistence.
 
 ## Next Task
 
-Add either `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY` to Vercel, redeploy production, then update the active n8n workflow to call `/api/thurnos-blueprint` after `/api/buildout-request`.
+Run `docs/backend/Supabase-Service-Role-Grants.sql` in Supabase SQL Editor, retest the live `/api/buildout-request` -> `/api/thurnos-blueprint` persistence path, then update the active n8n workflow.

@@ -121,4 +121,16 @@ with check (brand = 'right-thurr');
 grant usage on schema public to anon;
 grant insert on public.buildout_requests to anon;
 
+-- Server-side automation/API routes:
+-- Supabase secret keys and legacy service_role keys use the service_role Postgres role.
+-- RLS is bypassed for service_role, but explicit table grants are still required.
+grant usage on schema public to service_role;
+grant select, insert, update on public.buildout_requests to service_role;
+grant select, insert, update, delete on public.systems to service_role;
+grant select, insert, update, delete on public.system_assets to service_role;
+grant select, insert, update, delete on public.generated_reports to service_role;
+grant select, insert, update, delete on public.activity_logs to service_role;
+grant select, insert, update, delete on public.tasks to service_role;
+grant select, insert, update, delete on public.money_entries to service_role;
+
 -- n8n/admin reads should use server-side credentials or authenticated policies later.

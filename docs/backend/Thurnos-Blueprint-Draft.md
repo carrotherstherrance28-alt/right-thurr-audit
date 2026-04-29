@@ -135,6 +135,14 @@ If the dashboard shows `Secret keys` instead of an older `service_role` JWT, cop
 value and put it in Vercel as either `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY`.
 Never place that key in browser/client env vars.
 
+If the bridge returns `permission denied for table buildout_requests`, run:
+
+```text
+docs/backend/Supabase-Service-Role-Grants.sql
+```
+
+That grants the server-side `service_role` role access to the MVP tables while keeping RLS enabled.
+
 For a local/private worker version later, point n8n to a private machine endpoint that runs the
 same `generateBlueprintDraft` logic against Ollama.
 
