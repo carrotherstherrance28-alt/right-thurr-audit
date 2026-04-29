@@ -149,6 +149,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add generated report/system/task/activity draft persistence path.
 - [x] Add approved email delivery endpoint.
 - [x] Verify production approval-only report delivery path.
+- [x] Add repeatable approved report delivery QA script.
 - [ ] Configure email provider and test approved email delivery.
 - [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
@@ -230,6 +231,7 @@ Daily session:
 - [x] Added concise connector/task status doc for the current Vercel, Supabase, n8n, Discord, Slack, Notion, Cloudflare/domain, Resend, and Thurnos/Hermes/GPT state.
 - [x] Fixed approved-report delivery status so records only become `delivered` after a confirmed email send.
 - [x] Verified production `/api/approve-report` approval-only mode: request/report moved to `approved_for_delivery`, activity logged, and no email was sent.
+- [x] Added `npm run report:delivery:test` for repeatable approval-only and approved email-send QA.
 
 ## Next Task
 

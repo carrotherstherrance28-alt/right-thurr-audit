@@ -103,6 +103,52 @@ DKIM
 DMARC
 ```
 
+## Resend Setup Steps
+
+1. Create or open Resend.
+2. Add `thurrsolutions.com` as the sending domain.
+3. Copy the DNS records Resend gives you into Cloudflare exactly.
+4. Keep Cloudflare proxy off for mail records.
+5. Click `Verify DNS Records` in Resend.
+6. Create an API key after the domain verifies.
+7. Add the API key and sender variables to Vercel production.
+8. Redeploy production.
+9. Run the approved delivery test with your own email address first.
+
+Helpful links:
+
+- Resend Domains: <https://resend.com/domains>
+- Resend API Keys: <https://resend.com/api-keys>
+- Resend Cloudflare guide: <https://resend.com/docs/knowledge-base/cloudflare>
+- Resend DMARC guide: <https://resend.com/docs/dashboard/domains/dmarc>
+
+Recommended Vercel values:
+
+```text
+REPORT_EMAIL_FROM=Thurr Solutions <blueprints@thurrsolutions.com>
+REPORT_EMAIL_REPLY_TO=blueprints@thurrsolutions.com
+```
+
+Use a real monitored inbox for `REPORT_EMAIL_REPLY_TO` before sending to prospects.
+
+## QA Command
+
+Approval-only test:
+
+```bash
+npm run report:delivery:test
+```
+
+Approved email-send test:
+
+```bash
+npm run report:delivery:test -- --email=you@example.com --send-email
+```
+
+The send test requires Resend to be configured in Vercel first. It creates a fresh QA buildout
+request, generates a manual-review blueprint, approves it, sends to the test email, and confirms
+the final Supabase statuses.
+
 ## n8n Shape
 
 Manual review workflow:
