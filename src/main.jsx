@@ -71,14 +71,34 @@ function getIsOperatorPreview() {
     return false;
   }
 
-  return new URLSearchParams(window.location.search).get('operator') === '1';
+  return (
+    window.location.pathname === '/owner/callback' ||
+    new URLSearchParams(window.location.search).get('operator') === '1'
+  );
+}
+
+function getOwnerCallbackUrl() {
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
+  return `${window.location.origin}/owner/callback?operator=1`;
 }
 
 const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabaseBuildoutUrl = supabaseUrl ? `${supabaseUrl}/rest/v1/buildout_requests` : '';
-const authClient = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
+const authClient =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey, {
+        auth: {
+          detectSessionInUrl: true,
+          persistSession: true,
+          autoRefreshToken: true,
+        },
+      })
+    : null;
 
 function mapBuildoutPayloadToSupabaseRow(payload) {
   return {
@@ -157,6 +177,7 @@ function App() {
   const [submissionState, setSubmissionState] = useState('idle');
   const [authSession, setAuthSession] = useState(null);
   const [authReady, setAuthReady] = useState(!authClient);
+  const [authCallbackStatus, setAuthCallbackStatus] = useState('idle');
   const [ownerAccess, setOwnerAccess] = useState({ status: 'idle', allowed: false, message: '' });
   const [menuOpen, setMenuOpen] = useState(false);
   const isOperatorPreview = getIsOperatorPreview();
@@ -169,13 +190,35 @@ function App() {
     }
 
     let mounted = true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const tokenHash = searchParams.get('token_hash');
+    const otpType = searchParams.get('type') || 'magiclink';
 
-    authClient.auth.getSession().then(({ data }) => {
+    async function hydrateAuthSession() {
+      if (window.location.pathname === '/owner/callback' && tokenHash) {
+        setAuthCallbackStatus('verifying');
+        const { error } = await authClient.auth.verifyOtp({
+          token_hash: tokenHash,
+          type: otpType,
+        });
+
+        if (error) {
+          setAuthCallbackStatus('error');
+          setAuthReady(true);
+          return;
+        }
+
+        setAuthCallbackStatus('verified');
+      }
+
+      const { data } = await authClient.auth.getSession();
       if (mounted) {
         setAuthSession(data.session);
         setAuthReady(true);
       }
-    });
+    }
+
+    hydrateAuthSession();
 
     const {
       data: { subscription },
@@ -228,6 +271,10 @@ function App() {
         }
 
         setOwnerAccess({ status: 'allowed', allowed: true, message: '' });
+
+        if (window.location.pathname === '/owner/callback') {
+          window.history.replaceState({}, '', '/?operator=1');
+        }
       })
       .catch((error) => {
         if (error.name !== 'AbortError') {
@@ -386,7 +433,12 @@ function App() {
       </header>
 
       {isOperatorPreview && !canViewOperator ? (
-        <OwnerAccessGate authReady={authReady} authSession={authSession} ownerAccess={ownerAccess} />
+        <OwnerAccessGate
+          authCallbackStatus={authCallbackStatus}
+          authReady={authReady}
+          authSession={authSession}
+          ownerAccess={ownerAccess}
+        />
       ) : (
         <>
           {page === 'home' && <HomePage {...sharedProps} />}
@@ -402,7 +454,7 @@ function App() {
   );
 }
 
-function OwnerAccessGate({ authReady, authSession, ownerAccess }) {
+function OwnerAccessGate({ authCallbackStatus, authReady, authSession, ownerAccess }) {
   const [email, setEmail] = useState('');
   const [authMessage, setAuthMessage] = useState('');
   const [authStatus, setAuthStatus] = useState('idle');
@@ -424,7 +476,7 @@ function OwnerAccessGate({ authReady, authSession, ownerAccess }) {
     const { error } = await authClient.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: window.location.href,
+        emailRedirectTo: getOwnerCallbackUrl(),
       },
     });
 
@@ -435,7 +487,7 @@ function OwnerAccessGate({ authReady, authSession, ownerAccess }) {
     }
 
     setAuthStatus('sent');
-    setAuthMessage('Check your email for the owner access link.');
+    setAuthMessage('Check your email for the owner access link. It should open the owner callback page.');
   }
 
   async function handleSignOut() {
@@ -457,6 +509,16 @@ function OwnerAccessGate({ authReady, authSession, ownerAccess }) {
         </p>
 
         {!authReady && <p className="form-note">Checking owner session...</p>}
+
+        {authCallbackStatus === 'verifying' && (
+          <p className="form-note">Finishing owner sign-in...</p>
+        )}
+
+        {authCallbackStatus === 'error' && (
+          <p className="form-note error-note">
+            Owner sign-in link could not be verified. Request a fresh link from this page.
+          </p>
+        )}
 
         {ownerAccess.status === 'checking' && (
           <p className="form-note">Verifying owner access...</p>
