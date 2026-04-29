@@ -69,9 +69,9 @@ export default async function handler(request, response) {
 
   const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-  const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const supabaseServerKey = supabaseServiceRoleKey || supabaseAnonKey;
-  const preferHeader = supabaseServiceRoleKey ? 'return=representation' : 'return=minimal';
+  const supabaseElevatedKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY;
+  const supabaseServerKey = supabaseElevatedKey || supabaseAnonKey;
+  const preferHeader = supabaseElevatedKey ? 'return=representation' : 'return=minimal';
 
   if (!supabaseUrl || !supabaseServerKey) {
     sendJson(response, 500, {
@@ -102,7 +102,7 @@ export default async function handler(request, response) {
     return;
   }
 
-  const savedRows = supabaseServiceRoleKey ? await supabaseResponse.json() : [];
+  const savedRows = supabaseElevatedKey ? await supabaseResponse.json() : [];
   const savedRequest = Array.isArray(savedRows) ? savedRows[0] : null;
 
   sendJson(response, 201, {

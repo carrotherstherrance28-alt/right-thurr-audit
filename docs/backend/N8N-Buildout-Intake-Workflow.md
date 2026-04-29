@@ -192,11 +192,16 @@ Required Vercel server env:
 
 ```text
 SUPABASE_SERVICE_ROLE_KEY=
+or SUPABASE_SECRET_KEY=
 THURNOS_SHARED_SECRET=
 THURNOS_PROVIDER=openai
 OPENAI_API_KEY=
 THURNOS_OPENAI_MODEL=gpt-5.2
 ```
+
+Supabase dashboard may label the elevated backend key as `Secret keys` instead of `service_role`.
+Use that server-only secret as the Vercel value. Do not use the public anon key for report/system
+persistence.
 
 After importing, activate the workflow and copy the production webhook URL into Vercel:
 

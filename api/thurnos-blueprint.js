@@ -33,30 +33,30 @@ function getIntakePayload(body) {
 function getSupabaseConfig() {
   return {
     url: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL,
-    serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    elevatedKey: process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY,
   };
 }
 
-function supabaseHeaders(serviceRoleKey, prefer = 'return=representation') {
+function supabaseHeaders(elevatedKey, prefer = 'return=representation') {
   return {
-    apikey: serviceRoleKey,
-    Authorization: `Bearer ${serviceRoleKey}`,
+    apikey: elevatedKey,
+    Authorization: `Bearer ${elevatedKey}`,
     'Content-Type': 'application/json',
     Prefer: prefer,
   };
 }
 
 async function supabaseRequest(path, options) {
-  const { url, serviceRoleKey } = getSupabaseConfig();
+  const { url, elevatedKey } = getSupabaseConfig();
 
-  if (!url || !serviceRoleKey) {
-    throw new Error('Supabase service-role persistence is not configured.');
+  if (!url || !elevatedKey) {
+    throw new Error('Supabase elevated-key persistence is not configured.');
   }
 
   const supabaseResponse = await fetch(`${url}/rest/v1/${path}`, {
     ...options,
     headers: {
-      ...supabaseHeaders(serviceRoleKey, options.prefer),
+      ...supabaseHeaders(elevatedKey, options.prefer),
       ...(options.headers || {}),
     },
   });

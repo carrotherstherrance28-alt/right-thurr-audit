@@ -36,6 +36,15 @@ OpenAI provider:
 THURNOS_PROVIDER=openai OPENAI_API_KEY=<server-only-key> npm run thurnos:blueprint -- docs/backend/sample-buildout-intake.json
 ```
 
+Private bridge dry-run:
+
+```bash
+npm run thurnos:bridge:dry-run
+```
+
+This loads ignored `.env.local`, calls the private bridge handler with `dry_run: true`, and verifies
+the secret/header/OpenAI path without saving rows to Supabase.
+
 ## Output Shape
 
 The script returns JSON that can map into Supabase:
@@ -107,6 +116,7 @@ Required Vercel server env:
 
 ```txt
 SUPABASE_SERVICE_ROLE_KEY=
+or SUPABASE_SECRET_KEY=
 THURNOS_SHARED_SECRET=
 THURNOS_PROVIDER=openai
 OPENAI_API_KEY=
@@ -114,6 +124,16 @@ THURNOS_OPENAI_MODEL=gpt-5.2
 ```
 
 Do not call local Ollama directly from public Vercel.
+
+Supabase dashboard note:
+
+```txt
+Project Settings -> API -> API keys
+```
+
+If the dashboard shows `Secret keys` instead of an older `service_role` JWT, copy a secret key
+value and put it in Vercel as either `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY`.
+Never place that key in browser/client env vars.
 
 For a local/private worker version later, point n8n to a private machine endpoint that runs the
 same `generateBlueprintDraft` logic against Ollama.
