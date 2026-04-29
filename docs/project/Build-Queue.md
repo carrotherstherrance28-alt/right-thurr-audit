@@ -50,6 +50,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add direct setup checklist for GitHub, Vercel, n8n, Supabase, and domains.
 - [x] Add deployment verification checklist.
 - [x] Add connector/plugin strategy with pros, cons, and recommended order.
+- [x] Add Notion Command Center alignment plan.
 - [x] Run app locally and verify the first screen.
 - [x] Fix responsive/layout issues from browser review.
 - [x] Create clean repo branch and first commit.
@@ -185,6 +186,7 @@ Daily session:
 - [x] Added analytics event plan for CTA, buildout form, blueprint report, booked-call intent, social, owner, and backend activity tracking.
 - [x] Added LinkedIn-first B2B content plan with 4-week starter calendar, post formats, CTA rules, and measurement loop.
 - [x] Added client template brand boundary rules for owned Thurr assets vs re-skinned client funnels.
+- [x] Added Notion Command Center alignment plan for Task Tracker, Content Calendar, AI Ideas Log, Client Command Center, Workspace URLs, and To Do List.
 - [x] Sent a live QA Right Thurr buildout request through n8n.
 - [x] Verified n8n execution finished successfully.
 - [x] Verified the Discord `#leads-alerts` node ran in the successful execution.
