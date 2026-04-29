@@ -177,3 +177,55 @@ Domains:
 Temporary setup:
 
 One Vercel project can host all current prototype views, but production should split the brands once pages are stable.
+
+## Current Vercel Attachments
+
+Added in Vercel:
+
+```text
+right-thurr project
+- thurrsolutions.com
+- www.thurrsolutions.com
+
+right-thurr-audit project
+- build.thurrsolutions.com
+```
+
+DNS is still the remaining step. `thurrsolutions.com` currently uses Cloudflare
+nameservers:
+
+```text
+kyrie.ns.cloudflare.com
+marissa.ns.cloudflare.com
+```
+
+Current DNS is still resolving through Cloudflare and the apex is returning a
+502 until records are corrected.
+
+## Required Cloudflare DNS Records
+
+In Cloudflare DNS for `thurrsolutions.com`, set:
+
+```text
+Type: A
+Name: @
+Content: 76.76.21.21
+Proxy: DNS only for first verification
+```
+
+```text
+Type: A
+Name: www
+Content: 76.76.21.21
+Proxy: DNS only for first verification
+```
+
+```text
+Type: A
+Name: build
+Content: 76.76.21.21
+Proxy: DNS only for first verification
+```
+
+After Vercel verifies SSL and routing, Cloudflare proxy can be revisited. Keep
+it DNS-only first to reduce verification friction.
