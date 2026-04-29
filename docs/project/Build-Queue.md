@@ -156,6 +156,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
 - [ ] Add CRM tagging step.
+- [x] Add private owner report review queue.
 
 ## Phase 5: Client-Ready Diagnostic Engine
 
@@ -236,6 +237,8 @@ Daily session:
 - [x] Added `npm run report:delivery:test` for repeatable approval-only and approved email-send QA.
 - [x] Added production `REPORT_APPROVAL_SECRET`, `REPORT_EMAIL_FROM`, and `REPORT_EMAIL_REPLY_TO`, redeployed, and reverified approval-only QA with the stricter two-secret flow.
 - [x] Added production `RESEND_API_KEY`, redeployed, and reverified approval-only QA after the email provider key was installed.
+- [x] Added private owner Report Review Queue to Command Center with owner-session API access and approve-without-send action.
+- [x] Verified the review queue Supabase filter and rechecked production approval-only delivery QA.
 
 ## Next Task
 

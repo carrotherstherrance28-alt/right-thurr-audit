@@ -173,6 +173,34 @@ Operator approves report
 Do not connect public form submission directly to email delivery. The approval endpoint is the
 trust boundary between generated draft and client-facing communication.
 
+## Owner Review UI
+
+The private owner Command Center includes a report review queue for reports with:
+
+```text
+needs_review
+approved_for_delivery
+```
+
+The queue uses:
+
+```text
+GET /api/review-reports
+```
+
+It requires the logged-in Supabase owner session and checks `OWNER_EMAILS` on the server before
+reading review data with the service key.
+
+Approving from the owner UI calls:
+
+```text
+POST /api/approve-report
+```
+
+with the owner `Authorization` header and `send_email: false`. That moves the report to
+`approved_for_delivery` without exposing `REPORT_APPROVAL_SECRET` in the browser and without
+sending email.
+
 ## Test Checklist
 
 - [x] Create a fake QA buildout request.

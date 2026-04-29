@@ -15,12 +15,20 @@ function getPayload(request) {
 function getSupabaseConfig() {
   return {
     url: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL,
+    anonKey: process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY,
     elevatedKey: process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY,
   };
 }
 
 function getApprovalSecret() {
   return process.env.REPORT_APPROVAL_SECRET || process.env.THURNOS_SHARED_SECRET;
+}
+
+function getOwnerEmails() {
+  return (process.env.OWNER_EMAILS || '')
+    .split(',')
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean);
 }
 
 function supabaseHeaders(elevatedKey, prefer = 'return=representation') {
@@ -57,6 +65,34 @@ async function supabaseRequest(path, options = {}) {
   }
 
   return supabaseResponse.json();
+}
+
+async function verifyOwner(request) {
+  const { url, anonKey } = getSupabaseConfig();
+  const ownerEmails = getOwnerEmails();
+  const authorization = request.headers.authorization || '';
+
+  if (!url || !anonKey || ownerEmails.length === 0) {
+    return false;
+  }
+
+  if (!authorization.startsWith('Bearer ')) {
+    return false;
+  }
+
+  const userResponse = await fetch(`${url}/auth/v1/user`, {
+    headers: {
+      apikey: anonKey,
+      Authorization: authorization,
+    },
+  });
+
+  if (!userResponse.ok) {
+    return false;
+  }
+
+  const user = await userResponse.json();
+  return ownerEmails.includes((user.email || '').toLowerCase());
 }
 
 async function getSingleRow(path, missingMessage) {
@@ -168,8 +204,10 @@ export default async function handler(request, response) {
 
   const approvalSecret = getApprovalSecret();
   const providedSecret = request.headers['x-report-approval-secret'] || request.headers['x-thurnos-secret'];
+  const hasValidSecret = approvalSecret && providedSecret === approvalSecret;
+  const hasOwnerAccess = hasValidSecret ? false : await verifyOwner(request);
 
-  if (!approvalSecret || providedSecret !== approvalSecret) {
+  if (!hasValidSecret && !hasOwnerAccess) {
     sendJson(response, 401, {
       ok: false,
       status: 'unauthorized',

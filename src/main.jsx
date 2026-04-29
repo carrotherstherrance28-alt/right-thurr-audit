@@ -419,7 +419,9 @@ function App() {
           {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
           {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
           {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
-          {canViewOperator && page === 'command' && <CommandCenterPage setPage={navigateToPage} />}
+          {canViewOperator && page === 'command' && (
+            <CommandCenterPage authSession={authSession} setPage={navigateToPage} />
+          )}
           {canViewOperator && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
         </>
       )}
@@ -537,7 +539,7 @@ function OwnerAccessGate({ authCallbackStatus, authReady, authSession, ownerAcce
   );
 }
 
-function CommandCenterPage({ setPage }) {
+function CommandCenterPage({ authSession, setPage }) {
   return (
     <main className="command-page" id="top">
       <section className="activity-hero">
@@ -565,10 +567,156 @@ function CommandCenterPage({ setPage }) {
         </aside>
       </section>
 
+      <ReportReviewQueue authSession={authSession} />
       <MissionActivityFeed />
       <AIEngineOrchestra />
       <FinanceCommandCenter />
     </main>
+  );
+}
+
+function ReportReviewQueue({ authSession }) {
+  const [reports, setReports] = useState([]);
+  const [reviewStatus, setReviewStatus] = useState('loading');
+  const [reviewMessage, setReviewMessage] = useState('');
+  const accessToken = authSession?.access_token;
+
+  async function loadReports() {
+    if (!accessToken) {
+      setReviewStatus('idle');
+      return;
+    }
+
+    setReviewStatus('loading');
+    setReviewMessage('');
+
+    try {
+      const response = await fetch('/api/review-reports', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Review queue could not load.');
+      }
+
+      setReports(data.reports || []);
+      setReviewStatus('ready');
+    } catch (error) {
+      setReviewStatus('error');
+      setReviewMessage(error.message);
+    }
+  }
+
+  useEffect(() => {
+    loadReports();
+  }, [accessToken]);
+
+  async function approveReport(reportId) {
+    if (!accessToken) {
+      return;
+    }
+
+    setReviewStatus('approving');
+    setReviewMessage('');
+
+    try {
+      const response = await fetch('/api/approve-report', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          report_id: reportId,
+          send_email: false,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Report could not be approved.');
+      }
+
+      setReviewMessage('Report approved for delivery. Email was not sent.');
+      await loadReports();
+    } catch (error) {
+      setReviewStatus('error');
+      setReviewMessage(error.message);
+    }
+  }
+
+  return (
+    <section className="review-queue-panel" aria-label="Blueprint report review queue">
+      <div className="section-copy">
+        <div className="eyebrow">REPORT REVIEW QUEUE</div>
+        <h2>Approve the blueprint before it leaves the machine.</h2>
+        <p>
+          Generated reports wait here after Thurnos drafts them. Approving from this panel marks
+          the report ready for delivery, but it does not send email.
+        </p>
+      </div>
+
+      <div className="review-queue-list">
+        {reviewStatus === 'loading' && <p className="form-note">Loading review queue...</p>}
+        {reviewStatus === 'error' && <p className="form-note error-note">{reviewMessage}</p>}
+        {reviewStatus === 'ready' && reports.length === 0 && (
+          <article className="review-empty-state">
+            <span>QUEUE CLEAR</span>
+            <strong>No reports waiting for operator review.</strong>
+            <p>New blueprint drafts will appear here after intake and generation finish.</p>
+          </article>
+        )}
+        {reports.map((report) => (
+          <article className="review-report-card" key={report.id}>
+            <div className="review-report-meta">
+              <span>{report.report_status.replaceAll('_', ' ')}</span>
+              <time>{new Date(report.updated_at || report.created_at).toLocaleString()}</time>
+            </div>
+            <h3>{report.title}</h3>
+            <p>{report.summary}</p>
+            <div className="review-report-grid">
+              <div>
+                <span>Lead</span>
+                <strong>{report.request?.name || 'Unknown lead'}</strong>
+              </div>
+              <div>
+                <span>Industry</span>
+                <strong>{report.request?.industry || 'Not set'}</strong>
+              </div>
+              <div>
+                <span>System</span>
+                <strong>{report.system?.name || 'Draft system'}</strong>
+              </div>
+              <div>
+                <span>Next move</span>
+                <strong>{report.system?.next_move || report.request?.main_goal || 'Review draft'}</strong>
+              </div>
+            </div>
+            <div className="review-report-actions">
+              {report.report_status === 'needs_review' ? (
+                <button
+                  className="stamp-button link-button"
+                  type="button"
+                  disabled={reviewStatus === 'approving'}
+                  onClick={() => approveReport(report.id)}
+                >
+                  APPROVE, DO NOT SEND
+                  <ArrowUpRight size={18} strokeWidth={3} />
+                </button>
+              ) : (
+                <span className="review-ready-stamp">Ready for delivery</span>
+              )}
+              <small>Email send waits for one approved test recipient.</small>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {reviewMessage && reviewStatus !== 'error' && <p className="form-note">{reviewMessage}</p>}
+    </section>
   );
 }
 

@@ -1719,6 +1719,111 @@ textarea:focus {
   color: var(--rt-paper-cold);
 }
 
+.review-queue-panel {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.34fr) minmax(0, 1fr);
+  gap: var(--s-5);
+  margin: var(--s-12) 0;
+  padding: var(--s-5);
+  background: var(--rt-paper-cold);
+  border: var(--bw-loud) solid var(--rt-ink-900);
+  box-shadow: var(--shadow-stamp-orange);
+}
+
+.review-queue-panel .section-copy {
+  align-content: start;
+  padding: var(--s-5);
+  border: var(--bw-thin) solid var(--rt-ink-200);
+  background: var(--rt-paper);
+}
+
+.review-queue-list {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.review-empty-state,
+.review-report-card {
+  display: grid;
+  gap: var(--s-4);
+  padding: var(--s-5);
+  border: var(--bw-medium) solid var(--rt-ink-900);
+  background: var(--rt-paper);
+  box-shadow: var(--shadow-stamp-sm);
+}
+
+.review-empty-state span,
+.review-report-meta span,
+.review-report-grid span,
+.review-ready-stamp {
+  color: var(--rt-orange-700);
+  font-family: var(--font-subhead);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: var(--tracking-loud);
+  text-transform: uppercase;
+}
+
+.review-empty-state strong,
+.review-report-card h3 {
+  margin: 0;
+  font-family: var(--font-display-rt);
+  font-size: var(--text-2xl);
+  line-height: 1.05;
+}
+
+.review-empty-state p,
+.review-report-card p,
+.review-report-actions small {
+  margin: 0;
+  color: var(--rt-ink-700);
+  line-height: var(--leading-normal);
+}
+
+.review-report-meta,
+.review-report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-report-meta time {
+  color: var(--rt-ink-500);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.review-report-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.review-report-grid div {
+  display: grid;
+  gap: var(--s-1);
+  min-height: 92px;
+  padding: var(--s-4);
+  border: var(--bw-thin) solid var(--rt-ink-200);
+  background: var(--rt-paper-cold);
+}
+
+.review-report-grid strong {
+  font-size: var(--text-base);
+  line-height: var(--leading-tight);
+}
+
+.review-ready-stamp {
+  display: inline-grid;
+  min-height: 44px;
+  align-items: center;
+  padding: 0 var(--s-4);
+  border: var(--bw-medium) solid var(--rt-ink-900);
+  background: var(--rt-paper-cold);
+}
+
 .mission-feed-grid {
   display: grid;
   grid-template-columns: minmax(280px, 0.38fr) minmax(0, 1fr) minmax(280px, 0.34fr);
@@ -2837,6 +2942,7 @@ dd {
   .workspace-grid,
   .brand-boundary,
   .blueprint-command-report,
+  .review-queue-panel,
   .mission-feed-grid,
   .system-cockpit,
   .finance-command-grid,
