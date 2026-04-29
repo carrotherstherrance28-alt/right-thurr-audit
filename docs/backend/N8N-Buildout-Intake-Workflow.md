@@ -42,6 +42,8 @@ Vercel Production is configured with VITE_N8N_BUILDOUT_WEBHOOK_URL.
 2026-04-29: Active workflow was updated to call the Thurnos blueprint bridge automatically.
 2026-04-29: End-to-end production webhook test created buildout request, generated report, system,
 10 tasks, and 1 activity log without manual intervention.
+2026-04-29: Manual review mode was added to the bridge. New reports default to `needs_review`
+and requests default to `awaiting_review` before external delivery is added.
 ```
 
 Current production flow:

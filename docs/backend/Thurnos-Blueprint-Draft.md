@@ -191,10 +191,11 @@ Response:
 ```json
 {
   "ok": true,
-  "status": "draft_generated_and_saved",
+  "status": "blueprint_ready_for_review",
   "buildout_request_id": "",
   "draft": {},
   "persistence": {
+    "manual_review_required": true,
     "system_id": "",
     "generated_report_id": "",
     "task_ids": [],
@@ -211,7 +212,7 @@ Response:
 buildout_request_id -> request id from save step
 report_type         -> output.report_type
 title               -> output.title
-report_status       -> draft
+report_status       -> needs_review by default
 summary             -> output.summary
 sections            -> output.sections
 created_by_agent    -> output.created_by_agent
@@ -223,7 +224,7 @@ created_by_agent    -> output.created_by_agent
 buildout_request_id -> request id from save step
 name                -> output.starter_system.name
 type                -> output.starter_system.type
-status              -> building
+status              -> review by default
 current_mission     -> output.starter_system.current_mission
 next_move           -> output.starter_system.next_move
 ```
@@ -236,7 +237,7 @@ title           -> output.launch_tasks[].title
 description     -> output.launch_tasks[].description
 priority        -> output.launch_tasks[].priority
 assigned_agent  -> output.launch_tasks[].assigned_agent
-status          -> open
+status          -> needs_review for the first operator review task, then open for launch tasks
 ```
 
 `activity_logs`:
@@ -247,6 +248,20 @@ agent_name          -> output.activity_log[].agent_name
 action_type         -> output.activity_log[].action_type
 summary             -> output.activity_log[].summary
 status              -> output.activity_log[].status
+```
+
+Manual review mode is on by default. The bridge also:
+
+- updates `buildout_requests.status` to `awaiting_review`
+- inserts a first task named `Review and approve blueprint draft`
+- inserts an activity log event with `action_type = manual_review_required`
+
+Only disable this intentionally by sending:
+
+```json
+{
+  "manual_review": false
+}
 ```
 
 ## Discord Draft Alert

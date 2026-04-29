@@ -157,7 +157,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [ ] Create Thurr Solutions-branded sales version.
 - [ ] Create client re-skin checklist.
 - [ ] Create lead-gen niche prompt packs.
-- [ ] Add manual review mode before reports send.
+- [x] Add manual review mode before reports send.
 - [ ] Add follow-up automation templates for meeting thank-you, post-project thank-you, referral request, and deliverable reminders.
 
 ## Suggested Session Rhythm
@@ -216,6 +216,8 @@ Daily session:
 - [x] Confirmed the active n8n workflow still needs the Thurnos blueprint HTTP Request node; manually called Thurnos for the n8n QA request and verified report/system/tasks/activity persistence.
 - [x] Updated active n8n workflow to call the Thurnos blueprint bridge automatically after intake save.
 - [x] Reran n8n production webhook test and verified Supabase received generated report, system, 10 tasks, and activity log without manual intervention.
+- [x] Added manual review mode to the Thurnos bridge: new reports default to `needs_review`, requests to `awaiting_review`, systems to `review`, and first task to operator approval.
+- [x] Verified manual review mode locally with Supabase persistence.
 - [x] Added `We build. You profit.` Option B to the Thurr Solutions proof card.
 - [x] Replaced visible `Thurr Solutions LLC` labels with `Thurr` while keeping the top-left `Thurr Solutions` lockup.
 - [x] Ran desktop/mobile accessibility QA for the Thurr Solutions page: accessible names, image alt text, heading structure, tap target size, and horizontal overflow all passed.
@@ -223,4 +225,4 @@ Daily session:
 
 ## Next Task
 
-Choose the next backend workflow step: add CRM tagging, add email delivery, or add manual review mode before reports send.
+Deploy manual review mode, run one live n8n webhook test to confirm production now writes `awaiting_review`, then add approved email delivery.

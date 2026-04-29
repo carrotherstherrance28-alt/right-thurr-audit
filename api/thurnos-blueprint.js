@@ -95,6 +95,19 @@ async function insertRows(table, rows) {
   return Array.isArray(savedRows) ? savedRows : [];
 }
 
+const reviewTask = {
+  title: 'Review and approve blueprint draft',
+  description:
+    'Operator must review the generated blueprint, edit any weak claims, and approve the next action before the report is sent externally.',
+  status: 'needs_review',
+  priority: 'high',
+  assigned_agent: 'Operator Agent',
+};
+
+function getManualReviewEnabled(body) {
+  return body.manual_review !== false && body.manualReview !== false;
+}
+
 async function updateBuildoutRequest(buildoutRequestId, status) {
   await supabaseRequest(`buildout_requests?id=eq.${encodeURIComponent(buildoutRequestId)}`, {
     method: 'PATCH',
@@ -106,12 +119,12 @@ async function updateBuildoutRequest(buildoutRequestId, status) {
   });
 }
 
-async function persistBlueprintDraft({ buildoutRequestId, draft, payload }) {
+async function persistBlueprintDraft({ buildoutRequestId, draft, payload, manualReviewEnabled }) {
   const starterSystem = await insertRow('systems', {
     buildout_request_id: buildoutRequestId,
     name: draft.starter_system.name,
     type: draft.starter_system.type,
-    status: 'building',
+    status: manualReviewEnabled ? 'review' : 'building',
     location: payload?.intake?.location,
     current_mission: draft.starter_system.current_mission,
     next_move: draft.starter_system.next_move,
@@ -123,27 +136,41 @@ async function persistBlueprintDraft({ buildoutRequestId, draft, payload }) {
     system_id: starterSystem?.id,
     report_type: draft.report_type,
     title: draft.title,
-    report_status: 'draft',
+    report_status: manualReviewEnabled ? 'needs_review' : 'draft',
     summary: draft.summary,
     sections: draft.sections,
     created_by_agent: draft.created_by_agent,
   });
 
+  const launchTasks = manualReviewEnabled
+    ? [reviewTask, ...draft.launch_tasks].slice(0, 10)
+    : draft.launch_tasks;
   const tasks = await insertRows(
     'tasks',
-    draft.launch_tasks.map((task) => ({
+    launchTasks.map((task) => ({
       system_id: starterSystem?.id,
       title: task.title,
       description: task.description,
-      status: 'open',
+      status: task.status || 'open',
       priority: task.priority,
       assigned_agent: task.assigned_agent,
     })),
   );
 
+  const activityEvents = manualReviewEnabled
+    ? [
+        ...draft.activity_log,
+        {
+          agent_name: 'Operator Agent',
+          action_type: 'manual_review_required',
+          summary: 'Blueprint draft is ready for operator review before any external delivery.',
+          status: 'needs_review',
+        },
+      ]
+    : draft.activity_log;
   const activityLogs = await insertRows(
     'activity_logs',
-    draft.activity_log.map((event) => ({
+    activityEvents.map((event) => ({
       system_id: starterSystem?.id,
       buildout_request_id: buildoutRequestId,
       agent_name: event.agent_name,
@@ -153,9 +180,10 @@ async function persistBlueprintDraft({ buildoutRequestId, draft, payload }) {
     })),
   );
 
-  await updateBuildoutRequest(buildoutRequestId, 'draft_generated');
+  await updateBuildoutRequest(buildoutRequestId, manualReviewEnabled ? 'awaiting_review' : 'draft_generated');
 
   return {
+    manual_review_required: manualReviewEnabled,
     system_id: starterSystem?.id,
     generated_report_id: report?.id,
     task_ids: tasks.map((task) => task.id),
@@ -191,6 +219,7 @@ export default async function handler(request, response) {
     const buildoutRequestId = getBuildoutRequestId(body);
     const payload = getIntakePayload(body);
     const dryRun = body.dry_run === true || body.dryRun === true;
+    const manualReviewEnabled = getManualReviewEnabled(body);
 
     if (!payload?.lead || !payload?.intake) {
       sendJson(response, 400, {
@@ -212,12 +241,16 @@ export default async function handler(request, response) {
 
     const draft = await generateBlueprintDraft(payload);
     const persistence = dryRun
-      ? { dry_run: true }
-      : await persistBlueprintDraft({ buildoutRequestId, draft, payload });
+      ? { dry_run: true, manual_review_required: manualReviewEnabled }
+      : await persistBlueprintDraft({ buildoutRequestId, draft, payload, manualReviewEnabled });
 
     sendJson(response, 201, {
       ok: true,
-      status: dryRun ? 'draft_generated_dry_run' : 'draft_generated_and_saved',
+      status: dryRun
+        ? 'draft_generated_dry_run'
+        : manualReviewEnabled
+          ? 'blueprint_ready_for_review'
+          : 'draft_generated_and_saved',
       buildout_request_id: buildoutRequestId,
       draft,
       persistence,
