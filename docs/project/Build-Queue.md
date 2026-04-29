@@ -85,7 +85,7 @@ Before coding major visual changes, create 3 different example screenshots/optio
 - [x] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
 - [x] Add `thurrsolutions.com` and `www.thurrsolutions.com` to Vercel `right-thurr`.
 - [x] Add `build.thurrsolutions.com` to Vercel `right-thurr-audit`.
-- [ ] Update Cloudflare DNS records for `thurrsolutions.com`, `www`, and `build` to Vercel.
+- [x] Update Cloudflare DNS records for `thurrsolutions.com`, `www`, and `build` to Vercel.
 - [ ] Future domain: use `diagnostic.thurrsolutions.com` for client diagnostic funnels.
 - [ ] Future domain: use `app.rightthurr.com` for logged-in app.
 - [ ] Hold `thurrenterprise.com` for future parent/enterprise brand.

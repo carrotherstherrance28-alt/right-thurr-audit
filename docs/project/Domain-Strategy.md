@@ -202,9 +202,9 @@ marissa.ns.cloudflare.com
 Current DNS is still resolving through Cloudflare and the apex is returning a
 502 until records are corrected.
 
-## Required Cloudflare DNS Records
+## Active Cloudflare DNS Records
 
-In Cloudflare DNS for `thurrsolutions.com`, set:
+Verified records:
 
 ```text
 Type: A
@@ -227,5 +227,21 @@ Content: 76.76.21.21
 Proxy: DNS only for first verification
 ```
 
-After Vercel verifies SSL and routing, Cloudflare proxy can be revisited. Keep
-it DNS-only first to reduce verification friction.
+Status:
+
+```text
+https://thurrsolutions.com       -> 200 on Vercel
+https://www.thurrsolutions.com   -> 200 on Vercel
+https://build.thurrsolutions.com -> 200 on Vercel
+```
+
+Vercel certificate was issued for:
+
+```text
+thurrsolutions.com
+www.thurrsolutions.com
+build.thurrsolutions.com
+```
+
+Keep these DNS records gray-cloud / DNS-only unless there is a specific reason
+to proxy through Cloudflare later.
