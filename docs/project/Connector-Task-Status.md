@@ -17,7 +17,7 @@ Discord alerts are already working.
 | Area | Status | Complete | Blocked By | Next Action |
 | --- | --- | --- | --- | --- |
 | Vercel | Live | `right-thurr-audit` deploy is live, production env includes Supabase, n8n webhook, Thurnos/OpenAI, Resend, and bridge secrets. `/api/buildout-request`, `/api/thurnos-blueprint`, `/api/approve-report`, and `/api/review-reports` exist. The owner Report Review Queue is deployed. | Future deploys may hit the free daily deployment limit if we push too often. | Visually verify the owner Report Review Queue after owner sign-in. |
-| Supabase | Live | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, owner auth gate, RLS, and persistence for requests/reports/systems/tasks/activity are in place. | User-owned Supabase login for dashboard changes; server-only keys must stay out of docs and client env. | Keep Supabase as the source of truth; harden owner RLS before loading real private operator/client records in the UI. |
+| Supabase | Live | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, owner auth gate, RLS, and persistence for requests/reports/systems/tasks/activity are in place. CRM tagging now writes activity events and can update optional `lead_status`, `crm_tags`, and `last_activity_at` fields after the migration is run. | User-owned Supabase login for dashboard changes; server-only keys must stay out of docs and client env. CRM field migration still needs to be run in Supabase. | Run CRM field migration, then keep Supabase as the source of truth; harden owner RLS before loading real private operator/client records in the UI. |
 | n8n | Live | Workflow `Right Thurr - Buildout Plan Intake` is active. Production webhook saves intake, calls the Thurnos blueprint bridge, creates draft report/system/tasks/activity, and returns queued status. | n8n login/credentials for workflow edits; production webhook and bridge secret must stay private. | Add approval/email delivery workflow after Resend is configured. |
 | Discord | Live | `#leads-alerts` webhook is connected through n8n as a non-blocking privacy-safe alert. Live QA showed the Discord node ran successfully. | Discord webhook URL is sensitive; channel privacy must be confirmed before posting contact details. | Keep V1 alerts privacy-safe; optionally add review/delivery confirmation alerts. |
 | Slack | Optional / blocked | Slack node exists in n8n as a non-blocking side branch, so failed Slack delivery does not break intake. | Current n8n Slack credential returned `channel_not_found` for `general` and `new-clients`. Needs Slack workspace/channel access cleanup. | Leave optional until team/client operations need it; reconnect credential and test `new-clients` later. |
@@ -54,7 +54,7 @@ Public buildout form
 Do next:
 
 ```text
-Open the owner Command Center at `/?operator=1`, sign in, and visually verify the Report Review Queue. Then choose CRM tagging or owner-side report detail/editing next.
+Run the CRM field migration in Supabase, deploy the CRM tagging code, then verify a fresh buildout request writes CRM tags and lifecycle status.
 ```
 
 Do not do yet:

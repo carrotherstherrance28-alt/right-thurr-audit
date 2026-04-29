@@ -117,6 +117,13 @@ async function patchRows(path, row) {
   });
 }
 
+async function patchCrmFields(buildoutRequestId, row) {
+  await patchRows(`buildout_requests?id=eq.${encodeURIComponent(buildoutRequestId)}`, {
+    ...row,
+    last_activity_at: new Date().toISOString(),
+  }).catch(() => null);
+}
+
 async function insertActivityLog(row) {
   const rows = await supabaseRequest('activity_logs', {
     method: 'POST',
@@ -246,6 +253,12 @@ export default async function handler(request, response) {
     await patchRows(`buildout_requests?id=eq.${encodeURIComponent(buildoutRequestId)}`, {
       status: 'approved_for_delivery',
     });
+    await patchCrmFields(buildoutRequestId, {
+      lead_status: sendEmail ? 'delivery_requested' : 'approved_for_follow_up',
+      crm_tags: sendEmail
+        ? ['blueprint-approved', 'delivery-requested']
+        : ['blueprint-approved', 'approved-for-follow-up'],
+    });
 
     await insertActivityLog({
       system_id: report.system_id,
@@ -255,6 +268,17 @@ export default async function handler(request, response) {
       summary: sendEmail
         ? 'Blueprint report was approved and queued for email delivery.'
         : 'Blueprint report was approved for delivery. Email was not sent.',
+      status: 'completed',
+    });
+
+    await insertActivityLog({
+      system_id: report.system_id,
+      buildout_request_id: buildoutRequestId,
+      agent_name: 'CRM Agent',
+      action_type: 'crm_tag_applied',
+      summary: sendEmail
+        ? 'Lead tagged: blueprint-approved, delivery-requested'
+        : 'Lead tagged: blueprint-approved, ready-for-delivery',
       status: 'completed',
     });
 
@@ -269,6 +293,10 @@ export default async function handler(request, response) {
       await patchRows(`buildout_requests?id=eq.${encodeURIComponent(buildoutRequestId)}`, {
         status: 'delivered',
       });
+      await patchCrmFields(buildoutRequestId, {
+        lead_status: 'report_delivered',
+        crm_tags: ['report-delivered', 'follow-up-needed'],
+      });
 
       await insertActivityLog({
         system_id: report.system_id,
@@ -278,7 +306,19 @@ export default async function handler(request, response) {
         summary: 'Approved blueprint report email was sent to the prospect.',
         status: 'completed',
       });
+      await insertActivityLog({
+        system_id: report.system_id,
+        buildout_request_id: buildoutRequestId,
+        agent_name: 'CRM Agent',
+        action_type: 'crm_tag_applied',
+        summary: 'Lead tagged: report-delivered, follow-up-needed',
+        status: 'completed',
+      });
     } else if (sendEmail) {
+      await patchCrmFields(buildoutRequestId, {
+        lead_status: 'delivery_needs_attention',
+        crm_tags: ['delivery-needs-attention'],
+      });
       await insertActivityLog({
         system_id: report.system_id,
         buildout_request_id: buildoutRequestId,

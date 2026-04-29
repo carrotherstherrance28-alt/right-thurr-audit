@@ -47,6 +47,8 @@ and requests default to `awaiting_review` before external delivery is added.
 2026-04-29: Full n8n production webhook test confirmed manual review mode end to end:
 request `awaiting_review`, report `needs_review`, system `review`, operator review task created,
 and `manual_review_required` activity log written.
+2026-04-29: CRM tagging was added as Supabase activity events. Intake, manual review, approval,
+and delivery can now write `crm_tag_applied` events for later Notion/Airtable/CRM sync.
 ```
 
 Current production flow:

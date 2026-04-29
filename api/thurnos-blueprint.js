@@ -119,6 +119,18 @@ async function updateBuildoutRequest(buildoutRequestId, status) {
   });
 }
 
+async function updateBuildoutCrm(buildoutRequestId, row) {
+  await supabaseRequest(`buildout_requests?id=eq.${encodeURIComponent(buildoutRequestId)}`, {
+    method: 'PATCH',
+    prefer: 'return=minimal',
+    body: JSON.stringify({
+      ...row,
+      last_activity_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }),
+  }).catch(() => null);
+}
+
 async function persistBlueprintDraft({ buildoutRequestId, draft, payload, manualReviewEnabled }) {
   const starterSystem = await insertRow('systems', {
     buildout_request_id: buildoutRequestId,
@@ -161,6 +173,12 @@ async function persistBlueprintDraft({ buildoutRequestId, draft, payload, manual
     ? [
         ...draft.activity_log,
         {
+          agent_name: 'CRM Agent',
+          action_type: 'crm_tag_applied',
+          summary: 'Lead tagged: blueprint-needs-review, report-draft-ready',
+          status: 'completed',
+        },
+        {
           agent_name: 'Operator Agent',
           action_type: 'manual_review_required',
           summary: 'Blueprint draft is ready for operator review before any external delivery.',
@@ -181,6 +199,12 @@ async function persistBlueprintDraft({ buildoutRequestId, draft, payload, manual
   );
 
   await updateBuildoutRequest(buildoutRequestId, manualReviewEnabled ? 'awaiting_review' : 'draft_generated');
+  await updateBuildoutCrm(buildoutRequestId, {
+    lead_status: manualReviewEnabled ? 'blueprint_ready_for_review' : 'blueprint_draft_generated',
+    crm_tags: manualReviewEnabled
+      ? ['blueprint-ready-for-review', 'report-draft-ready']
+      : ['blueprint-draft-generated', 'report-draft-ready'],
+  });
 
   return {
     manual_review_required: manualReviewEnabled,

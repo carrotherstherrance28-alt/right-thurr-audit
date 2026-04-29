@@ -155,7 +155,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Configure email provider and test approved email delivery.
 - [x] Add Discord notification step.
 - [ ] Add Slack notification step later if needed.
-- [ ] Add CRM tagging step.
+- [x] Add CRM tagging step.
 - [x] Add private owner report review queue.
 
 ## Phase 5: Client-Ready Diagnostic Engine
@@ -242,7 +242,8 @@ Daily session:
 - [x] Sent approved Resend QA email to `therrance@thurrsolutions.com` and verified request/report moved to `delivered` with `report_email_sent` activity.
 - [x] Deploy owner Report Review Queue after Vercel daily deployment limit resets.
 - [x] Smoke-test `/api/review-reports` on production and `build.thurrsolutions.com`; unauthenticated requests return `401`.
+- [x] Added CRM tagging through `crm_tag_applied` activity events and optional `buildout_requests` CRM fields (`lead_status`, `crm_tags`, `last_activity_at`) when the Supabase migration is installed.
 
 ## Next Task
 
-Open the owner Command Center at `/?operator=1`, sign in, and visually verify the Report Review Queue card. Then choose whether to add CRM tagging or owner-side report detail/editing next.
+Run the CRM field migration in Supabase, then deploy and verify a fresh buildout request writes CRM tags and lifecycle status.

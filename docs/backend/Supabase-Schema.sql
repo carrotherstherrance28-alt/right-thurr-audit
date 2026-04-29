@@ -19,9 +19,26 @@ create table if not exists public.buildout_requests (
   biggest_bottleneck text,
   report_type text not null default 'right-thurr-autopilot-blueprint',
   status text not null default 'requested',
+  lead_status text not null default 'blueprint_requested',
+  crm_tags text[] not null default '{}'::text[],
+  last_activity_at timestamptz not null default now(),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.buildout_requests
+add column if not exists lead_status text not null default 'blueprint_requested',
+add column if not exists crm_tags text[] not null default '{}'::text[],
+add column if not exists last_activity_at timestamptz not null default now();
+
+create index if not exists buildout_requests_lead_status_idx
+on public.buildout_requests (lead_status);
+
+create index if not exists buildout_requests_crm_tags_idx
+on public.buildout_requests using gin (crm_tags);
+
+create index if not exists buildout_requests_last_activity_at_idx
+on public.buildout_requests (last_activity_at desc);
 
 create table if not exists public.systems (
   id uuid primary key default gen_random_uuid(),

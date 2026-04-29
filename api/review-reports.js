@@ -92,6 +92,20 @@ async function getRowsByIds(table, ids, select = '*') {
   return new Map(rows.map((row) => [row.id, row]));
 }
 
+async function getBuildoutRequestRows(ids) {
+  return getRowsByIds(
+    'buildout_requests',
+    ids,
+    'id,name,email,industry,main_goal,status,lead_status,crm_tags,last_activity_at,created_at,updated_at',
+  ).catch(() =>
+    getRowsByIds(
+      'buildout_requests',
+      ids,
+      'id,name,email,industry,main_goal,status,created_at,updated_at',
+    ),
+  );
+}
+
 export default async function handler(request, response) {
   if (request.method !== 'GET') {
     response.setHeader('Allow', 'GET');
@@ -118,11 +132,7 @@ export default async function handler(request, response) {
     const reports = await supabaseRequest(
       'generated_reports?report_status=in.(needs_review,approved_for_delivery)&select=id,buildout_request_id,system_id,title,report_status,summary,created_by_agent,created_at,updated_at&order=updated_at.desc&limit=8',
     );
-    const requestRows = await getRowsByIds(
-      'buildout_requests',
-      reports.map((report) => report.buildout_request_id),
-      'id,name,email,industry,main_goal,status,created_at,updated_at',
-    );
+    const requestRows = await getBuildoutRequestRows(reports.map((report) => report.buildout_request_id));
     const systemRows = await getRowsByIds(
       'systems',
       reports.map((report) => report.system_id),

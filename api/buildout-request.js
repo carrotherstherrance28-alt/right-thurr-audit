@@ -38,10 +38,48 @@ function mapBuildoutPayloadToSupabaseRow(payload) {
   };
 }
 
+function getLeadTags(payload) {
+  return [
+    'new-buildout-request',
+    payload.intake?.budget_level ? `budget-${payload.intake.budget_level}` : '',
+    payload.intake?.timeline ? `timeline-${payload.intake.timeline}` : '',
+    payload.intake?.industry ? `industry-${payload.intake.industry}` : '',
+  ]
+    .map((tag) =>
+      String(tag)
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, ''),
+    )
+    .filter(Boolean);
+}
+
 function sendJson(response, statusCode, body) {
   response.statusCode = statusCode;
   response.setHeader('Content-Type', 'application/json');
   response.end(JSON.stringify(body));
+}
+
+async function patchCrmFields({ supabaseUrl, supabaseKey, buildoutRequestId, leadTags }) {
+  const response = await fetch(`${supabaseUrl}/rest/v1/buildout_requests?id=eq.${encodeURIComponent(buildoutRequestId)}`, {
+    method: 'PATCH',
+    headers: {
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify({
+      lead_status: 'blueprint_requested',
+      crm_tags: leadTags,
+      last_activity_at: new Date().toISOString(),
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('CRM fields are not available yet.');
+  }
 }
 
 export default async function handler(request, response) {
@@ -104,11 +142,39 @@ export default async function handler(request, response) {
 
   const savedRows = supabaseElevatedKey ? await supabaseResponse.json() : [];
   const savedRequest = Array.isArray(savedRows) ? savedRows[0] : null;
+  const leadTags = getLeadTags(payload);
+
+  if (supabaseElevatedKey && savedRequest?.id) {
+    await patchCrmFields({
+      supabaseUrl,
+      supabaseKey: supabaseElevatedKey,
+      buildoutRequestId: savedRequest.id,
+      leadTags,
+    }).catch(() => null);
+
+    await fetch(`${supabaseUrl}/rest/v1/activity_logs`, {
+      method: 'POST',
+      headers: {
+        apikey: supabaseElevatedKey,
+        Authorization: `Bearer ${supabaseElevatedKey}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify({
+        buildout_request_id: savedRequest.id,
+        agent_name: 'CRM Agent',
+        action_type: 'crm_tag_applied',
+        summary: `Lead tagged: ${leadTags.join(', ')}`,
+        status: 'completed',
+      }),
+    }).catch(() => null);
+  }
 
   sendJson(response, 201, {
     ok: true,
     status: 'queued',
     message: 'Blueprint request saved.',
     buildout_request_id: savedRequest?.id,
+    crm_tags: leadTags,
   });
 }
