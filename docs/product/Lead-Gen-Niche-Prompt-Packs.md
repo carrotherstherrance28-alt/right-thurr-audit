@@ -26,6 +26,14 @@ Write in the brand voice provided by the client.
 
 Best for: cleaning, detailing, landscaping, home repair, mobile services.
 
+Recommended V1 lane:
+
+```txt
+Mobile detailing quote-to-booking diagnostic.
+```
+
+Use `docs/product/Client-Diagnostic-V1-Mobile-Detailing.md` as the first build reference.
+
 Diagnostic angle:
 
 - Lead capture clarity
@@ -196,4 +204,3 @@ Biggest leak: [one sentence]
 Fastest win: [one sentence]
 Recommended system: [one sentence]
 ```
-

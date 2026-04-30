@@ -33,6 +33,7 @@ Latest pushed commit is `2b857a5`; Vercel production deploy is blocked until the
 - Owner Report Review Queue frontend magic-link auth has been re-enabled.
 - Supabase owner RLS hardening SQL exists at `docs/backend/Supabase-Owner-RLS-Hardening.sql`.
 - Recurring hourly build-session automation was created for one-task-at-a-time execution.
+- Mobile detailing was selected as the first client diagnostic V1 lane.
 - Client diagnostic package added:
   - unbranded diagnostic report template
   - Thurr Solutions sales diagnostic version
@@ -58,7 +59,7 @@ signed in owner -> reports load
 approve without send -> approved_for_delivery / approved_for_follow_up
 ```
 
-5. Decide first client diagnostic niche and start the V1 client diagnostic flow.
+5. Create three visual options for the mobile detailing diagnostic page, then implement the selected reusable template.
 
 ## Linear Tasks To Create Or Update
 
@@ -108,12 +109,13 @@ Acceptance criteria:
 Priority: Medium
 
 Description:
-Turn the new product docs into the first client-ready diagnostic flow and report package.
+Turn the mobile detailing V1 spec into the first client-ready diagnostic flow and report package.
 
 Acceptance criteria:
+- Three screenshot options are created before coding the frontend.
 - Unbranded diagnostic report can be re-skinned.
 - Thurr Solutions sales version has a clear CTA.
-- Niche prompt pack is selected for the first target market.
+- Mobile detailing prompt pack is selected for the first target market.
 - Follow-up template sequence is mapped to n8n.
 
 ### 5. Decide Linear Mirror Scope

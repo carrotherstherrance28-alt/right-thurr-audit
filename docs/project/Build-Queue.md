@@ -263,7 +263,8 @@ Daily session:
 - [x] Added Supabase owner RLS hardening SQL for approved owner profiles and private table read policies.
 - [x] Added the recurring `Right Thurr Hourly Build Session` automation for one-task-at-a-time execution.
 - [x] Pushed owner auth/RLS code at commit `2b857a5`; production deployment is blocked by the Vercel free daily deployment cap.
+- [x] Selected mobile detailing as the recommended first client diagnostic lane and created the V1 diagnostic spec.
 
 ## Next Task
 
-Retry Vercel production deploy after the daily cap resets, then run the owner magic-link sign-in once, apply `docs/backend/Supabase-Owner-RLS-Hardening.sql`, and QA the private report queue against production.
+Retry Vercel production deploy after the daily cap resets. While blocked, create three visual options for the mobile detailing diagnostic page before coding the reusable client diagnostic template.

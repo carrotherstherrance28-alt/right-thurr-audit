@@ -24,6 +24,7 @@ Discord alerts, approval-only review, and approved Resend delivery are already w
 | Cloudflare / domain | Live for Thurr Solutions | `thurrsolutions.com`, `www.thurrsolutions.com`, and `build.thurrsolutions.com` resolve to Vercel with issued certificates. DNS is gray-cloud / DNS-only. | Future domain changes require Cloudflare login. `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com` are still future decisions/work. | Keep current DNS stable; decide later when to attach `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com`. |
 | Email provider / Resend | Live | `/api/approve-report` supports approval-only mode and Resend-backed send mode. Production send QA to `therrance@thurrsolutions.com` passed: Resend returned `sent`, request/report moved to `delivered`, and `report_email_sent` activity was logged. Owner Command Center has a Supabase magic-link gate and can approve without sending once the owner session is active. | Prospect delivery should still stay manual-review only. | Keep send tests limited to approved recipients until report quality is reviewed. |
 | Thurnos / Hermes / GPT | Live bridge | Local Ollama notes exist for `thurnos:latest`/`hermes3:latest`. Production bridge currently supports OpenAI provider with server-only `OPENAI_API_KEY` and `THURNOS_OPENAI_MODEL`. End-to-end n8n tests generated report/system/tasks/activity. | OpenAI key and bridge secret are server-only. Local Ollama should not be exposed directly to the public web. | Keep generated reports in manual review mode; improve prompt/report quality from reviewed examples. |
+| Client diagnostic V1 | Planned / spec ready | Mobile detailing was selected as the first client diagnostic lane. V1 spec exists at `docs/product/Client-Diagnostic-V1-Mobile-Detailing.md`. | Needs three visual options before frontend coding because this is visual/client-facing work. | Create three screenshot options, select one, then build reusable diagnostic page template. |
 
 ## Working Production Path
 
@@ -53,7 +54,7 @@ Public buildout form
 Do next:
 
 ```text
-Retry Vercel production deploy after the daily cap resets, then run owner magic-link sign-in once, apply the owner RLS hardening SQL, and QA the private owner queue on production.
+Retry Vercel production deploy after the daily cap resets. While blocked, create three visual options for the mobile detailing diagnostic page.
 ```
 
 Do not do yet:
