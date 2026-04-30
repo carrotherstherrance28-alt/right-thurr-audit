@@ -136,20 +136,25 @@ What I need:
 
 ## 6. Visual Direction
 
-Current options:
+Status:
 
 ```text
-design-options/screenshots/homepage-option-a.png
-design-options/screenshots/homepage-option-b.png
-design-options/screenshots/homepage-option-c.png
+Original homepage option screenshots were removed during screenshot cleanup.
+The selected direction was already implemented on the live site.
 ```
 
 What I need:
 
-- Pick A, B, C, or tell me what to combine.
+- For new visual/client-facing work, upload or provide client assets.
+- Codex will create three fresh screenshot options before coding.
 
-My recommendation:
+Current active visual option sets:
 
-- Use Option B for the homepage.
-- Use Option A for the Buildout Plan page.
-- Use Option C as a brand architecture section or internal brand page.
+```text
+design-options/screenshots/christy-nail-booking.png
+design-options/screenshots/christy-nail-receptionist.png
+design-options/screenshots/christy-nail-funnel.png
+design-options/screenshots/mobile-detailing-diagnostic-option-a.png
+design-options/screenshots/mobile-detailing-diagnostic-option-b.png
+design-options/screenshots/mobile-detailing-diagnostic-option-c.png
+```
