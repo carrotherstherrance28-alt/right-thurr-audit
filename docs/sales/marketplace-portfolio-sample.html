@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thurr Solutions Marketplace Portfolio Sample</title>
+    <style>
+      :root {
+        --ink: #171714;
+        --paper: #f5efe2;
+        --orange: #e95f24;
+        --muted: #5d5b55;
+        --line: #1f1d1a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #ddd8cf;
+        color: var(--ink);
+        font-family: Arial, sans-serif;
+      }
+
+      .sheet {
+        width: 1100px;
+        min-height: 1420px;
+        margin: 0 auto;
+        padding: 44px;
+        background:
+          linear-gradient(90deg, rgba(31, 29, 26, 0.05) 1px, transparent 1px) 0 0 / 42px 42px,
+          linear-gradient(rgba(31, 29, 26, 0.05) 1px, transparent 1px) 0 0 / 42px 42px,
+          var(--paper);
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 28px;
+        align-items: start;
+        padding-bottom: 28px;
+        border-bottom: 4px solid var(--line);
+      }
+
+      .eyebrow {
+        color: var(--orange);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin-top: 12px;
+        font-size: 58px;
+        line-height: 0.96;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .stamp {
+        padding: 18px;
+        border: 3px solid var(--line);
+        background: var(--ink);
+        color: var(--paper);
+        box-shadow: 6px 6px 0 var(--orange);
+        text-align: right;
+      }
+
+      .stamp strong {
+        display: block;
+        color: var(--orange);
+        font-size: 26px;
+      }
+
+      .section {
+        display: grid;
+        gap: 20px;
+        margin-top: 34px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .card {
+        min-height: 190px;
+        padding: 22px;
+        border: 3px solid var(--line);
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 5px 5px 0 var(--line);
+      }
+
+      .card span {
+        display: block;
+        margin-bottom: 18px;
+        color: var(--orange);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .card h3 {
+        margin-bottom: 12px;
+        font-size: 24px;
+      }
+
+      .proof {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .proof-panel {
+        padding: 28px;
+        border: 4px solid var(--line);
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .proof-panel p {
+        color: #d8d0c4;
+      }
+
+      .score {
+        margin-top: 24px;
+        font-size: 82px;
+        font-weight: 900;
+        color: var(--orange);
+        line-height: 1;
+      }
+
+      .workflow {
+        display: grid;
+        gap: 12px;
+      }
+
+      .workflow div {
+        display: grid;
+        grid-template-columns: 68px 1fr;
+        gap: 16px;
+        align-items: center;
+        padding: 16px;
+        border: 2px solid var(--line);
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .workflow span {
+        color: var(--orange);
+        font-weight: 900;
+      }
+
+      footer {
+        margin-top: 40px;
+        padding-top: 24px;
+        border-top: 4px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      @media print {
+        body {
+          background: var(--paper);
+        }
+
+        .sheet {
+          width: 100%;
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="sheet">
+      <header>
+        <div>
+          <div class="eyebrow">Thurr Solutions Portfolio Sample</div>
+          <h1>AI automation systems for lead intake, follow-up, and owner visibility.</h1>
+        </div>
+        <aside class="stamp">
+          <span>Operating Promise</span>
+          <strong>We build. You profit.</strong>
+        </aside>
+      </header>
+
+      <section class="section">
+        <p>
+          Thurr Solutions builds practical automation systems for local service businesses and
+          small teams. The work focuses on business process diagnosis, n8n workflows, CRM-style
+          records, owner alerts, AI-assisted summaries, and manual approval points where judgment
+          matters.
+        </p>
+      </section>
+
+      <section class="section">
+        <div class="eyebrow">Core Services</div>
+        <div class="grid">
+          <article class="card">
+            <span>01</span>
+            <h3>Lead-Flow Diagnostic</h3>
+            <p>Score the current lead path, find the biggest leak, and map the first automation worth building.</p>
+          </article>
+          <article class="card">
+            <span>02</span>
+            <h3>n8n Intake Automation</h3>
+            <p>Capture new leads, save records, tag status, notify the owner, and create follow-up tasks.</p>
+          </article>
+          <article class="card">
+            <span>03</span>
+            <h3>AI Buildout Blueprint</h3>
+            <p>Turn a business idea or workflow problem into a practical execution roadmap and system plan.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section proof">
+        <aside class="proof-panel">
+          <div class="eyebrow">Example Diagnostic</div>
+          <h2>Mobile Detailing Lead-Flow Diagnostic</h2>
+          <p>
+            A sample client diagnostic that reviews offer clarity, quote capture, response speed,
+            proof, and follow-up, then recommends a quote-to-booking system.
+          </p>
+          <div class="score">68</div>
+          <p>Opportunity score: enough demand to grow, but the follow-up path needs a real system.</p>
+        </aside>
+        <div class="workflow">
+          <div><span>01</span><strong>Lead lands on diagnostic or quote page.</strong></div>
+          <div><span>02</span><strong>n8n receives the form and validates key fields.</strong></div>
+          <div><span>03</span><strong>Supabase or CRM stores the lead record and status.</strong></div>
+          <div><span>04</span><strong>Owner gets a privacy-safe alert in Discord, Slack, or email.</strong></div>
+          <div><span>05</span><strong>AI drafts a diagnostic or lead summary for manual review.</strong></div>
+          <div><span>06</span><strong>Approved follow-up invites the prospect into the next step.</strong></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="eyebrow">Tools And Stack</div>
+        <div class="grid">
+          <article class="card">
+            <span>Automation</span>
+            <h3>n8n, Webhooks, APIs</h3>
+            <p>Workflow routing, lead status updates, alerts, and handoffs.</p>
+          </article>
+          <article class="card">
+            <span>Data</span>
+            <h3>Supabase, Sheets, Airtable</h3>
+            <p>CRM-style records, reports, activity logs, and task queues.</p>
+          </article>
+          <article class="card">
+            <span>AI</span>
+            <h3>OpenAI, Ollama, Thurnos</h3>
+            <p>Blueprint drafts, lead summaries, report sections, and owner review support.</p>
+          </article>
+        </div>
+      </section>
+
+      <footer>
+        <strong>Therrance Carrothers / Thurr Solutions</strong>
+        <span>Private AI systems for local service businesses.</span>
+      </footer>
+    </article>
+  </body>
+</html>

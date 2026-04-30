@@ -270,6 +270,7 @@ Daily session:
   - `design-options/screenshots/mobile-detailing-diagnostic-option-c.png`
 - [x] Installed project-level AIDesigner Codex config and documented remaining auth/session step.
 - [x] Created Upwork/Fiverr marketplace launch kit for Thurr Solutions service offers.
+- [x] Created marketplace portfolio sample HTML, screenshot, and PDF for Upwork/Fiverr proof.
 
 ## Next Task
 

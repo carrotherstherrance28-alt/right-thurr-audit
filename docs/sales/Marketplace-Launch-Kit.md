@@ -165,6 +165,12 @@ Portfolio items to add:
 - Approved-report/manual-review flow
 - Remotion branded intro once rendered
 
+Ready sample asset:
+
+```txt
+docs/sales/rendered/marketplace-portfolio-sample.pdf
+```
+
 ## Fiverr Gig 1
 
 Gig title:
@@ -304,6 +310,7 @@ Day 1:
 - Create or finish Upwork freelancer profile.
 - Add the profile title and overview from this kit.
 - Add 2-3 portfolio screenshots from the Thurr buildout engine and mobile detailing diagnostic options.
+- Use `docs/sales/rendered/marketplace-portfolio-sample.pdf` as the first portfolio proof asset.
 
 Day 2:
 
