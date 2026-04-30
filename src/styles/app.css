@@ -1823,6 +1823,20 @@ textarea:focus {
   line-height: var(--leading-normal);
 }
 
+.compact-owner-form {
+  grid-template-columns: minmax(220px, 1fr) auto;
+  align-items: end;
+}
+
+.compact-owner-form .stamp-button {
+  min-height: 54px;
+  white-space: nowrap;
+}
+
+.owner-signout-button {
+  justify-self: end;
+}
+
 .review-report-meta,
 .review-report-actions {
   display: flex;
@@ -3117,6 +3131,14 @@ dd {
 
   .brand-wordmark {
     width: 132px;
+  }
+
+  .compact-owner-form {
+    grid-template-columns: 1fr;
+  }
+
+  .compact-owner-form .stamp-button {
+    width: 100%;
   }
 
   .system-live {

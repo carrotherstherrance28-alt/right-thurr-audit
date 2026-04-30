@@ -259,7 +259,9 @@ Daily session:
 - [x] Ran Supabase CRM field migration and verified REST reads now return `lead_status`, `crm_tags`, and `last_activity_at`.
 - [x] Verified a fresh CRM lifecycle request: intake wrote request tags, blueprint generation moved it to `awaiting_review`, approval-only mode moved it to `approved_for_delivery`, and Supabase showed `approved_for_follow_up` with `blueprint-approved` / `approved-for-follow-up` tags.
 - [x] Created live Notion Command Center databases for Task Tracker, Content Calendar, and AI Ideas Log with the repo Notion API script.
+- [x] Re-enabled the private owner Report Review Queue auth flow with Supabase magic-link sign-in and owner-token API calls.
+- [x] Added Supabase owner RLS hardening SQL for approved owner profiles and private table read policies.
 
 ## Next Task
 
-Finalize owner auth/RLS before showing real private lead/report data in the owner UI, then wire the owner queue to the now-verified CRM lifecycle fields.
+Run the owner magic-link sign-in once, apply `docs/backend/Supabase-Owner-RLS-Hardening.sql`, then QA the private report queue against production.

@@ -24,6 +24,7 @@ https://right-thurr-audit.vercel.app/owner/callback?operator=1
 - With a valid owner session and server-side allowlisted email, the page opens `Command Center`.
 - Operator tabs are limited to `Command Center` and `Systems`.
 - `/api/review-reports` and owner report approvals require Supabase owner-session checks by default.
+- The private Report Review Queue now sends a Supabase owner magic link, stores the owner session in the browser, and calls private review/approval APIs with the owner bearer token.
 
 ## Vercel Environment Variables
 
@@ -92,9 +93,13 @@ Sources:
 
 Before real private records appear in the owner UI:
 
-1. Create an `owner_profiles` table.
-2. Store approved owner user IDs after first sign-in.
-3. Add RLS policies requiring `auth.uid()` to match an approved owner profile.
-4. Move operator data reads to authenticated Supabase queries.
-5. Keep Discord alerts privacy-safe and store sensitive lead details only in Supabase.
-6. Keep `OWNER_AUTH_MODE=supabase` for production owner screens.
+1. Sign in once with the owner magic link so Supabase creates the owner Auth user.
+2. Run:
+
+```txt
+docs/backend/Supabase-Owner-RLS-Hardening.sql
+```
+
+3. Confirm the `owner_profiles` row exists for the owner email.
+4. Keep Discord alerts privacy-safe and store sensitive lead details only in Supabase.
+5. Keep `OWNER_AUTH_MODE=supabase` for production owner screens.

@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { createClient } from '@supabase/supabase-js';
 import {
   Activity,
   ArrowUpRight,
@@ -79,6 +80,16 @@ const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabaseBuildoutUrl = supabaseUrl ? `${supabaseUrl}/rest/v1/buildout_requests` : '';
+const ownerSupabaseClient =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey, {
+        auth: {
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+          persistSession: true,
+        },
+      })
+    : null;
 
 function mapBuildoutPayloadToSupabaseRow(payload) {
   return {
@@ -396,19 +407,155 @@ function ReportReviewQueue() {
   const [reports, setReports] = useState([]);
   const [reviewStatus, setReviewStatus] = useState('auth_required');
   const [reviewMessage, setReviewMessage] = useState('');
+  const [ownerEmail, setOwnerEmail] = useState('');
+  const [ownerSession, setOwnerSession] = useState(null);
+
+  async function getOwnerSession() {
+    if (!ownerSupabaseClient) {
+      return null;
+    }
+
+    const { data } = await ownerSupabaseClient.auth.getSession();
+    return data.session || null;
+  }
 
   async function loadReports() {
-    setReviewStatus('auth_required');
-    setReviewMessage('Owner report details stay locked until Supabase owner auth is re-enabled.');
+    if (!ownerSupabaseClient) {
+      setReviewStatus('auth_required');
+      setReviewMessage('Owner auth needs the Supabase URL and anon key in the frontend environment.');
+      return;
+    }
+
+    const session = await getOwnerSession();
+    setOwnerSession(session);
+
+    if (!session?.access_token) {
+      setReviewStatus('auth_required');
+      setReviewMessage('Sign in with the owner email to load private blueprint reports.');
+      return;
+    }
+
+    setReviewStatus('loading');
+    setReviewMessage('');
+
+    try {
+      const response = await fetch('/api/review-reports', {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || data.error || 'Review reports could not be loaded.');
+      }
+
+      setReports(data.reports || []);
+      setReviewStatus('ready');
+    } catch (error) {
+      setReviewStatus('error');
+      setReviewMessage(error.message);
+    }
   }
 
   useEffect(() => {
     loadReports();
+
+    if (!ownerSupabaseClient) {
+      return undefined;
+    }
+
+    const {
+      data: { subscription },
+    } = ownerSupabaseClient.auth.onAuthStateChange((_event, session) => {
+      setOwnerSession(session);
+
+      if (session?.access_token) {
+        loadReports();
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  async function approveReport(reportId) {
+  async function sendOwnerMagicLink(event) {
+    event.preventDefault();
+
+    if (!ownerSupabaseClient || !ownerEmail) {
+      setReviewStatus('auth_required');
+      setReviewMessage('Enter the owner email to request the secure sign-in link.');
+      return;
+    }
+
+    setReviewStatus('loading');
+    setReviewMessage('Sending owner sign-in link...');
+
+    const redirectTo = `${window.location.origin}/owner/callback?operator=1`;
+    const { error } = await ownerSupabaseClient.auth.signInWithOtp({
+      email: ownerEmail,
+      options: {
+        emailRedirectTo: redirectTo,
+        shouldCreateUser: true,
+      },
+    });
+
+    if (error) {
+      setReviewStatus('auth_required');
+      setReviewMessage(error.message);
+      return;
+    }
+
     setReviewStatus('auth_required');
-    setReviewMessage(`Owner auth must be re-enabled before report ${reportId} can be approved from the UI.`);
+    setReviewMessage('Check your email for the owner sign-in link, then come back to the Command Center.');
+  }
+
+  async function signOutOwner() {
+    if (ownerSupabaseClient) {
+      await ownerSupabaseClient.auth.signOut();
+    }
+
+    setOwnerSession(null);
+    setReports([]);
+    setReviewStatus('auth_required');
+    setReviewMessage('Owner session signed out. Private reports are locked again.');
+  }
+
+  async function approveReport(reportId) {
+    const session = ownerSession || (await getOwnerSession());
+
+    if (!session?.access_token) {
+      setReviewStatus('auth_required');
+      setReviewMessage('Sign in as the owner before approving reports.');
+      return;
+    }
+
+    setReviewStatus('approving');
+    setReviewMessage('Approving report without sending email...');
+
+    try {
+      const response = await fetch('/api/approve-report', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          report_id: reportId,
+          send_email: false,
+        }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || data.error || 'Report approval failed.');
+      }
+
+      setReviewMessage('Report approved for follow-up. Email was not sent.');
+      await loadReports();
+    } catch (error) {
+      setReviewStatus('error');
+      setReviewMessage(error.message);
+    }
   }
 
   return (
@@ -426,11 +573,28 @@ function ReportReviewQueue() {
         {reviewStatus === 'auth_required' && (
           <article className="review-empty-state">
             <span>PRIVATE QUEUE LOCKED</span>
-            <strong>Owner auth required before loading lead reports.</strong>
+            <strong>Owner sign-in required before loading lead reports.</strong>
             <p>
-              The Command Center preview stays open for layout and workflow review. The real report
-              queue will load after the Supabase owner gate is re-enabled.
+              The Command Center preview stays open for workflow review. Real lead details load only
+              after Supabase verifies your owner session.
             </p>
+            <form className="owner-access-form compact-owner-form" onSubmit={sendOwnerMagicLink}>
+              <label htmlFor="owner-email">
+                Owner Email
+                <input
+                  id="owner-email"
+                  type="email"
+                  autoComplete="email"
+                  value={ownerEmail}
+                  placeholder="therrance@thurrsolutions.com"
+                  onChange={(event) => setOwnerEmail(event.target.value)}
+                />
+              </label>
+              <button className="stamp-button link-button" type="submit">
+                SEND OWNER LINK
+                <ArrowUpRight size={18} strokeWidth={3} />
+              </button>
+            </form>
           </article>
         )}
         {reviewStatus === 'loading' && <p className="form-note">Loading review queue...</p>}
@@ -545,6 +709,11 @@ function ReportReviewQueue() {
         })}
       </div>
 
+      {ownerSession && reviewStatus !== 'loading' && (
+        <button className="text-link button-link owner-signout-button" type="button" onClick={signOutOwner}>
+          Lock owner queue
+        </button>
+      )}
       {reviewMessage && reviewStatus !== 'error' && <p className="form-note">{reviewMessage}</p>}
     </section>
   );
