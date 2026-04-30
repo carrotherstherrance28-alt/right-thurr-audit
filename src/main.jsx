@@ -1263,6 +1263,9 @@ function AboutTherranceSection() {
       <div className="founder-copy">
         <div className="eyebrow">ABOUT THERRANCE CARROTHERS</div>
         <h2>AI automation builder with finance, operations, and design-system instincts.</h2>
+        <div className="founder-credential" aria-label="Careerist certification">
+          Careerist Certified AI Automation Specialist
+        </div>
         <p>
           Therrance Carrothers designs and deploys automation systems using n8n, LLMs, APIs,
           Supabase, and workflow logic that turns manual business processes into repeatable

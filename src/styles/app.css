@@ -1256,6 +1256,20 @@ textarea:focus {
   line-height: var(--leading-normal);
 }
 
+.founder-credential {
+  width: fit-content;
+  margin: 0 0 var(--s-4);
+  padding: var(--s-2) var(--s-3);
+  border: var(--bw-thin) solid rgba(245, 239, 226, 0.38);
+  background: rgba(228, 90, 26, 0.14);
+  color: var(--rt-orange-100);
+  font-family: var(--font-subhead);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: var(--tracking-loud);
+  text-transform: uppercase;
+}
+
 .founder-socials {
   display: flex;
   flex-wrap: wrap;

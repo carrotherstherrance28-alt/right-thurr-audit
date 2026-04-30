@@ -118,7 +118,7 @@ export function SiteFooter({ navigateToAbout, navigateToPage, socialLinks }) {
         <span>Blueprints</span>
         <span>Automation</span>
         <span>AI Agents</span>
-        <span>Revenue Ops</span>
+        <span>Certified AI Automation</span>
       </div>
 
       <nav className="site-footer-links" aria-label="Footer navigation">
