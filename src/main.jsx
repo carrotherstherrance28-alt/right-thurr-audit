@@ -1269,9 +1269,9 @@ function AboutTherranceSection() {
         </p>
         <p>
           His background blends AI automation, trucking operations, finance, lead intelligence,
-          proposal automation, onboarding systems, and brand-aware UI design. Thurr is the public
-          buildout engine; Thurr Solutions is the implementation arm behind client systems,
-          diagnostic funnels, content assets, and private operator workflows.
+          proposal automation, onboarding systems, and brand-aware UI design. Therrance is building
+          the public Right Thurr buildout engine, while Thurr Solutions is the implementation arm
+          behind client systems, diagnostic funnels, content assets, and private operator workflows.
         </p>
         <div className="founder-socials" aria-label="Therrance Carrothers social links">
           <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
