@@ -6,7 +6,20 @@ The Notion page is the operating hub. The repo remains the source of truth for c
 
 ## Notion Command Center Structure
 
-Pasted Command Center links:
+Live Command Center:
+
+- Command Center: https://www.notion.so/Command-Center-34ca6f1d252381dbae98fd09da37ae32
+- Task Tracker: https://app.notion.com/p/352a6f1d252381ccb2d8c1feeadd0a29
+- Content Calendar: https://app.notion.com/p/352a6f1d2523811694cec856397a88d6
+- AI Ideas Log: https://app.notion.com/p/352a6f1d2523818f80a7db7d63e73f0a
+
+Created by:
+
+```txt
+scripts/notion-create-command-center.mjs
+```
+
+Original pasted Command Center links:
 
 - Task Tracker: `09eb0d6f1f76481c93272f8b9e02c108`
 - Content Calendar: `6926f277a49a4e99a0cba692b9279bf9`
@@ -18,11 +31,12 @@ Pasted Command Center links:
 Current connector status:
 
 ```txt
-The Notion connector can search the workspace, but these linked pages/databases are not visible yet.
-The user pasted the Command Center content, so planning can continue.
+The direct Notion API write path works when NOTION_API_KEY has access to the parent page.
+The Codex app Notion connector remains search/fetch-oriented, so future automated writes should
+use the repo script path or n8n Notion credentials.
 ```
 
-If connector access is fixed later, use these IDs to fetch and sync.
+Use the live database URLs above for day-to-day tracking.
 
 ## Operating Rule
 

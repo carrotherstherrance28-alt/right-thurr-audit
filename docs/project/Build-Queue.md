@@ -258,6 +258,7 @@ Daily session:
 - [x] Deployed latest `main` at commit `93b4088` and verified unauthenticated `/api/review-reports` returns `401` on both production aliases.
 - [x] Ran Supabase CRM field migration and verified REST reads now return `lead_status`, `crm_tags`, and `last_activity_at`.
 - [x] Verified a fresh CRM lifecycle request: intake wrote request tags, blueprint generation moved it to `awaiting_review`, approval-only mode moved it to `approved_for_delivery`, and Supabase showed `approved_for_follow_up` with `blueprint-approved` / `approved-for-follow-up` tags.
+- [x] Created live Notion Command Center databases for Task Tracker, Content Calendar, and AI Ideas Log with the repo Notion API script.
 
 ## Next Task
 

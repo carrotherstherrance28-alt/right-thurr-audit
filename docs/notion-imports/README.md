@@ -1,10 +1,16 @@
 # Notion Import Pack
 
-These CSV files create the first Command Center databases:
+These CSV files create the first Command Center databases if the API script is unavailable:
 
 - `task-tracker.csv`
 - `content-calendar.csv`
 - `ai-ideas-log.csv`
+
+The live databases were also created through `scripts/notion-create-command-center.mjs`:
+
+- Task Tracker: https://app.notion.com/p/352a6f1d252381ccb2d8c1feeadd0a29
+- Content Calendar: https://app.notion.com/p/352a6f1d2523811694cec856397a88d6
+- AI Ideas Log: https://app.notion.com/p/352a6f1d2523818f80a7db7d63e73f0a
 
 ## Import Steps
 
