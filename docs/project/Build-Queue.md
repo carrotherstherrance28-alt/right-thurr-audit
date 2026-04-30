@@ -271,6 +271,7 @@ Daily session:
 - [x] Installed project-level AIDesigner Codex config and documented remaining auth/session step.
 - [x] Created Upwork/Fiverr marketplace launch kit for Thurr Solutions service offers.
 - [x] Created marketplace portfolio sample HTML, screenshot, and PDF for Upwork/Fiverr proof.
+- [x] Created three sales-ready Christy nail business mockups: booking page, AI receptionist, and Instagram lead funnel.
 
 ## Next Task
 

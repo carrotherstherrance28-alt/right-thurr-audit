@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Christy Nail Business Client Mockups</title>
+    <style>
+      :root {
+        --ink: #151114;
+        --charcoal: #252025;
+        --pink: #f4a9c3;
+        --pink-soft: #ffe8f1;
+        --pink-hot: #e45e93;
+        --white: #ffffff;
+        --paper: #fff8fb;
+        --line: #1e181d;
+        --muted: #6b5d66;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #0b090b;
+        color: var(--ink);
+        font-family: Inter, Arial, sans-serif;
+      }
+
+      .mockup {
+        display: none;
+        width: 1200px;
+        height: 900px;
+        overflow: hidden;
+        padding: 34px;
+        background:
+          radial-gradient(circle at 20% 12%, rgba(244, 169, 195, 0.38), transparent 30%),
+          linear-gradient(135deg, #fff7fb 0%, #f8e0eb 100%);
+      }
+
+      body[data-screen="booking"] .booking,
+      body[data-screen="receptionist"] .receptionist,
+      body[data-screen="funnel"] .funnel {
+        display: grid;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.45;
+      }
+
+      .eyebrow {
+        color: var(--pink-hot);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 58px;
+        height: 58px;
+        border: 3px solid var(--line);
+        border-radius: 18px;
+        background: var(--ink);
+        color: var(--pink);
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      .brand strong {
+        display: block;
+        color: var(--ink);
+        font-size: 22px;
+        letter-spacing: 0.02em;
+      }
+
+      .brand span {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        min-height: 58px;
+        padding: 0 24px;
+        border: 3px solid var(--line);
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--white);
+        box-shadow: 6px 6px 0 var(--pink);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .panel {
+        border: 3px solid var(--line);
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 10px 10px 0 rgba(21, 17, 20, 0.12);
+      }
+
+      .booking {
+        grid-template-rows: auto 1fr;
+        gap: 28px;
+      }
+
+      .booking header,
+      .funnel header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .booking-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(420px, 0.65fr);
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .booking-copy {
+        display: grid;
+        align-content: center;
+        gap: 22px;
+        padding: 40px;
+      }
+
+      .booking h1 {
+        max-width: 660px;
+        font-size: 70px;
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .service-board {
+        display: grid;
+        gap: 18px;
+        padding: 28px;
+        background: var(--ink);
+        color: var(--white);
+      }
+
+      .service-board p {
+        color: #ead8e1;
+      }
+
+      .service-row,
+      .slot {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .service-row strong,
+      .slot strong {
+        font-size: 20px;
+      }
+
+      .service-row span,
+      .slot span {
+        color: var(--pink);
+        font-weight: 900;
+      }
+
+      .slots {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .slot {
+        display: block;
+        padding: 14px;
+        border: 2px solid rgba(255, 255, 255, 0.28);
+        border-radius: 18px;
+      }
+
+      .receptionist {
+        grid-template-columns: 420px minmax(0, 1fr);
+        gap: 34px;
+        align-items: stretch;
+      }
+
+      .phone {
+        align-self: center;
+        min-height: 780px;
+        padding: 24px;
+        border: 5px solid var(--line);
+        border-radius: 46px;
+        background: var(--charcoal);
+        color: var(--white);
+        box-shadow: 18px 18px 0 rgba(21, 17, 20, 0.22);
+      }
+
+      .phone-top {
+        width: 126px;
+        height: 24px;
+        margin: 0 auto 28px;
+        border-radius: 999px;
+        background: #0b090b;
+      }
+
+      .chat {
+        display: grid;
+        gap: 16px;
+      }
+
+      .bubble {
+        max-width: 86%;
+        padding: 16px;
+        border-radius: 22px;
+        font-size: 17px;
+        line-height: 1.35;
+      }
+
+      .bubble.client {
+        justify-self: start;
+        background: #f1edf0;
+        color: var(--ink);
+      }
+
+      .bubble.ai {
+        justify-self: end;
+        background: var(--pink);
+        color: var(--ink);
+        font-weight: 800;
+      }
+
+      .reception-copy {
+        display: grid;
+        align-content: center;
+        gap: 24px;
+      }
+
+      .reception-copy h1,
+      .funnel h1 {
+        max-width: 690px;
+        color: var(--ink);
+        font-size: 64px;
+        line-height: 0.95;
+      }
+
+      .proof-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .proof-card {
+        min-height: 150px;
+        padding: 18px;
+      }
+
+      .proof-card span {
+        display: block;
+        margin-bottom: 14px;
+        color: var(--pink-hot);
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .funnel {
+        grid-template-rows: auto 1fr;
+        gap: 28px;
+      }
+
+      .funnel-body {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(480px, 0.7fr);
+        gap: 30px;
+      }
+
+      .funnel-copy {
+        display: grid;
+        align-content: center;
+        gap: 18px;
+      }
+
+      .flow-stack {
+        display: grid;
+        gap: 16px;
+      }
+
+      .flow-step {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 18px;
+        align-items: center;
+        padding: 18px;
+      }
+
+      .flow-step span {
+        color: var(--pink-hot);
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .instagram-card {
+        display: grid;
+        gap: 18px;
+        padding: 24px;
+      }
+
+      .post-preview {
+        min-height: 320px;
+        border-radius: 22px;
+        background:
+          linear-gradient(135deg, rgba(21, 17, 20, 0.55), transparent),
+          radial-gradient(circle at 28% 28%, #ffd7e6, transparent 20%),
+          radial-gradient(circle at 68% 42%, #f4a9c3, transparent 24%),
+          linear-gradient(135deg, #fff, #f2cedc);
+        border: 3px solid var(--line);
+      }
+
+      .caption {
+        display: grid;
+        gap: 8px;
+        padding: 16px;
+        border-radius: 18px;
+        background: var(--pink-soft);
+      }
+
+      .caption strong {
+        font-size: 21px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="mockup booking">
+      <header>
+        <div class="brand">
+          <div class="brand-mark">CW</div>
+          <div>
+            <strong>Christy Watkins</strong>
+            <span>Nail Tech | CEO</span>
+          </div>
+        </div>
+        <div class="button">Book Appointment</div>
+      </header>
+
+      <main class="booking-hero">
+        <section class="booking-copy panel">
+          <div class="eyebrow">A. Booking Page Mockup</div>
+          <h1>Book your next nail appointment in seconds.</h1>
+          <p>
+            This gives clients a clean way to choose a service, see open times, and request their
+            appointment without texting back and forth all day.
+          </p>
+          <div class="button">This is what clients see</div>
+        </section>
+
+        <aside class="service-board panel">
+          <div>
+            <div class="eyebrow">The Sweetest Pea & Co.</div>
+            <h2>Available Services</h2>
+            <p>Select a service and pick a time that works.</p>
+          </div>
+          <div>
+            <div class="service-row"><strong>Gel Manicure</strong><span>$45</span></div>
+            <div class="service-row"><strong>Acrylic Full Set</strong><span>$70+</span></div>
+            <div class="service-row"><strong>Fill-In</strong><span>$45+</span></div>
+            <div class="service-row"><strong>Nail Art Add-On</strong><span>$10+</span></div>
+          </div>
+          <div>
+            <div class="eyebrow">Open Times Tomorrow</div>
+            <div class="slots">
+              <div class="slot"><strong>1:30</strong><br /><span>PM</span></div>
+              <div class="slot"><strong>3:00</strong><br /><span>PM</span></div>
+              <div class="slot"><strong>5:00</strong><br /><span>PM</span></div>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </section>
+
+    <section class="mockup receptionist">
+      <aside class="phone">
+        <div class="phone-top"></div>
+        <div class="chat">
+          <div class="bubble client">Hi, do you have availability tomorrow?</div>
+          <div class="bubble ai">Yes! Christy has 3:00 PM and 5:00 PM open tomorrow. Which one works best?</div>
+          <div class="bubble client">5 works. Can I do acrylic with a simple design?</div>
+          <div class="bubble ai">Absolutely. I can hold 5:00 PM for an acrylic full set with simple nail art. Want me to book it?</div>
+          <div class="bubble client">Yes book it!</div>
+          <div class="bubble ai">You’re booked. You’ll get a confirmation with the address, service details, and reminder.</div>
+        </div>
+      </aside>
+
+      <main class="reception-copy">
+        <div class="eyebrow">B. AI Receptionist Example</div>
+        <h1>Less texting. More booked appointments.</h1>
+        <p>
+          This shows how an AI receptionist can answer common questions, suggest available times,
+          collect details, and move clients toward booking while Christy stays focused on the work.
+        </p>
+        <div class="proof-grid">
+          <article class="proof-card panel"><span>Responds</span><strong>Answers availability questions fast.</strong></article>
+          <article class="proof-card panel"><span>Qualifies</span><strong>Collects service and design details.</strong></article>
+          <article class="proof-card panel"><span>Books</span><strong>Sends the client to the right next step.</strong></article>
+        </div>
+      </main>
+    </section>
+
+    <section class="mockup funnel">
+      <header>
+        <div class="brand">
+          <div class="brand-mark">SP</div>
+          <div>
+            <strong>The Sweetest Pea & Co.</strong>
+            <span>Beauty booking system</span>
+          </div>
+        </div>
+        <div class="button">Clients click → get booked</div>
+      </header>
+
+      <main class="funnel-body">
+        <section class="funnel-copy">
+          <div class="eyebrow">C. Instagram Lead Funnel</div>
+          <h1>Turn Instagram attention into booked nail clients.</h1>
+          <p>
+            Instead of making people search, ask, wait, and forget, this flow moves them from post
+            to DM to booking link while their interest is still hot.
+          </p>
+          <div class="flow-stack">
+            <article class="flow-step panel"><span>01</span><strong>Client sees nail post or story.</strong></article>
+            <article class="flow-step panel"><span>02</span><strong>Client taps “Book” or sends a DM.</strong></article>
+            <article class="flow-step panel"><span>03</span><strong>Automation replies with service options and booking link.</strong></article>
+            <article class="flow-step panel"><span>04</span><strong>Appointment gets logged and Christy gets notified.</strong></article>
+          </div>
+        </section>
+
+        <aside class="instagram-card panel">
+          <div class="post-preview" aria-hidden="true"></div>
+          <div class="caption">
+            <strong>Fresh set openings this week 💅</strong>
+            <p>DM “BOOK” and I’ll send available times, service options, and the booking link.</p>
+          </div>
+        </aside>
+      </main>
+    </section>
+
+    <script>
+      const screen = new URLSearchParams(window.location.search).get('screen') || 'booking';
+      document.body.dataset.screen = screen;
+    </script>
+  </body>
+</html>
