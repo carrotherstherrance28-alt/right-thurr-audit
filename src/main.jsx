@@ -55,7 +55,7 @@ const publicNavItems = [
 ];
 
 const socialLinks = {
-  linkedin: 'https://www.linkedin.com/in/therrancecarrothers',
+  linkedin: 'https://www.linkedin.com/in/therrance-carrothers',
   instagram: 'https://www.instagram.com/thurrsolutions/',
   upwork: 'https://www.upwork.com/freelancers/~011a33e3e2e65c4bbd?mp_source=share',
 };
