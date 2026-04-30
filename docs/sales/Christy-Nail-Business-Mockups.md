@@ -7,6 +7,13 @@ Client context from conversation:
 - Role language: Nail Tech | CEO
 - Proposed package direction: Tier 2
 - Budget note: $250 path mentioned in proposal message
+- Services: Builder Gel, Polygel, press-ons
+- Current booking tool: Gloss Genius
+- Current pain: manual approval, too difficult for clients to navigate, cost too high for complexity
+- Deposit: $15 booking deposit
+- Revenue streams: in-person nail services and press-on sales
+- Marketing channels: Instagram, word of mouth, expanding to TikTok
+- Partnership: Be Lounge future bundles
 - Goal: send visuals that make the client see booking, texting, and Instagram lead flow as a real business system.
 
 ## Screenshots Created
@@ -34,13 +41,15 @@ Send these in this order:
 ## Suggested Text
 
 ```txt
-Hey Christy, I put together a few quick visuals so you can actually see how this would look and work for your business.
+Hey Christy, I put together a few quick visuals so you can actually see how this would work for your business.
 
-This is the real experience your clients would have: booking, texting, and moving from Instagram into an appointment.
+This is the real flow your clients would go through — from Instagram -> texting -> booking an appointment or starting a press-on order.
 
-I kept the pink beauty feel, but tightened the layout so the name, booking button, services, and client actions are easier to read.
+The goal here is simple: make it easier for people to book with you, pay the $15 deposit, and cut down the back-and-forth in your DMs.
 
-Let me know what you think. I can tweak the colors, wording, services, or photos to fit exactly how you want it.
+Most nail techs lose bookings just from slow replies, missed messages, or confusing booking steps — this fixes that.
+
+Take a look when you get a chance and let me know what stands out to you. If everything looks good, I can get this set up and ready to go for you by next week.
 ```
 
 ## What To Ask For Next
