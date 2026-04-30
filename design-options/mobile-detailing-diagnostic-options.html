@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Detailing Diagnostic Options</title>
+    <style>
+      :root {
+        --ink: #171717;
+        --muted: #5a5f63;
+        --paper: #f6f2e9;
+        --white: #ffffff;
+        --line: #1f1f1f;
+        --orange: #e95f24;
+        --blue: #1f5f75;
+        --silver: #d9dee2;
+        --green: #5b7651;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #e8e4da;
+        color: var(--ink);
+        font-family: Inter, Arial, sans-serif;
+      }
+
+      .option {
+        display: none;
+        min-height: 840px;
+        padding: 28px;
+      }
+
+      body[data-option="a"] .option-a,
+      body[data-option="b"] .option-b,
+      body[data-option="c"] .option-c,
+      body:not([data-option]) .option {
+        display: grid;
+      }
+
+      .eyebrow {
+        color: var(--orange);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        max-width: 720px;
+        font-size: 64px;
+        line-height: 0.92;
+        letter-spacing: 0;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.45;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        min-height: 58px;
+        padding: 0 24px;
+        border: 3px solid var(--line);
+        background: var(--orange);
+        color: var(--white);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        box-shadow: 5px 5px 0 var(--line);
+      }
+
+      .panel {
+        border: 3px solid var(--line);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 6px 6px 0 var(--line);
+      }
+
+      .option-a {
+        grid-template-columns: 1fr 420px;
+        gap: 28px;
+        background:
+          linear-gradient(90deg, rgba(23, 23, 23, 0.06) 1px, transparent 1px) 0 0 / 44px 44px,
+          linear-gradient(rgba(23, 23, 23, 0.06) 1px, transparent 1px) 0 0 / 44px 44px,
+          var(--paper);
+      }
+
+      .option-a .hero-copy {
+        display: grid;
+        align-content: center;
+        gap: 24px;
+      }
+
+      .option-a .diagnostic-card {
+        display: grid;
+        align-content: space-between;
+        padding: 24px;
+        background: var(--ink);
+        color: var(--white);
+        transform: rotate(1deg);
+      }
+
+      .option-a .diagnostic-card p {
+        color: #d8d1c3;
+      }
+
+      .score-stack {
+        display: grid;
+        gap: 10px;
+      }
+
+      .score-row {
+        display: grid;
+        grid-template-columns: 1fr 70px;
+        gap: 12px;
+        align-items: center;
+        padding: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.24);
+      }
+
+      .score-row strong {
+        color: var(--orange);
+      }
+
+      .mini-flow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .mini-flow div {
+        min-height: 118px;
+        padding: 18px;
+        background: var(--white);
+        border: 3px solid var(--line);
+        box-shadow: 4px 4px 0 var(--line);
+      }
+
+      .mini-flow span {
+        display: block;
+        margin-bottom: 16px;
+        color: var(--orange);
+        font-weight: 900;
+      }
+
+      .option-b {
+        grid-template-columns: minmax(0, 0.9fr) minmax(400px, 0.7fr);
+        gap: 36px;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(233, 95, 36, 0.34), transparent 28%),
+          linear-gradient(140deg, #101416 0%, #20282c 52%, #0c0d0e 100%);
+        color: var(--white);
+      }
+
+      .option-b p {
+        color: #c8d0d3;
+      }
+
+      .option-b .hero-copy {
+        display: grid;
+        align-content: center;
+        gap: 24px;
+      }
+
+      .car-visual {
+        position: relative;
+        min-height: 560px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03)),
+          linear-gradient(90deg, transparent 0 15%, rgba(255, 255, 255, 0.08) 15% 16%, transparent 16% 31%, rgba(255, 255, 255, 0.08) 31% 32%, transparent 32%);
+      }
+
+      .car-shape {
+        position: absolute;
+        right: -60px;
+        bottom: 110px;
+        width: 560px;
+        height: 190px;
+        border: 4px solid var(--silver);
+        border-radius: 52px 130px 38px 34px;
+        background: linear-gradient(120deg, #eef3f4, #9fa8ad 48%, #f6f7f5);
+        box-shadow: 0 35px 90px rgba(0, 0, 0, 0.48);
+      }
+
+      .car-shape::before {
+        content: "";
+        position: absolute;
+        left: 170px;
+        top: -72px;
+        width: 220px;
+        height: 88px;
+        border: 4px solid var(--silver);
+        border-bottom: 0;
+        border-radius: 120px 120px 0 0;
+        background: #11181b;
+      }
+
+      .car-shape::after {
+        content: "";
+        position: absolute;
+        inset: auto 70px -42px auto;
+        width: 92px;
+        height: 92px;
+        border: 18px solid #0a0c0d;
+        border-radius: 50%;
+        background: var(--silver);
+        box-shadow: -300px 0 0 -18px var(--silver), -300px 0 0 0 #0a0c0d;
+      }
+
+      .option-b .metric-bar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .option-b .metric-bar div {
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .option-c {
+        grid-template-columns: 360px minmax(0, 1fr);
+        gap: 26px;
+        background: #f8f8f4;
+      }
+
+      .option-c .sidebar {
+        display: grid;
+        align-content: start;
+        gap: 28px;
+        padding: 28px;
+        background: #11201c;
+        color: var(--white);
+      }
+
+      .option-c .sidebar p {
+        color: #d6dfda;
+      }
+
+      .option-c .content {
+        display: grid;
+        gap: 22px;
+      }
+
+      .option-c h1 {
+        max-width: 840px;
+        font-size: 52px;
+      }
+
+      .clean-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .clean-card {
+        min-height: 152px;
+        padding: 20px;
+        border: 1px solid #d8ddd8;
+        background: var(--white);
+      }
+
+      .clean-card span {
+        display: block;
+        margin-bottom: 18px;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .clean-score {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 22px;
+        align-items: center;
+        padding: 22px;
+        border: 1px solid #d8ddd8;
+        background: var(--white);
+      }
+
+      .clean-score strong {
+        font-size: 68px;
+        line-height: 1;
+        color: var(--green);
+      }
+
+      .clean-score .bar {
+        height: 12px;
+        background: #dce4df;
+      }
+
+      .clean-score .bar span {
+        display: block;
+        width: 68%;
+        height: 100%;
+        background: var(--green);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="option option-a">
+      <div class="hero-copy">
+        <div class="eyebrow">Option A / Local Service Operator</div>
+        <h1>See where detailing leads leak before they book someone else.</h1>
+        <p>
+          A rugged, clear, Thurr-adjacent sales diagnostic for service owners who need speed,
+          follow-up, and visibility without feeling like they bought another complicated app.
+        </p>
+        <div class="button">Get my lead-flow diagnostic</div>
+        <div class="mini-flow">
+          <div><span>01</span><strong>Capture quote requests</strong></div>
+          <div><span>02</span><strong>Alert the owner fast</strong></div>
+          <div><span>03</span><strong>Follow up automatically</strong></div>
+          <div><span>04</span><strong>Track booked work</strong></div>
+        </div>
+      </div>
+      <aside class="diagnostic-card panel">
+        <div>
+          <div class="eyebrow">Lead-Flow Score</div>
+          <h2>68 / 100</h2>
+          <p>Solid demand, but too many quote requests depend on manual replies.</p>
+        </div>
+        <div class="score-stack">
+          <div class="score-row"><span>Offer clarity</span><strong>4/5</strong></div>
+          <div class="score-row"><span>Quote readiness</span><strong>3/5</strong></div>
+          <div class="score-row"><span>Speed to lead</span><strong>2/5</strong></div>
+          <div class="score-row"><span>Follow-up</span><strong>2/5</strong></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="option option-b">
+      <div class="hero-copy">
+        <div class="eyebrow">Option B / Premium Auto Detailing</div>
+        <h1>Turn quote requests into booked details faster.</h1>
+        <p>
+          A darker, more premium visual direction for detailers who sell finish, trust, and
+          polish. Best when the client has strong vehicle photography or before-and-after media.
+        </p>
+        <div class="button">Audit my quote path</div>
+        <div class="metric-bar">
+          <div><strong>14 days</strong><p>first system path</p></div>
+          <div><strong>5 scores</strong><p>lead-flow review</p></div>
+          <div><strong>1 build</strong><p>quote-to-booking</p></div>
+        </div>
+      </div>
+      <aside class="car-visual">
+        <div class="car-shape" aria-hidden="true"></div>
+      </aside>
+    </section>
+
+    <section class="option option-c">
+      <aside class="sidebar">
+        <div>
+          <div class="eyebrow">Option C / White-Label Minimal</div>
+          <h2>Lead-Flow Diagnostic</h2>
+          <p>
+            The cleanest reusable client version. It can take any client logo, color, or industry
+            without bringing Thurr's owned orange-and-border identity into the client funnel.
+          </p>
+        </div>
+        <div class="button">Start diagnostic</div>
+      </aside>
+      <main class="content">
+        <h1>Find the first system your detailing business should build.</h1>
+        <p>
+          Review offer clarity, quote capture, response speed, proof, and follow-up. Then map the
+          simplest workflow that turns more interest into booked jobs.
+        </p>
+        <div class="clean-score">
+          <strong>68</strong>
+          <div>
+            <h3>Opportunity Score</h3>
+            <p>Enough demand to grow, but the follow-up path needs a real system.</p>
+            <div class="bar"><span></span></div>
+          </div>
+        </div>
+        <div class="clean-grid">
+          <article class="clean-card"><span>Leak</span><h3>Slow first reply</h3><p>New quote requests wait too long before the owner responds.</p></article>
+          <article class="clean-card"><span>Fix</span><h3>Fast reply workflow</h3><p>Send confirmation, notify the owner, and create a follow-up task.</p></article>
+          <article class="clean-card"><span>Build</span><h3>Quote-to-booking system</h3><p>Capture the details needed to price and schedule the job.</p></article>
+        </div>
+      </main>
+    </section>
+
+    <script>
+      const option = new URLSearchParams(window.location.search).get('option') || 'a';
+      document.body.dataset.option = option;
+    </script>
+  </body>
+</html>

@@ -34,6 +34,7 @@ Latest pushed commit is `2b857a5`; Vercel production deploy is blocked until the
 - Supabase owner RLS hardening SQL exists at `docs/backend/Supabase-Owner-RLS-Hardening.sql`.
 - Recurring hourly build-session automation was created for one-task-at-a-time execution.
 - Mobile detailing was selected as the first client diagnostic V1 lane.
+- Three mobile detailing diagnostic screenshot options were created before frontend coding.
 - Client diagnostic package added:
   - unbranded diagnostic report template
   - Thurr Solutions sales diagnostic version
@@ -59,7 +60,7 @@ signed in owner -> reports load
 approve without send -> approved_for_delivery / approved_for_follow_up
 ```
 
-5. Create three visual options for the mobile detailing diagnostic page, then implement the selected reusable template.
+5. Pick one mobile detailing diagnostic visual option, then implement the selected reusable template.
 
 ## Linear Tasks To Create Or Update
 
@@ -113,6 +114,7 @@ Turn the mobile detailing V1 spec into the first client-ready diagnostic flow an
 
 Acceptance criteria:
 - Three screenshot options are created before coding the frontend.
+- One option is selected for implementation.
 - Unbranded diagnostic report can be re-skinned.
 - Thurr Solutions sales version has a clear CTA.
 - Mobile detailing prompt pack is selected for the first target market.
