@@ -132,7 +132,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Create 3 AI Engine screen options before coding.
 - [x] Add AI Engine screen.
 - [x] Add mock local data store.
-- [ ] Add real owner authentication before storing or showing private client/operator data.
+- [x] Add real owner authentication before storing or showing private client/operator data.
 - [ ] Add owner RLS hardening before loading real private operator/client records.
 - [x] Create 3 exportable report layout options before coding.
 - [x] Add exportable report layout.
@@ -263,11 +263,14 @@ Daily session:
 - [x] Added Supabase owner RLS hardening SQL for approved owner profiles and private table read policies.
 - [x] Added the recurring `Right Thurr Hourly Build Session` automation for one-task-at-a-time execution.
 - [x] Pushed owner auth/RLS code at commit `2b857a5`; production deployment is blocked by the Vercel free daily deployment cap.
+- [x] Gated `?operator=1` operator screens behind allowlisted Supabase owner sessions (or `OWNER_AUTH_MODE=preview`) with an explicit Owner Access screen.
 - [x] Selected mobile detailing as the recommended first client diagnostic lane and created the V1 diagnostic spec.
 - [x] Created three mobile detailing diagnostic visual options before frontend coding:
   - `design-options/screenshots/mobile-detailing-diagnostic-option-a.png`
   - `design-options/screenshots/mobile-detailing-diagnostic-option-b.png`
   - `design-options/screenshots/mobile-detailing-diagnostic-option-c.png`
+- [x] Built the reusable hidden client diagnostic template from the recommended Option C direction at `?diagnostic=mobile-detailing`.
+- [x] Ran production build and desktop/mobile screenshot smoke checks for the hidden diagnostic template.
 - [x] Installed project-level AIDesigner Codex config and documented remaining auth/session step.
 - [x] Created Upwork/Fiverr marketplace launch kit for Thurr Solutions service offers.
 - [x] Created marketplace portfolio sample HTML, screenshot, and PDF for Upwork/Fiverr proof.
@@ -275,4 +278,4 @@ Daily session:
 
 ## Next Task
 
-Pick Option A, B, or C for the mobile detailing diagnostic page, then code the reusable client diagnostic template. Also retry Vercel production deploy after the daily cap resets.
+Retry Vercel production deploy after the daily cap resets, then QA the owner magic-link queue flow and hidden `?diagnostic=mobile-detailing` page on the live domain.

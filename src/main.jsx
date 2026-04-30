@@ -25,6 +25,7 @@ import './styles/brand-tokens.css';
 import './styles/app.css';
 import monogram from './assets/rt-monogram-clean.png';
 import { SiteFooter, SiteHeader } from './components/SiteChrome.jsx';
+import { clientDiagnosticTemplates } from './data/clientDiagnosticTemplates.js';
 import { fieldDefaults, rightThurrMockData } from './data/rightThurrMockData.js';
 
 const {
@@ -74,6 +75,18 @@ function getIsOperatorPreview() {
     window.location.pathname === '/owner/callback' ||
     new URLSearchParams(window.location.search).get('operator') === '1'
   );
+}
+
+function getInitialPage() {
+  if (typeof window === 'undefined') {
+    return 'home';
+  }
+
+  if (new URLSearchParams(window.location.search).get('diagnostic') === 'mobile-detailing') {
+    return 'client-diagnostic';
+  }
+
+  return 'home';
 }
 
 const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
@@ -163,13 +176,68 @@ async function submitBuildoutRequest(payload) {
 }
 
 function App() {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState(getInitialPage);
   const [form, setForm] = useState(fieldDefaults);
   const [submissionState, setSubmissionState] = useState('idle');
   const [menuOpen, setMenuOpen] = useState(false);
   const isOperatorPreview = getIsOperatorPreview();
-  const canViewOperator = isOperatorPreview;
+  const [operatorAccess, setOperatorAccess] = useState({ status: 'idle', message: '' });
+  const [canViewOperator, setCanViewOperator] = useState(false);
   const currentStep = useMemo(() => buildSteps[form.idea.length % buildSteps.length], [form.idea]);
+
+  async function getOwnerSession() {
+    if (!ownerSupabaseClient) {
+      return null;
+    }
+
+    const { data } = await ownerSupabaseClient.auth.getSession();
+    return data.session || null;
+  }
+
+  async function checkOwnerAccess({ nextPageOnDeny = 'owner-access' } = {}) {
+    if (!isOperatorPreview) {
+      setCanViewOperator(false);
+      setOperatorAccess({ status: 'idle', message: '' });
+      return { allowed: false };
+    }
+
+    setOperatorAccess({ status: 'checking', message: '' });
+
+    try {
+      const session = await getOwnerSession();
+      const headers = {};
+
+      if (session?.access_token) {
+        headers.Authorization = `Bearer ${session.access_token}`;
+      }
+
+      const response = await fetch('/api/owner-access', {
+        method: 'GET',
+        headers,
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data.allowed) {
+        setCanViewOperator(true);
+        setOperatorAccess({ status: 'allowed', message: '' });
+        return { allowed: true, mode: data.mode || 'supabase' };
+      }
+
+      const message = data.error || 'Owner sign-in is required to access operator screens.';
+      setCanViewOperator(false);
+      setOperatorAccess({ status: 'denied', message });
+      setPage(nextPageOnDeny);
+      return { allowed: false };
+    } catch (error) {
+      setCanViewOperator(false);
+      setOperatorAccess({
+        status: 'denied',
+        message: error?.message || 'Owner access check failed.',
+      });
+      setPage(nextPageOnDeny);
+      return { allowed: false };
+    }
+  }
 
   useEffect(() => {
     if (window.location.pathname === '/owner/callback') {
@@ -178,7 +246,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (canViewOperator && page === 'home') {
+    if (!isOperatorPreview) {
+      return;
+    }
+
+    checkOwnerAccess();
+  }, []);
+
+  useEffect(() => {
+    if (isOperatorPreview && canViewOperator && page === 'home') {
       setPage('command');
     }
   }, [canViewOperator, page]);
@@ -205,7 +281,7 @@ function App() {
 
   function navigateToPage(target) {
     if (!canViewOperator && operatorPages.includes(target)) {
-      setPage('home');
+      setPage(isOperatorPreview ? 'owner-access' : 'home');
       setMenuOpen(false);
       return;
     }
@@ -302,14 +378,185 @@ function App() {
       {page === 'home' && <HomePage {...sharedProps} />}
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
       {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
+      {page === 'client-diagnostic' && <ClientDiagnosticPage setPage={navigateToPage} />}
       {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
       {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
+      {isOperatorPreview && !canViewOperator && page === 'owner-access' && (
+        <OwnerAccessPage
+          operatorAccess={operatorAccess}
+          onRetry={() => checkOwnerAccess({ nextPageOnDeny: 'owner-access' })}
+        />
+      )}
       {canViewOperator && page === 'command' && <CommandCenterPage setPage={navigateToPage} />}
       {canViewOperator && page === 'systems' && <SystemsPage setPage={navigateToPage} />}
       {shouldShowFooter && (
         <SiteFooter navigateToAbout={navigateToAbout} navigateToPage={navigateToPage} socialLinks={socialLinks} />
       )}
     </div>
+  );
+}
+
+function ClientDiagnosticPage({ setPage }) {
+  const diagnostic = clientDiagnosticTemplates.mobileDetailing;
+
+  return (
+    <main className="client-diagnostic-page" id="top">
+      <section className="client-diagnostic-shell" aria-labelledby="client-diagnostic-title">
+        <aside className="client-diagnostic-sidebar">
+          <div>
+            <div className="eyebrow">{diagnostic.eyebrow}</div>
+            <h1 id="client-diagnostic-title">
+              {(diagnostic.titleLines || [diagnostic.title]).map((line) => (
+                <span key={line}>{line}</span>
+              ))}
+            </h1>
+            <p>{diagnostic.intro}</p>
+          </div>
+          <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
+            {diagnostic.cta}
+            <ArrowUpRight size={18} strokeWidth={3} />
+          </button>
+        </aside>
+
+        <section className="client-diagnostic-content">
+          <section className="client-score-panel" aria-label="Diagnostic opportunity score">
+            <strong>{diagnostic.score}</strong>
+            <div>
+              <h2>{diagnostic.scoreTitle}</h2>
+              <p>{diagnostic.scoreText}</p>
+              <div className="client-score-bar" aria-hidden="true">
+                <span style={{ width: `${diagnostic.score}%` }} />
+              </div>
+            </div>
+          </section>
+
+          <section className="client-card-grid" aria-label="Diagnostic findings">
+            {diagnostic.cards.map((card) => (
+              <article className="client-diagnostic-card" key={card.label}>
+                <span>{card.label}</span>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </section>
+
+          <section className="client-diagnostic-grid">
+            <article className="client-diagnostic-list">
+              <div className="eyebrow">Scorecard</div>
+              {diagnostic.scorecard.map(([label, value]) => (
+                <div className="client-list-row" key={label}>
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </div>
+              ))}
+            </article>
+            <article className="client-diagnostic-list">
+              <div className="eyebrow">Intake</div>
+              {diagnostic.intakeFields.map((field) => (
+                <div className="client-list-row" key={field}>
+                  <span>{field}</span>
+                  <strong>Required</strong>
+                </div>
+              ))}
+            </article>
+          </section>
+
+          <section className="client-system-map" aria-label="Recommended diagnostic workflow">
+            <div className="section-title">
+              <Zap size={22} strokeWidth={3} />
+              First System Map
+            </div>
+            {diagnostic.systemSteps.map((step, index) => (
+              <div className="client-system-step" key={step}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{step}</strong>
+              </div>
+            ))}
+          </section>
+        </section>
+      </section>
+    </main>
+  );
+}
+
+function OwnerAccessPage({ onRetry, operatorAccess }) {
+  const [ownerEmail, setOwnerEmail] = useState('');
+  const [status, setStatus] = useState('idle');
+  const [message, setMessage] = useState('');
+
+  async function sendOwnerMagicLink(event) {
+    event.preventDefault();
+
+    if (!ownerSupabaseClient) {
+      setStatus('error');
+      setMessage('Supabase is not configured in the frontend environment yet.');
+      return;
+    }
+
+    if (!ownerEmail) {
+      setStatus('error');
+      setMessage('Enter the owner email to request the secure sign-in link.');
+      return;
+    }
+
+    setStatus('loading');
+    setMessage('Sending owner sign-in link...');
+
+    const redirectTo = `${window.location.origin}/owner/callback?operator=1`;
+    const { error } = await ownerSupabaseClient.auth.signInWithOtp({
+      email: ownerEmail,
+      options: {
+        emailRedirectTo: redirectTo,
+        shouldCreateUser: true,
+      },
+    });
+
+    if (error) {
+      setStatus('error');
+      setMessage(error.message);
+      return;
+    }
+
+    setStatus('sent');
+    setMessage('Check your email for the owner sign-in link, then retry access here.');
+  }
+
+  return (
+    <main className="owner-access-page" aria-label="Owner access gate">
+      <article className="owner-access-card">
+        <h1>Owner sign-in required.</h1>
+        <p>
+          Operator screens stay private-by-default. Sign in with the owner email allowlist to unlock the Command
+          Center and report review queue.
+        </p>
+
+        {operatorAccess?.message && <p className="form-note">{operatorAccess.message}</p>}
+
+        <form className="owner-access-form" onSubmit={sendOwnerMagicLink}>
+          <label htmlFor="owner-access-email">
+            Owner Email
+            <input
+              id="owner-access-email"
+              type="email"
+              autoComplete="email"
+              value={ownerEmail}
+              placeholder="therrance@thurrsolutions.com"
+              onChange={(event) => setOwnerEmail(event.target.value)}
+            />
+          </label>
+          <button className="stamp-button link-button" type="submit" disabled={status === 'loading'}>
+            SEND OWNER LINK
+            <ArrowUpRight size={18} strokeWidth={3} />
+          </button>
+        </form>
+
+        <button className="text-link button-link" type="button" onClick={onRetry} disabled={operatorAccess?.status === 'checking'}>
+          Retry owner access
+        </button>
+
+        {message && <p className={status === 'error' ? 'form-note error-note' : 'form-note'}>{message}</p>}
+      </article>
+    </main>
   );
 }
 
