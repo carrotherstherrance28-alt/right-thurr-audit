@@ -275,6 +275,8 @@ Daily session:
   - `design-options/screenshots/mobile-detailing-diagnostic-option-c.png`
 - [x] Built the reusable hidden client diagnostic template from the recommended Option C direction at `?diagnostic=mobile-detailing`.
 - [x] Ran production build and desktop/mobile screenshot smoke checks for the hidden diagnostic template.
+- [x] Pushed optional Slack webhook alerts, GitHub Actions CI, and owner-session report review reads.
+- [x] Verified Vercel production deploy is live again at `right-thurr-audit-dkfup06k2` with aliases for `build.thurrsolutions.com` and `right-thurr-audit.vercel.app`.
 - [x] Installed project-level AIDesigner Codex config and documented remaining auth/session step.
 - [x] Created Upwork/Fiverr marketplace launch kit for Thurr Solutions service offers.
 - [x] Created marketplace portfolio sample HTML, screenshot, and PDF for Upwork/Fiverr proof.
@@ -282,4 +284,4 @@ Daily session:
 
 ## Next Task
 
-Retry Vercel production deploy after the daily cap resets, then QA the owner magic-link queue flow and hidden `?diagnostic=mobile-detailing` page on the live domain.
+QA the owner magic-link queue flow, run `docs/backend/Supabase-Owner-RLS-Hardening.sql`, and verify the hidden `?diagnostic=mobile-detailing` page on the live domain.
