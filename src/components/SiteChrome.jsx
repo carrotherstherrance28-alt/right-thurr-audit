@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, Instagram, Linkedin, Mail, Menu } from 'lucide-react';
+import { BriefcaseBusiness, ChevronDown, Instagram, Linkedin, Mail, Menu } from 'lucide-react';
 import monogram from '../assets/rt-monogram-clean.png';
 
 export function SiteHeader({
@@ -60,6 +60,10 @@ export function SiteHeader({
                 <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
                   <Instagram size={16} strokeWidth={3} />
                   Instagram
+                </a>
+                <a href={socialLinks.upwork} target="_blank" rel="noreferrer">
+                  <BriefcaseBusiness size={16} strokeWidth={3} />
+                  Upwork
                 </a>
                 <a href="mailto:hello@thurrsolutions.com">
                   <Mail size={16} strokeWidth={3} />
@@ -140,6 +144,10 @@ export function SiteFooter({ navigateToAbout, navigateToPage, socialLinks }) {
         <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
           <Instagram size={17} strokeWidth={3} />
           Instagram
+        </a>
+        <a href={socialLinks.upwork} target="_blank" rel="noreferrer">
+          <BriefcaseBusiness size={17} strokeWidth={3} />
+          Upwork
         </a>
         <a href="mailto:hello@thurrsolutions.com">
           <Mail size={17} strokeWidth={3} />

@@ -57,6 +57,7 @@ const publicNavItems = [
 const socialLinks = {
   linkedin: 'https://www.linkedin.com/in/therrancecarrothers',
   instagram: 'https://www.instagram.com/thurrsolutions/',
+  upwork: 'https://www.upwork.com/freelancers/~011a33e3e2e65c4bbd?mp_source=share',
 };
 
 const operatorNavItems = [
@@ -1281,6 +1282,10 @@ function AboutTherranceSection() {
           <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
             <Instagram size={18} strokeWidth={3} />
             Instagram
+          </a>
+          <a href={socialLinks.upwork} target="_blank" rel="noreferrer">
+            <BriefcaseBusiness size={18} strokeWidth={3} />
+            Upwork
           </a>
           <a href="mailto:hello@thurrsolutions.com">
             <Mail size={18} strokeWidth={3} />
