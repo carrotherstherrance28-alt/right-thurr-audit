@@ -29,7 +29,7 @@ async function verifyOwner(request) {
   const authorization = request.headers.authorization || '';
 
   if (getOwnerAuthMode() === 'preview') {
-    return { ok: true, email: 'preview-owner' };
+    return { ok: true, email: 'preview-owner', mode: 'preview' };
   }
 
   if (!url || !anonKey || ownerEmails.length === 0) {
@@ -58,21 +58,49 @@ async function verifyOwner(request) {
     return { ok: false, statusCode: 403, message: 'This account is not on the owner allowlist.' };
   }
 
-  return { ok: true, email };
+  return { ok: true, email, mode: 'supabase' };
 }
 
-async function supabaseRequest(path, options = {}) {
-  const { url, elevatedKey } = getSupabaseConfig();
+function getSupabaseAuthHeaders({ mode, authorization }) {
+  const { anonKey, elevatedKey } = getSupabaseConfig();
 
-  if (!url || !elevatedKey) {
-    throw new Error('Supabase elevated-key persistence is not configured.');
+  if (mode === 'preview') {
+    if (!elevatedKey) {
+      throw new Error('Supabase elevated-key persistence is not configured.');
+    }
+
+    return {
+      apikey: elevatedKey,
+      Authorization: `Bearer ${elevatedKey}`,
+    };
   }
 
+  if (!anonKey) {
+    throw new Error('Supabase anon-key persistence is not configured.');
+  }
+
+  if (!authorization?.startsWith('Bearer ')) {
+    throw new Error('Missing owner session.');
+  }
+
+  return {
+    apikey: anonKey,
+    Authorization: authorization,
+  };
+}
+
+async function supabaseRequest(path, options = {}, auth = {}) {
+  const { url } = getSupabaseConfig();
+
+  if (!url) {
+    throw new Error('Supabase URL is not configured.');
+  }
+
+  const authHeaders = getSupabaseAuthHeaders(auth);
   const supabaseResponse = await fetch(`${url}/rest/v1/${path}`, {
     ...options,
     headers: {
-      apikey: elevatedKey,
-      Authorization: `Bearer ${elevatedKey}`,
+      ...authHeaders,
       'Content-Type': 'application/json',
       ...(options.headers || {}),
     },
@@ -86,7 +114,7 @@ async function supabaseRequest(path, options = {}) {
   return supabaseResponse.json();
 }
 
-async function getRowsByIds(table, ids, select = '*') {
+async function getRowsByIds(table, ids, select = '*', auth = {}) {
   const cleanIds = [...new Set(ids.filter(Boolean))];
 
   if (cleanIds.length === 0) {
@@ -95,21 +123,25 @@ async function getRowsByIds(table, ids, select = '*') {
 
   const rows = await supabaseRequest(
     `${table}?id=in.(${cleanIds.map((id) => encodeURIComponent(id)).join(',')})&select=${encodeURIComponent(select)}`,
+    {},
+    auth,
   );
 
   return new Map(rows.map((row) => [row.id, row]));
 }
 
-async function getBuildoutRequestRows(ids) {
+async function getBuildoutRequestRows(ids, auth = {}) {
   return getRowsByIds(
     'buildout_requests',
     ids,
     'id,name,email,phone,website_or_social,business_idea,industry,main_goal,location,budget_level,timeline,biggest_bottleneck,status,lead_status,crm_tags,last_activity_at,created_at,updated_at',
+    auth,
   ).catch(() =>
     getRowsByIds(
       'buildout_requests',
       ids,
       'id,name,email,phone,website_or_social,business_idea,industry,main_goal,location,budget_level,timeline,biggest_bottleneck,status,created_at,updated_at',
+      auth,
     ),
   );
 }
@@ -137,14 +169,21 @@ export default async function handler(request, response) {
   }
 
   try {
+    const auth = { mode: owner.mode, authorization: request.headers.authorization || '' };
     const reports = await supabaseRequest(
       'generated_reports?report_status=in.(needs_review,approved_for_delivery)&select=id,buildout_request_id,system_id,title,report_status,summary,sections,created_by_agent,created_at,updated_at&order=updated_at.desc&limit=8',
+      {},
+      auth,
     );
-    const requestRows = await getBuildoutRequestRows(reports.map((report) => report.buildout_request_id));
+    const requestRows = await getBuildoutRequestRows(
+      reports.map((report) => report.buildout_request_id),
+      auth,
+    );
     const systemRows = await getRowsByIds(
       'systems',
       reports.map((report) => report.system_id),
       'id,name,status,current_mission,next_move,build_progress',
+      auth,
     );
 
     sendJson(response, 200, {

@@ -31,6 +31,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Create Right Thurr React/Vite app shell.
 - [x] Add initial Right Thurr command center screen.
 - [x] Run app build successfully.
+- [x] Add GitHub Actions CI workflow (npm ci + build).
 - [x] Build first Right Thurr landing page pass.
 - [x] Add dedicated AI Business Buildout Plan page/view.
 - [x] Define n8n webhook payload contract.
@@ -79,7 +80,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Create n8n production webhook URL and add it to Vercel/local env.
 - [x] Test form submission against Supabase or n8n.
 - [x] Draft Slack status update after n8n intake works.
-- [ ] Fix n8n Slack credential/channel access for buildout request alerts.
+- [ ] (Blocked: needs n8n + Slack workspace access) Fix n8n Slack credential/channel access for buildout request alerts.
 - [x] Create Discord `#leads-alerts` webhook.
 - [x] Add Discord buildout request alert to n8n.
 - [x] Hide owner/operator screens from public website navigation.
@@ -133,7 +134,9 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add AI Engine screen.
 - [x] Add mock local data store.
 - [x] Add real owner authentication before storing or showing private client/operator data.
-- [ ] Add owner RLS hardening before loading real private operator/client records.
+- [x] Add owner RLS hardening before loading real private operator/client records.
+- [ ] (Blocked: Supabase dashboard login) Run `docs/backend/Supabase-Owner-RLS-Hardening.sql` after first owner sign-in.
+- [x] Enforce owner-session RLS reads in `/api/review-reports` (no service-role reads for the owner UI).
 - [x] Create 3 exportable report layout options before coding.
 - [x] Add exportable report layout.
 
@@ -154,7 +157,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add Resend API key to Vercel production and redeploy.
 - [x] Configure email provider and test approved email delivery.
 - [x] Add Discord notification step.
-- [ ] Add Slack notification step later if needed.
+- [x] Add Slack notification step (optional webhook alerts).
 - [x] Add CRM tagging step.
 - [x] Add private owner report review queue.
 
@@ -257,6 +260,7 @@ Daily session:
 - [x] Checked Supabase CRM fields through the REST API; migration is still missing because `buildout_requests.lead_status` does not exist yet.
 - [x] Deployed latest `main` at commit `93b4088` and verified unauthenticated `/api/review-reports` returns `401` on both production aliases.
 - [x] Ran Supabase CRM field migration and verified REST reads now return `lead_status`, `crm_tags`, and `last_activity_at`.
+- [x] Added optional Slack webhook alerts for privacy-safe intake + approval/delivery status pings.
 - [x] Verified a fresh CRM lifecycle request: intake wrote request tags, blueprint generation moved it to `awaiting_review`, approval-only mode moved it to `approved_for_delivery`, and Supabase showed `approved_for_follow_up` with `blueprint-approved` / `approved-for-follow-up` tags.
 - [x] Created live Notion Command Center databases for Task Tracker, Content Calendar, and AI Ideas Log with the repo Notion API script.
 - [x] Re-enabled the private owner Report Review Queue auth flow with Supabase magic-link sign-in and owner-token API calls.

@@ -2,24 +2,26 @@
 
 Concise status for the Right Thurr / Thurr Solutions connector stack.
 
-Last updated: 2026-04-29
+Last updated: 2026-04-30
 
 ## Current Priority
 
-Run owner RLS hardening before loading real private lead/report data in the owner UI.
+Finish owner RLS hardening in Supabase (owner sign-in + run the SQL) before loading real private lead/report data in the owner UI.
 
-This is the next trust-boundary task because intake, blueprint generation, manual review status,
-Discord alerts, approval-only review, and approved Resend delivery are already working.
+As of 2026-04-29, `/api/review-reports` reads via the owner session (anon key + bearer token) so the owner queue can no longer be fetched via the Supabase service role.
+
+This is the next trust-boundary task because intake, blueprint generation, manual review status, Discord alerts, approval-only review, and approved Resend delivery are already working.
 
 ## Status Table
 
 | Area | Status | Complete | Blocked By | Next Action |
 | --- | --- | --- | --- | --- |
 | Vercel | Live / deploy capped | Production currently serves the previous ready deploy; owner auth/RLS code is pushed at commit `2b857a5`. Production env includes Supabase, n8n webhook, Thurnos/OpenAI, Resend, and bridge secrets. `/api/buildout-request`, `/api/thurnos-blueprint`, `/api/approve-report`, `/api/review-reports`, and `/api/owner-access` exist. The frontend now gates `?operator=1` operator screens via `/api/owner-access`, so the query param no longer bypasses owner checks. Unauthenticated `/api/review-reports` returns `401` on both `right-thurr-audit.vercel.app` and `build.thurrsolutions.com`. | Vercel free daily deployment cap returned `api-deployments-free-per-day`; retry after the cap resets. | Retry production deploy, then QA owner sign-in + report review queue gating in the browser. |
-| Supabase | Live | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, RLS, and persistence for requests/reports/systems/tasks/activity are in place. CRM fields are installed; REST verification on 2026-04-29 returned `lead_status`, `crm_tags`, and `last_activity_at`. A fresh lifecycle QA request moved from intake to `awaiting_review` to `approved_for_delivery`, with `approved_for_follow_up` and `blueprint-approved` / `approved-for-follow-up` tags. Owner RLS hardening SQL now exists at `docs/backend/Supabase-Owner-RLS-Hardening.sql`. | User-owned Supabase login for future SQL/RLS changes; server-only keys must stay out of docs and client env. | Sign in once with the owner magic link, run the owner RLS hardening SQL, then QA the private queue. |
+| GitHub Actions (CI) | Live | Build workflow runs `npm ci` + `npm run build` on pushes and PRs. | None | Keep CI green; add lint/typecheck steps later if/when introduced. |
+| Supabase | Live | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, RLS, and persistence for requests/reports/systems/tasks/activity are in place. CRM fields are installed; REST verification on 2026-04-29 returned `lead_status`, `crm_tags`, and `last_activity_at`. A fresh lifecycle QA request moved from intake to `awaiting_review` to `approved_for_delivery`, with `approved_for_follow_up` and `blueprint-approved` / `approved-for-follow-up` tags. Owner RLS hardening SQL exists at `docs/backend/Supabase-Owner-RLS-Hardening.sql`, and `/api/review-reports` now reads reports via the owner session (RLS) instead of the service role. | User-owned Supabase login for future SQL/RLS changes; server-only keys must stay out of docs and client env. | Sign in once with the owner magic link, run `docs/backend/Supabase-Owner-RLS-Hardening.sql`, then QA the private queue. |
 | n8n | Live | Workflow `Right Thurr - Buildout Plan Intake` is active. Production webhook saves intake, calls the Thurnos blueprint bridge, creates draft report/system/tasks/activity, and returns queued status. | n8n login/credentials for workflow edits; production webhook and bridge secret must stay private. | Add approval/email delivery workflow after Resend is configured. |
 | Discord | Live | `#leads-alerts` webhook is connected through n8n as a non-blocking privacy-safe alert. Live QA showed the Discord node ran successfully. | Discord webhook URL is sensitive; channel privacy must be confirmed before posting contact details. | Keep V1 alerts privacy-safe; optionally add review/delivery confirmation alerts. |
-| Slack | Optional / blocked | Slack node exists in n8n as a non-blocking side branch, so failed Slack delivery does not break intake. | Current n8n Slack credential returned `channel_not_found` for `general` and `new-clients`. Needs Slack workspace/channel access cleanup. | Leave optional until team/client operations need it; reconnect credential and test `new-clients` later. |
+| Slack | Optional / available (webhook) | Repo now supports optional privacy-safe Slack incoming webhook alerts via `SLACK_ALERTS_WEBHOOK_URL` (buildout queued, blueprint approved, blueprint delivered). The n8n Slack node remains optional and non-blocking. | n8n Slack credential still returned `channel_not_found`; Slack workspace/channel access cleanup is needed if n8n should post to channels. | If Slack alerts are desired now, create an incoming webhook, set `SLACK_ALERTS_WEBHOOK_URL` in Vercel, redeploy after the cap resets, then confirm the messages are privacy-safe. |
 | Notion | Live / API-created | Task Tracker, Content Calendar, and AI Ideas Log were created under the Command Center with the repo Notion API script. CSV fallback/import files exist in `docs/notion-imports`. | The Codex Notion connector is still search/fetch-oriented; automated writes need `NOTION_API_KEY` through the repo script or n8n Notion credentials. Rotate any pasted Notion integration token after setup. | Decide whether task/content/idea sync should run through n8n or the repo script, then mirror only high-level tasks and content ideas. |
 | Cloudflare / domain | Live for Thurr Solutions | `thurrsolutions.com`, `www.thurrsolutions.com`, and `build.thurrsolutions.com` resolve to Vercel with issued certificates. DNS is gray-cloud / DNS-only. | Future domain changes require Cloudflare login. `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com` are still future decisions/work. | Keep current DNS stable; decide later when to attach `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com`. |
 | Email provider / Resend | Live | `/api/approve-report` supports approval-only mode and Resend-backed send mode. Production send QA to `therrance@thurrsolutions.com` passed: Resend returned `sent`, request/report moved to `delivered`, and `report_email_sent` activity was logged. Owner Command Center has a Supabase magic-link gate and can approve without sending once the owner session is active. | Prospect delivery should still stay manual-review only. | Keep send tests limited to approved recipients until report quality is reviewed. |
@@ -56,7 +58,7 @@ Public buildout form
 Do next:
 
 ```text
-Retry Vercel production deploy after the daily cap resets. Then QA owner sign-in, the private queue, and the hidden `?diagnostic=mobile-detailing` page on the live domain.
+Retry Vercel production deploy after the daily cap resets. Then QA owner sign-in, run `docs/backend/Supabase-Owner-RLS-Hardening.sql`, and verify the private queue + hidden `?diagnostic=mobile-detailing` page on the live domain.
 ```
 
 Do not do yet:

@@ -1,3 +1,5 @@
+import { postSlackAlert } from './_slack.js';
+
 const requiredFields = [
   ['lead', 'name'],
   ['lead', 'email'],
@@ -143,6 +145,28 @@ export default async function handler(request, response) {
   const savedRows = supabaseElevatedKey ? await supabaseResponse.json() : [];
   const savedRequest = Array.isArray(savedRows) ? savedRows[0] : null;
   const leadTags = getLeadTags(payload);
+
+  await postSlackAlert({
+    text: 'New buildout request queued.',
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: ['*New buildout request queued*', savedRequest?.id ? `Request ID: \`${savedRequest.id}\`` : null]
+            .filter(Boolean)
+            .join('\n'),
+        },
+      },
+      {
+        type: 'context',
+        elements: [
+          { type: 'mrkdwn', text: `Brand: \`${payload.brand || 'right-thurr'}\`` },
+          { type: 'mrkdwn', text: `Report: \`${payload.routing?.report_type || 'right-thurr-autopilot-blueprint'}\`` },
+        ],
+      },
+    ],
+  }).catch(() => null);
 
   if (supabaseElevatedKey && savedRequest?.id) {
     await patchCrmFields({

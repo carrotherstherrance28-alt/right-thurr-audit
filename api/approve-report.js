@@ -1,3 +1,5 @@
+import { postSlackAlert } from './_slack.js';
+
 function sendJson(response, statusCode, body) {
   response.statusCode = statusCode;
   response.setHeader('Content-Type', 'application/json');
@@ -290,6 +292,24 @@ export default async function handler(request, response) {
       status: 'completed',
     });
 
+    await postSlackAlert({
+      text: 'Blueprint approved.',
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: [
+              '*Blueprint approved*',
+              `Report ID: \`${reportId}\``,
+              `Request ID: \`${buildoutRequestId}\``,
+              `Delivery: \`${sendEmail ? 'send_requested' : 'approval_only'}\``,
+            ].join('\n'),
+          },
+        },
+      ],
+    }).catch(() => null);
+
     const emailDelivery = sendEmail
       ? await sendEmailWithResend({ report, request: requestRow })
       : { status: 'not_requested' };
@@ -322,6 +342,21 @@ export default async function handler(request, response) {
         summary: 'Lead tagged: report-delivered, follow-up-needed',
         status: 'completed',
       });
+
+      await postSlackAlert({
+        text: 'Blueprint delivered.',
+        blocks: [
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: ['*Blueprint delivered*', `Report ID: \`${reportId}\``, `Request ID: \`${buildoutRequestId}\``].join(
+                '\n',
+              ),
+            },
+          },
+        ],
+      }).catch(() => null);
     } else if (sendEmail) {
       await patchCrmFields(buildoutRequestId, {
         lead_status: 'delivery_needs_attention',
