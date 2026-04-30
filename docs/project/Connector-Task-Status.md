@@ -15,7 +15,7 @@ Discord alerts, approval-only review, and approved Resend delivery are already w
 
 | Area | Status | Complete | Blocked By | Next Action |
 | --- | --- | --- | --- | --- |
-| Vercel | Live | `right-thurr-audit` deploy is live at commit `93b4088`, production env includes Supabase, n8n webhook, Thurnos/OpenAI, Resend, and bridge secrets. `/api/buildout-request`, `/api/thurnos-blueprint`, `/api/approve-report`, `/api/review-reports`, and `/api/owner-access` exist. Unauthenticated `/api/review-reports` returns `401` on both `right-thurr-audit.vercel.app` and `build.thurrsolutions.com`. | None right now. Future deploys may still hit the free daily deployment limit if we push too often. | Finalize owner auth/RLS before loading real private report data in the UI. |
+| Vercel | Live / deploy capped | Production currently serves the previous ready deploy; owner auth/RLS code is pushed at commit `2b857a5`. Production env includes Supabase, n8n webhook, Thurnos/OpenAI, Resend, and bridge secrets. `/api/buildout-request`, `/api/thurnos-blueprint`, `/api/approve-report`, `/api/review-reports`, and `/api/owner-access` exist. Unauthenticated `/api/review-reports` returns `401` on both `right-thurr-audit.vercel.app` and `build.thurrsolutions.com`. | Vercel free daily deployment cap returned `api-deployments-free-per-day`; retry after the cap resets. | Retry production deploy, then QA the owner magic-link queue flow. |
 | Supabase | Live | Project `xplfryahxdegfvxmymco` exists. MVP schema, generated reports, service-role grants, RLS, and persistence for requests/reports/systems/tasks/activity are in place. CRM fields are installed; REST verification on 2026-04-29 returned `lead_status`, `crm_tags`, and `last_activity_at`. A fresh lifecycle QA request moved from intake to `awaiting_review` to `approved_for_delivery`, with `approved_for_follow_up` and `blueprint-approved` / `approved-for-follow-up` tags. Owner RLS hardening SQL now exists at `docs/backend/Supabase-Owner-RLS-Hardening.sql`. | User-owned Supabase login for future SQL/RLS changes; server-only keys must stay out of docs and client env. | Sign in once with the owner magic link, run the owner RLS hardening SQL, then QA the private queue. |
 | n8n | Live | Workflow `Right Thurr - Buildout Plan Intake` is active. Production webhook saves intake, calls the Thurnos blueprint bridge, creates draft report/system/tasks/activity, and returns queued status. | n8n login/credentials for workflow edits; production webhook and bridge secret must stay private. | Add approval/email delivery workflow after Resend is configured. |
 | Discord | Live | `#leads-alerts` webhook is connected through n8n as a non-blocking privacy-safe alert. Live QA showed the Discord node ran successfully. | Discord webhook URL is sensitive; channel privacy must be confirmed before posting contact details. | Keep V1 alerts privacy-safe; optionally add review/delivery confirmation alerts. |
@@ -53,7 +53,7 @@ Public buildout form
 Do next:
 
 ```text
-Run owner magic-link sign-in once, apply the owner RLS hardening SQL, then QA the private owner queue on production.
+Retry Vercel production deploy after the daily cap resets, then run owner magic-link sign-in once, apply the owner RLS hardening SQL, and QA the private owner queue on production.
 ```
 
 Do not do yet:

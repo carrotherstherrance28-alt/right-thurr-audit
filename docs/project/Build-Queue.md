@@ -261,7 +261,9 @@ Daily session:
 - [x] Created live Notion Command Center databases for Task Tracker, Content Calendar, and AI Ideas Log with the repo Notion API script.
 - [x] Re-enabled the private owner Report Review Queue auth flow with Supabase magic-link sign-in and owner-token API calls.
 - [x] Added Supabase owner RLS hardening SQL for approved owner profiles and private table read policies.
+- [x] Added the recurring `Right Thurr Hourly Build Session` automation for one-task-at-a-time execution.
+- [x] Pushed owner auth/RLS code at commit `2b857a5`; production deployment is blocked by the Vercel free daily deployment cap.
 
 ## Next Task
 
-Run the owner magic-link sign-in once, apply `docs/backend/Supabase-Owner-RLS-Hardening.sql`, then QA the private report queue against production.
+Retry Vercel production deploy after the daily cap resets, then run the owner magic-link sign-in once, apply `docs/backend/Supabase-Owner-RLS-Hardening.sql`, and QA the private report queue against production.

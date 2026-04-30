@@ -8,13 +8,13 @@ Right Thurr / Thurr Solutions Buildout Engine
 
 ## Status
 
-On track, with one database migration blocker.
+On track. CRM lifecycle is verified; owner auth/RLS is the active trust-boundary task.
 
 ## Summary
 
-The public Thurr Solutions site, buildout intake path, n8n workflow, Supabase persistence, Thurnos/OpenAI blueprint bridge, Discord alerts, manual review mode, Resend approved email delivery, and client diagnostic documentation package are now in place.
+The public Thurr Solutions site, buildout intake path, n8n workflow, Supabase persistence, Thurnos/OpenAI blueprint bridge, Discord alerts, manual review mode, Resend approved email delivery, CRM lifecycle tagging, Notion Command Center databases, and client diagnostic documentation package are now in place.
 
-Latest production deploy is live from commit `93b4088`.
+Latest pushed commit is `2b857a5`; Vercel production deploy is blocked until the free daily deployment cap resets.
 
 ## Completed
 
@@ -27,6 +27,12 @@ Latest production deploy is live from commit `93b4088`.
 - `/api/approve-report` supports approval-only mode and Resend-backed delivery.
 - Approved test email delivery to `therrance@thurrsolutions.com` succeeded.
 - Owner review API is private-by-default; unauthenticated `/api/review-reports` returns `401`.
+- CRM lifecycle fields are installed and verified: `lead_status`, `crm_tags`, and `last_activity_at`.
+- Fresh QA moved a request from intake to `awaiting_review` to `approved_for_delivery`.
+- Notion Task Tracker, Content Calendar, and AI Ideas Log were created under the Command Center.
+- Owner Report Review Queue frontend magic-link auth has been re-enabled.
+- Supabase owner RLS hardening SQL exists at `docs/backend/Supabase-Owner-RLS-Hardening.sql`.
+- Recurring hourly build-session automation was created for one-task-at-a-time execution.
 - Client diagnostic package added:
   - unbranded diagnostic report template
   - Thurr Solutions sales diagnostic version
@@ -36,36 +42,53 @@ Latest production deploy is live from commit `93b4088`.
 
 ## Blocked
 
-- Supabase CRM field migration is not installed yet.
-- Verification returned: `column buildout_requests.lead_status does not exist`.
+- Owner RLS hardening needs one owner Supabase Auth user. Sign in once with the owner magic link, then run `docs/backend/Supabase-Owner-RLS-Hardening.sql`.
+- Vercel free daily deployment cap blocked deploying commit `2b857a5`.
 
 ## Next
 
-1. Run `docs/backend/Supabase-CRM-Fields-Migration.sql` in Supabase SQL Editor.
-2. Verify one fresh buildout request moves through:
+1. Retry Vercel production deploy after the free daily deployment cap resets.
+2. Open the owner Command Center and request the Supabase magic link.
+3. After first owner sign-in, run `docs/backend/Supabase-Owner-RLS-Hardening.sql` in Supabase SQL Editor.
+4. QA the private report queue against production:
 
 ```text
-requested -> awaiting_review -> approved_for_delivery
+signed out -> locked
+signed in owner -> reports load
+approve without send -> approved_for_delivery / approved_for_follow_up
 ```
 
-3. Confirm `lead_status`, `crm_tags`, and `last_activity_at` are visible in Supabase.
-4. Decide the final owner auth/RLS path before showing real private client/operator records in the owner UI.
+5. Decide first client diagnostic niche and start the V1 client diagnostic flow.
 
 ## Linear Tasks To Create Or Update
 
-### 1. Run Supabase CRM Field Migration
+### 1. QA Owner Magic-Link Report Queue
 
 Priority: High
 
 Description:
-Run `docs/backend/Supabase-CRM-Fields-Migration.sql` in Supabase SQL Editor, then verify `buildout_requests` includes `lead_status`, `crm_tags`, and `last_activity_at`.
+Verify the production owner Report Review Queue after Vercel deploys commit `2b857a5`.
 
 Acceptance criteria:
-- SQL runs with no errors.
-- REST check for `buildout_requests?select=id,lead_status,crm_tags,last_activity_at&limit=1` returns `200`.
-- Build queue and connector status docs are updated.
+- Signed-out owner queue stays locked.
+- Magic-link request sends to the approved owner email.
+- Signed-in owner can load reports.
+- Non-owner sessions are rejected server-side.
 
-### 2. Verify Fresh Buildout Lifecycle
+### 2. Run Owner RLS Hardening SQL
+
+Priority: High
+
+Description:
+After the owner Auth user exists, run `docs/backend/Supabase-Owner-RLS-Hardening.sql` in Supabase SQL Editor.
+
+Acceptance criteria:
+- `owner_profiles` table exists.
+- Approved owner profile row exists.
+- Authenticated owner read policies exist for private tables.
+- Anonymous reads remain blocked.
+
+### 3. Verify Fresh Buildout Lifecycle
 
 Priority: High
 
@@ -79,19 +102,6 @@ Acceptance criteria:
 - Approval-only mode moves request/report to `approved_for_delivery`.
 - `crm_tag_applied` activity exists.
 - CRM fields reflect the lifecycle.
-
-### 3. Finalize Owner Auth And RLS Path
-
-Priority: High
-
-Description:
-Decide and implement the owner authentication path before real private report data appears in the owner UI.
-
-Acceptance criteria:
-- Owner access is private-by-default.
-- Approved owner identity is enforced server-side.
-- Supabase RLS policy direction is documented and implemented before real client/operator data is shown.
-- Public visitors cannot access private report details.
 
 ### 4. Build Client Diagnostic V1 From Templates
 
