@@ -1,5 +1,12 @@
 # Domain Strategy
 
+## Decision Status (2026-04-30)
+
+- **Decided:** Reserve `rightthurr.com` for the Right Thurr product/app brand surface (app onboarding, logged-in app, product landing).
+- **Current canonical public marketing:** Keep `thurrsolutions.com` as the primary public domain until `rightthurr.com` is attached and ready (DNS/Vercel work is login-gated).
+- **Decided (MVP):** Client diagnostic funnels live at `thurrsolutions.com/diagnostic/*` (path-based) for speed and simplicity; keep `diagnostic.thurrsolutions.com` as an optional later upgrade.
+- **Blocked follow-up:** Attaching `rightthurr.com`, `app.rightthurr.com`, and `diagnostic.thurrsolutions.com` requires Cloudflare/Vercel access.
+
 ## Goal
 
 Keep Right Thurr, Thurr Solutions, and client diagnostic funnels separated clearly.
@@ -21,7 +28,7 @@ That means they are pointed somewhere. It does not prove ownership inside this r
 
 ## Recommended Domain Split
 
-### Right Thurr Product
+### Right Thurr Product / App
 
 Best:
 
@@ -33,8 +40,8 @@ Use for:
 
 - Right Thurr product homepage
 - AI Business Buildout Plan
-- app preview
-- eventual app onboarding
+- app preview (once attached)
+- eventual logged-in app onboarding
 - merch/stickers/luggage tags
 
 Suggested paths:
@@ -74,13 +81,13 @@ thurrsolutions.com/diagnostic
 
 ### Client Diagnostic Funnels
 
-Best:
+MVP (recommended now):
 
 ```text
-diagnostic.thurrsolutions.com
+thurrsolutions.com/diagnostic/*
 ```
 
-or client-specific paths:
+Example lanes:
 
 ```text
 thurrsolutions.com/diagnostic/roofing
@@ -88,9 +95,19 @@ thurrsolutions.com/diagnostic/med-spa
 thurrsolutions.com/diagnostic/cleaning
 ```
 
+Later (optional upgrade):
+
+```text
+diagnostic.thurrsolutions.com
+```
+
 Rule:
 
 Client funnels may use the same backend engine, but they should be visually re-skinnable and not inherit Right Thurr branding by default.
+
+Note:
+
+The current repo prototype is implemented behind a query param (`?diagnostic=mobile-detailing`) for quick iteration; migrate to `/diagnostic/<lane>` before making any diagnostic page public.
 
 ### Thurr Enterprise
 
@@ -135,14 +152,15 @@ Do not make this the main brand domain if `thurrsolutions.com` is available to y
 Use:
 
 ```text
-rightthurr.com       -> Right Thurr product/app/public brand
-thurrsolutions.com   -> Thurr Solutions B2B services
+thurrsolutions.com   -> primary public marketing + B2B services (current canonical)
+rightthurr.com       -> product/app surface (reserved; attach when ready)
 ```
 
 Use later:
 
 ```text
-diagnostic.thurrsolutions.com -> client diagnostic funnels
+thurrsolutions.com/diagnostic/* -> client diagnostic funnels (MVP)
+diagnostic.thurrsolutions.com   -> optional later upgrade
 app.rightthurr.com            -> future logged-in app
 ```
 
@@ -171,7 +189,7 @@ Domains:
 Vercel project: thurr-solutions
 Domains:
 - thurrsolutions.com
-- diagnostic.thurrsolutions.com later
+- diagnostic.thurrsolutions.com (optional later)
 ```
 
 Temporary setup:

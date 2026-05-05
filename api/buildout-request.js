@@ -14,7 +14,11 @@ function getNestedValue(source, path) {
 
 function getPayload(request) {
   if (typeof request.body === 'string') {
-    return JSON.parse(request.body);
+    try {
+      return JSON.parse(request.body || '{}');
+    } catch (error) {
+      return null;
+    }
   }
 
   return request.body || {};
@@ -96,6 +100,16 @@ export default async function handler(request, response) {
   }
 
   const payload = getPayload(request);
+
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+    sendJson(response, 400, {
+      ok: false,
+      status: 'invalid_json',
+      message: 'Request body must be valid JSON.',
+    });
+    return;
+  }
+
   const missingFields = requiredFields.filter((path) => !getNestedValue(payload, path));
 
   if (missingFields.length > 0) {

@@ -1,0 +1,20 @@
+{
+  "canonicalOrigin": "https://thurrsolutions.com",
+  "lanes": [
+    {
+      "slug": "mobile-detailing",
+      "title": "Mobile Detailing Diagnostic | Thurr Solutions",
+      "description": "Review offer clarity, quote capture, response speed, proof, and follow-up. Then map the simplest workflow that turns more interest into booked jobs."
+    },
+    {
+      "slug": "med-spa",
+      "title": "Med Spa Diagnostic | Thurr Solutions",
+      "description": "Review offer clarity, consult booking, response speed, proof, and follow-up. Then map the simplest workflow that turns more inquiries into booked consults."
+    },
+    {
+      "slug": "roofing-contractor",
+      "title": "Roofing Contractor Diagnostic | Thurr Solutions",
+      "description": "Review estimate capture, qualification, response speed, proof, and follow-up. Then map the simplest workflow that turns more inquiries into booked inspections."
+    }
+  ]
+}

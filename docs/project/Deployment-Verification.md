@@ -29,6 +29,19 @@ Check:
 - `sitemap.xml` is available at `/sitemap.xml`.
 - `site.webmanifest` is available at `/site.webmanifest`.
 
+## Diagnostic Lane Checks
+
+For each `/diagnostic/<lane>` page (starting with `mobile-detailing`), verify:
+
+- `/diagnostic/mobile-detailing` renders and stays on the canonical path (no stray slugs).
+- Legacy query `/?diagnostic=mobile-detailing` normalizes to `/diagnostic/mobile-detailing`.
+- Response headers include `X-Robots-Tag: noindex, nofollow` on `/diagnostic` and `/diagnostic/*`.
+- Page `<title>` matches the lane eyebrow (ex: `Mobile Detailing Diagnostic | Thurr Solutions`).
+- `<link rel="canonical">` points to `/diagnostic/<lane>` on the same origin.
+- `<meta name="robots">` exists with `noindex, nofollow` while on diagnostic pages.
+- Social preview tags (`og:title`, `og:description`, `og:url`, `twitter:title`, `twitter:description`) update to match the lane.
+- View-source for `/diagnostic/<lane>` shows the lane-specific `<title>`, description, canonical, and `og:*`/`twitter:*` tags (do not rely on JS execution for social preview bots).
+
 ## Form Behavior
 
 Current production fallback:

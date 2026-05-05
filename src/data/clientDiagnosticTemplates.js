@@ -1,5 +1,6 @@
 export const clientDiagnosticTemplates = {
   mobileDetailing: {
+    slug: 'mobile-detailing',
     eyebrow: 'Mobile Detailing Diagnostic',
     title: 'Find the first system your detailing business should build.',
     titleLines: ['Find the first', 'system your', 'detailing', 'business should', 'build.'],
@@ -40,6 +41,108 @@ export const clientDiagnosticTemplates = {
       'Main detailing offer',
       'Biggest lead problem',
       'Current booking method',
+    ],
+    systemSteps: [
+      'Lead lands on diagnostic page',
+      'n8n validates and saves the lead',
+      'AI drafts a custom diagnostic',
+      'Owner reviews the report',
+      'Approved follow-up invites the prospect into the buildout conversation',
+    ],
+  },
+  medSpa: {
+    slug: 'med-spa',
+    eyebrow: 'Med Spa Diagnostic',
+    title: 'Find the first system your med spa should build.',
+    titleLines: ['Find the first', 'system your', 'med spa', 'should', 'build.'],
+    intro:
+      'Review offer clarity, consult booking, response speed, proof, and follow-up. Then map the simplest workflow that turns more inquiries into booked consults.',
+    cta: 'Start Diagnostic',
+    score: 74,
+    scoreTitle: 'Opportunity Score',
+    scoreText: 'High intent leads exist, but consult booking and follow-up need a real system.',
+    cards: [
+      {
+        label: 'Leak',
+        title: 'Inquiries stall before booking',
+        text: 'Prospects ask questions but don’t lock in a consult time.',
+      },
+      {
+        label: 'Fix',
+        title: 'Consult booking workflow',
+        text: 'Capture intent, send a booking link, and create follow-up tasks automatically.',
+      },
+      {
+        label: 'Build',
+        title: 'Intake-to-treatment system',
+        text: 'Collect essentials, confirm eligibility, and prep the team before the visit.',
+      },
+    ],
+    scorecard: [
+      ['Offer clarity', '4/5'],
+      ['Consult booking', '3/5'],
+      ['Speed to lead', '3/5'],
+      ['Trust/proof strength', '4/5'],
+      ['Follow-up reliability', '2/5'],
+    ],
+    intakeFields: [
+      'Business name',
+      'Website or Instagram link',
+      'Top treatment offer',
+      'How consults are booked today',
+      'Main lead question (price, eligibility, timing)',
+      'Biggest follow-up problem',
+    ],
+    systemSteps: [
+      'Lead lands on diagnostic page',
+      'n8n validates and saves the lead',
+      'AI drafts a custom diagnostic',
+      'Owner reviews the report',
+      'Approved follow-up invites the prospect into the buildout conversation',
+    ],
+  },
+  roofingContractor: {
+    slug: 'roofing-contractor',
+    eyebrow: 'Roofing / Contractor Diagnostic',
+    title: 'Find the first system your roofing business should build.',
+    titleLines: ['Find the first', 'system your', 'roofing', 'business should', 'build.'],
+    intro:
+      'Review estimate capture, qualification, response speed, proof, and follow-up. Then map the simplest workflow that turns more inquiries into booked inspections.',
+    cta: 'Get my estimate path reviewed',
+    score: 71,
+    scoreTitle: 'Opportunity Score',
+    scoreText: 'Demand exists, but estimate routing and follow-up still leak high-intent leads.',
+    cards: [
+      {
+        label: 'Leak',
+        title: 'Unqualified estimate requests',
+        text: 'Too many leads reach the owner without enough details to price or schedule fast.',
+      },
+      {
+        label: 'Fix',
+        title: 'Qualification + urgency routing',
+        text: 'Separate urgent repairs from planned replacements and capture the right context upfront.',
+      },
+      {
+        label: 'Build',
+        title: 'Estimate-to-inspection system',
+        text: 'Collect project info, schedule inspections, and create follow-up tasks automatically.',
+      },
+    ],
+    scorecard: [
+      ['Offer clarity', '3/5'],
+      ['Estimate readiness', '3/5'],
+      ['Speed to lead', '3/5'],
+      ['Trust/proof strength', '4/5'],
+      ['Follow-up reliability', '2/5'],
+    ],
+    intakeFields: [
+      'Business name',
+      'Website or social link',
+      'Service area',
+      'Primary project type (repair vs replacement)',
+      'How estimates are scheduled today',
+      'Biggest estimate leak',
     ],
     systemSteps: [
       'Lead lands on diagnostic page',

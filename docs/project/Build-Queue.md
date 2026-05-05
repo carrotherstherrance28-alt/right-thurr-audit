@@ -24,6 +24,39 @@ All tasks should use a plan-first automation loop before build work starts:
 6. Update this queue.
 7. Stop with the next task clearly marked.
 
+## Next Task Marker
+
+Do next (repo-local, unblocked):
+
+- None. Next actionable step is the live-domain deploy + browser QA (blocked below). Use `npm run ci` as the preflight for any diagnostic edits. (Last run: 2026-05-03)
+
+Just completed (repo-local):
+
+- Added a `/diagnostic` lane index view (cards) so visitors can pick `mobile-detailing`, `med-spa`, or `roofing-contractor` without being redirected immediately. Added `diagnostic/index.html` + Vercel route so `/diagnostic` view-source has correct `noindex` + canonical/title/meta tags.
+- Created 3 lane index visual directions (A/B/C) at `design-options/diagnostic-lane-index-options.html`.
+- Added a simple diagnostic lane selector dropdown in the diagnostic sidebar so `/diagnostic/*` can switch templates without manual URL edits. Screenshot options captured at:
+  - `design-options/screenshots/diagnostic-lane-selector-option-a.png` (implemented)
+  - `design-options/screenshots/diagnostic-lane-selector-option-b.png`
+  - `design-options/screenshots/diagnostic-lane-selector-option-c.png`
+- Added a “Back to lanes” link in the diagnostic sidebar so visitors can return to `/diagnostic` from any lane.
+- Added a “Back to site” link/button inside the diagnostic sidebar so people can jump back to `/` without using the browser back button.
+- Created 3 “Back to site” visual options (A/B/C) as SVG mock screenshots:
+  - `design-options/screenshots/diagnostic-back-to-site-option-a.svg` (implemented direction)
+  - `design-options/screenshots/diagnostic-back-to-site-option-b.svg`
+  - `design-options/screenshots/diagnostic-back-to-site-option-c.svg`
+
+Do next (blocked: needs user-owned Vercel/domain access):
+
+- Deploy + browser-QA the diagnostic lane routes on the live domain (confirm Vercel routes serve lane HTML + legacy `?diagnostic=mobile-detailing` redirect + confirm `X-Robots-Tag: noindex` is served for `/diagnostic/*` + confirm the page title, canonical URL, and social preview tags are correct in view-source):
+  - `thurrsolutions.com/diagnostic/mobile-detailing`
+  - `thurrsolutions.com/diagnostic/med-spa`
+  - `thurrsolutions.com/diagnostic/roofing-contractor`
+
+Blocked (needs user-owned logins):
+
+- Supabase: run `docs/backend/Supabase-Owner-RLS-Hardening.sql` after first owner sign-in.
+- n8n/Slack: fix Slack credential + channel access for n8n channel posting (incoming webhook alerts remain optional).
+
 ## Phase 1: Foundation
 
 - [x] Import Right Thurr / Thurr Solutions design system zip into repo.
@@ -32,6 +65,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add initial Right Thurr command center screen.
 - [x] Run app build successfully.
 - [x] Add GitHub Actions CI workflow (npm ci + build).
+- [x] Add `npm run ci` (diagnostic:verify + build) and run it in GitHub Actions.
 - [x] Build first Right Thurr landing page pass.
 - [x] Add dedicated AI Business Buildout Plan page/view.
 - [x] Define n8n webhook payload contract.
@@ -93,13 +127,13 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add founder/operator trust section for Therrance Carrothers.
 - [x] Document Thurnos OpenAI brain swap and Discord prototype command path.
 - [x] Install Remotion and add first branded vertical intro composition.
-- [ ] Decide whether to expose/use Linear after the current build queue is stable.
-- [ ] Domain decision: use `rightthurr.com` for Right Thurr product/app.
+- [x] Decide whether to expose/use Linear after the current build queue is stable (mirror high-level only; see `docs/project/Linear-Mirror-Scope.md`).
+- [x] Domain decision: reserve `rightthurr.com` for Right Thurr product/app (attachment blocked by Cloudflare/Vercel logins).
 - [x] Domain decision: use `thurrsolutions.com` for Thurr Solutions B2B services.
 - [x] Add `thurrsolutions.com` and `www.thurrsolutions.com` to Vercel `right-thurr`.
 - [x] Add `build.thurrsolutions.com` to Vercel `right-thurr-audit`.
 - [x] Update Cloudflare DNS records for `thurrsolutions.com`, `www`, and `build` to Vercel.
-- [ ] Future domain: use `diagnostic.thurrsolutions.com` for client diagnostic funnels.
+- [ ] Optional future: use `diagnostic.thurrsolutions.com` for client diagnostic funnels (after the `/diagnostic/*` MVP is stable).
 - [ ] Future domain: use `app.rightthurr.com` for logged-in app.
 - [ ] Hold `thurrenterprise.com` for future parent/enterprise brand.
 - [ ] Use `thurrsolutions.online` only for backup, staging, or redirects.
@@ -160,6 +194,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Add Slack notification step (optional webhook alerts).
 - [x] Add CRM tagging step.
 - [x] Add private owner report review queue.
+- [x] Harden `/api/buildout-request` invalid JSON handling and add a repo-local payload smoke test.
 
 ## Phase 5: Client-Ready Diagnostic Engine
 
@@ -169,6 +204,7 @@ All tasks should use a plan-first automation loop before build work starts:
 - [x] Create lead-gen niche prompt packs.
 - [x] Add manual review mode before reports send.
 - [x] Add follow-up automation templates for meeting thank-you, post-project thank-you, referral request, and deliverable reminders.
+- [x] Add a second diagnostic lane (`med-spa`) scaffold + in-app template.
 
 ## Suggested Session Rhythm
 
@@ -191,12 +227,17 @@ Daily session:
 
 ## Latest Completed
 
+- [x] Added `diagnostic/lanes.json` + `npm run diagnostic:create-lane` generator; Vite multi-page inputs and `npm run diagnostic:verify` now derive from the lane registry (2026-04-30).
+- [x] Expanded `npm run diagnostic:verify` to assert diagnostic lane social meta tags + legacy `?diagnostic=` redirect invariants, then confirmed `npm run ci` passes locally (2026-04-30).
+- [x] Added `med-spa` diagnostic lane end-to-end (lane registry + static HTML + Vercel route + in-app template); `npm run ci` still passes (2026-04-30).
+- [x] Added `roofing-contractor` diagnostic lane end-to-end (lane registry + static HTML + Vercel route + in-app template); `npm run ci` still passes (2026-04-30).
 - [x] Kept `?operator=1` available for mock preview while locking private report data behind owner-auth requirements.
 - [x] Added unbranded diagnostic report template for re-skinnable client reports.
 - [x] Added Thurr Solutions diagnostic sales version for lead-gen and paid buildout handoff.
 - [x] Added client diagnostic re-skin checklist.
 - [x] Added lead-gen niche prompt packs for local service, contractor, med spa, funeral home, wedding/event, and professional services.
 - [x] Added follow-up automation templates for diagnostic delivery, meetings, post-project thank-you, referrals, reminders, and no-reply nudges.
+- [x] Added repo-local diagnostic lane verification script (`npm run diagnostic:verify`).
 - [x] Added future Thurr community roadmap for launching only after consistent content, proof assets, and support capacity exist.
 - [x] Extracted shared public site header/footer chrome and added the `We build. You profit.` footer.
 - [x] Added AI automation/content inspiration tracker for Nate Herk reference patterns and future Thurr Solutions content/community planning.
@@ -281,7 +322,19 @@ Daily session:
 - [x] Created Upwork/Fiverr marketplace launch kit for Thurr Solutions service offers.
 - [x] Created marketplace portfolio sample HTML, screenshot, and PDF for Upwork/Fiverr proof.
 - [x] Updated Christy nail business mockups around the real offer: Builder Gel, Polygel, press-ons, Gloss Genius replacement, $15 deposits, and Be Lounge bundles.
+- [x] Hardened `/api/buildout-request` against invalid JSON and added `npm run buildout:payload:test` to catch it early.
+- [x] Implemented a real `/diagnostic/*` route with Vercel rewrites and legacy `?diagnostic=mobile-detailing` redirect.
+- [x] Added `noindex` protection for `/diagnostic/*` via Vercel `X-Robots-Tag` headers + `public/robots.txt` disallow rule (keeps the lane out of indexing until production QA).
+- [x] Hardened diagnostic lane UX: normalize `/diagnostic/*` paths to `/diagnostic/mobile-detailing` and apply diagnostic-only `meta robots` + page titles for accurate previews.
+- [x] Improved diagnostic share previews: update `<meta name="description">` + OpenGraph/Twitter tags per diagnostic lane and restore defaults when leaving diagnostics.
+- [x] Added a lane-specific static HTML entry for `mobile-detailing` (`diagnostic/mobile-detailing.html`) and a Vercel route so social preview bots get correct meta tags without executing JS.
 
 ## Next Task
 
-QA the owner magic-link queue flow, run `docs/backend/Supabase-Owner-RLS-Hardening.sql`, and verify the hidden `?diagnostic=mobile-detailing` page on the live domain.
+Primary (blocked by user-owned logins):
+
+- QA the owner magic-link queue flow, run `docs/backend/Supabase-Owner-RLS-Hardening.sql`, and verify the private queue + hidden `?diagnostic=mobile-detailing` page on the live domain.
+
+Fallback (repo-local, unblocked):
+
+- Add a simple diagnostic lane selector (start with `mobile-detailing`, `med-spa`, and `roofing-contractor`) so `/diagnostic/*` can switch templates without manual URL edits; keep `noindex` until live QA is done.

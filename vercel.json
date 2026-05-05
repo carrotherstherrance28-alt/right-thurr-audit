@@ -1,8 +1,51 @@
 {
-  "rewrites": [
+  "headers": [
     {
-      "source": "/owner/callback",
-      "destination": "/"
+      "source": "/diagnostic",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/diagnostic/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/diagnostic/roofing-contractor",
+      "dest": "/diagnostic/roofing-contractor.html"
+    },
+    {
+      "src": "/diagnostic/med-spa",
+      "dest": "/diagnostic/med-spa.html"
+    },
+    {
+      "src": "/diagnostic/mobile-detailing",
+      "dest": "/diagnostic/mobile-detailing.html"
+    },
+    {
+      "src": "/owner/callback",
+      "dest": "/"
+    },
+    {
+      "src": "/diagnostic/?",
+      "dest": "/diagnostic/index.html"
+    },
+    {
+      "src": "/diagnostic/(.*)",
+      "dest": "/"
     }
   ]
 }

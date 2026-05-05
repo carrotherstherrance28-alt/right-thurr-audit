@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagnostic Sidebar Back-Link Options</title>
+    <style>
+      :root {
+        --ink: #171717;
+        --paper: #f6f2e9;
+        --paper-cold: #f8faf4;
+        --muted: rgba(245, 239, 226, 0.78);
+        --line: #1f1f1f;
+        --orange: #e95f24;
+        --sidebar: #0f1214;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #e8e4da;
+        color: var(--ink);
+        font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      .option {
+        display: none;
+        min-height: 900px;
+        padding: 32px;
+      }
+
+      body[data-option="a"] .option-a,
+      body[data-option="b"] .option-b,
+      body[data-option="c"] .option-c,
+      body:not([data-option]) .option {
+        display: grid;
+      }
+
+      .switcher {
+        position: fixed;
+        right: 14px;
+        top: 14px;
+        display: grid;
+        grid-auto-flow: column;
+        gap: 8px;
+        padding: 10px;
+        border-radius: 14px;
+        border: 2px solid rgba(31, 31, 31, 0.18);
+        background: rgba(255, 255, 255, 0.74);
+        backdrop-filter: blur(10px);
+        font-size: 12px;
+        z-index: 10;
+      }
+
+      .switcher a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 30px;
+        border-radius: 10px;
+        border: 2px solid rgba(31, 31, 31, 0.18);
+        color: rgba(23, 23, 23, 0.8);
+        text-decoration: none;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      body[data-option="a"] .switcher a[data-option="a"],
+      body[data-option="b"] .switcher a[data-option="b"],
+      body[data-option="c"] .switcher a[data-option="c"] {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
+
+      .shell {
+        width: min(100%, 1200px);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(320px, 0.34fr) minmax(0, 1fr);
+        border: 4px solid var(--line);
+        background: var(--paper-cold);
+        box-shadow: 10px 10px 0 rgba(31, 31, 31, 0.26);
+        overflow: hidden;
+      }
+
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 28px;
+        padding: 28px;
+        color: #fff;
+        background:
+          linear-gradient(rgba(245, 239, 226, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(245, 239, 226, 0.06) 1px, transparent 1px),
+          var(--sidebar);
+        background-size: 34px 34px;
+      }
+
+      .content {
+        padding: 28px;
+        display: grid;
+        gap: 16px;
+        align-content: start;
+      }
+
+      .eyebrow {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .title {
+        margin-top: 18px;
+        font-size: 56px;
+        font-weight: 950;
+        line-height: 0.96;
+        letter-spacing: -0.02em;
+      }
+
+      .intro {
+        max-width: 520px;
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .lane-label {
+        margin-bottom: 8px;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .select {
+        width: 100%;
+        min-height: 50px;
+        padding: 0 16px;
+        border: 2px solid rgba(245, 239, 226, 0.28);
+        background: rgba(245, 239, 226, 0.08);
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .stamp {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        min-height: 56px;
+        padding: 0 18px;
+        border: 3px solid rgba(255, 255, 255, 0.78);
+        background: rgba(245, 239, 226, 0.08);
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .stamp.primary {
+        background: var(--orange);
+        border-color: rgba(255, 255, 255, 0.92);
+        color: #fff;
+      }
+
+      .backlink {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        color: rgba(255, 255, 255, 0.88);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .backlink .chev {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        border: 2px solid rgba(245, 239, 226, 0.26);
+        background: rgba(245, 239, 226, 0.06);
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 2px solid rgba(245, 239, 226, 0.28);
+        background: rgba(245, 239, 226, 0.08);
+        color: rgba(255, 255, 255, 0.92);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .card {
+        padding: 18px;
+        border: 3px solid var(--line);
+        background: #fff;
+        box-shadow: 6px 6px 0 rgba(31, 31, 31, 0.22);
+      }
+
+      .card h2 {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+
+      .card p {
+        color: rgba(23, 23, 23, 0.7);
+        line-height: 1.55;
+      }
+
+      .stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .helper {
+        margin-top: 18px;
+        color: rgba(23, 23, 23, 0.72);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="switcher" aria-label="Option picker">
+      <a href="?a" data-option="a" onclick="pickOption(event,'a')">A</a>
+      <a href="?b" data-option="b" onclick="pickOption(event,'b')">B</a>
+      <a href="?c" data-option="c" onclick="pickOption(event,'c')">C</a>
+    </nav>
+
+    <section class="option option-a">
+      <div class="shell">
+        <aside class="sidebar">
+          <div class="stack">
+            <a class="backlink" href="#">
+              <span class="chev">←</span>
+              Back to lanes
+            </a>
+
+            <div>
+              <div class="lane-label">Diagnostic lane</div>
+              <select class="select" aria-label="Diagnostic lane">
+                <option>Mobile Detailing</option>
+                <option>Med Spa</option>
+                <option>Roofing Contractor</option>
+              </select>
+            </div>
+
+            <div>
+              <div class="eyebrow">Thurr Solutions</div>
+              <h1 class="title">Mobile detailing scorecard.</h1>
+              <p class="intro">A fast review of your booking flow, follow-up, and marketing readiness.</p>
+            </div>
+          </div>
+
+          <button class="stamp primary" type="button">Start buildout →</button>
+        </aside>
+
+        <section class="content">
+          <div class="card">
+            <h2>Option A</h2>
+            <p>Top-of-sidebar backlink with icon; feels like a “breadcrumb” and stays out of the CTA area.</p>
+          </div>
+          <p class="helper">Goal: make it obvious how to return to `/diagnostic` without losing the lane selector.</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="option option-b">
+      <div class="shell">
+        <aside class="sidebar">
+          <div class="stack">
+            <div>
+              <div class="lane-label">Diagnostic lane</div>
+              <select class="select" aria-label="Diagnostic lane">
+                <option>Mobile Detailing</option>
+                <option>Med Spa</option>
+                <option>Roofing Contractor</option>
+              </select>
+            </div>
+
+            <a class="pill" href="#">
+              ←
+              Back to lanes
+            </a>
+
+            <div>
+              <div class="eyebrow">Thurr Solutions</div>
+              <h1 class="title">Mobile detailing scorecard.</h1>
+              <p class="intro">A fast review of your booking flow, follow-up, and marketing readiness.</p>
+            </div>
+          </div>
+
+          <button class="stamp primary" type="button">Start buildout →</button>
+        </aside>
+
+        <section class="content">
+          <div class="card">
+            <h2>Option B</h2>
+            <p>Pill button under the selector; fast to scan, still lightweight, and touch-friendly.</p>
+          </div>
+          <p class="helper">Goal: “Back to lanes” reads like an action, but doesn’t compete with the main CTA.</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="option option-c">
+      <div class="shell">
+        <aside class="sidebar">
+          <div class="stack">
+            <div>
+              <div class="lane-label">Diagnostic lane</div>
+              <select class="select" aria-label="Diagnostic lane">
+                <option>Mobile Detailing</option>
+                <option>Med Spa</option>
+                <option>Roofing Contractor</option>
+              </select>
+            </div>
+
+            <div>
+              <div class="eyebrow">Thurr Solutions</div>
+              <h1 class="title">Mobile detailing scorecard.</h1>
+              <p class="intro">A fast review of your booking flow, follow-up, and marketing readiness.</p>
+            </div>
+          </div>
+
+          <div class="stack">
+            <button class="stamp" type="button">← Back to lanes</button>
+            <button class="stamp primary" type="button">Start buildout →</button>
+          </div>
+        </aside>
+
+        <section class="content">
+          <div class="card">
+            <h2>Option C</h2>
+            <p>Two stamp buttons at the bottom; strongest affordance, but competes for attention with the CTA.</p>
+          </div>
+          <p class="helper">Goal: maximize clarity for non-technical visitors (especially on mobile).</p>
+        </section>
+      </div>
+    </section>
+
+    <script>
+      const match = window.location.search.match(/[?&]([abc])(?:$|&)/i);
+      if (match) {
+        document.body.dataset.option = match[1].toLowerCase();
+      }
+
+      function pickOption(event, option) {
+        event.preventDefault();
+        document.body.dataset.option = option;
+        window.history.replaceState({}, '', `?${option}`);
+      }
+    </script>
+  </body>
+</html>

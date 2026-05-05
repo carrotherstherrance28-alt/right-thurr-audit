@@ -8,6 +8,7 @@ import {
   BriefcaseBusiness,
   ClipboardCheck,
   DollarSign,
+  ArrowLeft,
   Factory,
   FileText,
   Gauge,
@@ -26,6 +27,7 @@ import './styles/app.css';
 import monogram from './assets/rt-monogram-clean.png';
 import { SiteFooter, SiteHeader } from './components/SiteChrome.jsx';
 import { clientDiagnosticTemplates } from './data/clientDiagnosticTemplates.js';
+import diagnosticLanesConfig from '../diagnostic/lanes.json';
 import { fieldDefaults, rightThurrMockData } from './data/rightThurrMockData.js';
 
 const {
@@ -66,6 +68,64 @@ const operatorNavItems = [
 ];
 
 const operatorPages = operatorNavItems.map(([, target]) => target);
+const diagnosticSlugToTemplateKey = Object.entries(clientDiagnosticTemplates).reduce((acc, [key, template]) => {
+  const slug = template?.slug;
+  if (slug) {
+    acc[slug] = key;
+  }
+  return acc;
+}, {});
+
+const diagnosticLaneSlugs = new Set(
+  (diagnosticLanesConfig?.lanes ?? [])
+    .map((lane) => String(lane?.slug ?? '').trim())
+    .filter(Boolean),
+);
+
+const defaultDiagnosticSlug =
+  String(diagnosticLanesConfig?.lanes?.[0]?.slug ?? '').trim() ||
+  clientDiagnosticTemplates.mobileDetailing?.slug ||
+  'mobile-detailing';
+
+diagnosticLaneSlugs.add(defaultDiagnosticSlug);
+
+const defaultDiagnosticKey = diagnosticSlugToTemplateKey[defaultDiagnosticSlug] || 'mobileDetailing';
+
+function normalizeDiagnosticSlug(value) {
+  if (!value) {
+    return null;
+  }
+
+  const normalized = String(value).trim().toLowerCase();
+
+  if (diagnosticLaneSlugs.has(normalized)) {
+    return normalized;
+  }
+
+  return null;
+}
+
+function getDiagnosticSlugFromPathname(pathname) {
+  if (!pathname?.startsWith('/diagnostic')) {
+    return null;
+  }
+
+  const remainder = pathname.replace(/^\/diagnostic\/?/, '');
+  const rawSlug = remainder.split('/')[0] || '';
+
+  if (!rawSlug) {
+    return null;
+  }
+
+  return normalizeDiagnosticSlug(rawSlug);
+}
+
+function replaceLocationPathname(nextPathname) {
+  const url = new URL(window.location.href);
+  url.pathname = nextPathname;
+  url.searchParams.delete('diagnostic');
+  window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+}
 
 function getIsOperatorPreview() {
   if (typeof window === 'undefined') {
@@ -78,13 +138,32 @@ function getIsOperatorPreview() {
   );
 }
 
+function getInitialDiagnosticSlug() {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const legacySlug = normalizeDiagnosticSlug(params.get('diagnostic'));
+
+  if (legacySlug) {
+    return legacySlug;
+  }
+
+  return getDiagnosticSlugFromPathname(window.location.pathname);
+}
+
 function getInitialPage() {
   if (typeof window === 'undefined') {
     return 'home';
   }
 
-  if (new URLSearchParams(window.location.search).get('diagnostic') === 'mobile-detailing') {
+  if (getInitialDiagnosticSlug()) {
     return 'client-diagnostic';
+  }
+
+  if (window.location.pathname.startsWith('/diagnostic')) {
+    return 'diagnostic-index';
   }
 
   return 'home';
@@ -178,6 +257,7 @@ async function submitBuildoutRequest(payload) {
 
 function App() {
   const [page, setPage] = useState(getInitialPage);
+  const [diagnosticSlug, setDiagnosticSlug] = useState(getInitialDiagnosticSlug);
   const [form, setForm] = useState(fieldDefaults);
   const [submissionState, setSubmissionState] = useState('idle');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -185,6 +265,34 @@ function App() {
   const [operatorAccess, setOperatorAccess] = useState({ status: 'idle', message: '' });
   const [canViewOperator, setCanViewOperator] = useState(false);
   const currentStep = useMemo(() => buildSteps[form.idea.length % buildSteps.length], [form.idea]);
+  const headDefaults = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+    const robotsMeta = document.querySelector('meta[name="robots"]');
+
+    const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+    const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+
+    const twitterTitleMeta = document.querySelector('meta[name="twitter:title"]');
+    const twitterDescriptionMeta = document.querySelector('meta[name="twitter:description"]');
+
+    return {
+      title: document.title || 'Thurr Solutions | AI Automation Systems',
+      canonicalHref: canonicalLink?.getAttribute('href') || `${window.location.origin}/`,
+      description: descriptionMeta?.getAttribute('content') || '',
+      robots: robotsMeta?.getAttribute('content') || null,
+      ogTitle: ogTitleMeta?.getAttribute('content') || '',
+      ogDescription: ogDescriptionMeta?.getAttribute('content') || '',
+      ogUrl: ogUrlMeta?.getAttribute('content') || `${window.location.origin}/`,
+      twitterTitle: twitterTitleMeta?.getAttribute('content') || '',
+      twitterDescription: twitterDescriptionMeta?.getAttribute('content') || '',
+    };
+  }, []);
 
   async function getOwnerSession() {
     if (!ownerSupabaseClient) {
@@ -247,6 +355,198 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const legacySlug = normalizeDiagnosticSlug(params.get('diagnostic'));
+    const pathname = window.location.pathname;
+    const remainder = pathname.replace(/^\/diagnostic\/?/, '');
+    const rawSlug = remainder.split('/')[0] || '';
+    const pathSlug = rawSlug ? normalizeDiagnosticSlug(rawSlug) : null;
+
+    if (legacySlug) {
+      setDiagnosticSlug(legacySlug);
+      setPage('client-diagnostic');
+      replaceLocationPathname(`/diagnostic/${legacySlug}`);
+      return;
+    }
+
+    if (pathname.startsWith('/diagnostic') && !rawSlug) {
+      if (pathname !== '/diagnostic') {
+        replaceLocationPathname('/diagnostic');
+      }
+      setPage('diagnostic-index');
+      return;
+    }
+
+    if (pathname.startsWith('/diagnostic') && rawSlug && !pathSlug) {
+      replaceLocationPathname('/diagnostic');
+      setPage('diagnostic-index');
+      return;
+    }
+
+    if (pathname.startsWith('/diagnostic') && pathSlug) {
+      const canonicalPathname = `/diagnostic/${pathSlug}`;
+
+      setDiagnosticSlug(pathSlug);
+      setPage('client-diagnostic');
+
+      if (pathname !== canonicalPathname) {
+        replaceLocationPathname(canonicalPathname);
+        return;
+      }
+    }
+
+    if (
+      (pathname === '/diagnostic' || pathname === '/diagnostic/') &&
+      pathSlug
+    ) {
+      replaceLocationPathname(`/diagnostic/${pathSlug}`);
+    }
+  }, []);
+
+  useEffect(() => {
+    function upsertCanonicalLink(href) {
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+
+      canonicalLink.setAttribute('href', href);
+      return canonicalLink;
+    }
+
+    function upsertMetaByName(name, content) {
+      let meta = document.querySelector(`meta[name="${name}"]`);
+
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', name);
+        document.head.appendChild(meta);
+      }
+
+      meta.setAttribute('content', content);
+      return meta;
+    }
+
+    function upsertMetaByProperty(property, content) {
+      let meta = document.querySelector(`meta[property="${property}"]`);
+
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('property', property);
+        document.head.appendChild(meta);
+      }
+
+      meta.setAttribute('content', content);
+      return meta;
+    }
+
+    const canonicalHref = headDefaults?.canonicalHref || `${window.location.origin}/`;
+    const defaultTitle = headDefaults?.title || 'Thurr Solutions | AI Automation Systems';
+
+    function upsertRobotsMeta(content) {
+      let robotsMeta = document.querySelector('meta[name="robots"]');
+
+      if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robotsMeta);
+      }
+
+      robotsMeta.setAttribute('content', content);
+    }
+
+    function removeRobotsMeta() {
+      const robotsMeta = document.querySelector('meta[name="robots"]');
+      robotsMeta?.remove();
+    }
+
+    if (page === 'client-diagnostic') {
+      const slug = diagnosticSlug || defaultDiagnosticSlug;
+      const diagnosticKey = diagnosticSlugToTemplateKey[slug] || defaultDiagnosticKey;
+      const diagnostic = clientDiagnosticTemplates[diagnosticKey] || clientDiagnosticTemplates[defaultDiagnosticKey];
+      const shareTitle = `${diagnostic.eyebrow} | Thurr Solutions`;
+      const shareDescription =
+        diagnostic.intro ||
+        'Run a fast diagnostic and map the simplest workflow that turns more interest into booked jobs.';
+      const shareUrl = `${window.location.origin}/diagnostic/${slug}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'diagnostic-index') {
+      const shareTitle = 'Diagnostic Lanes | Thurr Solutions';
+      const shareDescription =
+        'Pick a lane to run a fast diagnostic and map the simplest workflow that turns more interest into booked jobs.';
+      const shareUrl = `${window.location.origin}/diagnostic`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    const titlesByPage = {
+      home: defaultTitle,
+      buildout: 'AI Business Buildout Plan | Thurr Solutions',
+      solutions: 'Thurr Solutions | Services',
+      report: 'Blueprint Report | Thurr Solutions',
+      export: 'Export Report | Thurr Solutions',
+      'owner-access': 'Owner Access | Thurr Solutions',
+      command: 'Command Center | Thurr Solutions',
+      systems: 'Systems | Thurr Solutions',
+    };
+
+    document.title = titlesByPage[page] || defaultTitle;
+    upsertCanonicalLink(canonicalHref);
+
+    if (headDefaults?.description) {
+      upsertMetaByName('description', headDefaults.description);
+    }
+
+    if (headDefaults) {
+      if (headDefaults.ogTitle) {
+        upsertMetaByProperty('og:title', headDefaults.ogTitle);
+      }
+      if (headDefaults.ogDescription) {
+        upsertMetaByProperty('og:description', headDefaults.ogDescription);
+      }
+      if (headDefaults.ogUrl) {
+        upsertMetaByProperty('og:url', headDefaults.ogUrl);
+      }
+      if (headDefaults.twitterTitle) {
+        upsertMetaByName('twitter:title', headDefaults.twitterTitle);
+      }
+      if (headDefaults.twitterDescription) {
+        upsertMetaByName('twitter:description', headDefaults.twitterDescription);
+      }
+    }
+
+    if (headDefaults?.robots) {
+      upsertRobotsMeta(headDefaults.robots);
+    } else {
+      removeRobotsMeta();
+    }
+  }, [diagnosticSlug, headDefaults, page]);
+
+  useEffect(() => {
     if (!isOperatorPreview) {
       return;
     }
@@ -287,6 +587,16 @@ function App() {
       return;
     }
 
+    if (target === 'client-diagnostic') {
+      const nextSlug = diagnosticSlug || defaultDiagnosticSlug;
+      replaceLocationPathname(`/diagnostic/${nextSlug}`);
+      setDiagnosticSlug(nextSlug);
+    } else if (target === 'diagnostic-index') {
+      replaceLocationPathname('/diagnostic');
+    } else if (window.location.pathname.startsWith('/diagnostic')) {
+      replaceLocationPathname('/');
+    }
+
     setPage(target);
     setMenuOpen(false);
   }
@@ -307,6 +617,21 @@ function App() {
         behavior: 'smooth',
       });
     }, 0);
+  }
+
+  function setDiagnosticLaneSlug(nextSlug) {
+    const normalized = normalizeDiagnosticSlug(nextSlug) || defaultDiagnosticSlug;
+    setDiagnosticSlug(normalized);
+
+    if (window.location.pathname.startsWith('/diagnostic')) {
+      replaceLocationPathname(`/diagnostic/${normalized}`);
+    }
+  }
+
+  function startDiagnosticLane(nextSlug) {
+    setDiagnosticLaneSlug(nextSlug);
+    setPage('client-diagnostic');
+    setMenuOpen(false);
   }
 
   function updateField(field, value) {
@@ -379,7 +704,19 @@ function App() {
       {page === 'home' && <HomePage {...sharedProps} />}
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
       {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
-      {page === 'client-diagnostic' && <ClientDiagnosticPage setPage={navigateToPage} />}
+      {page === 'diagnostic-index' && (
+        <DiagnosticIndexPage navigateToPage={navigateToPage} onStartLane={startDiagnosticLane} />
+      )}
+      {page === 'client-diagnostic' && (
+        <ClientDiagnosticPage
+          diagnosticKey={
+            diagnosticSlugToTemplateKey[diagnosticSlug || defaultDiagnosticSlug] || defaultDiagnosticKey
+          }
+          diagnosticSlug={diagnosticSlug || defaultDiagnosticSlug}
+          onDiagnosticSlugChange={setDiagnosticLaneSlug}
+          setPage={navigateToPage}
+        />
+      )}
       {page === 'report' && <BlueprintReportPage setPage={navigateToPage} />}
       {page === 'export' && <ExportReportPage setPage={navigateToPage} />}
       {isOperatorPreview && !canViewOperator && page === 'owner-access' && (
@@ -397,14 +734,134 @@ function App() {
   );
 }
 
-function ClientDiagnosticPage({ setPage }) {
-  const diagnostic = clientDiagnosticTemplates.mobileDetailing;
+function titleCaseDiagnosticSlug(slug) {
+  if (!slug) {
+    return '';
+  }
+
+  return String(slug)
+    .split('-')
+    .filter(Boolean)
+    .map((chunk) => chunk.charAt(0).toUpperCase() + chunk.slice(1))
+    .join(' ');
+}
+
+function DiagnosticIndexPage({ navigateToPage, onStartLane }) {
+  const lanes = useMemo(
+    () =>
+      (diagnosticLanesConfig?.lanes ?? [])
+        .map((lane) => ({
+          slug: String(lane?.slug ?? '').trim(),
+          label: titleCaseDiagnosticSlug(lane?.slug),
+          description: String(lane?.description ?? '').trim(),
+        }))
+        .filter((lane) => lane.slug),
+    [],
+  );
+
+  return (
+    <main className="diagnostic-index-page" id="top">
+      <section className="diagnostic-index-shell" aria-labelledby="diagnostic-index-title">
+        <aside className="diagnostic-index-sidebar">
+          <div>
+            <div className="eyebrow">Thurr Solutions</div>
+            <h1 id="diagnostic-index-title">Pick your diagnostic lane.</h1>
+            <p>
+              Choose your niche, answer a handful of questions, and get a clean workflow map for turning more inquiries into
+              booked jobs.
+            </p>
+          </div>
+          <div className="diagnostic-index-sidebar-actions">
+            <button className="btn btn-secondary" type="button" onClick={() => navigateToPage('home')}>
+              Back to site
+            </button>
+          </div>
+        </aside>
+
+        <div className="diagnostic-index-content">
+          <div className="diagnostic-index-grid" role="list">
+            {lanes.map((lane) => (
+              <article className="diagnostic-index-card" role="listitem" key={lane.slug}>
+                <div>
+                  <h2>{lane.label}</h2>
+                  <p>{lane.description}</p>
+                </div>
+                <div className="diagnostic-index-card-actions">
+                  <span className="diagnostic-index-pill">3–5 minutes</span>
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={() => onStartLane(lane.slug)}
+                  >
+                    Start lane
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function ClientDiagnosticPage({ setPage, diagnosticKey, diagnosticSlug, onDiagnosticSlugChange }) {
+  const diagnostic = clientDiagnosticTemplates[diagnosticKey] || clientDiagnosticTemplates[defaultDiagnosticKey];
+  const laneOptions = useMemo(
+    () =>
+      (diagnosticLanesConfig?.lanes ?? [])
+        .map((lane) => ({
+          slug: String(lane?.slug ?? '').trim(),
+          label: titleCaseDiagnosticSlug(lane?.slug),
+        }))
+        .filter((lane) => lane.slug),
+    [],
+  );
 
   return (
     <main className="client-diagnostic-page" id="top">
       <section className="client-diagnostic-shell" aria-labelledby="client-diagnostic-title">
         <aside className="client-diagnostic-sidebar">
           <div>
+            <div className="diagnostic-sidebar-nav">
+              <a
+                className="diagnostic-back-to-lanes"
+                href="/diagnostic"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setPage('diagnostic-index');
+                }}
+              >
+                <ArrowLeft size={18} strokeWidth={3} />
+                Back to lanes
+              </a>
+              <a
+                className="diagnostic-back-to-site"
+                href="/"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setPage('home');
+                }}
+              >
+                Back to site
+              </a>
+            </div>
+            <div className="diagnostic-lane-selector">
+              <label className="eyebrow" htmlFor="diagnostic-lane-select">
+                Diagnostic lane
+              </label>
+              <select
+                id="diagnostic-lane-select"
+                value={diagnosticSlug}
+                onChange={(event) => onDiagnosticSlugChange?.(event.target.value)}
+              >
+                {laneOptions.map((lane) => (
+                  <option key={lane.slug} value={lane.slug}>
+                    {lane.label}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="eyebrow">{diagnostic.eyebrow}</div>
             <h1 id="client-diagnostic-title">
               {(diagnostic.titleLines || [diagnostic.title]).map((line) => (
