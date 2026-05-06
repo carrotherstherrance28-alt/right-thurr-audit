@@ -290,24 +290,24 @@ function verifyVercelConfig() {
     }
   }
 
-  const routes = config.routes ?? [];
+  const rewrites = config.rewrites ?? [];
   for (const lane of loadLanes()) {
     if (!lane.slug) continue;
-    const src = `/diagnostic/${lane.slug}`;
-    const dest = `/diagnostic/${lane.slug}.html`;
-    const laneRoute = routes.find((r) => r?.src === src && r?.dest === dest);
-    if (!laneRoute) {
-      fail(`vercel.json routes missing ${src} -> ${dest}`);
+    const source = `/diagnostic/${lane.slug}`;
+    const destination = `/diagnostic/${lane.slug}.html`;
+    const laneRewrite = rewrites.find((r) => r?.source === source && r?.destination === destination);
+    if (!laneRewrite) {
+      fail(`vercel.json rewrites missing ${source} -> ${destination}`);
     } else {
-      ok(`vercel.json route maps ${lane.slug} lane HTML`);
+      ok(`vercel.json rewrite maps ${lane.slug} lane HTML`);
     }
   }
 
-  const indexRoute = routes.find((r) => r?.src === '/diagnostic/?' && r?.dest === '/diagnostic/index.html');
-  if (!indexRoute) {
-    fail(`vercel.json routes missing /diagnostic/? -> /diagnostic/index.html`);
+  const indexRewrite = rewrites.find((r) => r?.source === '/diagnostic' && r?.destination === '/diagnostic/index.html');
+  if (!indexRewrite) {
+    fail(`vercel.json rewrites missing /diagnostic -> /diagnostic/index.html`);
   } else {
-    ok(`vercel.json route maps diagnostic index HTML`);
+    ok(`vercel.json rewrite maps diagnostic index HTML`);
   }
 }
 

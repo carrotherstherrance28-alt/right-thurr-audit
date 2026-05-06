@@ -54,21 +54,19 @@ function ensureLaneRouteInVercelJson({ slug }) {
   if (!fs.existsSync(vercelPath)) fail('Missing vercel.json at repo root');
 
   const config = readJson(vercelPath);
-  const routes = Array.isArray(config.routes) ? config.routes : [];
+  const rewrites = Array.isArray(config.rewrites) ? config.rewrites : [];
 
-  const src = `/diagnostic/${slug}`;
-  const dest = `/diagnostic/${slug}.html`;
+  const source = `/diagnostic/${slug}`;
+  const destination = `/diagnostic/${slug}.html`;
 
-  const already = routes.find((r) => r?.src === src && r?.dest === dest);
+  const already = rewrites.find((r) => r?.source === source && r?.destination === destination);
   if (already) return { changed: false };
 
-  const fsHandleIdx = routes.findIndex((r) => r?.handle === 'filesystem');
-  const insertAt = fsHandleIdx === -1 ? 0 : fsHandleIdx + 1;
-  routes.splice(insertAt, 0, { src, dest });
+  rewrites.unshift({ source, destination });
 
-  config.routes = routes;
+  config.rewrites = rewrites;
   writeJson(vercelPath, config);
-  ok(`Updated vercel.json routes: ${src} -> ${dest}`);
+  ok(`Updated vercel.json rewrites: ${source} -> ${destination}`);
   return { changed: true };
 }
 

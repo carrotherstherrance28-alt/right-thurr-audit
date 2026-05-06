@@ -1,6 +1,15 @@
 {
   "headers": [
     {
+      "source": "/use-cases/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/diagnostic",
       "headers": [
         {
@@ -19,33 +28,38 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "handle": "filesystem"
+      "source": "/diagnostic/roofing-contractor",
+      "destination": "/diagnostic/roofing-contractor.html"
     },
     {
-      "src": "/diagnostic/roofing-contractor",
-      "dest": "/diagnostic/roofing-contractor.html"
+      "source": "/diagnostic/med-spa",
+      "destination": "/diagnostic/med-spa.html"
     },
     {
-      "src": "/diagnostic/med-spa",
-      "dest": "/diagnostic/med-spa.html"
+      "source": "/diagnostic/mobile-detailing",
+      "destination": "/diagnostic/mobile-detailing.html"
     },
     {
-      "src": "/diagnostic/mobile-detailing",
-      "dest": "/diagnostic/mobile-detailing.html"
+      "source": "/owner/callback",
+      "destination": "/"
     },
     {
-      "src": "/owner/callback",
-      "dest": "/"
+      "source": "/diagnostic",
+      "destination": "/diagnostic/index.html"
     },
     {
-      "src": "/diagnostic/?",
-      "dest": "/diagnostic/index.html"
+      "source": "/use-cases",
+      "destination": "/"
     },
     {
-      "src": "/diagnostic/(.*)",
-      "dest": "/"
+      "source": "/use-cases/:path*",
+      "destination": "/"
+    },
+    {
+      "source": "/diagnostic/:path*",
+      "destination": "/"
     }
   ]
 }
