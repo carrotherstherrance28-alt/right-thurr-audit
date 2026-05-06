@@ -7,7 +7,8 @@ export default async function handler(request, response) {
 
   const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-  const ownerAuthMode = process.env.OWNER_AUTH_MODE || 'preview';
+  const ownerAuthMode =
+    process.env.OWNER_AUTH_MODE || (process.env.VERCEL_ENV === 'production' ? 'supabase' : 'preview');
   const ownerEmails = (process.env.OWNER_EMAILS || '')
     .split(',')
     .map((email) => email.trim().toLowerCase())

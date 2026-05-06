@@ -34,7 +34,7 @@ function getOwnerEmails() {
 }
 
 function getOwnerAuthMode() {
-  return process.env.OWNER_AUTH_MODE || 'preview';
+  return process.env.OWNER_AUTH_MODE || (process.env.VERCEL_ENV === 'production' ? 'supabase' : 'preview');
 }
 
 function supabaseHeaders(elevatedKey, prefer = 'return=representation') {

@@ -34,6 +34,8 @@ For production, keep `OWNER_AUTH_MODE` unset or set it to:
 OWNER_AUTH_MODE=supabase
 ```
 
+Production defaults to Supabase owner auth when `VERCEL_ENV=production`. Local development defaults to preview mode unless `OWNER_AUTH_MODE` is set.
+
 Add these to the Vercel project, Production environment:
 
 ```txt
