@@ -14,3 +14,4 @@ docs/resume/ql/
 docs/resume/rendered/
 .aidesigner/*
 !.aidesigner/.gitkeep
+.superpowers/
