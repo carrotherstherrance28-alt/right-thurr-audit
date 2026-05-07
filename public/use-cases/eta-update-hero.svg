@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1120" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0B0F" />
+      <stop offset="1" stop-color="#101018" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#151522" />
+      <stop offset="1" stop-color="#0F0F18" />
+    </linearGradient>
+  </defs>
+  <rect width="1120" height="760" rx="28" fill="url(#bg)" />
+  <rect x="52" y="78" width="1016" height="604" rx="22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)" />
+
+  <text x="92" y="152" fill="rgba(255,255,255,0.92)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="24" font-weight="800">
+    On-the-Way ETA Update
+  </text>
+  <text x="92" y="184" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="15">
+    Dispatch trigger → one ETA message → stop rules + human routing (operator-safe).
+  </text>
+
+  <g>
+    <rect x="92" y="238" width="292" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text x="122" y="290" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      Trigger
+    </text>
+    <text x="122" y="322" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      Tech “en route”
+    </text>
+    <rect x="122" y="356" width="232" height="108" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" />
+    <text x="142" y="392" fill="rgba(255,255,255,0.76)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      Gate rules
+    </text>
+    <g fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      <text x="142" y="418">Business hours</text>
+      <text x="142" y="442">Consent on file</text>
+    </g>
+    <text x="122" y="514" fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      One message (no drip)
+    </text>
+  </g>
+
+  <path d="M408 430h64" stroke="rgba(255,255,255,0.20)" stroke-width="10" stroke-linecap="round" />
+  <path d="M454 402l30 28-30 28" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+
+  <g>
+    <rect x="496" y="238" width="292" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text x="526" y="290" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      Message
+    </text>
+    <text x="526" y="322" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      ETA + one ask
+    </text>
+    <rect x="526" y="356" width="232" height="166" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" />
+    <g fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      <text x="546" y="388">“On the way — ETA ~10:45.</text>
+      <text x="546" y="410">Reply YES to confirm you’ll</text>
+      <text x="546" y="432">be there.”</text>
+      <text x="546" y="464">“Reply with questions and</text>
+      <text x="546" y="486">we’ll help.”</text>
+    </g>
+    <text x="526" y="566" fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      Stop on reply
+    </text>
+  </g>
+
+  <path d="M812 430h64" stroke="rgba(255,255,255,0.20)" stroke-width="10" stroke-linecap="round" />
+  <path d="M858 402l30 28-30 28" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+
+  <g>
+    <rect x="900" y="238" width="168" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text x="926" y="290" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      Outcome
+    </text>
+
+    <rect x="926" y="322" width="116" height="86" rx="14" fill="rgba(34,197,94,0.18)" stroke="rgba(34,197,94,0.42)" />
+    <text x="944" y="356" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12" font-weight="800">
+      Confirmed
+    </text>
+    <text x="944" y="378" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="11">
+      proceed
+    </text>
+
+    <rect x="926" y="418" width="116" height="86" rx="14" fill="rgba(245,158,11,0.16)" stroke="rgba(245,158,11,0.42)" />
+    <text x="944" y="452" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12" font-weight="800">
+      Resched
+    </text>
+    <text x="944" y="474" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="11">
+      adjust
+    </text>
+
+    <rect x="926" y="514" width="116" height="86" rx="14" fill="rgba(239,68,68,0.14)" stroke="rgba(239,68,68,0.40)" />
+    <text x="944" y="548" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12" font-weight="800">
+      Human
+    </text>
+    <text x="944" y="570" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="11">
+      question
+    </text>
+  </g>
+</svg>

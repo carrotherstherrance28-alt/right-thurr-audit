@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1120" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0B0F" />
+      <stop offset="1" stop-color="#101018" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#151522" />
+      <stop offset="1" stop-color="#0F0F18" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1120" height="760" rx="28" fill="url(#bg)" />
+  <rect x="52" y="78" width="1016" height="604" rx="22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)" />
+
+  <text
+    x="92"
+    y="152"
+    fill="rgba(255,255,255,0.92)"
+    font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto"
+    font-size="24"
+    font-weight="800"
+  >
+    Service Recovery Save
+  </text>
+  <text
+    x="92"
+    y="184"
+    fill="rgba(255,255,255,0.70)"
+    font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto"
+    font-size="15"
+  >
+    Complaint/low-score signal → apology + next step → fix lane or manager call-back (operator-safe).
+  </text>
+
+  <g>
+    <rect x="92" y="238" width="292" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text
+      x="122"
+      y="290"
+      fill="rgba(255,255,255,0.90)"
+      font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto"
+      font-size="16"
+      font-weight="800"
+    >
+      Trigger
+    </text>
+    <text x="122" y="322" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      “Something went wrong”
+    </text>
+    <rect x="122" y="356" width="232" height="154" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" />
+    <text x="142" y="392" fill="rgba(255,255,255,0.76)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      Signal sources
+    </text>
+    <g fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      <text x="142" y="418">Reply “not happy”</text>
+      <text x="142" y="442">Complaint email</text>
+      <text x="142" y="466">Low rating survey</text>
+      <text x="142" y="490">Operator note</text>
+    </g>
+    <text x="122" y="564" fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      Stop on reply • 1 follow-up max
+    </text>
+
+    <rect x="414" y="238" width="292" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text x="444" y="290" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      Message
+    </text>
+    <text x="444" y="322" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      Apology + next step
+    </text>
+    <rect x="444" y="356" width="232" height="176" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" />
+    <g fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      <text x="464" y="392">“I’m sorry — we’ll make this right.”</text>
+      <text x="464" y="416">“What’s the main issue (1 line)?”</text>
+      <text x="464" y="440">“Best phone + time window?”</text>
+      <text x="464" y="464">“We can schedule a fix or call you.”</text>
+      <text x="464" y="488">Stop on reply • keep it human</text>
+    </g>
+    <text x="444" y="564" fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      No discounts by bot
+    </text>
+
+    <rect x="736" y="238" width="292" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text x="766" y="290" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      Outcomes
+    </text>
+    <text x="766" y="322" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      Fix lane + escalation
+    </text>
+    <rect x="766" y="356" width="232" height="176" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" />
+    <g fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      <text x="786" y="392">Schedule redo / fix visit</text>
+      <text x="786" y="416">Manager call-back lane</text>
+      <text x="786" y="440">Risky: immediate human</text>
+      <text x="786" y="464">Log + close the loop</text>
+      <text x="786" y="488">Stop rules + audit trail</text>
+    </g>
+    <text x="766" y="564" fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      Fast next step beats debate
+    </text>
+
+    <path d="M390 428 C402 420 406 420 414 428" stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none" />
+    <path d="M712 428 C724 420 728 420 736 428" stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none" />
+  </g>
+</svg>
+

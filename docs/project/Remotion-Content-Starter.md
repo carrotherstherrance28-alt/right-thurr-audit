@@ -3,6 +3,8 @@
 Remotion is installed for programmatic video content, short-form posts, and
 prototype clips.
 
+Workflow reference: `docs/project/Branded-AI-Video-Production-Kit.md`
+
 ## Commands
 
 Open Remotion Studio:
@@ -45,6 +47,7 @@ Use this first for:
 - LinkedIn vertical clips
 - Discord prototype previews
 - quick branded intros before walkthrough videos
+- Baby Rae / Rated R pilot marketing assets after brand intake and visual direction approval
 
 ## Content Direction
 
@@ -62,3 +65,7 @@ The first family of clips should prove the same product promise as the website:
 ```txt
 Ideas do not pay you. Systems do.
 ```
+
+Related backlog:
+
+- `docs/project/Research-Agent-Backlog.md`

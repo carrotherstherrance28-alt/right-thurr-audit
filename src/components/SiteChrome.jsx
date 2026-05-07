@@ -2,6 +2,37 @@ import React from 'react';
 import { BriefcaseBusiness, ChevronDown, Instagram, Linkedin, Mail, Menu } from 'lucide-react';
 import monogram from '../assets/rt-monogram-clean.png';
 
+export function SystemStatusBar() {
+  const statuses = ['AUDIT · OPERATIONAL', 'BUILD · OPERATIONAL', 'MANAGE · OPERATIONAL'];
+  const buildTime = typeof __BUILD_TIME__ === 'string' ? new Date(__BUILD_TIME__) : new Date();
+  const statusTime = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(buildTime);
+
+  return (
+    <div className="system-status-bar" aria-label="Thurr Solutions system status">
+      <div className="status-bar-desktop">
+        {statuses.map((status) => (
+          <span className="status-pill" key={status}>
+            <span className="status-dot" />
+            {status}
+          </span>
+        ))}
+      </div>
+      <div className="status-bar-mobile">
+        <span className="status-pill">
+          <span className="status-dot" />
+          ALL SYSTEMS OPERATIONAL
+        </span>
+      </div>
+      <span className="status-updated">LAST UPDATED {statusTime}</span>
+    </div>
+  );
+}
+
 export function SiteHeader({
   canViewOperator,
   menuOpen,
@@ -106,35 +137,26 @@ export function SiteHeader({
 export function SiteFooter({ navigateToAbout, navigateToPage, socialLinks }) {
   return (
     <footer className="site-footer" aria-label="Thurr Solutions footer">
-      <div className="site-footer-promise">
-        <span>Thurr</span>
-        <strong>
-          We build.
-          <span>You profit.</span>
-        </strong>
+      <div className="site-footer-column">
+        <span>Services</span>
+        <button type="button" onClick={() => navigateToPage('audit')}>Lead Flow Audit</button>
+        <button type="button" onClick={() => navigateToPage('home')}>Intake Automation</button>
+        <button type="button" onClick={() => navigateToPage('home')}>Managed AI Support</button>
       </div>
 
-      <div className="site-footer-capabilities" aria-label="Core capabilities">
-        <span>Blueprints</span>
-        <span>Automation</span>
-        <span>AI Agents</span>
-        <span>Certified AI Automation</span>
+      <div className="site-footer-column">
+        <span>Method</span>
+        <button type="button" onClick={() => navigateToPage('home')}>Audit</button>
+        <button type="button" onClick={() => navigateToPage('home')}>Build</button>
+        <button type="button" onClick={() => navigateToPage('home')}>Manage</button>
       </div>
 
-      <nav className="site-footer-links" aria-label="Footer navigation">
-        <button type="button" onClick={() => navigateToPage('home')}>
-          Home
-        </button>
-        <button type="button" onClick={() => navigateToPage('buildout')}>
-          Buildout Plan
-        </button>
-        <button type="button" onClick={() => navigateToPage('solutions')}>
-          Thurr
-        </button>
-        <button type="button" onClick={navigateToAbout}>
-          About
-        </button>
-      </nav>
+      <div className="site-footer-column">
+        <span>Legal</span>
+        <button type="button" onClick={() => navigateToPage('compliance')}>Compliance</button>
+        <button type="button" onClick={navigateToAbout}>Founder</button>
+        <a href="mailto:hello@thurrsolutions.com">Contact</a>
+      </div>
 
       <div className="site-footer-socials" aria-label="Therrance Carrothers links">
         <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
@@ -154,6 +176,11 @@ export function SiteFooter({ navigateToAbout, navigateToPage, socialLinks }) {
           Email
         </a>
       </div>
+      <p className="site-footer-disclosure">
+        Thurr Solutions LLC does not provide legal, financial, or medical advice. We do not
+        guarantee leads, closed jobs, or specific revenue outcomes. Healthcare engagements require
+        a Business Associate Agreement. Insurance engagements require carrier and compliance review.
+      </p>
     </footer>
   );
 }

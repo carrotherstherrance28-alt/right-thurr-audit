@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="Missed call to textback follow-up to booked handoff">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b0f" />
+      <stop offset="1" stop-color="#10162a" />
+    </linearGradient>
+    <style>
+      .ink { fill: rgba(255,255,255,0.92); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .muted { fill: rgba(255,255,255,0.72); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .stroke { stroke: rgba(255,255,255,0.14); }
+      .accent { fill: rgba(255,141,48,0.92); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="560" rx="32" fill="url(#bg)" />
+  <rect x="28" y="28" width="844" height="504" rx="28" fill="rgba(255,255,255,0.03)" class="stroke" stroke-width="1" />
+
+  <rect x="70" y="90" width="240" height="330" rx="26" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+  <text class="accent" x="98" y="142" font-size="12" font-weight="700" letter-spacing="1.2">MISS</text>
+  <text class="ink" x="98" y="182" font-size="18" font-weight="700">Missed call</text>
+  <text class="muted" x="98" y="212" font-size="13">Phone log</text>
+  <text class="muted" x="98" y="236" font-size="13">Voicemail (optional)</text>
+  <rect x="98" y="268" width="184" height="40" rx="20" fill="rgba(255,255,255,0.08)" class="stroke" stroke-width="1" />
+  <text class="ink" x="122" y="294" font-size="12" font-weight="700">Tag + source</text>
+
+  <rect x="330" y="90" width="240" height="330" rx="26" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+  <text class="accent" x="358" y="142" font-size="12" font-weight="700" letter-spacing="1.2">TEXTBACK</text>
+  <text class="ink" x="358" y="182" font-size="18" font-weight="700">Short script</text>
+  <text class="muted" x="358" y="212" font-size="13">Quiet hours</text>
+  <text class="muted" x="358" y="236" font-size="13">Stop list</text>
+  <rect x="358" y="268" width="184" height="40" rx="20" fill="rgba(255,255,255,0.08)" class="stroke" stroke-width="1" />
+  <text class="ink" x="382" y="294" font-size="12" font-weight="700">Human takeover</text>
+
+  <rect x="590" y="90" width="240" height="330" rx="26" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+  <text class="accent" x="618" y="142" font-size="12" font-weight="700" letter-spacing="1.2">BOOKED</text>
+  <text class="ink" x="618" y="182" font-size="18" font-weight="700">Handoff</text>
+  <text class="muted" x="618" y="212" font-size="13">Call back</text>
+  <text class="muted" x="618" y="236" font-size="13">Calendar option</text>
+  <rect x="618" y="268" width="184" height="40" rx="20" fill="rgba(255,255,255,0.08)" class="stroke" stroke-width="1" />
+  <text class="ink" x="642" y="294" font-size="12" font-weight="700">Outcome report</text>
+
+  <path d="M310 255C326 255 334 255 350 255" stroke="rgba(255,255,255,0.22)" stroke-width="3" stroke-linecap="round" />
+  <path d="M570 255C586 255 594 255 610 255" stroke="rgba(255,255,255,0.22)" stroke-width="3" stroke-linecap="round" />
+
+  <rect x="98" y="440" width="704" height="72" rx="22" fill="rgba(255,255,255,0.035)" class="stroke" stroke-width="1" />
+  <text class="muted" x="126" y="476" font-size="12" letter-spacing="1.1">OPERATOR SAFE</text>
+  <text class="ink" x="126" y="502" font-size="14" font-weight="700">Inbound-only follow-up • quiet hours • stop list • human takeover</text>
+</svg>
+

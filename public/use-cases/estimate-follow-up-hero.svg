@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="Lead to estimate to follow-up and close">
+  <defs>
+    <linearGradient id="bgEstimateFollowUpHero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b0f" />
+      <stop offset="1" stop-color="#14102a" />
+    </linearGradient>
+    <style>
+      .ink { fill: rgba(255,255,255,0.92); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .muted { fill: rgba(255,255,255,0.72); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .stroke { stroke: rgba(255,255,255,0.14); }
+      .accent { fill: rgba(255,141,48,0.92); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="560" rx="32" fill="url(#bgEstimateFollowUpHero)" />
+  <rect x="28" y="28" width="844" height="504" rx="28" fill="rgba(255,255,255,0.03)" class="stroke" stroke-width="1" />
+
+  <rect x="70" y="90" width="240" height="330" rx="26" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+  <text class="accent" x="98" y="142" font-size="12" font-weight="700" letter-spacing="1.2">LEAD</text>
+  <text class="ink" x="98" y="182" font-size="18" font-weight="700">Request captured</text>
+  <text class="muted" x="98" y="212" font-size="13">Form / call / DM</text>
+  <text class="muted" x="98" y="236" font-size="13">Owner assigned</text>
+  <rect x="98" y="268" width="184" height="40" rx="20" fill="rgba(255,255,255,0.08)" class="stroke" stroke-width="1" />
+  <text class="ink" x="122" y="294" font-size="12" font-weight="700">Next action set</text>
+
+  <rect x="330" y="90" width="240" height="330" rx="26" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+  <text class="accent" x="358" y="142" font-size="12" font-weight="700" letter-spacing="1.2">ESTIMATE</text>
+  <text class="ink" x="358" y="182" font-size="18" font-weight="700">Sent + logged</text>
+  <text class="muted" x="358" y="212" font-size="13">Timestamped</text>
+  <text class="muted" x="358" y="236" font-size="13">Receipt check</text>
+  <rect x="358" y="268" width="184" height="40" rx="20" fill="rgba(255,255,255,0.08)" class="stroke" stroke-width="1" />
+  <text class="ink" x="382" y="294" font-size="12" font-weight="700">Day 2 check-in</text>
+
+  <rect x="590" y="90" width="240" height="330" rx="26" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+  <text class="accent" x="618" y="142" font-size="12" font-weight="700" letter-spacing="1.2">CLOSE</text>
+  <text class="ink" x="618" y="182" font-size="18" font-weight="700">Follow-up rules</text>
+  <text class="muted" x="618" y="212" font-size="13">Quiet hours</text>
+  <text class="muted" x="618" y="236" font-size="13">Stop on reply</text>
+  <rect x="618" y="268" width="184" height="40" rx="20" fill="rgba(255,255,255,0.08)" class="stroke" stroke-width="1" />
+  <text class="ink" x="642" y="294" font-size="12" font-weight="700">Won / close-lost</text>
+
+  <path d="M310 255 H330" fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M570 255 H590" fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="3" stroke-linecap="round"/>
+</svg>
+

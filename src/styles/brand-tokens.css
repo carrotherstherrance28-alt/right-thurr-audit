@@ -4,9 +4,25 @@
    ============================================================ */
 
 /* ------- Web fonts (Google Fonts substitutions, see README) ---- */
-@import url('https://fonts.googleapis.com/css2?family=Rye&family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
+  /* ----------------------------------------------------------
+     OPERATOR CORE — premium Thurr Solutions public system
+     ---------------------------------------------------------- */
+  --op-bg: #0B0B0D;
+  --op-surface: #141417;
+  --op-surface-2: #1B1B1F;
+  --op-border: #26262B;
+  --op-text: #F2F2EE;
+  --op-text-muted: #8E8E94;
+  --op-text-dim: #5A5A60;
+  --op-accent: #E8643C;
+  --op-accent-soft: #3A1F18;
+  --op-success: #7BB369;
+  --op-warn: #D4A04A;
+  --op-max-width: 1240px;
+
   /* ----------------------------------------------------------
      CORE PALETTE  (shared by both brands)
      Three-color system: rust/clay orange, ink black, off-white.
@@ -53,24 +69,24 @@
   /* ----------------------------------------------------------
      SEMANTIC TOKENS — light theme, paper canvas
      ---------------------------------------------------------- */
-  --bg:            var(--rt-paper);
-  --bg-raised:     var(--rt-paper-cold);
-  --bg-sunken:     var(--rt-paper-deep);
-  --bg-inverse:    var(--rt-ink-900);
+  --bg:            var(--op-bg);
+  --bg-raised:     var(--op-surface);
+  --bg-sunken:     var(--op-surface-2);
+  --bg-inverse:    var(--op-text);
 
-  --fg:            var(--rt-ink-900);     /* primary text */
-  --fg-muted:      var(--rt-ink-600);     /* secondary text */
-  --fg-subtle:     var(--rt-ink-500);     /* labels, captions */
+  --fg:            var(--op-text);        /* primary text */
+  --fg-muted:      var(--op-text-muted);  /* secondary text */
+  --fg-subtle:     var(--op-text-dim);    /* labels, captions */
   --fg-on-orange:  var(--rt-paper-cold);  /* text on orange */
-  --fg-on-ink:     var(--rt-paper);
+  --fg-on-ink:     var(--op-text);
 
-  --accent:        var(--rt-orange-500);
-  --accent-hover:  var(--rt-orange-400);
-  --accent-press:  var(--rt-orange-600);
+  --accent:        var(--op-accent);
+  --accent-hover:  #F2784F;
+  --accent-press:  #C94F2F;
 
-  --border:        var(--rt-ink-900);     /* the bold black border */
-  --border-thin:   var(--rt-ink-300);
-  --border-paper:  var(--rt-ink-200);
+  --border:        var(--op-border);
+  --border-thin:   var(--op-border);
+  --border-paper:  var(--op-border);
 
   /* ----------------------------------------------------------
      TYPOGRAPHY
@@ -80,16 +96,16 @@
      ---------------------------------------------------------- */
 
   /* Right Thurr — bold, hand-drawn, saloon poster */
-  --font-display-rt:      'Rye', 'Alfa Slab One', Georgia, serif;
+  --font-display-rt:      'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Thurr Solutions — refined, professional, slab-confident */
-  --font-display-ts:      'Alfa Slab One', 'Rockwell', Georgia, serif;
+  --font-display-ts:      'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Subhead — narrower grotesk, condensed posters */
-  --font-subhead:         'Archivo Narrow', 'Oswald', Impact, sans-serif;
+  --font-subhead:         'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Body / UI — workhorse grotesk */
-  --font-body:            'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:            'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Monospace — money trackers, task IDs, code */
   --font-mono:            'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
@@ -161,15 +177,15 @@
      SHADOWS — hard-offset poster shadows, NOT soft drop.
      Right Thurr has stamped, sticker-like shadows.
      ---------------------------------------------------------- */
-  --shadow-stamp-sm:  3px 3px 0 0 var(--rt-ink-900);
-  --shadow-stamp:     6px 6px 0 0 var(--rt-ink-900);
-  --shadow-stamp-lg:  10px 10px 0 0 var(--rt-ink-900);
-  --shadow-stamp-orange: 6px 6px 0 0 var(--rt-orange-500);
+  --shadow-stamp-sm:  none;
+  --shadow-stamp:     none;
+  --shadow-stamp-lg:  none;
+  --shadow-stamp-orange: none;
 
   /* Subtle paper depth (Thurr Solutions) */
-  --shadow-paper-sm:  0 1px 0 var(--rt-ink-200), 0 2px 6px rgba(26,23,20,0.06);
-  --shadow-paper:     0 2px 0 var(--rt-ink-200), 0 6px 18px rgba(26,23,20,0.10);
-  --shadow-paper-lg:  0 3px 0 var(--rt-ink-200), 0 18px 36px rgba(26,23,20,0.14);
+  --shadow-paper-sm:  none;
+  --shadow-paper:     none;
+  --shadow-paper-lg:  none;
 
   /* Inset stamp (pressed-in) */
   --shadow-inset:     inset 0 2px 0 var(--rt-ink-200), inset 0 -2px 0 var(--rt-paper-cold);

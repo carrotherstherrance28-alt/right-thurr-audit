@@ -6,17 +6,22 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
-    "ci": "npm run diagnostic:verify && npm run build",
+    "ci": "npm run use-cases:verify && npm run diagnostic:verify && npm run build && npm run diagnostic:verify:dist",
     "preview": "vite preview --host 0.0.0.0",
     "remotion:studio": "remotion studio src/remotion/index.jsx",
     "remotion:render:intro": "remotion render src/remotion/index.jsx ThurrIntro out/thurr-intro.mp4",
+    "remotion:render:lead-system": "remotion render src/remotion/index.jsx ThurrLeadSystemIntro public/media/thurr-solutions-lead-system-intro.mp4",
+    "remotion:render:kirby-logo-options": "remotion render src/remotion/index.jsx KirbyLogoOptions /private/tmp/kirby-logo-options-miracle.mp4",
+    "remotion:still:lead-system": "remotion still src/remotion/index.jsx ThurrLeadSystemIntro public/media/thurr-solutions-lead-system-intro-poster.jpg --frame=90",
     "buildout:payload:test": "node scripts/buildout-request-payload-test.mjs",
     "report:delivery:test": "node scripts/approved-email-delivery-test.mjs",
     "notion:create-command-center": "node scripts/notion-create-command-center.mjs",
     "thurnos:blueprint": "node scripts/thurnos-blueprint-draft.mjs",
     "thurnos:bridge:dry-run": "node scripts/thurnos-bridge-dry-run.mjs",
     "thurnos:test": "node scripts/thurnos-smoke-test.mjs",
+    "use-cases:verify": "node scripts/verify-use-cases.mjs",
     "diagnostic:verify": "node scripts/verify-diagnostic-lanes.mjs",
+    "diagnostic:verify:dist": "node scripts/verify-diagnostic-dist.mjs",
     "diagnostic:create-lane": "node scripts/create-diagnostic-lane.mjs"
   },
   "dependencies": {

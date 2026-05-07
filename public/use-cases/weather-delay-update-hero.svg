@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760" fill="none">
+  <defs>
+    <linearGradient id="bgWeatherDelay" x1="0" y1="0" x2="1120" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0B0F" />
+      <stop offset="1" stop-color="#101018" />
+    </linearGradient>
+    <linearGradient id="panelWeatherDelay" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#151522" />
+      <stop offset="1" stop-color="#0F0F18" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1120" height="760" rx="28" fill="url(#bgWeatherDelay)" />
+  <rect x="52" y="78" width="1016" height="604" rx="22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)" />
+
+  <text x="92" y="152" fill="rgba(255,255,255,0.92)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="24" font-weight="800">
+    Weather Delay Update
+  </text>
+  <text x="92" y="184" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="15">
+    Weather/crew delay → calm update message → confirm / reschedule (operator-safe).
+  </text>
+
+  <g>
+    <rect x="92" y="238" width="292" height="382" rx="18" fill="url(#panelWeatherDelay)" stroke="rgba(255,255,255,0.10)" />
+    <text x="122" y="288" fill="rgba(255,255,255,0.92)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      1) Trigger
+    </text>
+    <text x="122" y="318" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      Unsafe conditions
+    </text>
+    <text x="122" y="346" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      or crew delay.
+    </text>
+    <rect x="122" y="384" width="232" height="1" fill="rgba(255,255,255,0.10)" />
+    <text x="122" y="414" fill="rgba(255,255,255,0.60)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      Notify early + offer options.
+    </text>
+    <rect x="122" y="448" width="210" height="38" rx="12" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" />
+    <text x="138" y="472" fill="rgba(255,255,255,0.80)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      Send update
+    </text>
+  </g>
+
+  <path d="M404 428 C 454 428, 454 428, 504 428" stroke="rgba(255,255,255,0.22)" stroke-width="3" fill="none" />
+  <path d="M494 418 L504 428 L494 438" stroke="rgba(255,255,255,0.22)" stroke-width="3" fill="none" stroke-linecap="round" />
+
+  <g>
+    <rect x="514" y="238" width="292" height="382" rx="18" fill="url(#panelWeatherDelay)" stroke="rgba(255,255,255,0.10)" />
+    <text x="544" y="288" fill="rgba(255,255,255,0.92)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      2) Calm Update
+    </text>
+    <text x="544" y="318" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      Heads-up + new window.
+    </text>
+    <text x="544" y="346" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      Ask for YES / better time.
+    </text>
+    <rect x="544" y="384" width="232" height="1" fill="rgba(255,255,255,0.10)" />
+    <rect x="544" y="414" width="168" height="40" rx="12" fill="rgba(126, 231, 135, 0.14)" stroke="rgba(126, 231, 135, 0.34)" />
+    <text x="560" y="440" fill="rgba(255,255,255,0.88)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      “YES”
+    </text>
+    <rect x="724" y="414" width="152" height="40" rx="12" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" />
+    <text x="740" y="440" fill="rgba(255,255,255,0.80)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      New time
+    </text>
+  </g>
+
+  <path d="M826 428 C 876 428, 876 428, 926 428" stroke="rgba(255,255,255,0.22)" stroke-width="3" fill="none" />
+  <path d="M916 418 L926 428 L916 438" stroke="rgba(255,255,255,0.22)" stroke-width="3" fill="none" stroke-linecap="round" />
+
+  <g>
+    <rect x="936" y="238" width="132" height="382" rx="18" fill="url(#panelWeatherDelay)" stroke="rgba(255,255,255,0.10)" />
+    <text x="956" y="288" fill="rgba(255,255,255,0.92)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      3)
+    </text>
+    <text x="956" y="314" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      Outcomes
+    </text>
+    <rect x="956" y="346" width="92" height="1" fill="rgba(255,255,255,0.10)" />
+    <text x="956" y="374" fill="rgba(255,255,255,0.62)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      Confirmed →
+    </text>
+    <text x="956" y="394" fill="rgba(255,255,255,0.62)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      proceed.
+    </text>
+    <text x="956" y="432" fill="rgba(255,255,255,0.55)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      New time →
+    </text>
+    <text x="956" y="452" fill="rgba(255,255,255,0.55)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      reschedule.
+    </text>
+    <text x="956" y="492" fill="rgba(255,255,255,0.50)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      No reply →
+    </text>
+    <text x="956" y="512" fill="rgba(255,255,255,0.50)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      1 follow-up.
+    </text>
+    <rect x="956" y="548" width="92" height="1" fill="rgba(255,255,255,0.10)" />
+    <text x="956" y="576" fill="rgba(255,255,255,0.46)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="11">
+      Escalate to a call if off.
+    </text>
+  </g>
+</svg>
+

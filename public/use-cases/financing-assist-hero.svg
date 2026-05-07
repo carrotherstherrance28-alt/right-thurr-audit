@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" role="img">
+  <defs>
+    <linearGradient id="faHeroBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b0f" />
+      <stop offset="1" stop-color="#1a3f52" />
+    </linearGradient>
+    <style>
+      .ink { fill: rgba(255,255,255,0.92); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .muted { fill: rgba(255,255,255,0.72); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      .stroke { stroke: rgba(255,255,255,0.14); }
+      .accent { fill: rgba(94,174,255,0.92); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="680" rx="26" fill="url(#faHeroBg)" />
+  <rect x="34" y="30" width="972" height="620" rx="24" fill="rgba(255,255,255,0.03)" class="stroke" stroke-width="1" />
+
+  <text class="muted" x="72" y="88" font-size="12" letter-spacing="1.2">USE CASE FLOW</text>
+  <text class="ink" x="72" y="132" font-size="34" font-weight="700">Financing Assist</text>
+  <text class="muted" x="72" y="162" font-size="14">Quote ready → financing options link → booked next step (operator-controlled)</text>
+
+  <rect x="72" y="208" width="896" height="230" rx="22" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+
+  <rect x="102" y="252" width="250" height="150" rx="20" fill="rgba(255,255,255,0.05)" class="stroke" stroke-width="1" />
+  <text class="ink" x="130" y="298" font-size="14" font-weight="700">Quote ready</text>
+  <text class="muted" x="130" y="324" font-size="12">Clear scope</text>
+  <text class="muted" x="130" y="346" font-size="12">Price range</text>
+
+  <rect x="395" y="252" width="250" height="150" rx="20" fill="rgba(255,255,255,0.05)" class="stroke" stroke-width="1" />
+  <text class="ink" x="423" y="298" font-size="14" font-weight="700">Send link</text>
+  <text class="muted" x="423" y="324" font-size="12">Provider options</text>
+  <text class="muted" x="423" y="346" font-size="12">Disclosure included</text>
+
+  <rect x="688" y="252" width="250" height="150" rx="20" fill="rgba(255,255,255,0.05)" class="stroke" stroke-width="1" />
+  <text class="ink" x="716" y="298" font-size="14" font-weight="700">Book</text>
+  <text class="muted" x="716" y="324" font-size="12">Confirm path</text>
+  <text class="muted" x="716" y="346" font-size="12">Schedule next step</text>
+
+  <path d="M352 328 H395" fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="4" stroke-linecap="round" />
+  <path d="M645 328 H688" fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="4" stroke-linecap="round" />
+
+  <rect x="72" y="472" width="896" height="154" rx="22" fill="rgba(255,255,255,0.03)" class="stroke" stroke-width="1" />
+  <text class="accent" x="102" y="516" font-size="12" font-weight="700" letter-spacing="1.2">GUARDRAILS</text>
+  <text class="muted" x="102" y="546" font-size="13">Consent-first • Stop on reply • One follow-up max • Quiet hours + caps</text>
+  <text class="muted" x="102" y="572" font-size="13">Approvals/terms handled by provider • Route questions to a human</text>
+</svg>
+

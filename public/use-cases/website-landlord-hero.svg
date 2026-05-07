@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="stampShadow" x="-40" y="-40" width="1160" height="2000" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="10" dy="10" stdDeviation="0" flood-color="#1A1714" flood-opacity="0.55"/>
+    </filter>
+    <linearGradient id="orangeWash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8DCC4" stop-opacity="0.60"/>
+      <stop offset="1" stop-color="#D9621F" stop-opacity="0.20"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1080" height="1920" fill="#F5EFE2"/>
+
+  <g filter="url(#stampShadow)">
+    <rect x="64" y="64" width="952" height="1792" fill="#FAF7EE" stroke="#000000" stroke-width="10"/>
+    <rect x="64" y="64" width="952" height="340" fill="url(#orangeWash)"/>
+
+    <g transform="translate(104 120)">
+      <text x="0" y="0" fill="#1A1714" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="34" font-weight="900" letter-spacing="0.18em">USE CASE TEMPLATE</text>
+      <text x="0" y="96" fill="#1A1714" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="110" font-weight="900" letter-spacing="-0.02em">Own the lead path.</text>
+      <text x="0" y="166" fill="#1A1714" opacity="0.82" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="44" font-weight="700">build → track → route → report</text>
+    </g>
+
+    <g transform="translate(118 496)">
+      <rect x="0" y="0" width="844" height="1248" rx="0" fill="#F5EFE2" stroke="#000000" stroke-width="10"/>
+
+      <g transform="translate(44 54)">
+        <rect x="0" y="0" width="756" height="110" fill="#1A1714"/>
+        <text x="24" y="72" fill="#F5EFE2" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="44" font-weight="900">SITE</text>
+        <text x="165" y="72" fill="#F5EFE2" opacity="0.82" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="34" font-weight="700">calls + forms</text>
+        <rect x="0" y="140" width="756" height="280" fill="#FAF7EE" stroke="#000000" stroke-width="6"/>
+        <rect x="28" y="170" width="420" height="30" fill="#1A1714" opacity="0.10"/>
+        <rect x="28" y="216" width="610" height="20" fill="#1A1714" opacity="0.08"/>
+        <rect x="28" y="250" width="560" height="20" fill="#1A1714" opacity="0.08"/>
+        <rect x="28" y="284" width="480" height="20" fill="#1A1714" opacity="0.08"/>
+        <rect x="28" y="318" width="320" height="56" fill="#D9621F" stroke="#000000" stroke-width="6"/>
+        <text x="52" y="360" fill="#1A1714" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="26" font-weight="900" letter-spacing="0.16em">CALL / FORM</text>
+      </g>
+
+      <g transform="translate(44 520)">
+        <rect x="0" y="0" width="756" height="110" fill="#1A1714"/>
+        <text x="24" y="72" fill="#F5EFE2" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="44" font-weight="900">TRACKING</text>
+        <text x="290" y="72" fill="#F5EFE2" opacity="0.82" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="34" font-weight="700">measure every inquiry</text>
+        <rect x="0" y="140" width="756" height="280" fill="#FAF7EE" stroke="#000000" stroke-width="6"/>
+        <rect x="28" y="170" width="250" height="170" fill="#F5EFE2" stroke="#000000" stroke-width="6"/>
+        <rect x="314" y="170" width="414" height="54" fill="#D9621F" stroke="#000000" stroke-width="6"/>
+        <text x="338" y="208" fill="#1A1714" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="24" font-weight="900" letter-spacing="0.12em">NEW CALL</text>
+        <rect x="314" y="242" width="414" height="54" fill="#F5EFE2" stroke="#000000" stroke-width="6"/>
+        <text x="338" y="280" fill="#1A1714" opacity="0.72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="24" font-weight="900" letter-spacing="0.12em">NEW FORM</text>
+        <rect x="314" y="314" width="414" height="54" fill="#F5EFE2" stroke="#000000" stroke-width="6"/>
+        <text x="338" y="352" fill="#1A1714" opacity="0.72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="24" font-weight="900" letter-spacing="0.12em">SOURCE NOTE</text>
+      </g>
+
+      <g transform="translate(44 986)">
+        <rect x="0" y="0" width="756" height="110" fill="#1A1714"/>
+        <text x="24" y="72" fill="#F5EFE2" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="44" font-weight="900">OPERATOR</text>
+        <text x="258" y="72" fill="#F5EFE2" opacity="0.82" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="34" font-weight="700">route + confirm</text>
+        <rect x="0" y="140" width="756" height="280" fill="#FAF7EE" stroke="#000000" stroke-width="6"/>
+        <rect x="28" y="170" width="700" height="76" fill="#F5EFE2" stroke="#000000" stroke-width="6"/>
+        <text x="52" y="222" fill="#1A1714" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="26" font-weight="900" letter-spacing="0.14em">LEAD → FORWARD</text>
+        <rect x="28" y="268" width="700" height="76" fill="#F5EFE2" stroke="#000000" stroke-width="6"/>
+        <text x="52" y="320" fill="#1A1714" opacity="0.72" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="26" font-weight="900" letter-spacing="0.14em">APPT → LOG</text>
+        <rect x="28" y="366" width="310" height="46" fill="#D9621F" stroke="#000000" stroke-width="6"/>
+        <text x="52" y="400" fill="#1A1714" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="20" font-weight="900" letter-spacing="0.12em">REPORT</text>
+      </g>
+
+      <g transform="translate(396 906)">
+        <path d="M16 0 V64" stroke="#000000" stroke-width="12"/>
+        <path d="M0 48 L16 64 L32 48" stroke="#000000" stroke-width="12" fill="none"/>
+      </g>
+      <g transform="translate(396 440)">
+        <path d="M16 0 V64" stroke="#000000" stroke-width="12"/>
+        <path d="M0 48 L16 64 L32 48" stroke="#000000" stroke-width="12" fill="none"/>
+      </g>
+      <g transform="translate(396 906)">
+        <path d="M16 -306 V-242" stroke="#000000" stroke-width="12"/>
+        <path d="M0 -258 L16 -242 L32 -258" stroke="#000000" stroke-width="12" fill="none"/>
+      </g>
+    </g>
+
+    <g transform="translate(104 1780)">
+      <text x="0" y="0" fill="#1A1714" opacity="0.70" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="26" font-weight="700">
+        Educational example. No guarantee of rankings, leads, revenue, or retention.
+      </text>
+    </g>
+  </g>
+</svg>
+

@@ -1,0 +1,48 @@
+@media (max-width: 720px) {
+  body[data-brand="thurr-solutions"] .audit-page {
+    width: min(100% - 20px, 1480px);
+    overflow-x: hidden;
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-5);
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+    margin-inline: auto;
+    padding: var(--s-5);
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero h1 {
+    max-width: calc(100vw - 70px);
+    font-size: clamp(28px, 8vw, 34px);
+    line-height: 1.06;
+    overflow-wrap: break-word;
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero p {
+    max-width: calc(100vw - 70px);
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero .stamp-button,
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero .text-link {
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-price-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: calc(100vw - 60px);
+    min-width: 0;
+    padding: var(--s-5);
+  }
+}

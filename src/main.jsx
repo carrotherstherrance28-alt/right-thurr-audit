@@ -17,6 +17,7 @@ import {
   Linkedin,
   Mail,
   MapPinned,
+  PhoneCall,
   Send,
   Sparkles,
   Target,
@@ -24,8 +25,35 @@ import {
 } from 'lucide-react';
 import './styles/brand-tokens.css';
 import './styles/app.css';
+import './styles/final-overrides.css';
 import monogram from './assets/rt-monogram-clean.png';
-import { SiteFooter, SiteHeader } from './components/SiteChrome.jsx';
+import { SiteFooter, SiteHeader, SystemStatusBar } from './components/SiteChrome.jsx';
+import { UseCasesIndexPage } from './components/UseCasesIndexPage.jsx';
+import { WebsiteLandlordUseCasePage } from './components/WebsiteLandlordUseCasePage.jsx';
+import { AiLeadFollowupUseCasePage } from './components/AiLeadFollowupUseCasePage.jsx';
+import { MissedCallTextbackUseCasePage } from './components/MissedCallTextbackUseCasePage.jsx';
+import { ReviewBoosterUseCasePage } from './components/ReviewBoosterUseCasePage.jsx';
+import { NoShowSaverUseCasePage } from './components/NoShowSaverUseCasePage.jsx';
+import { EstimateFollowUpUseCasePage } from './components/EstimateFollowUpUseCasePage.jsx';
+import { SeasonalReactivationUseCasePage } from './components/SeasonalReactivationUseCasePage.jsx';
+import { QuoteQualifierUseCasePage } from './components/QuoteQualifierUseCasePage.jsx';
+import { ServiceReminderUseCasePage } from './components/ServiceReminderUseCasePage.jsx';
+import { MaintenancePlanUpsellUseCasePage } from './components/MaintenancePlanUpsellUseCasePage.jsx';
+import { DepositRequestUseCasePage } from './components/DepositRequestUseCasePage.jsx';
+import { FinancingAssistUseCasePage } from './components/FinancingAssistUseCasePage.jsx';
+import { ProjectPhotoProofUseCasePage } from './components/ProjectPhotoProofUseCasePage.jsx';
+import { PartsArrivalPingUseCasePage } from './components/PartsArrivalPingUseCasePage.jsx';
+import { EtaUpdateUseCasePage } from './components/EtaUpdateUseCasePage.jsx';
+import { ReferralLoopUseCasePage } from './components/ReferralLoopUseCasePage.jsx';
+import { CancellationSaveUseCasePage } from './components/CancellationSaveUseCasePage.jsx';
+import { InvoiceFollowUpUseCasePage } from './components/InvoiceFollowUpUseCasePage.jsx';
+import { AppointmentPrepUseCasePage } from './components/AppointmentPrepUseCasePage.jsx';
+import { AfterHoursTriageUseCasePage } from './components/AfterHoursTriageUseCasePage.jsx';
+import { ServiceRecoverySaveUseCasePage } from './components/ServiceRecoverySaveUseCasePage.jsx';
+import { WarrantyClaimIntakeUseCasePage } from './components/WarrantyClaimIntakeUseCasePage.jsx';
+import { ChangeOrderApprovalUseCasePage } from './components/ChangeOrderApprovalUseCasePage.jsx';
+import { JobKickoffPacketUseCasePage } from './components/JobKickoffPacketUseCasePage.jsx';
+import { WeatherDelayUpdateUseCasePage } from './components/WeatherDelayUpdateUseCasePage.jsx';
 import { clientDiagnosticTemplates } from './data/clientDiagnosticTemplates.js';
 import diagnosticLanesConfig from '../diagnostic/lanes.json';
 import { fieldDefaults, rightThurrMockData } from './data/rightThurrMockData.js';
@@ -52,8 +80,8 @@ const {
 
 const publicNavItems = [
   ['Home', 'home'],
-  ['Buildout Plan', 'buildout'],
-  ['Thurr Solutions', 'solutions'],
+  ['Lead Audit', 'audit'],
+  ['Compliance', 'compliance'],
 ];
 
 const socialLinks = {
@@ -61,6 +89,22 @@ const socialLinks = {
   instagram: 'https://www.instagram.com/thurrsolutions/',
   upwork: 'https://www.upwork.com/freelancers/~011a33e3e2e65c4bbd?mp_source=share',
 };
+
+const introVideo = {
+  src: '/media/thurr-solutions-lead-system-intro.mp4',
+  poster: '/media/thurr-solutions-lead-system-intro-poster.jpg',
+};
+
+const auditInitialForm = {
+  businessName: '',
+  ownerName: '',
+  email: '',
+  businessUrl: '',
+  monthlyLeadsEstimate: 'Not sure',
+  frustrationText: '',
+};
+
+const auditLeadVolumes = ['<25', '25–100', '100–500', '500+', 'Not sure'];
 
 const operatorNavItems = [
   ['Command Center', 'command'],
@@ -158,6 +202,134 @@ function getInitialPage() {
     return 'home';
   }
 
+  if (window.location.pathname === '/audit/thanks' || window.location.pathname === '/audit/thanks/') {
+    return 'audit-thanks';
+  }
+
+  if (window.location.pathname === '/audit' || window.location.pathname === '/audit/') {
+    return 'audit';
+  }
+
+  if (window.location.pathname === '/compliance' || window.location.pathname === '/compliance/') {
+    return 'compliance';
+  }
+
+  if (window.location.pathname === '/work/restore-contracting' || window.location.pathname === '/work/restore-contracting/') {
+    return 'work-restore';
+  }
+
+  if (window.location.pathname === '/work/dallas-mobile-detailing' || window.location.pathname === '/work/dallas-mobile-detailing/') {
+    return 'work-dmd';
+  }
+
+  if (window.location.pathname === '/work' || window.location.pathname === '/work/') {
+    return 'work';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/website-landlord')) {
+    return 'usecase-website-landlord';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/ai-lead-followup')) {
+    return 'usecase-ai-lead-followup';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/missed-call-textback')) {
+    return 'usecase-missed-call-textback';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/review-booster')) {
+    return 'usecase-review-booster';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/no-show-saver')) {
+    return 'usecase-no-show-saver';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/estimate-follow-up')) {
+    return 'usecase-estimate-follow-up';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/seasonal-reactivation')) {
+    return 'usecase-seasonal-reactivation';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/quote-qualifier')) {
+    return 'usecase-quote-qualifier';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/service-reminder')) {
+    return 'usecase-service-reminder';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/maintenance-plan-upsell')) {
+    return 'usecase-maintenance-plan-upsell';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/deposit-request')) {
+    return 'usecase-deposit-request';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/financing-assist')) {
+    return 'usecase-financing-assist';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/project-photo-proof')) {
+    return 'usecase-project-photo-proof';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/parts-arrival-ping')) {
+    return 'usecase-parts-arrival-ping';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/eta-update')) {
+    return 'usecase-eta-update';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/referral-loop')) {
+    return 'usecase-referral-loop';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/cancellation-save')) {
+    return 'usecase-cancellation-save';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/invoice-follow-up')) {
+    return 'usecase-invoice-follow-up';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/appointment-prep')) {
+    return 'usecase-appointment-prep';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/after-hours-triage')) {
+    return 'usecase-after-hours-triage';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/service-recovery-save')) {
+    return 'usecase-service-recovery-save';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/warranty-claim-intake')) {
+    return 'usecase-warranty-claim-intake';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/change-order-approval')) {
+    return 'usecase-change-order-approval';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/job-kickoff-packet')) {
+    return 'usecase-job-kickoff-packet';
+  }
+
+  if (window.location.pathname.startsWith('/use-cases/weather-delay-update')) {
+    return 'usecase-weather-delay-update';
+  }
+
+  if (window.location.pathname === '/use-cases' || window.location.pathname === '/use-cases/') {
+    return 'usecases-index';
+  }
+
   if (getInitialDiagnosticSlug()) {
     return 'client-diagnostic';
   }
@@ -168,6 +340,44 @@ function getInitialPage() {
 
   return 'home';
 }
+
+const useCaseRoutes = {
+  'usecases-index': '/use-cases',
+  'usecase-website-landlord': '/use-cases/website-landlord',
+  'usecase-ai-lead-followup': '/use-cases/ai-lead-followup',
+  'usecase-missed-call-textback': '/use-cases/missed-call-textback',
+  'usecase-review-booster': '/use-cases/review-booster',
+  'usecase-no-show-saver': '/use-cases/no-show-saver',
+  'usecase-estimate-follow-up': '/use-cases/estimate-follow-up',
+  'usecase-seasonal-reactivation': '/use-cases/seasonal-reactivation',
+  'usecase-quote-qualifier': '/use-cases/quote-qualifier',
+  'usecase-service-reminder': '/use-cases/service-reminder',
+  'usecase-maintenance-plan-upsell': '/use-cases/maintenance-plan-upsell',
+  'usecase-deposit-request': '/use-cases/deposit-request',
+  'usecase-financing-assist': '/use-cases/financing-assist',
+  'usecase-project-photo-proof': '/use-cases/project-photo-proof',
+  'usecase-parts-arrival-ping': '/use-cases/parts-arrival-ping',
+  'usecase-eta-update': '/use-cases/eta-update',
+  'usecase-referral-loop': '/use-cases/referral-loop',
+  'usecase-cancellation-save': '/use-cases/cancellation-save',
+  'usecase-invoice-follow-up': '/use-cases/invoice-follow-up',
+  'usecase-appointment-prep': '/use-cases/appointment-prep',
+  'usecase-after-hours-triage': '/use-cases/after-hours-triage',
+  'usecase-service-recovery-save': '/use-cases/service-recovery-save',
+  'usecase-warranty-claim-intake': '/use-cases/warranty-claim-intake',
+  'usecase-change-order-approval': '/use-cases/change-order-approval',
+  'usecase-job-kickoff-packet': '/use-cases/job-kickoff-packet',
+  'usecase-weather-delay-update': '/use-cases/weather-delay-update',
+};
+
+const pageRoutes = {
+  audit: '/audit',
+  'audit-thanks': '/audit/thanks',
+  compliance: '/compliance',
+  work: '/work',
+  'work-restore': '/work/restore-contracting',
+  'work-dmd': '/work/dallas-mobile-detailing',
+};
 
 const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -255,6 +465,25 @@ async function submitBuildoutRequest(payload) {
   return 'queued-local';
 }
 
+async function submitAuditRequest(payload) {
+  const response = await fetch('/api/audit-request', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  if (response.ok) {
+    return response.json().catch(() => ({ ok: true }));
+  }
+
+  if (response.status === 404) {
+    return { ok: true, status: 'queued-local' };
+  }
+
+  const errorPayload = await response.json().catch(() => ({}));
+  throw new Error(errorPayload.message || 'Lead Flow Audit request failed.');
+}
+
 function App() {
   const [page, setPage] = useState(getInitialPage);
   const [diagnosticSlug, setDiagnosticSlug] = useState(getInitialDiagnosticSlug);
@@ -282,7 +511,7 @@ function App() {
     const twitterDescriptionMeta = document.querySelector('meta[name="twitter:description"]');
 
     return {
-      title: document.title || 'Thurr Solutions | AI Automation Systems',
+      title: document.title || 'Thurr Solutions | AI Lead Generation Systems',
       canonicalHref: canonicalLink?.getAttribute('href') || `${window.location.origin}/`,
       description: descriptionMeta?.getAttribute('content') || '',
       robots: robotsMeta?.getAttribute('content') || null,
@@ -358,6 +587,256 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     const legacySlug = normalizeDiagnosticSlug(params.get('diagnostic'));
     const pathname = window.location.pathname;
+    const normalizedPathname = pathname.replace(/\/+$/, '') || '/';
+
+    if (normalizedPathname === pageRoutes['audit-thanks']) {
+      setPage('audit-thanks');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === pageRoutes.audit) {
+      setPage('audit');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === pageRoutes.compliance) {
+      setPage('compliance');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === pageRoutes['work-restore']) {
+      setPage('work-restore');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === pageRoutes['work-dmd']) {
+      setPage('work-dmd');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === pageRoutes.work) {
+      setPage('work');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-website-landlord']) {
+      setPage('usecase-website-landlord');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-ai-lead-followup']) {
+      setPage('usecase-ai-lead-followup');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-missed-call-textback']) {
+      setPage('usecase-missed-call-textback');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-review-booster']) {
+      setPage('usecase-review-booster');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-no-show-saver']) {
+      setPage('usecase-no-show-saver');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-estimate-follow-up']) {
+      setPage('usecase-estimate-follow-up');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-seasonal-reactivation']) {
+      setPage('usecase-seasonal-reactivation');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-quote-qualifier']) {
+      setPage('usecase-quote-qualifier');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-service-reminder']) {
+      setPage('usecase-service-reminder');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-maintenance-plan-upsell']) {
+      setPage('usecase-maintenance-plan-upsell');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-deposit-request']) {
+      setPage('usecase-deposit-request');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-financing-assist']) {
+      setPage('usecase-financing-assist');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-project-photo-proof']) {
+      setPage('usecase-project-photo-proof');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-parts-arrival-ping']) {
+      setPage('usecase-parts-arrival-ping');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-eta-update']) {
+      setPage('usecase-eta-update');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-cancellation-save']) {
+      setPage('usecase-cancellation-save');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-invoice-follow-up']) {
+      setPage('usecase-invoice-follow-up');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-appointment-prep']) {
+      setPage('usecase-appointment-prep');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-after-hours-triage']) {
+      setPage('usecase-after-hours-triage');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-service-recovery-save']) {
+      setPage('usecase-service-recovery-save');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-warranty-claim-intake']) {
+      setPage('usecase-warranty-claim-intake');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-change-order-approval']) {
+      setPage('usecase-change-order-approval');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-job-kickoff-packet']) {
+      setPage('usecase-job-kickoff-packet');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecase-weather-delay-update']) {
+      setPage('usecase-weather-delay-update');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === useCaseRoutes['usecases-index']) {
+      setPage('usecases-index');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
     const remainder = pathname.replace(/^\/diagnostic\/?/, '');
     const rawSlug = remainder.split('/')[0] || '';
     const pathSlug = rawSlug ? normalizeDiagnosticSlug(rawSlug) : null;
@@ -444,7 +923,7 @@ function App() {
     }
 
     const canonicalHref = headDefaults?.canonicalHref || `${window.location.origin}/`;
-    const defaultTitle = headDefaults?.title || 'Thurr Solutions | AI Automation Systems';
+    const defaultTitle = headDefaults?.title || 'Thurr Solutions | AI Lead Generation Systems';
 
     function upsertRobotsMeta(content) {
       let robotsMeta = document.querySelector('meta[name="robots"]');
@@ -505,14 +984,476 @@ function App() {
 
     const titlesByPage = {
       home: defaultTitle,
-      buildout: 'AI Business Buildout Plan | Thurr Solutions',
+      audit: 'Lead Flow Audit | Thurr Solutions',
+      'audit-thanks': 'Audit Request Received | Thurr Solutions',
+      compliance: 'Compliance | Thurr Solutions',
+      work: 'Selected Work | Thurr Solutions',
+      'work-restore': 'Restore Contracting | Thurr Solutions',
+      'work-dmd': 'Dallas Mobile Detailing Demo | Thurr Solutions',
+      buildout: 'Lead System Audit | Thurr Solutions',
       solutions: 'Thurr Solutions | Services',
+      'usecase-website-landlord': 'Website Landlord (Template) | Thurr Solutions',
+      'usecase-ai-lead-followup': 'AI Lead Follow-Up (Template) | Thurr Solutions',
+      'usecase-missed-call-textback': 'Missed Call Textback (Template) | Thurr Solutions',
+      'usecase-review-booster': 'Review Booster (Template) | Thurr Solutions',
+      'usecase-no-show-saver': 'No-Show Saver (Template) | Thurr Solutions',
+      'usecase-estimate-follow-up': 'Estimate Follow-Up (Template) | Thurr Solutions',
+      'usecase-seasonal-reactivation': 'Seasonal Reactivation (Template) | Thurr Solutions',
+      'usecase-quote-qualifier': 'Quote Qualifier (Template) | Thurr Solutions',
+      'usecase-service-reminder': 'Service Reminder (Template) | Thurr Solutions',
+      'usecase-maintenance-plan-upsell': 'Maintenance Plan Upsell (Template) | Thurr Solutions',
+      'usecase-deposit-request': 'Deposit Request (Template) | Thurr Solutions',
+      'usecase-financing-assist': 'Financing Assist (Template) | Thurr Solutions',
+      'usecase-project-photo-proof': 'Project Photo Proof (Template) | Thurr Solutions',
+      'usecase-parts-arrival-ping': 'Parts Arrival Ping (Template) | Thurr Solutions',
+      'usecase-eta-update': 'On-the-Way ETA Update (Template) | Thurr Solutions',
+      'usecase-cancellation-save': 'Cancellation Save (Template) | Thurr Solutions',
+      'usecase-invoice-follow-up': 'Invoice Follow-Up (Template) | Thurr Solutions',
+      'usecase-appointment-prep': 'Appointment Prep Checklist (Template) | Thurr Solutions',
+      'usecase-after-hours-triage': 'After-Hours Emergency Triage (Template) | Thurr Solutions',
+      'usecase-service-recovery-save': 'Service Recovery Save (Template) | Thurr Solutions',
+      'usecase-warranty-claim-intake': 'Warranty Claim Intake (Template) | Thurr Solutions',
+      'usecase-change-order-approval': 'Change Order Approval (Template) | Thurr Solutions',
+      'usecase-job-kickoff-packet': 'Job Kickoff Packet (Template) | Thurr Solutions',
+      'usecase-weather-delay-update': 'Weather Delay Update (Template) | Thurr Solutions',
       report: 'Blueprint Report | Thurr Solutions',
       export: 'Export Report | Thurr Solutions',
       'owner-access': 'Owner Access | Thurr Solutions',
       command: 'Command Center | Thurr Solutions',
       systems: 'Systems | Thurr Solutions',
     };
+
+    if (page === 'usecase-website-landlord') {
+      const shareTitle = 'Website Landlord (Template) — Own the Lead Path | Thurr Solutions';
+      const shareDescription =
+        'Educational example: a copyable local lead-flow template (build → track → route → report). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-website-landlord']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-ai-lead-followup') {
+      const shareTitle = 'AI Lead Follow-Up (Template) — Reply Fast, Book More | Thurr Solutions';
+      const shareDescription =
+        'Educational example: operator-controlled follow-up scripts, escalation rules, and booked handoff. No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-ai-lead-followup']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-missed-call-textback') {
+      const shareTitle = 'Missed Call Textback (Template) — Recover Missed Calls | Thurr Solutions';
+      const shareDescription =
+        'Educational example: inbound-only missed call recovery via operator-approved scripts, quiet hours, and human takeover. No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-missed-call-textback']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-review-booster') {
+      const shareTitle = 'Review Booster (Template) — Reviews That Don’t Feel Spammy | Thurr Solutions';
+      const shareDescription =
+        'Educational example: job-complete trigger, one review ask, issue routing, and referral follow-up (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-review-booster']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-no-show-saver') {
+      const shareTitle = 'No-Show Saver (Template) — Confirm, Remind, Reschedule | Thurr Solutions';
+      const shareDescription =
+        'Educational example: appointment confirmation scripts, safe reminders, and a reschedule/save path (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-no-show-saver']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-estimate-follow-up') {
+      const shareTitle = 'Estimate Follow-Up (Template) — Close More Without Spamming | Thurr Solutions';
+      const shareDescription =
+        'Educational example: operator-controlled estimate follow-up cadence with guardrails and a close outcome. No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-estimate-follow-up']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-seasonal-reactivation') {
+      const shareTitle = 'Seasonal Reactivation (Template) — Winbacks Without Spamming | Thurr Solutions';
+      const shareDescription =
+        'Educational example: segment past customers, send value-first check-ins, cap follow-ups, and track outcomes (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-seasonal-reactivation']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-quote-qualifier') {
+      const shareTitle = 'Quote Qualifier (Template) — Turn “How Much?” Into Booked Slots | Thurr Solutions';
+      const shareDescription =
+        'Educational example: a short qualifier form, routing rules, and a fast next step (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-quote-qualifier']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-service-reminder') {
+      const shareTitle = 'Service Reminder (Template) — Repeat Appointments Without Spamming | Thurr Solutions';
+      const shareDescription =
+        'Educational example: time-based service reminders with consent, caps, stop-on-reply, and human routing (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-service-reminder']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-maintenance-plan-upsell') {
+      const shareTitle = 'Maintenance Plan Upsell (Template) — Turn Wins Into Predictable Work | Thurr Solutions';
+      const shareDescription =
+        'Educational example: job-complete invite, simple enrollment, consent + caps, stop-on-reply, and human routing (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-maintenance-plan-upsell']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-deposit-request') {
+      const shareTitle = 'Deposit Request (Template) — Paid Next Step Without Chasing | Thurr Solutions';
+      const shareDescription =
+        'Educational example: acceptance gating, one secure link, receipt + confirmation, and stop rules (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-deposit-request']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-financing-assist') {
+      const shareTitle = 'Financing Assist (Template) — Help Customers Say “Yes” | Thurr Solutions';
+      const shareDescription =
+        'Educational example: quote-ready trigger, one provider link + disclosure, booking handoff, and stop rules (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-financing-assist']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-project-photo-proof') {
+      const shareTitle = 'Project Photo Proof (Template) — Collect Proof + Permission | Thurr Solutions';
+      const shareDescription =
+        'Educational example: job-complete trigger, request 3 photos, permission reply, and stop rules (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-project-photo-proof']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-parts-arrival-ping') {
+      const shareTitle = 'Parts Arrival Ping (Template) — Reduce “Is It In Yet?” Calls | Thurr Solutions';
+      const shareDescription =
+        'Educational example: part-ordered consent, arrival update, schedule/confirm next step, and stop rules (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-parts-arrival-ping']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-eta-update') {
+      const shareTitle = 'On-the-Way ETA Update (Template) — Reduce No-Shows | Thurr Solutions';
+      const shareDescription =
+        'Educational example: en route trigger, one ETA update message, confirm/reschedule outcomes, and stop rules (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-eta-update']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-cancellation-save') {
+      const shareTitle = 'Cancellation Save (Template) — Recover Cancellations Calmly | Thurr Solutions';
+      const shareDescription =
+        'Educational example: cancellation signal, one optional save offer, rebook/close outcomes, and stop rules (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-cancellation-save']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-invoice-follow-up') {
+      const shareTitle = 'Invoice Follow-Up (Template) — Get Paid Without Being Weird | Thurr Solutions';
+      const shareDescription =
+        'Educational example: unpaid trigger, one calm reminder with secure pay link, stop rules, and human escalation (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-invoice-follow-up']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-appointment-prep') {
+      const shareTitle = 'Appointment Prep Checklist (Template) — Reduce No-Shows | Thurr Solutions';
+      const shareDescription =
+        'Educational example: day-before trigger, one prep confirmation message, stop rules, and human routing (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-appointment-prep']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-after-hours-triage') {
+      const shareTitle = 'After-Hours Emergency Triage (Template) — Route Safely | Thurr Solutions';
+      const shareDescription =
+        'Educational example: after-hours inbound, one calm triage message with safety boundaries, stop rules, and schedule/human routing (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-after-hours-triage']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-service-recovery-save') {
+      const shareTitle = 'Service Recovery Save (Template) — Calm Next Steps | Thurr Solutions';
+      const shareDescription =
+        'Educational example: complaint/low-score signal, one apology + next step, and fix lane/manager routing (operator-controlled). No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-service-recovery-save']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-warranty-claim-intake') {
+      const shareTitle = 'Warranty Claim Intake (Template) — Evidence + Review | Thurr Solutions';
+      const shareDescription =
+        'Educational example: warranty claim intake with minimum evidence collection, human review routing, and operator-safe stop rules. No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-warranty-claim-intake']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-change-order-approval') {
+      const shareTitle = 'Change Order Approval (Template) — Stop Scope Creep | Thurr Solutions';
+      const shareDescription =
+        'Educational example: scope change → summary → explicit approval → invoice update, with operator-safe stop rules and human-controlled guardrails. No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-change-order-approval']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-job-kickoff-packet') {
+      const shareTitle = 'Job Kickoff Packet (Template) — Clean Handoff After The Yes | Thurr Solutions';
+      const shareDescription =
+        'Educational example: deposit/yes → kickoff packet → confirm access + prep → proceed, with operator-safe stop rules and human-controlled guardrails. No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-job-kickoff-packet']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
+
+    if (page === 'usecase-weather-delay-update') {
+      const shareTitle = 'Weather Delay Update (Template) — Keep The Job Calm | Thurr Solutions';
+      const shareDescription =
+        'Educational example: weather/crew delay → calm update message → confirm or reschedule, with operator-safe stop rules and human-controlled guardrails. No guarantees.';
+      const shareUrl = `${window.location.origin}${useCaseRoutes['usecase-weather-delay-update']}`;
+
+      document.title = shareTitle;
+      upsertCanonicalLink(shareUrl);
+      upsertMetaByName('description', shareDescription);
+      upsertMetaByProperty('og:title', shareTitle);
+      upsertMetaByProperty('og:description', shareDescription);
+      upsertMetaByProperty('og:url', shareUrl);
+      upsertMetaByName('twitter:title', shareTitle);
+      upsertMetaByName('twitter:description', shareDescription);
+      upsertRobotsMeta('noindex, nofollow');
+      return;
+    }
 
     document.title = titlesByPage[page] || defaultTitle;
     upsertCanonicalLink(canonicalHref);
@@ -585,6 +1526,13 @@ function App() {
       setPage(isOperatorPreview ? 'owner-access' : 'home');
       setMenuOpen(false);
       return;
+    }
+
+    const routePath = useCaseRoutes[target] || pageRoutes[target];
+    if (routePath) {
+      replaceLocationPathname(routePath);
+    } else if (window.location.pathname.startsWith('/use-cases') || window.location.pathname.startsWith('/audit')) {
+      replaceLocationPathname('/');
     }
 
     if (target === 'client-diagnostic') {
@@ -686,9 +1634,25 @@ function App() {
     setPage: navigateToPage,
   };
   const shouldShowFooter = !isOperatorPreview && page !== 'export';
+  const brand =
+    page === 'home' ||
+    page === 'audit' ||
+    page === 'audit-thanks' ||
+    page === 'solutions' ||
+    page === 'compliance' ||
+    page === 'work' ||
+    page === 'work-restore' ||
+    page === 'work-dmd'
+      ? 'thurr-solutions'
+      : 'right-thurr';
+
+  useEffect(() => {
+    document.body.dataset.brand = brand;
+  }, [brand]);
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-brand={brand}>
+      <SystemStatusBar />
       <SiteHeader
         canViewOperator={canViewOperator}
         menuOpen={menuOpen}
@@ -702,8 +1666,40 @@ function App() {
       />
 
       {page === 'home' && <HomePage {...sharedProps} />}
+      {page === 'audit' && <AuditPage setPage={navigateToPage} />}
+      {page === 'audit-thanks' && <AuditThanksPage setPage={navigateToPage} />}
+      {page === 'compliance' && <CompliancePage setPage={navigateToPage} />}
+      {page === 'work' && <WorkPage setPage={navigateToPage} />}
+      {page === 'work-restore' && <WorkDetailPage slug="restore-contracting" setPage={navigateToPage} />}
+      {page === 'work-dmd' && <WorkDetailPage slug="dallas-mobile-detailing" setPage={navigateToPage} />}
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
       {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
+      {page === 'usecases-index' && <UseCasesIndexPage setPage={navigateToPage} />}
+      {page === 'usecase-website-landlord' && <WebsiteLandlordUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-ai-lead-followup' && <AiLeadFollowupUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-missed-call-textback' && <MissedCallTextbackUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-review-booster' && <ReviewBoosterUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-no-show-saver' && <NoShowSaverUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-estimate-follow-up' && <EstimateFollowUpUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-seasonal-reactivation' && <SeasonalReactivationUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-quote-qualifier' && <QuoteQualifierUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-service-reminder' && <ServiceReminderUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-maintenance-plan-upsell' && <MaintenancePlanUpsellUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-deposit-request' && <DepositRequestUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-financing-assist' && <FinancingAssistUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-project-photo-proof' && <ProjectPhotoProofUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-parts-arrival-ping' && <PartsArrivalPingUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-eta-update' && <EtaUpdateUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-referral-loop' && <ReferralLoopUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-cancellation-save' && <CancellationSaveUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-invoice-follow-up' && <InvoiceFollowUpUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-appointment-prep' && <AppointmentPrepUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-after-hours-triage' && <AfterHoursTriageUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-service-recovery-save' && <ServiceRecoverySaveUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-warranty-claim-intake' && <WarrantyClaimIntakeUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-change-order-approval' && <ChangeOrderApprovalUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-job-kickoff-packet' && <JobKickoffPacketUseCasePage setPage={navigateToPage} />}
+      {page === 'usecase-weather-delay-update' && <WeatherDelayUpdateUseCasePage setPage={navigateToPage} />}
       {page === 'diagnostic-index' && (
         <DiagnosticIndexPage navigateToPage={navigateToPage} onStartLane={startDiagnosticLane} />
       )}
@@ -1507,19 +2503,19 @@ function SolutionsPage({ setPage }) {
       <section className="solutions-hero">
         <div className="hero-copy">
           <div className="eyebrow">THURR</div>
-          <h1>Private AI systems for local service businesses.</h1>
+          <h1>AI lead generation systems for local service businesses.</h1>
           <p>
-            Custom AI agents, automations, lead intake, follow-up, and backend systems that help
-            contractors, salons, realtors, and service companies stop losing money from missed
-            leads and manual work.
+            Thurr Solutions builds and manages the intake, follow-up, automation, and AI support
+            layer that helps contractors, beauty businesses, insurance teams, and service companies
+            respond faster and stop losing warm leads.
           </p>
           <div className="hero-actions">
-            <a className="stamp-button link-button" href="#solutions-services">
-              START A PROJECT
+            <button className="stamp-button link-button" type="button" onClick={() => setPage('audit')}>
+              BOOK A LEAD SYSTEM AUDIT
               <ArrowUpRight size={18} strokeWidth={3} />
-            </a>
-            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
-              View buildout plan
+            </button>
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('audit')}>
+              View audit form
             </button>
           </div>
         </div>
@@ -1538,16 +2534,16 @@ function SolutionsPage({ setPage }) {
           </p>
           <div className="proof-stats">
             <div>
-              <span>Primary tool</span>
-              <strong>n8n workflows</strong>
+              <span>Front door</span>
+              <strong>Lead generation</strong>
             </div>
             <div>
-              <span>AI layer</span>
-              <strong>Qualification + reporting</strong>
+              <span>Retainer path</span>
+              <strong>Managed automation</strong>
             </div>
             <div>
-              <span>Outcome</span>
-              <strong>Less dropped revenue</strong>
+              <span>Guardrail</span>
+              <strong>System safety</strong>
             </div>
           </div>
         </aside>
@@ -1556,19 +2552,111 @@ function SolutionsPage({ setPage }) {
       <section className="solutions-services" id="solutions-services">
         <FlowCard
           icon={Target}
-          title="Workflow Audit"
-          text="Map the current process, find delay points, and define the system worth building."
+          title="AI Lead Generation"
+          text="Capture inquiries, qualify prospects, route opportunities, and move leads toward a booked next step."
+        />
+        <FlowCard
+          icon={MapPinned}
+          title="Growth Websites"
+          text="Mobile-friendly service pages, offer copy, lead forms, booking paths, SEO metadata, and follow-up automations."
+        />
+        <FlowCard
+          icon={PhoneCall}
+          title="Missed-Call Text-Back"
+          text="Reply to missed calls automatically, capture the lead by text, and show the owner what each recovered inquiry could be worth."
         />
         <FlowCard
           icon={Zap}
-          title="Automation Build"
-          text="Create n8n workflows for lead capture, routing, follow-up, alerts, and reporting."
+          title="Managed AI Automation"
+          text="Monitor, fix, and improve the workflows after launch so the system keeps earning its place."
+        />
+        <FlowCard
+          icon={ClipboardCheck}
+          title="AI Consulting"
+          text="Audit the workflow, identify the biggest leak, and create a battle plan before money gets burned on the wrong build."
         />
         <FlowCard
           icon={Bot}
-          title="AI Operations"
-          text="Add AI agents for qualification, summaries, decision support, and client-ready reports."
+          title="AI Agent Development"
+          text="Add AI receptionists, intake assistants, lead qualifiers, and reporting assistants when they serve the workflow."
         />
+        <FlowCard
+          icon={Gauge}
+          title="System Safety"
+          text="Design credential hygiene, access controls, audit trails, and compliance-aware guardrails into the automation."
+        />
+        <FlowCard
+          icon={BriefcaseBusiness}
+          title="Client Intake Systems"
+          text="Turn forms, DMs, booking links, and scattered notes into one trackable path from first contact to follow-up."
+        />
+      </section>
+
+      <section className="solutions-packages" id="solutions-packages" aria-labelledby="solutions-packages-title">
+        <div className="section-copy">
+          <div className="eyebrow">THE OFFER LADDER</div>
+          <h2 id="solutions-packages-title">The audit tells us what to fix. The build fixes it.</h2>
+          <p>
+            Start small enough to avoid wasting money, then move into the next phase only when the
+            diagnosis shows it will help revenue, response speed, or owner visibility.
+          </p>
+        </div>
+        <div className="offer-ladder">
+          <article>
+            <div className="ladder-step">Starter</div>
+            <h3>Lead Flow Audit</h3>
+            <strong>$250-$350</strong>
+            <p>
+              Diagnose the website, booking path, lead intake, follow-up, and owner visibility.
+              Deliver a scorecard, priority fix list, and recommended battle plan.
+            </p>
+            <div className="ladder-next">If the website is leaking trust or inquiries, move to Growth Website + Intake.</div>
+          </article>
+          <article>
+            <div className="ladder-step">Phase 1</div>
+            <h3>Growth Website + Intake</h3>
+            <strong>$500-$1,500</strong>
+            <p>
+              Build or improve the service site, lead form, booking/inquiry flow, SEO basics, and
+              first follow-up handoff so the business can capture demand cleanly.
+            </p>
+            <div className="ladder-next">If leads need faster response and routing, move to Automation Build.</div>
+          </article>
+          <article>
+            <div className="ladder-step">Phase 2</div>
+            <h3>Automation Build</h3>
+            <strong>$1,000-$3,500+</strong>
+            <p>
+              Connect forms, CRM or sheets, alerts, follow-up sequences, AI summaries, and routing
+              so leads move without constant manual chasing.
+            </p>
+            <div className="ladder-next">If the system becomes business-critical, move to Managed Automation.</div>
+          </article>
+          <article>
+            <div className="ladder-step">Add-On</div>
+            <h3>Missed-Call Recovery</h3>
+            <strong>$500-$1,500</strong>
+            <p>
+              Add an automatic missed-call text-back, lead capture path, owner alert, and simple
+              ROI calculator so service businesses can see the value of faster response.
+            </p>
+            <div className="ladder-next">Best for contractors, beauty, real estate, insurance, and appointment-based teams.</div>
+          </article>
+          <article>
+            <div className="ladder-step">Retainer</div>
+            <h3>Managed AI Automation</h3>
+            <strong>$250-$750/mo</strong>
+            <p>
+              Monitor workflows, fix breaks, improve prompts, update routing, review errors, and
+              keep the lead path useful after launch.
+            </p>
+            <div className="ladder-next">Best once the workflow is tied to real leads, bookings, or client communication.</div>
+          </article>
+        </div>
+        <div className="ladder-rule">
+          <strong>The audit fee can be credited toward the build.</strong>
+          <span>That keeps the first step low-risk without turning strategy into free work.</span>
+        </div>
       </section>
 
       <section className="solutions-process">
@@ -1586,12 +2674,12 @@ function SolutionsPage({ setPage }) {
             Project Flow
           </div>
           {[
-            'Business process audit',
-            'ROI and workflow plan',
-            'n8n workflow build',
-            'AI prompt and agent layer',
+            'Lead path audit',
+            'Offer, ROI, and workflow plan',
+            'Lead capture and follow-up build',
+            'AI assistant and reporting layer',
             'Testing and owner handoff',
-            'Monitoring and improvement',
+            'Managed automation support',
           ].map((item, index) => (
             <div className="backend-step" key={item}>
               <span>{String(index + 1).padStart(2, '0')}</span>
@@ -1612,10 +2700,10 @@ function SolutionsPage({ setPage }) {
           </p>
         </div>
         <div className="solutions-cta-card">
-          <span>READY FOR BUILDOUT</span>
-          <strong>Start with the workflow that stops the biggest leak.</strong>
+          <span>RECOMMENDED NEXT STEP</span>
+          <strong>Request the audit first. Build only after the leak is clear.</strong>
           <a className="text-link" href="mailto:hello@thurrsolutions.com">
-            Start a project <Mail size={18} strokeWidth={3} />
+            Email Thurr <Mail size={18} strokeWidth={3} />
           </a>
         </div>
       </section>
@@ -1623,85 +2711,766 @@ function SolutionsPage({ setPage }) {
   );
 }
 
-function HomePage({ form, updateField, handleSubmit, submissionState, currentStep, setPage }) {
+function HomePage({ setPage }) {
   return (
-    <main id="top">
+    <main className="b2b-home-page" id="top" data-brand="thurr-solutions">
       <section className="landing-hero machine-first-hero" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <div className="eyebrow">YOUR SYSTEM IS ALREADY MOVING</div>
-          <h1 id="hero-title">Ideas do not pay you. Systems do.</h1>
+          <div className="eyebrow">THURR SOLUTIONS / LEAD FLOW SYSTEMS</div>
+          <h1 id="hero-title">Your warm leads are getting cold.</h1>
           <p>
-            Thurr turns business ideas and missed-lead problems into visible action:
-            blueprint, offer, page copy, automations, tasks, and the next move.
+            Most local service businesses lose more revenue to slow follow-up than to bad marketing.
+            We find the leak, fix it, and keep it sealed.
           </p>
           <div className="hero-actions">
-            <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-              GET MY BUILDOUT PLAN
+            <a className="stamp-button link-button" href="/audit">
+              Book a Lead Flow Audit — $250
               <ArrowUpRight size={18} strokeWidth={3} />
-            </button>
-            <a className="text-link dark-link" href="#machine">
-              Watch the system work
+            </a>
+            <a className="text-link dark-link" href="#how-it-works">
+              See how it works
             </a>
           </div>
-          <div className="hero-pulse-row" aria-label="Live system proof">
-            <span>Blueprint generated</span>
-            <span>Tasks queued</span>
-            <span>Revenue tracked</span>
+        </div>
+
+        <OperatorSystemPanel />
+      </section>
+
+      <ThreeStepsSection />
+      <HomeOfferLadderSection setPage={setPage} />
+      <IndustriesSection />
+      <SystemDiagramSection />
+      <FieldNotesSection />
+      <FounderOperatorSection />
+      <FinalCtaSection setPage={setPage} />
+    </main>
+  );
+}
+
+function HomeOfferLadderSection({ setPage }) {
+  const offers = [
+    {
+      title: 'Lead Flow Audit',
+      price: '$250',
+      text: 'Three days. One report. The biggest leak named, ranked, and priced. You get a PDF report, a 10-minute Loom walkthrough, and a fixed-price quote for the fix.',
+      next: 'Audit credit applies to your build if you start within 30 days.',
+      action: (
+        <a className="stamp-button link-button" href="/audit">
+          Book Audit
+          <ArrowUpRight size={18} strokeWidth={3} />
+        </a>
+      ),
+    },
+    {
+      title: 'Growth Website + Intake',
+      price: '$500-$1,500',
+      text: 'A site that takes leads in clean and routes them where they belong. Form + auto-response + owner alert + connected to your tools (Calendar, CRM, SMS, email).',
+      next: null,
+      action: (
+        <a className="text-link dark-link" href="/work">
+          See Sample Build
+        </a>
+      ),
+    },
+    {
+      title: 'Managed Automation',
+      price: '$250-$750/month',
+      text: 'We run the system. You see the dashboard. Issues get caught before clients call you. Monthly report, on-call adjustments, and no surprise invoices.',
+      next: null,
+      action: (
+        <a className="text-link dark-link" href="mailto:thurr@thurrsolutions.com">
+          Talk to Thurr
+        </a>
+      ),
+    },
+  ];
+
+  return (
+    <section className="solutions-packages homepage-offer-ladder" aria-labelledby="offer-ladder-title">
+      <div className="section-copy">
+        <div className="eyebrow">03 / OFFER LADDER</div>
+        <h2 id="offer-ladder-title">Start low-risk. Move up only after proof.</h2>
+        <p>
+          The audit is the front door. Everything else is optional and only happens after the leak is clear.
+        </p>
+      </div>
+      <div>
+        <div className="offer-ladder">
+          {offers.map((offer) => (
+            <article key={offer.title}>
+              <h3>{offer.title}</h3>
+              <strong>{offer.price}</strong>
+              <p>{offer.text}</p>
+              {offer.next ? <div className="ladder-next">{offer.next}</div> : null}
+              {offer.action ? <div className="ladder-action">{offer.action}</div> : null}
+            </article>
+          ))}
+        </div>
+        <div className="ladder-rule">
+          <strong>The audit fee can be credited toward the build.</strong>
+          <span>Keep step one low-risk without turning strategy into free work.</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ThreeStepsSection() {
+  const steps = [
+    {
+      number: '01',
+      title: 'AUDIT',
+      text:
+        "3 days. We map every place a lead enters your business and grade where they're dying. Output: a written report + Loom walkthrough naming your top 3 leaks. $250–$350",
+    },
+    {
+      number: '02',
+      title: 'BUILD',
+      text:
+        "1–3 weeks. One focused fix — intake site, automation workflow, or missed-call recovery. We don't redesign your business. We patch the leak. $500–$3,500",
+    },
+    {
+      number: '03',
+      title: 'MANAGE',
+      text:
+        "Monthly. We run the system, catch issues before clients do, and report what's working. $250–$750/month",
+    },
+  ];
+
+  return (
+    <section className="three-steps-section" id="how-it-works" aria-labelledby="three-steps-title">
+      <div className="section-copy">
+        <div className="eyebrow">01 / HOW IT WORKS</div>
+        <h2 id="three-steps-title">How this actually works.</h2>
+      </div>
+      <div className="three-steps-grid">
+        {steps.map((step) => (
+          <article key={step.number}>
+            <span>{step.number}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </article>
+        ))}
+      </div>
+      <p className="three-steps-tagline">
+        The audit tells us what to fix. The build fixes it. The retainer keeps it working.
+      </p>
+    </section>
+  );
+}
+
+function IntroVideoStage() {
+  const [videoReady, setVideoReady] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch(introVideo.src, { method: 'HEAD' })
+      .then((response) => {
+        if (isMounted && response.ok) {
+          setVideoReady(true);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setVideoReady(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return (
+    <div className="video-stage" aria-label="Lead system walkthrough video">
+      <div className="video-topline">
+        <span>60-second walkthrough</span>
+        <strong>{videoReady ? 'Ready to watch' : 'Video slot ready'}</strong>
+      </div>
+      {videoReady ? (
+        <video
+          className="video-player"
+          controls
+          playsInline
+          preload="metadata"
+          poster={introVideo.poster}
+          aria-label="Thurr Solutions lead system intro video"
+        >
+          <source src={introVideo.src} type="video/mp4" />
+        </video>
+      ) : (
+        <div className="video-screen">
+          <div className="video-play-mark" aria-hidden="true">▶</div>
+          <div>
+            <span>Lead System Audit</span>
+            <strong>Website → Intake → Follow-up → Managed automation</strong>
           </div>
         </div>
+      )}
+      <div className="video-timeline" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+    </div>
+  );
+}
 
-        <HeroActivityPanel />
+function OperatorSystemPanel() {
+  const rows = [
+    ['AUDIT', 'OPERATIONAL', 'LEAD FLOW'],
+    ['BUILD', 'OPERATIONAL', 'INTAKE PATH'],
+    ['MANAGE', 'OPERATIONAL', 'MONTHLY'],
+  ];
+
+  return (
+    <aside className="operator-system-panel" aria-label="Thurr Solutions operating status">
+      <div className="operator-panel-header">
+        <span>SYSTEM STATUS</span>
+        <strong>Infrastructure view</strong>
+      </div>
+      <div className="operator-status-list">
+        {rows.map(([label, status, time]) => (
+          <div className="operator-status-row" key={label}>
+            <span className="status-dot" />
+            <strong>{label}</strong>
+            <span>{status}</span>
+            <time>{time}</time>
+          </div>
+        ))}
+      </div>
+      <p>Documented process. Visible artifacts. No tool pile-up before the leak is clear.</p>
+    </aside>
+  );
+}
+
+function MethodologySection({ setPage }) {
+  const steps = [
+    {
+      number: '01',
+      name: 'Audit',
+      duration: 'Week 1',
+      text:
+        'One week. Output: a written diagnostic showing where leads leak, what is costing money, and what to fix first.',
+      gets: ['Lead-flow scorecard', 'Leak map and priority fix list', 'Effort/impact recommendation'],
+    },
+    {
+      number: '02',
+      name: 'Build',
+      duration: 'Weeks 2-4',
+      text:
+        'Two to four weeks. Output: a working lead capture, intake, and follow-up system tied to your CRM, your phone, and your team.',
+      gets: ['Capture and intake path', 'Owner alerts and routing', 'Follow-up workflow'],
+    },
+    {
+      number: '03',
+      name: 'Manage',
+      duration: 'Monthly',
+      text:
+        'Monthly. Output: monitoring, optimization, and reporting. The system stays running while you run the business.',
+      gets: ['Workflow monitoring', 'Prompt and routing updates', 'Reporting and next-action review'],
+    },
+  ];
+
+  return (
+    <section className="methodology-section" id="methodology" aria-labelledby="methodology-title">
+      <div className="section-copy">
+        <div className="eyebrow">01 / METHODOLOGY</div>
+        <h2 id="methodology-title">The audit tells us what to fix. The build fixes it. The retainer keeps it working.</h2>
+      </div>
+      <div className="methodology-timeline">
+        {steps.map((step) => (
+          <article className="methodology-step" key={step.number}>
+            <div className="methodology-marker">{step.number}</div>
+            <div>
+              <div className="methodology-meta">{step.duration}</div>
+              <h3>{step.number} · {step.name}</h3>
+              <p>{step.text}</p>
+              <div className="methodology-list">
+                <span>What you get</span>
+                {step.gets.map((item) => (
+                  <strong key={item}>{item}</strong>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+        <button className="text-link dark-link button-link methodology-cta" type="button" onClick={() => setPage('audit')}>
+          Start with the audit →
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function AuditFeatureSection({ setPage }) {
+  const checks = [
+    'Speed-to-lead measurement',
+    'Intake form audit',
+    'Follow-up sequence audit',
+    'CRM and pipeline visibility check',
+    'Compliance flags',
+    'Effort/impact fix ranking',
+  ];
+
+  return (
+    <section className="audit-feature-section" aria-labelledby="audit-feature-title">
+      <div className="audit-feature-copy">
+        <div className="eyebrow">02 / ENTRY POINT</div>
+        <h2 id="audit-feature-title">A $250 diagnostic that pays for itself in one closed lead.</h2>
+        <p>
+          Most local service businesses do not have a lead problem. They have a leak. The Lead Flow
+          Audit is a structured one-week diagnostic where I trace every step a lead takes from form
+          submit to follow-up to closed job.
+        </p>
+        <p>
+          You get a written report with prioritized fixes, a score, and a recommended path forward.
+          No pressure to continue. The report is yours either way.
+        </p>
+        <div className="audit-check-grid">
+          {checks.map((check) => (
+            <span key={check}>{check}</span>
+          ))}
+        </div>
+        <button className="stamp-button link-button" type="button" onClick={() => setPage('audit')}>
+          REQUEST THE AUDIT
+          <ArrowUpRight size={18} strokeWidth={3} />
+        </button>
+      </div>
+      <aside className="audit-report-preview" aria-label="Sample audit report preview">
+        <div className="sample-watermark">SAMPLE</div>
+        <div className="report-preview-top">
+          <span>Lead Flow Audit</span>
+          <strong>Diagnostic Report</strong>
+        </div>
+        <div className="report-score-line">
+          <span>Speed to lead</span>
+          <strong>Needs action</strong>
+        </div>
+        <div className="redacted-line wide" />
+        <div className="redacted-line" />
+        <div className="redacted-line short" />
+        <div className="report-fix-list">
+          <span>01 / Fix first</span>
+          <span>02 / Automate handoff</span>
+          <span>03 / Review weekly</span>
+        </div>
+      </aside>
+    </section>
+  );
+}
+
+function IndustriesSection() {
+  const industries = [
+    {
+      label: 'Roofing & Contractors',
+      leak: 'Storm leads decay in hours.',
+      fix: 'We build instant-response and follow-up systems that close the gap between form submit and first call.',
+    },
+    {
+      label: 'Beauty & Service Studios',
+      leak: 'No-shows and missed bookings cost more than ads.',
+      fix: 'We build intake, confirmation, and rebooking flows that protect the chair.',
+    },
+    {
+      label: 'Insurance Agents',
+      leak: 'Carrier and compliance review constrains what you can automate.',
+      fix: "We build within your upline's rules.",
+    },
+    {
+      label: 'Healthcare & Hospice',
+      tag: 'COMPLIANCE-FIRST',
+      leak: 'Compliance-first engagements only.',
+      fix: 'HIPAA-aware intake, BAA required, no shortcuts.',
+    },
+  ];
+
+  return (
+    <section className="industries-section" aria-labelledby="industries-title">
+      <div className="section-copy">
+        <div className="eyebrow">03 / INDUSTRIES</div>
+        <h2 id="industries-title">Built for local operators.</h2>
+      </div>
+      <div className="industry-grid">
+        {industries.map((industry) => (
+          <article className="industry-card" key={industry.label}>
+            <div className="industry-card-top">
+              <h3>{industry.label}</h3>
+              {industry.tag ? <span>{industry.tag}</span> : null}
+            </div>
+            <p>{industry.leak}</p>
+            <p>{industry.fix}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SystemDiagramSection() {
+  const nodes = [
+    ['FORM SUBMIT', 40, 110],
+    ['INSTANT SMS', 220, 110],
+    ['CRM LOG', 400, 110],
+    ['PIPELINE ROUTE', 580, 110],
+    ['REPLY → STOP', 760, 62],
+    ['NO REPLY → 24H', 760, 158],
+    ['72H FOLLOW-UP', 940, 158],
+    ['ARCHIVE', 1120, 158],
+  ];
+
+  return (
+    <section className="system-diagram-section" aria-labelledby="system-diagram-title">
+      <div className="section-copy">
+        <div className="eyebrow">04 / WHAT&apos;S INSIDE A BUILD</div>
+        <h2 id="system-diagram-title">A real system, not a deliverable list.</h2>
+      </div>
+      <div className="system-diagram-shell">
+        <svg viewBox="0 0 1280 270" role="img" aria-labelledby="workflow-title workflow-desc">
+          <title id="workflow-title">Lead follow-up workflow diagram</title>
+          <desc id="workflow-desc">Lead capture moves through SMS, CRM, pipeline routing, reply stop, and follow-up branches.</desc>
+          <defs>
+            <marker id="arrow-active" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="var(--op-accent)" />
+            </marker>
+            <marker id="arrow-muted" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="var(--op-text-dim)" />
+            </marker>
+          </defs>
+          <path className="diagram-path active" d="M170 135 H220 M350 135 H400 M530 135 H580 M710 135 H750" markerEnd="url(#arrow-active)" />
+          <path className="diagram-path muted" d="M710 135 C740 135 740 87 760 87" markerEnd="url(#arrow-muted)" />
+          <path className="diagram-path muted" d="M710 135 C740 135 740 183 760 183 H940 M1070 183 H1120" markerEnd="url(#arrow-muted)" />
+          {nodes.map(([label, x, y]) => (
+            <g className="diagram-node" key={label} transform={`translate(${x} ${y})`}>
+              <rect width="130" height="50" />
+              <text x="65" y="31" textAnchor="middle">{label}</text>
+            </g>
+          ))}
+        </svg>
+      </div>
+    </section>
+  );
+}
+
+function FieldNotesSection() {
+  const notes = [
+    {
+      client: 'Restore Contracting',
+      label: 'STORM LEAD CAPTURE',
+      problem: 'Indianapolis roofing/siding/gutter operator with no instant response and weak landing infrastructure.',
+      solution: 'Built a storm lead capture page, instant SMS, and pipeline routing across multiple markets.',
+      status: 'Active retainer.',
+    },
+    {
+      client: 'HeartPathBloom',
+      label: 'YOUTH WELLNESS APP',
+      problem: 'Founders building a guided wellness experience for young users.',
+      solution: 'Compliance-first build under COPPA with clinical reviewer in scope.',
+      status: 'In build, Phase 1.',
+    },
+  ];
+
+  return (
+    <section className="field-notes-section" aria-labelledby="field-notes-title">
+      <div className="section-copy">
+        <div className="eyebrow">05 / FIELD NOTES</div>
+        <h2 id="field-notes-title">Recent engagements.</h2>
+      </div>
+      <div className="field-notes-grid">
+        {notes.map((note) => (
+          <article className="field-note-card" key={note.client}>
+            <span>{note.client} · {note.label}</span>
+            <p>{note.problem}</p>
+            <p>{note.solution}</p>
+            <strong>{note.status}</strong>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FounderOperatorSection() {
+  return (
+    <section className="operator-founder-section" id="about-therrance" aria-labelledby="founder-title">
+      <div className="founder-photo-frame">
+        <img src={monogram} alt="Thurr Solutions monogram placeholder for Therrance Carrothers headshot" />
+        <span>HEADSHOT PENDING</span>
+      </div>
+      <div className="section-copy">
+        <div className="eyebrow">06 / OPERATOR</div>
+        <h2 id="founder-title">Run by Therrance Carrothers.</h2>
+        <p>
+          AI Automation Engineer. Built and shipped lead systems for roofing, hospice intake, and
+          youth wellness clients. BBA Finance, University of Missouri. AWS and AI Automation
+          Specialist certifications. Based in Houston, operating across the U.S.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function FinalCtaSection({ setPage }) {
+  return (
+    <section className="final-audit-cta" aria-labelledby="final-cta-title">
+      <div className="eyebrow">07 / NEXT STEP</div>
+      <h2 id="final-cta-title">Start with the audit.</h2>
+      <p>One week. $250. A written diagnostic of where your leads are leaking and what to fix first.</p>
+      <button className="stamp-button link-button" type="button" onClick={() => setPage('audit')}>
+        Run a Lead Flow Audit →
+        <ArrowUpRight size={18} strokeWidth={3} />
+      </button>
+    </section>
+  );
+}
+
+function AuditPage({ setPage }) {
+  const [auditForm, setAuditForm] = useState(auditInitialForm);
+  const [auditState, setAuditState] = useState('idle');
+
+  function updateAuditField(field, value) {
+    setAuditForm((current) => ({ ...current, [field]: value }));
+  }
+
+  async function handleAuditSubmit(event) {
+    event.preventDefault();
+    setAuditState('sending');
+
+    try {
+      await submitAuditRequest({
+        business_name: auditForm.businessName,
+        owner_name: auditForm.ownerName,
+        email: auditForm.email,
+        business_url: auditForm.businessUrl,
+        monthly_leads_estimate: auditForm.monthlyLeadsEstimate,
+        frustration_text: auditForm.frustrationText,
+      });
+      setAuditState('queued');
+      setAuditForm(auditInitialForm);
+      setPage('audit-thanks');
+    } catch {
+      setAuditState('error');
+    }
+  }
+
+  return (
+    <main className="audit-page" id="top" data-brand="thurr-solutions">
+      <section className="audit-hero">
+        <div className="hero-copy">
+          <div className="eyebrow">LEAD FLOW AUDIT</div>
+          <h1>Find your leak in 3 days. $250.</h1>
+          <p>We map every place a lead enters your business and rank where they&apos;re dying — by revenue impact.</p>
+          <div className="hero-actions">
+            <a className="stamp-button link-button" href="#audit-request-form">
+              Start your audit
+              <ArrowUpRight size={18} strokeWidth={3} />
+            </a>
+            <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
+              Back to home
+            </button>
+          </div>
+        </div>
+        <aside className="audit-price-card">
+          <span>Three-day diagnostic</span>
+          <strong>$250</strong>
+          <p>If you move into the Build within 30 days, your audit fee is credited in full.</p>
+        </aside>
       </section>
 
-      <section className="buildout-section" id="buildout" aria-labelledby="buildout-title">
+      <section className="audit-steps audit-deliverables" aria-labelledby="audit-deliverables-title">
         <div className="section-copy">
-          <div className="eyebrow">START HERE</div>
-          <h2 id="buildout-title">Get the buildout plan before you build the wrong thing.</h2>
+          <div className="eyebrow">WHAT YOU GET</div>
+          <h2 id="audit-deliverables-title">What you get.</h2>
+          <p>Three days after kickoff, you receive:</p>
+        </div>
+        <ol>
+          <li>A written report (PDF) ranking your top 3 lead-flow leaks by revenue impact.</li>
+          <li>A 10-minute Loom walkthrough where I explain each one in plain English.</li>
+          <li>A fixed-price quote for the fix — broken into Build phases so you can stop after any phase.</li>
+        </ol>
+        <p className="audit-deliverables-note">You can keep the audit and stop. No retainer trap, no upsell pressure.</p>
+        <p className="audit-deliverables-credit">
+          If you move into the Build within 30 days, your audit fee is credited in full.
+        </p>
+      </section>
+
+      <section className="buildout-section audit-form-section" id="audit-request-form" aria-labelledby="audit-form-title">
+        <div className="section-copy">
+          <div className="eyebrow">THE REQUEST</div>
+          <h2 id="audit-form-title">Start your audit.</h2>
           <p>
-            This form will feed the n8n intake workflow first. V1 can notify you and save the lead,
-            then the report engine generates the Autopilot Blueprint.
+            Tell me about your business. I review every audit request personally and respond within one business day.
           </p>
         </div>
-        <BuildoutForm
-          form={form}
-          updateField={updateField}
-          handleSubmit={handleSubmit}
-          submissionState={submissionState}
+        <AuditRequestForm
+          auditForm={auditForm}
+          auditState={auditState}
+          handleAuditSubmit={handleAuditSubmit}
+          updateAuditField={updateAuditField}
         />
       </section>
+    </main>
+  );
+}
 
-      <section className="metric-strip" aria-label="Autopilot metrics">
-        <Metric icon={Gauge} label="Private Systems" value="Built" />
-        <Metric icon={Factory} label="Lead Intake" value="Automated" />
-        <Metric icon={DollarSign} label="Revenue Leaks" value="Tracked" />
-        <Metric icon={ClipboardCheck} label="Follow-Up" value="Handled" />
-        <Metric icon={Zap} label="Owner Alerts" value="Live" />
-      </section>
-
-      <AuthoritySection />
-
-      <section className="blueprint-showcase" id="blueprint">
-        <div className="section-copy">
-          <div className="eyebrow">THE REPORT</div>
-          <h2>Not a funnel audit. A buildout blueprint.</h2>
+function AuditThanksPage() {
+  return (
+    <main className="audit-page" id="top" data-brand="thurr-solutions">
+      <section className="audit-hero audit-thanks-hero">
+        <div className="hero-copy">
+          <div className="eyebrow">REQUEST RECEIVED</div>
+          <h1>Got it. Your audit request is in.</h1>
           <p>
-            The report explains the business angle, revenue path, funnel, automations, agents,
-            bottlenecks, and next move.
+            I&apos;ll reply within 1 business day with two things: 1. A 15-minute kickoff call invite
+            to confirm scope. 2. The $250 invoice. Your audit starts the day payment clears. Three
+            days after that, you&apos;ll have your report. — Thurr
           </p>
-          <button className="text-link dark-link button-link" type="button" onClick={() => setPage('report')}>
-            View generated report
-          </button>
+          <div className="hero-actions">
+            <a className="stamp-button link-button" href="/#how-it-works">
+              While you wait, here&apos;s how the build works →
+              <ArrowUpRight size={18} strokeWidth={3} />
+            </a>
+          </div>
         </div>
-        <BlueprintPanel />
+        <aside className="audit-price-card">
+          <span>AUDIT REQUEST RECEIVED</span>
+          <strong>Review first</strong>
+          <p>No blind build. No tool pile-up. No fake automation theater.</p>
+        </aside>
       </section>
+    </main>
+  );
+}
 
-      <section className="machine-section" id="machine">
-        <BuildPanel currentStep={currentStep} title="Dallas Mobile Detailing Engine" heading="BUILDING NOW" />
-        <ActivityPanel />
+function AuditRequestForm({ auditForm, auditState, handleAuditSubmit, updateAuditField }) {
+  return (
+    <form className="buildout-form audit-request-form" onSubmit={handleAuditSubmit}>
+      <label>
+        Business name
+        <input
+          value={auditForm.businessName}
+          onChange={(event) => updateAuditField('businessName', event.target.value)}
+          placeholder="Business name"
+          required
+        />
+      </label>
+      <label>
+        Owner name
+        <input
+          value={auditForm.ownerName}
+          onChange={(event) => updateAuditField('ownerName', event.target.value)}
+          placeholder="Your name"
+          required
+        />
+      </label>
+      <label>
+        Email
+        <input
+          type="email"
+          value={auditForm.email}
+          onChange={(event) => updateAuditField('email', event.target.value)}
+          placeholder="you@example.com"
+          required
+        />
+      </label>
+      <label>
+        Business URL
+        <input
+          type="url"
+          value={auditForm.businessUrl}
+          onChange={(event) => updateAuditField('businessUrl', event.target.value)}
+          placeholder="https://..."
+          required
+        />
+      </label>
+      <label>
+        Approx. monthly lead volume
+        <select
+          value={auditForm.monthlyLeadsEstimate}
+          onChange={(event) => updateAuditField('monthlyLeadsEstimate', event.target.value)}
+          required
+        >
+          {auditLeadVolumes.map((volume) => (
+            <option key={volume}>{volume}</option>
+          ))}
+        </select>
+      </label>
+      <label className="wide-field">
+        Where do you think leads are slipping through?
+        <textarea
+          value={auditForm.frustrationText}
+          onChange={(event) => updateAuditField('frustrationText', event.target.value)}
+          rows={4}
+          placeholder="Where do you think leads are slipping through?"
+          required
+        />
+      </label>
+      <button className="stamp-button wide-field" type="submit" disabled={auditState === 'sending'}>
+        {auditState === 'sending' ? 'SENDING...' : 'Submit Audit Request'}
+        <ArrowUpRight size={18} strokeWidth={3} />
+      </button>
+      {auditState === 'error' && (
+        <p className="form-note error-note wide-field">
+          Audit request could not be saved. Check the configured endpoint and try again.
+        </p>
+      )}
+    </form>
+  );
+}
+
+function CompliancePage({ setPage }) {
+  const sections = [
+    {
+      title: 'TCPA',
+      body:
+        'Text and call workflows are gated by consent, opt-out language, and source review. We do not build homeowner blasting systems or treat purchased lists as permission to contact people.',
+    },
+    {
+      title: 'HIPAA',
+      body:
+        'Healthcare and hospice engagements require a Business Associate Agreement before protected health information touches any workflow. We separate marketing intake from clinical or patient data by default.',
+    },
+    {
+      title: 'COPPA',
+      body:
+        'Youth-facing projects are scoped with parent/guardian consent, data minimization, reviewer visibility, and strict AI exclusion rules before any production build.',
+    },
+    {
+      title: 'Insurance',
+      body:
+        'Insurance marketing and follow-up are reviewed against carrier, upline, TCPA, and state-specific constraints. Automations support process visibility; they do not replace licensed advice or compliance review.',
+    },
+  ];
+
+  return (
+    <main className="compliance-page" id="top" data-brand="thurr-solutions">
+      <section className="compliance-hero">
+        <div className="eyebrow">LEGAL &amp; COMPLIANCE</div>
+        <h1>How we gate engagements.</h1>
+        <p>
+          Thurr Solutions builds practical automation systems, but regulated work gets reviewed
+          before tools, prompts, forms, or follow-up sequences go live.
+        </p>
       </section>
-
-      <AppPreview />
-      <AboutTherranceSection />
+      <section className="compliance-grid" aria-label="Compliance stance">
+        {sections.map((section) => (
+          <article className="compliance-card" id={section.title.toLowerCase()} key={section.title}>
+            <span>{section.title}</span>
+            <p>{section.body}</p>
+          </article>
+        ))}
+      </section>
+      <section className="final-audit-cta compliance-cta">
+        <div className="eyebrow">NEXT STEP</div>
+        <h2>Start with the audit.</h2>
+        <p>Compliance gates are part of the diagnostic, not a surprise after the build starts.</p>
+        <button className="stamp-button link-button" type="button" onClick={() => setPage('audit')}>
+          Run a Lead Flow Audit →
+          <ArrowUpRight size={18} strokeWidth={3} />
+        </button>
+      </section>
     </main>
   );
 }
@@ -1762,15 +3531,15 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
     <main className="buildout-page" id="top">
       <section className="buildout-hero">
         <div className="hero-copy">
-          <div className="eyebrow">FREE AI BUSINESS BUILDOUT PLAN</div>
-          <h1>Get the blueprint before you build.</h1>
+          <div className="eyebrow">LEAD SYSTEM AUDIT</div>
+          <h1>Find the leak before you build.</h1>
           <p>
-            Thurr analyzes your idea, niche, goal, and current assets, then maps the
-            private AI system we would build first.
+            Thurr reviews your website, lead path, follow-up, and current tools, then maps the
+            simplest system worth building first.
           </p>
           <div className="hero-actions">
             <a className="stamp-button link-button" href="#buildout-form">
-              START THE BLUEPRINT
+              START THE AUDIT
               <ArrowUpRight size={18} strokeWidth={3} />
             </a>
             <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
@@ -1784,7 +3553,7 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
             <span>REPORT SAMPLE</span>
             <span className="activity-glyph">✓</span>
           </div>
-          <h2>Autopilot Blueprint</h2>
+          <h2>Lead System Audit</h2>
           <div className="report-mini-list">
             {blueprintSections.slice(0, 6).map((section, index) => (
               <div key={section}>
@@ -1805,10 +3574,10 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
       <section className="buildout-section" id="buildout-form" aria-labelledby="buildout-page-title">
         <div className="section-copy">
           <div className="eyebrow">THE INTAKE</div>
-          <h2 id="buildout-page-title">Tell us what you want to build.</h2>
+          <h2 id="buildout-page-title">Tell us where leads come from now.</h2>
           <p>
-            V1 sends this into n8n, saves the lead, notifies you, and prepares the report generation
-            step. Later this becomes the first onboarding screen inside the app.
+            This gives enough context to diagnose the current path before recommending a website,
+            workflow, AI assistant, or retainer.
           </p>
         </div>
         <BuildoutForm
@@ -1842,8 +3611,8 @@ function AuthoritySection() {
       <div className="authority-card-grid">
         <FlowCard
           icon={Target}
-          title="Lead Intake"
-          text="Capture the request, qualify the opportunity, and route it before the lead cools off."
+          title="Growth Websites"
+          text="Service pages, booking paths, inquiry forms, SEO metadata, and follow-up handoffs built around conversion."
         />
         <FlowCard
           icon={Zap}
@@ -1852,8 +3621,8 @@ function AuthoritySection() {
         />
         <FlowCard
           icon={Bot}
-          title="Private AI Agents"
-          text="Internal agents draft reports, summarize activity, and help decide the next best move."
+          title="AI Intake"
+          text="AI assistants can qualify, summarize, and route leads when the workflow justifies the extra complexity."
         />
         <FlowCard
           icon={BriefcaseBusiness}
@@ -1924,7 +3693,7 @@ function BuildoutForm({ form, updateField, handleSubmit, submissionState }) {
         />
       </label>
       <button className="stamp-button wide-field" type="submit">
-        GET MY BUILDOUT PLAN
+        REQUEST THE AUDIT
         <ArrowUpRight size={18} strokeWidth={3} />
       </button>
       {submissionState === 'sending' && (
@@ -2582,6 +4351,78 @@ function BrandBoundary() {
         </div>
       </section>
     </>
+  );
+}
+
+const selectedWork = {
+  'restore-contracting': {
+    eyebrow: 'LIVE CLIENT',
+    title: 'Restore Contracting — storm lead capture',
+    body:
+      'Live deployment for a residential contractor capturing storm-damage leads with instant routing. Case study in progress.',
+    detail:
+      'Restore is the real client proof point for contractor lead capture. The next useful add-on is a residential close-system presentation that shows the custom app experience without promising a giant enterprise platform.',
+    status: 'Active retainer',
+  },
+  'dallas-mobile-detailing': {
+    eyebrow: 'DEMO BUILD',
+    title: 'Dallas Mobile Detailing — demo build',
+    body:
+      'A demonstration build for a mobile detailing operator showing intake form, owner alert, and SMS auto-response. Built as a reference template.',
+    detail:
+      'This stays positioned as a demo, not a customer claim. It is useful for showing the lead-flow mechanism without inventing fake conversion metrics.',
+    status: 'Reference template',
+  },
+};
+
+function WorkPage() {
+  return (
+    <main className="b2b-home-page work-page" id="top" data-brand="thurr-solutions">
+      <section className="audit-hero">
+        <div className="eyebrow">SELECTED WORK</div>
+        <h1>Selected work.</h1>
+        <p>
+          Real engagements and reference builds that show the mechanism: capture the lead,
+          route it fast, and make the next action visible.
+        </p>
+      </section>
+
+      <section className="field-notes-section" aria-label="Selected work">
+        <div className="field-notes-grid">
+          {Object.entries(selectedWork).map(([slug, item]) => (
+            <a className="field-note-card work-card-link" href={`/work/${slug}`} key={slug}>
+              <span>{item.eyebrow}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              <strong>{item.status}</strong>
+            </a>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function WorkDetailPage({ slug, setPage }) {
+  const item = selectedWork[slug] || selectedWork['restore-contracting'];
+
+  return (
+    <main className="b2b-home-page work-page" id="top" data-brand="thurr-solutions">
+      <section className="audit-hero">
+        <div className="eyebrow">{item.eyebrow}</div>
+        <h1>{item.title}</h1>
+        <p>{item.body}</p>
+      </section>
+
+      <section className="final-audit-cta">
+        <div className="eyebrow">WORK NOTE</div>
+        <h2>{item.status}</h2>
+        <p>{item.detail}</p>
+        <button className="text-link dark-link button-link" type="button" onClick={() => setPage('work')}>
+          Back to selected work →
+        </button>
+      </section>
+    </main>
   );
 }
 
