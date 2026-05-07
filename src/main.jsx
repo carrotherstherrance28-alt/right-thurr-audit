@@ -214,6 +214,10 @@ function getInitialPage() {
     return 'compliance';
   }
 
+  if (window.location.pathname === '/privacy' || window.location.pathname === '/privacy/') {
+    return 'privacy';
+  }
+
   if (window.location.pathname === '/work/restore-contracting' || window.location.pathname === '/work/restore-contracting/') {
     return 'work-restore';
   }
@@ -378,6 +382,7 @@ const pageRoutes = {
   audit: '/audit',
   'audit-thanks': '/audit/thanks',
   compliance: '/compliance',
+  privacy: '/privacy',
   work: '/work',
   'work-restore': '/work/restore-contracting',
   'work-heartpathbloom': '/work/heartpathbloom',
@@ -612,6 +617,14 @@ function App() {
 
     if (normalizedPathname === pageRoutes.compliance) {
       setPage('compliance');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === pageRoutes.privacy) {
+      setPage('privacy');
       if (pathname !== normalizedPathname) {
         replaceLocationPathname(normalizedPathname);
       }
@@ -1000,6 +1013,7 @@ function App() {
       audit: 'Lead Flow Audit | Thurr Solutions',
       'audit-thanks': 'Audit Request Received | Thurr Solutions',
       compliance: 'Compliance | Thurr Solutions',
+      privacy: 'Privacy | Thurr Solutions',
       work: 'Selected Work | Thurr Solutions',
       'work-restore': 'Restore Contracting | Thurr Solutions',
       'work-heartpathbloom': 'HeartPathBloom | Thurr Solutions',
@@ -1654,6 +1668,7 @@ function App() {
     page === 'audit-thanks' ||
     page === 'solutions' ||
     page === 'compliance' ||
+    page === 'privacy' ||
     page === 'work' ||
     page === 'work-restore' ||
     page === 'work-heartpathbloom' ||
@@ -1684,6 +1699,7 @@ function App() {
       {page === 'audit' && <AuditPage setPage={navigateToPage} />}
       {page === 'audit-thanks' && <AuditThanksPage setPage={navigateToPage} />}
       {page === 'compliance' && <CompliancePage setPage={navigateToPage} />}
+      {page === 'privacy' && <PrivacyPage setPage={navigateToPage} />}
       {page === 'work' && <WorkPage setPage={navigateToPage} />}
       {page === 'work-restore' && <WorkDetailPage slug="restore-contracting" setPage={navigateToPage} />}
       {page === 'work-heartpathbloom' && <WorkDetailPage slug="heartpathbloom" setPage={navigateToPage} />}
@@ -4367,6 +4383,50 @@ function BrandBoundary() {
         </div>
       </section>
     </>
+  );
+}
+
+function PrivacyPage({ setPage }) {
+  const privacyRows = [
+    ['What the audit form collects', 'Business name, owner name, email, website URL, approximate lead volume, and the operational lead-flow issue you describe.'],
+    ['What not to submit', 'Do not submit patient health information, youth/minor private content, passwords, payment details, SSNs, insurance health details, or confidential customer records.'],
+    ['How it is used', 'Audit submissions are used to review fit, prepare a first response, and create internal follow-up records for Thurr Solutions.'],
+    ['Where it may route internally', 'A submission may create a private Supabase row, owner alert, Notion prospect record, and Linear review task. These systems are for internal operations only.'],
+    ['Retention', 'Prospect records are kept only as long as needed for sales, delivery, compliance, and business recordkeeping. Delete requests can be sent by email.'],
+  ];
+
+  return (
+    <main className="compliance-page" id="top" data-brand="thurr-solutions">
+      <section className="compliance-hero">
+        <div className="eyebrow">PRIVACY</div>
+        <h1>How audit request data is handled.</h1>
+        <p>
+          This page explains the operational data boundary for Thurr Solutions audit requests.
+          It is not a substitute for legal review, and the policy should be reviewed before
+          public launch or paid traffic.
+        </p>
+      </section>
+      <section className="compliance-grid" aria-label="Privacy handling">
+        {privacyRows.map(([title, body]) => (
+          <article className="compliance-card" key={title}>
+            <span>{title}</span>
+            <p>{body}</p>
+          </article>
+        ))}
+      </section>
+      <section className="final-audit-cta compliance-cta">
+        <div className="eyebrow">CONTACT</div>
+        <h2>Questions about your audit request?</h2>
+        <p>Email Thurr Solutions directly before submitting regulated or sensitive information.</p>
+        <a className="stamp-button link-button" href="mailto:hello@thurrsolutions.com">
+          Email Thurr Solutions →
+          <ArrowUpRight size={18} strokeWidth={3} />
+        </a>
+        <button className="text-link dark-link button-link" type="button" onClick={() => setPage('audit')}>
+          Back to Lead Flow Audit →
+        </button>
+      </section>
+    </main>
   );
 }
 

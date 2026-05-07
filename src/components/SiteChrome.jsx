@@ -154,6 +154,7 @@ export function SiteFooter({ navigateToAbout, navigateToPage, socialLinks }) {
       <div className="site-footer-column">
         <span>Legal</span>
         <button type="button" onClick={() => navigateToPage('compliance')}>Compliance</button>
+        <button type="button" onClick={() => navigateToPage('privacy')}>Privacy</button>
         <button type="button" onClick={navigateToAbout}>Founder</button>
         <a href="mailto:hello@thurrsolutions.com">Contact</a>
       </div>
@@ -176,6 +177,10 @@ export function SiteFooter({ navigateToAbout, navigateToPage, socialLinks }) {
           Email
         </a>
       </div>
+      <p className="site-footer-disclosure">
+        HIPAA-aware system design. TCPA-safe follow-up architecture. COPPA-compliant where required.
+        Compliance sign-off required before any regulated system goes live.
+      </p>
       <p className="site-footer-disclosure">
         Thurr Solutions LLC does not provide legal, financial, or medical advice. We do not
         guarantee leads, closed jobs, or specific revenue outcomes. Healthcare engagements require
