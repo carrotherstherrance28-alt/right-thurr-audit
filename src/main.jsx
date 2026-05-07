@@ -218,8 +218,12 @@ function getInitialPage() {
     return 'work-restore';
   }
 
-  if (window.location.pathname === '/work/dallas-mobile-detailing' || window.location.pathname === '/work/dallas-mobile-detailing/') {
-    return 'work-dmd';
+  if (window.location.pathname === '/work/heartpathbloom' || window.location.pathname === '/work/heartpathbloom/') {
+    return 'work-heartpathbloom';
+  }
+
+  if (window.location.pathname === '/work/insurance-pipeline' || window.location.pathname === '/work/insurance-pipeline/') {
+    return 'work-insurance';
   }
 
   if (window.location.pathname === '/work' || window.location.pathname === '/work/') {
@@ -376,7 +380,8 @@ const pageRoutes = {
   compliance: '/compliance',
   work: '/work',
   'work-restore': '/work/restore-contracting',
-  'work-dmd': '/work/dallas-mobile-detailing',
+  'work-heartpathbloom': '/work/heartpathbloom',
+  'work-insurance': '/work/insurance-pipeline',
 };
 
 const buildoutWebhookUrl = import.meta.env.VITE_N8N_BUILDOUT_WEBHOOK_URL;
@@ -621,8 +626,16 @@ function App() {
       return;
     }
 
-    if (normalizedPathname === pageRoutes['work-dmd']) {
-      setPage('work-dmd');
+    if (normalizedPathname === pageRoutes['work-heartpathbloom']) {
+      setPage('work-heartpathbloom');
+      if (pathname !== normalizedPathname) {
+        replaceLocationPathname(normalizedPathname);
+      }
+      return;
+    }
+
+    if (normalizedPathname === pageRoutes['work-insurance']) {
+      setPage('work-insurance');
       if (pathname !== normalizedPathname) {
         replaceLocationPathname(normalizedPathname);
       }
@@ -989,7 +1002,8 @@ function App() {
       compliance: 'Compliance | Thurr Solutions',
       work: 'Selected Work | Thurr Solutions',
       'work-restore': 'Restore Contracting | Thurr Solutions',
-      'work-dmd': 'Dallas Mobile Detailing Demo | Thurr Solutions',
+      'work-heartpathbloom': 'HeartPathBloom | Thurr Solutions',
+      'work-insurance': 'Insurance Pipeline Concept | Thurr Solutions',
       buildout: 'Lead System Audit | Thurr Solutions',
       solutions: 'Thurr Solutions | Services',
       'usecase-website-landlord': 'Website Landlord (Template) | Thurr Solutions',
@@ -1642,7 +1656,8 @@ function App() {
     page === 'compliance' ||
     page === 'work' ||
     page === 'work-restore' ||
-    page === 'work-dmd'
+    page === 'work-heartpathbloom' ||
+    page === 'work-insurance'
       ? 'thurr-solutions'
       : 'right-thurr';
 
@@ -1671,7 +1686,8 @@ function App() {
       {page === 'compliance' && <CompliancePage setPage={navigateToPage} />}
       {page === 'work' && <WorkPage setPage={navigateToPage} />}
       {page === 'work-restore' && <WorkDetailPage slug="restore-contracting" setPage={navigateToPage} />}
-      {page === 'work-dmd' && <WorkDetailPage slug="dallas-mobile-detailing" setPage={navigateToPage} />}
+      {page === 'work-heartpathbloom' && <WorkDetailPage slug="heartpathbloom" setPage={navigateToPage} />}
+      {page === 'work-insurance' && <WorkDetailPage slug="insurance-pipeline" setPage={navigateToPage} />}
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
       {page === 'solutions' && <SolutionsPage setPage={navigateToPage} />}
       {page === 'usecases-index' && <UseCasesIndexPage setPage={navigateToPage} />}
@@ -4364,14 +4380,23 @@ const selectedWork = {
       'Restore is the real client proof point for contractor lead capture. The next useful add-on is a residential close-system presentation that shows the custom app experience without promising a giant enterprise platform.',
     status: 'Active retainer',
   },
-  'dallas-mobile-detailing': {
-    eyebrow: 'DEMO BUILD',
-    title: 'Dallas Mobile Detailing — demo build',
+  heartpathbloom: {
+    eyebrow: 'SIGNED BUILD',
+    title: 'HeartPathBloom — youth wellness MVP',
     body:
-      'A demonstration build for a mobile detailing operator showing intake form, owner alert, and SMS auto-response. Built as a reference template.',
+      'Phase 1 build for a youth-facing wellness product with COPPA scope, crisis-review guardrails, and owned production infrastructure.',
     detail:
-      'This stays positioned as a demo, not a customer claim. It is useful for showing the lead-flow mechanism without inventing fake conversion metrics.',
-    status: 'Reference template',
+      'This is the strongest signal that Thurr Solutions can handle more than a landing page. Keep all claims compliance-aware: no clinical promises, no minor data screenshots, and no public details beyond the approved scope.',
+    status: 'In build, Phase 1',
+  },
+  'insurance-pipeline': {
+    eyebrow: 'PIPELINE CONCEPT',
+    title: 'Insurance lead pipeline — proposal concept',
+    body:
+      'A compliance-aware lead capture and follow-up concept for a licensed insurance agent: consent language, source tracking, response routing, and calendar handoff.',
+    detail:
+      'Use this as a forward-looking concept until the deal closes. It is stronger than a generic demo because it maps directly to the kind of client Thurr is pursuing, without implying a signed engagement.',
+    status: 'Proposal-ready',
   },
 };
 
