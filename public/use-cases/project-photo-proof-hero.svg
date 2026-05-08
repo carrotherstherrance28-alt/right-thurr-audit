@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bgProjectPhotoProof" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b0f" />
+      <stop offset="1" stop-color="#0f3f3a" />
+    </linearGradient>
+    <style>
+      .ink {
+        fill: rgba(255, 255, 255, 0.92);
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+      .muted {
+        fill: rgba(255, 255, 255, 0.72);
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+      .stroke {
+        stroke: rgba(255, 255, 255, 0.14);
+      }
+      .accent {
+        fill: rgba(106, 240, 210, 0.92);
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" fill="url(#bgProjectPhotoProof)" />
+  <rect x="64" y="48" width="1152" height="624" rx="24" fill="rgba(255,255,255,0.03)" class="stroke" stroke-width="1" />
+
+  <text class="muted" x="104" y="112" font-size="14" letter-spacing="1.2">USE CASE TEMPLATE</text>
+  <text class="ink" x="104" y="168" font-size="44" font-weight="700">Project Photo Proof</text>
+  <text class="muted" x="104" y="206" font-size="16">Job complete → request 3 photos → permission reply (operator-controlled).</text>
+
+  <rect x="104" y="244" width="520" height="392" rx="20" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+  <text class="accent" x="136" y="292" font-size="12" font-weight="700" letter-spacing="1.2">OPERATOR-SAFE</text>
+  <text class="ink" x="136" y="328" font-size="20" font-weight="700">Proof library without chaos.</text>
+  <text class="muted" x="136" y="358" font-size="14">Trigger only after “job complete”.</text>
+  <text class="muted" x="136" y="382" font-size="14">Ask for 3 photos + 1 reply.</text>
+  <text class="muted" x="136" y="406" font-size="14">Stop on reply; caps + quiet hours.</text>
+  <rect x="136" y="448" width="220" height="38" rx="19" fill="rgba(255,255,255,0.10)" class="stroke" stroke-width="1" />
+  <text class="ink" x="160" y="473" font-size="12" font-weight="700">Start with audit</text>
+  <rect x="368" y="448" width="224" height="38" rx="19" fill="rgba(255,255,255,0.06)" class="stroke" stroke-width="1" />
+  <text class="ink" x="392" y="473" font-size="12" font-weight="700">See services</text>
+
+  <rect x="656" y="244" width="520" height="392" rx="20" fill="rgba(255,255,255,0.04)" class="stroke" stroke-width="1" />
+
+  <rect x="688" y="290" width="172" height="150" rx="18" fill="rgba(255,255,255,0.05)" class="stroke" stroke-width="1" />
+  <text class="ink" x="712" y="332" font-size="14" font-weight="700">Job done</text>
+  <text class="muted" x="712" y="358" font-size="12">Marked complete</text>
+  <text class="muted" x="712" y="382" font-size="12">Happy outcome</text>
+
+  <rect x="872" y="290" width="172" height="150" rx="18" fill="rgba(255,255,255,0.05)" class="stroke" stroke-width="1" />
+  <text class="ink" x="896" y="332" font-size="14" font-weight="700">Ask for 3</text>
+  <text class="muted" x="896" y="358" font-size="12">Wide + detail</text>
+  <text class="muted" x="896" y="382" font-size="12">Result shot</text>
+
+  <rect x="1056" y="290" width="104" height="150" rx="18" fill="rgba(255,255,255,0.05)" class="stroke" stroke-width="1" />
+  <text class="ink" x="1072" y="332" font-size="14" font-weight="700">YES/NO</text>
+  <text class="muted" x="1072" y="358" font-size="12">Permission</text>
+  <text class="muted" x="1072" y="382" font-size="12">One reply</text>
+
+  <path d="M860 366 H872" fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="3" stroke-linecap="round" />
+  <path d="M1044 366 H1056" fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="3" stroke-linecap="round" />
+
+  <rect x="688" y="474" width="472" height="130" rx="18" fill="rgba(255,255,255,0.03)" class="stroke" stroke-width="1" />
+  <text class="accent" x="712" y="512" font-size="12" font-weight="700" letter-spacing="1.2">GUARDRAILS</text>
+  <text class="muted" x="712" y="540" font-size="13">Consent-first • Stop on reply • One follow-up max • Quiet hours + caps</text>
+  <text class="muted" x="712" y="566" font-size="13">Clear permission language • Honor takedown requests</text>
+</svg>
+

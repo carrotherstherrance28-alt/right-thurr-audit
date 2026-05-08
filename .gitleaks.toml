@@ -1,0 +1,16 @@
+title = "right-thurr-audit gitleaks config"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-private-key-file"
+description = "Private key material"
+regex = '''-----BEGIN (RSA |EC |OPENSSH |DSA |PRIVATE )?PRIVATE KEY-----'''
+tags = ["key", "private"]
+
+[[rules]]
+id = "thurr-hook-test-secret"
+description = "Local hook test marker"
+regex = '''THURR_FAKE_SECRET_DO_NOT_COMMIT_[A-Z0-9]{12,}'''
+tags = ["test", "secret"]

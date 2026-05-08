@@ -1,0 +1,194 @@
+@media (max-width: 720px) {
+  body[data-brand="thurr-solutions"] .audit-page {
+    width: min(100% - 20px, 1480px);
+    overflow-x: hidden;
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-5);
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+    margin-inline: auto;
+    padding: var(--s-5);
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero h1 {
+    max-width: calc(100vw - 70px);
+    font-size: clamp(28px, 8vw, 34px);
+    line-height: 1.06;
+    overflow-wrap: break-word;
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero p {
+    max-width: calc(100vw - 70px);
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero .stamp-button,
+  body[data-brand="thurr-solutions"] .audit-page .audit-hero .text-link {
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  body[data-brand="thurr-solutions"] .audit-page .audit-price-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: calc(100vw - 60px);
+    min-width: 0;
+    padding: var(--s-5);
+  }
+}
+
+/* Visual Sprint 01 must win over older OPERATOR CORE chrome rules. */
+body[data-brand="thurr-solutions"] .system-status-bar {
+  display: none !important;
+}
+
+body[data-brand="thurr-solutions"] .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 32px;
+  background: #F5EFE2;
+  border-bottom: 2px solid #1A1714;
+  backdrop-filter: none;
+}
+
+body[data-brand="thurr-solutions"] .brand-name {
+  color: #1A1714;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+body[data-brand="thurr-solutions"] .site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 48px;
+  border-top: 2px solid #1A1714;
+  background: #F5EFE2;
+  color: #7a7264;
+}
+
+body[data-brand="thurr-solutions"] .work-page .audit-hero {
+  display: grid;
+  min-height: auto;
+  padding: 64px 36px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: none;
+}
+
+body[data-brand="thurr-solutions"] .work-page .audit-hero h1 {
+  max-width: 860px;
+  color: #F5EFE2;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(54px, 7vw, 92px);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+body[data-brand="thurr-solutions"] .work-page .audit-hero p {
+  max-width: 760px;
+  color: #7A7670;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+body[data-brand="thurr-solutions"] .work-page .audit-hero .eyebrow {
+  color: #D9621F;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+
+/* Light mode is opt-in only. Dark remains the default unless the visitor toggles it. */
+body[data-brand="thurr-solutions"][data-ui-theme="light"] {
+  --bg: #F5EFE2;
+  --bg2: #EDE7D9;
+  --paper: #1A1714;
+  --paper2: #2A2520;
+  --ink: #1A1714;
+  --warm-text: #1A1714;
+  --muted: #6B6258;
+  --border: rgba(26, 23, 20, 0.14);
+  --grid-1: rgba(217, 98, 31, 0.16);
+  --grid-2: rgba(26, 23, 20, 0.05);
+  --op-bg: #F5EFE2;
+  --op-surface: rgba(26, 23, 20, 0.035);
+  --op-surface-2: rgba(26, 23, 20, 0.06);
+  --op-border: rgba(26, 23, 20, 0.14);
+  --op-text: #1A1714;
+  --op-text-muted: #6B6258;
+  --op-text-dim: #8A8175;
+  background: #F5EFE2;
+  color: #1A1714;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .app-shell {
+  background: #F5EFE2;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.18) 2px,
+    rgba(255, 255, 255, 0.18) 4px
+  );
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-primary-btn,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .stamp-button {
+  color: #F5EFE2;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .pipeline-wrap,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-work article,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .work-page .audit-hero,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .terminal-widget {
+  background: rgba(26, 23, 20, 0.035);
+  border-color: rgba(26, 23, 20, 0.14);
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .pipeline-wrap::before,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form::before {
+  background: #F5EFE2;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .node-box,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form input,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form select {
+  background: rgba(26, 23, 20, 0.05);
+  border-color: rgba(26, 23, 20, 0.16);
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .node-label-main,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form input,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form select,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .work-page .audit-hero h1 {
+  color: #1A1714;
+  fill: #1A1714;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .node-label-sub {
+  fill: #6B6258;
+}

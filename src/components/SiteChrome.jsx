@@ -1,158 +1,74 @@
 import React from 'react';
-import { BriefcaseBusiness, ChevronDown, Instagram, Linkedin, Mail, Menu } from 'lucide-react';
-import monogram from '../assets/rt-monogram-clean.png';
+
+export function SystemStatusBar() {
+  const statuses = ['AUDIT · OPERATIONAL', 'BUILD · OPERATIONAL', 'MANAGE · OPERATIONAL'];
+  const buildTime = typeof __BUILD_TIME__ === 'string' ? new Date(__BUILD_TIME__) : new Date();
+  const statusTime = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(buildTime);
+
+  return (
+    <div className="system-status-bar" aria-label="Thurr Solutions system status">
+      <div className="status-bar-desktop">
+        {statuses.map((status) => (
+          <span className="status-pill" key={status}>
+            <span className="status-dot" />
+            {status}
+          </span>
+        ))}
+      </div>
+      <div className="status-bar-mobile">
+        <span className="status-pill">
+          <span className="status-dot" />
+          ALL SYSTEMS OPERATIONAL
+        </span>
+      </div>
+      <span className="status-updated">LAST UPDATED {statusTime}</span>
+    </div>
+  );
+}
 
 export function SiteHeader({
-  canViewOperator,
-  menuOpen,
-  navigateToAbout,
   navigateToPage,
-  operatorNavItems,
-  page,
-  publicNavItems,
-  setMenuOpen,
-  socialLinks,
+  onToggleTheme,
+  uiTheme = 'dark',
 }) {
+  const nextThemeLabel = uiTheme === 'dark' ? 'Light' : 'Dark';
+
   return (
     <header className="topbar">
-      <button className="brand-lockup brand-button" type="button" onClick={() => navigateToPage('home')}>
-        <img src={monogram} alt="" className="brand-mark" />
-        <span className="brand-name">Thurr Solutions</span>
+      <button className="brand-lockup brand-button" type="button" onClick={() => navigateToPage('home')} aria-label="Go to Thurr Solutions home">
+        <span className="nav-wordmark-dot" aria-hidden="true" />
+        <span className="brand-name">THURR SOLUTIONS</span>
       </button>
 
       <div className="topbar-actions">
-        <div className={canViewOperator ? 'system-live owner-live' : 'system-live'}>
-          <span className="live-dot" />
-          {canViewOperator ? 'OWNER MODE' : 'SYSTEM LIVE'}
-        </div>
-        <div className="nav-menu">
-          <button
-            className={menuOpen ? 'menu-trigger active' : 'menu-trigger'}
-            type="button"
-            aria-expanded={menuOpen}
-            aria-controls="primary-menu"
-            onClick={() => setMenuOpen((current) => !current)}
-          >
-            <Menu size={18} strokeWidth={3} />
-            Menu
-            <ChevronDown size={16} strokeWidth={3} />
-          </button>
-          {menuOpen && (
-            <nav className="nav-dropdown" id="primary-menu" aria-label="Primary navigation">
-              {publicNavItems.map(([label, target]) => (
-                <button
-                  className={page === target ? 'nav-tab active' : 'nav-tab'}
-                  key={label}
-                  type="button"
-                  onClick={() => navigateToPage(target)}
-                >
-                  {label}
-                </button>
-              ))}
-              <button className="nav-tab" type="button" onClick={navigateToAbout}>
-                About Therrance
-              </button>
-              <div className="nav-social-links" aria-label="Therrance Carrothers social links">
-                <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
-                  <Linkedin size={16} strokeWidth={3} />
-                  LinkedIn
-                </a>
-                <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
-                  <Instagram size={16} strokeWidth={3} />
-                  Instagram
-                </a>
-                <a href={socialLinks.upwork} target="_blank" rel="noreferrer">
-                  <BriefcaseBusiness size={16} strokeWidth={3} />
-                  Upwork
-                </a>
-                <a href="mailto:hello@thurrsolutions.com">
-                  <Mail size={16} strokeWidth={3} />
-                  Email
-                </a>
-              </div>
-              {canViewOperator &&
-                operatorNavItems.map(([label, target]) => (
-                  <button
-                    className={page === target ? 'nav-tab active operator-nav-tab' : 'nav-tab operator-nav-tab'}
-                    key={label}
-                    type="button"
-                    onClick={() => navigateToPage(target)}
-                  >
-                    {label}
-                  </button>
-                ))}
-            </nav>
-          )}
-        </div>
+        <button
+          className="theme-toggle"
+          type="button"
+          aria-label={`Switch to ${nextThemeLabel.toLowerCase()} mode`}
+          onClick={onToggleTheme}
+        >
+          <span className={uiTheme === 'dark' ? 'active' : ''}>Dark</span>
+          <span className={uiTheme === 'light' ? 'active' : ''}>Light</span>
+        </button>
+        <a className="nav-cta" href="#audit">Get the Lead Flow Audit — $250</a>
       </div>
-
-      <nav className="nav-tabs desktop-nav" aria-label="Primary navigation">
-        {canViewOperator &&
-          operatorNavItems.map(([label, target]) => (
-            <button
-              className={page === target ? 'nav-tab active operator-nav-tab' : 'nav-tab operator-nav-tab'}
-              key={label}
-              type="button"
-              onClick={() => navigateToPage(target)}
-            >
-              {label}
-            </button>
-          ))}
-      </nav>
     </header>
   );
 }
 
-export function SiteFooter({ navigateToAbout, navigateToPage, socialLinks }) {
+export function SiteFooter({ navigateToPage }) {
   return (
     <footer className="site-footer" aria-label="Thurr Solutions footer">
-      <div className="site-footer-promise">
-        <span>Thurr</span>
-        <strong>
-          We build.
-          <span>You profit.</span>
-        </strong>
-      </div>
-
-      <div className="site-footer-capabilities" aria-label="Core capabilities">
-        <span>Blueprints</span>
-        <span>Automation</span>
-        <span>AI Agents</span>
-        <span>Certified AI Automation</span>
-      </div>
-
-      <nav className="site-footer-links" aria-label="Footer navigation">
-        <button type="button" onClick={() => navigateToPage('home')}>
-          Home
-        </button>
-        <button type="button" onClick={() => navigateToPage('buildout')}>
-          Buildout Plan
-        </button>
-        <button type="button" onClick={() => navigateToPage('solutions')}>
-          Thurr
-        </button>
-        <button type="button" onClick={navigateToAbout}>
-          About
-        </button>
-      </nav>
-
-      <div className="site-footer-socials" aria-label="Therrance Carrothers links">
-        <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
-          <Linkedin size={17} strokeWidth={3} />
-          LinkedIn
-        </a>
-        <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
-          <Instagram size={17} strokeWidth={3} />
-          Instagram
-        </a>
-        <a href={socialLinks.upwork} target="_blank" rel="noreferrer">
-          <BriefcaseBusiness size={17} strokeWidth={3} />
-          Upwork
-        </a>
-        <a href="mailto:hello@thurrsolutions.com">
-          <Mail size={17} strokeWidth={3} />
-          Email
-        </a>
+      <div className="footer-brand">THURR SOLUTIONS</div>
+      <p>Thurr Solutions LLC · Missouri · Houston Office · AI Automation Engineer</p>
+      <div className="footer-links">
+        <button type="button" onClick={() => navigateToPage('privacy')}>Privacy Policy</button>
+        <a href="mailto:hello@thurrsolutions.com">hello@thurrsolutions.com</a>
       </div>
     </footer>
   );

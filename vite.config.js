@@ -5,6 +5,9 @@ import fs from 'node:fs';
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+  },
   build: {
     rollupOptions: {
       input: (() => {

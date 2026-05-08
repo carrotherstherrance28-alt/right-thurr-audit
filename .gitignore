@@ -4,14 +4,28 @@ dist/
 *.local
 .env
 .env.*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.crt
+*.cer
+*credentials*.json
+*secret*.json
+*token*.json
+n8n-credentials*.json
+supabase-service-role*.json
 
 # Local editor and tool output
 .vite/
 .aidesigner/runs/
 .vercel
+.netlify
 out/
 docs/resume/ql/
 docs/resume/rendered/
+private-media/
 .aidesigner/*
 !.aidesigner/.gitkeep
 .superpowers/

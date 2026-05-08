@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1120" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0B0F" />
+      <stop offset="1" stop-color="#101018" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#151522" />
+      <stop offset="1" stop-color="#0F0F18" />
+    </linearGradient>
+  </defs>
+  <rect width="1120" height="760" rx="28" fill="url(#bg)" />
+  <rect x="52" y="78" width="1016" height="604" rx="22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)" />
+
+  <text x="92" y="152" fill="rgba(255,255,255,0.92)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="24" font-weight="800">
+    Appointment Prep Checklist
+  </text>
+  <text x="92" y="184" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="15">
+    Day-before trigger → one prep confirmation message → stop rules + human routing (operator-safe).
+  </text>
+
+  <g>
+    <rect x="92" y="238" width="292" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text x="122" y="290" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      Trigger
+    </text>
+    <text x="122" y="322" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      18–24 hours before
+    </text>
+    <rect x="122" y="356" width="232" height="154" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" />
+    <text x="142" y="392" fill="rgba(255,255,255,0.76)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      Gate rules
+    </text>
+    <g fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      <text x="142" y="418">Business hours</text>
+      <text x="142" y="442">Consent on file</text>
+      <text x="142" y="466">Stop if already confirmed</text>
+      <text x="142" y="490">Skip if canceled/rescheduled</text>
+    </g>
+    <text x="122" y="564" fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      One message (no drip)
+    </text>
+  </g>
+
+  <path d="M408 430h64" stroke="rgba(255,255,255,0.20)" stroke-width="10" stroke-linecap="round" />
+  <path d="M454 402l30 28-30 28" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+
+  <g>
+    <rect x="496" y="238" width="292" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text x="526" y="290" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      Message
+    </text>
+    <text x="526" y="322" fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="14">
+      Confirm + collect notes
+    </text>
+    <rect x="526" y="356" width="232" height="202" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)" />
+    <g fill="rgba(255,255,255,0.70)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12">
+      <text x="546" y="388">“Quick confirmation for tomorrow</text>
+      <text x="546" y="410">at 10:15–11:00.</text>
+      <text x="546" y="436">Reply YES to confirm.</text>
+      <text x="546" y="462">Gate code / parking notes?</text>
+      <text x="546" y="488">Pets on site?”</text>
+    </g>
+    <text x="526" y="602" fill="rgba(255,255,255,0.64)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="13">
+      One CTA: confirm or reply
+    </text>
+  </g>
+
+  <path d="M812 430h64" stroke="rgba(255,255,255,0.20)" stroke-width="10" stroke-linecap="round" />
+  <path d="M858 402l30 28-30 28" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+
+  <g>
+    <rect x="900" y="238" width="168" height="382" rx="18" fill="url(#panel)" stroke="rgba(255,255,255,0.10)" />
+    <text x="930" y="290" fill="rgba(255,255,255,0.90)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="16" font-weight="800">
+      Outcomes
+    </text>
+    <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12" fill="rgba(255,255,255,0.70)">
+      <text x="930" y="332">Confirmed ✓</text>
+      <text x="930" y="364">Notes captured</text>
+      <text x="930" y="396">Change request → human</text>
+      <text x="930" y="428">No reply → 1 follow-up</text>
+      <text x="930" y="460">Stop + close</text>
+    </g>
+    <rect x="930" y="496" width="108" height="96" rx="14" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.10)" />
+    <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="12" fill="rgba(255,255,255,0.62)">
+      <text x="944" y="528">Stop rules</text>
+      <text x="944" y="552">cap 1</text>
+      <text x="944" y="576">quiet hours</text>
+    </g>
+  </g>
+</svg>
+

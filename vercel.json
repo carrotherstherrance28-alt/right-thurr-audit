@@ -46,6 +46,14 @@
       "destination": "/"
     },
     {
+      "source": "/audit",
+      "destination": "/"
+    },
+    {
+      "source": "/audit/thanks",
+      "destination": "/"
+    },
+    {
       "source": "/diagnostic",
       "destination": "/diagnostic/index.html"
     },

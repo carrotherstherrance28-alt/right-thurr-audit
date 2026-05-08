@@ -32,7 +32,7 @@ I build the intake, follow-up, reporting, and automation system so owners stop l
 
 ## First Offer Stack
 
-Start with three offers. Do not launch with ten.
+Start with four offers. Do not launch with ten.
 
 ### Offer 1: Lead-Flow Diagnostic
 
@@ -85,7 +85,37 @@ Starting price:
 $250-$500 depending on integrations
 ```
 
-### Offer 3: AI Business Buildout Blueprint
+### Offer 3: Missed-Call Text-Back + ROI Calculator
+
+Best for local service businesses that miss calls or rely on owner memory for follow-up.
+
+```txt
+I will build a missed-call text-back workflow that helps recover warm leads and shows what missed calls may be worth.
+```
+
+Deliverables:
+
+- Missed-call response flow map
+- SMS text-back copy
+- Lead reply capture path
+- Owner/team alert
+- Lead log in CRM, Sheet, Airtable, or Supabase
+- Simple ROI calculator estimate
+- Handoff notes
+
+Starting price:
+
+```txt
+$250-$750 for demo/setup, higher if phone/SMS/CRM complexity is involved
+```
+
+Guardrail:
+
+```txt
+ROI is an estimate, not a guarantee. SMS and industry compliance rules must be reviewed before launch.
+```
+
+### Offer 4: AI Business Buildout Blueprint
 
 Best for Thurr-owned site leads and higher-value Upwork conversations.
 
@@ -126,9 +156,11 @@ My work focuses on practical AI automation systems: lead intake, CRM routing, n8
 
 What I can build:
 - n8n lead intake workflows
+- missed-call text-back and lead recovery workflows
 - website form to CRM/Supabase/Google Sheets/Airtable automations
 - Discord, Slack, email, or SMS owner alerts
 - follow-up task and email/SMS sequences
+- simple ROI calculators for missed leads and follow-up leaks
 - AI-generated lead summaries and diagnostic reports
 - owner command centers for activity, tasks, and revenue visibility
 
@@ -161,6 +193,7 @@ Portfolio items to add:
 
 - Thurr Solutions Buildout Engine
 - Mobile Detailing Lead-Flow Diagnostic
+- Missed-Call Text-Back + ROI Calculator demo
 - n8n Intake to Supabase to Discord workflow
 - Approved-report/manual-review flow
 - Remotion branded intro once rendered
