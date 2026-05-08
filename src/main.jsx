@@ -506,6 +506,13 @@ function App() {
   const isOperatorPreview = getIsOperatorPreview();
   const [operatorAccess, setOperatorAccess] = useState({ status: 'idle', message: '' });
   const [canViewOperator, setCanViewOperator] = useState(false);
+  const [uiTheme, setUiTheme] = useState(() => {
+    if (typeof window === 'undefined') {
+      return 'dark';
+    }
+
+    return window.localStorage.getItem('thurr-solutions-theme') === 'light' ? 'light' : 'dark';
+  });
   const currentStep = useMemo(() => buildSteps[form.idea.length % buildSteps.length], [form.idea]);
   const headDefaults = useMemo(() => {
     if (typeof window === 'undefined') {
@@ -1683,8 +1690,20 @@ function App() {
     document.body.dataset.brand = brand;
   }, [brand]);
 
+  useEffect(() => {
+    document.body.dataset.uiTheme = uiTheme;
+
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('thurr-solutions-theme', uiTheme);
+    }
+  }, [uiTheme]);
+
+  function toggleUiTheme() {
+    setUiTheme((current) => (current === 'dark' ? 'light' : 'dark'));
+  }
+
   return (
-    <div className="app-shell" data-brand={brand}>
+    <div className="app-shell" data-brand={brand} data-ui-theme={uiTheme}>
       {brand === 'thurr-solutions' ? (
         <>
           <div className="grid-bg" aria-hidden="true" />
@@ -1698,10 +1717,12 @@ function App() {
         navigateToAbout={navigateToAbout}
         navigateToPage={navigateToPage}
         operatorNavItems={operatorNavItems}
+        onToggleTheme={toggleUiTheme}
         page={page}
         publicNavItems={publicNavItems}
         setMenuOpen={setMenuOpen}
         socialLinks={socialLinks}
+        uiTheme={uiTheme}
       />
 
       {page === 'home' && <HomePage {...sharedProps} />}

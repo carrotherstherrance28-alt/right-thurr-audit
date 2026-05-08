@@ -33,7 +33,11 @@ export function SystemStatusBar() {
 
 export function SiteHeader({
   navigateToPage,
+  onToggleTheme,
+  uiTheme = 'dark',
 }) {
+  const nextThemeLabel = uiTheme === 'dark' ? 'Light' : 'Dark';
+
   return (
     <header className="topbar">
       <button className="brand-lockup brand-button" type="button" onClick={() => navigateToPage('home')} aria-label="Go to Thurr Solutions home">
@@ -42,6 +46,15 @@ export function SiteHeader({
       </button>
 
       <div className="topbar-actions">
+        <button
+          className="theme-toggle"
+          type="button"
+          aria-label={`Switch to ${nextThemeLabel.toLowerCase()} mode`}
+          onClick={onToggleTheme}
+        >
+          <span className={uiTheme === 'dark' ? 'active' : ''}>Dark</span>
+          <span className={uiTheme === 'light' ? 'active' : ''}>Light</span>
+        </button>
         <a className="nav-cta" href="#audit">Get the Lead Flow Audit — $250</a>
       </div>
     </header>

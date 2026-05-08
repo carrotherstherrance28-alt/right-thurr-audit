@@ -117,3 +117,78 @@ body[data-brand="thurr-solutions"] .work-page .audit-hero .eyebrow {
   font-size: 11px;
   letter-spacing: 0.18em;
 }
+
+/* Light mode is opt-in only. Dark remains the default unless the visitor toggles it. */
+body[data-brand="thurr-solutions"][data-ui-theme="light"] {
+  --bg: #F5EFE2;
+  --bg2: #EDE7D9;
+  --paper: #1A1714;
+  --paper2: #2A2520;
+  --ink: #1A1714;
+  --warm-text: #1A1714;
+  --muted: #6B6258;
+  --border: rgba(26, 23, 20, 0.14);
+  --grid-1: rgba(217, 98, 31, 0.16);
+  --grid-2: rgba(26, 23, 20, 0.05);
+  --op-bg: #F5EFE2;
+  --op-surface: rgba(26, 23, 20, 0.035);
+  --op-surface-2: rgba(26, 23, 20, 0.06);
+  --op-border: rgba(26, 23, 20, 0.14);
+  --op-text: #1A1714;
+  --op-text-muted: #6B6258;
+  --op-text-dim: #8A8175;
+  background: #F5EFE2;
+  color: #1A1714;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .app-shell {
+  background: #F5EFE2;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.18) 2px,
+    rgba(255, 255, 255, 0.18) 4px
+  );
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-primary-btn,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .stamp-button {
+  color: #F5EFE2;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .pipeline-wrap,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-work article,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .work-page .audit-hero,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .terminal-widget {
+  background: rgba(26, 23, 20, 0.035);
+  border-color: rgba(26, 23, 20, 0.14);
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .pipeline-wrap::before,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form::before {
+  background: #F5EFE2;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .node-box,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form input,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form select {
+  background: rgba(26, 23, 20, 0.05);
+  border-color: rgba(26, 23, 20, 0.16);
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .node-label-main,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form input,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-form select,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .work-page .audit-hero h1 {
+  color: #1A1714;
+  fill: #1A1714;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .node-label-sub {
+  fill: #6B6258;
+}
