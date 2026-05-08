@@ -1682,6 +1682,12 @@ function App() {
 
   return (
     <div className="app-shell" data-brand={brand}>
+      {brand === 'thurr-solutions' ? (
+        <>
+          <div className="grid-bg" aria-hidden="true" />
+          <div className="scanlines" aria-hidden="true" />
+        </>
+      ) : null}
       <SystemStatusBar />
       <SiteHeader
         canViewOperator={canViewOperator}
@@ -2745,37 +2751,277 @@ function SolutionsPage({ setPage }) {
 
 function HomePage({ setPage }) {
   return (
-    <main className="b2b-home-page" id="top" data-brand="thurr-solutions">
-      <section className="landing-hero machine-first-hero" aria-labelledby="hero-title">
-        <div className="hero-copy">
-          <div className="eyebrow">THURR SOLUTIONS / LEAD FLOW SYSTEMS</div>
-          <h1 id="hero-title">Your warm leads are getting cold.</h1>
-          <p>
-            Most local service businesses lose more revenue to slow follow-up than to bad marketing.
-            We find the leak, fix it, and keep it sealed.
-          </p>
-          <div className="hero-actions">
-            <a className="stamp-button link-button" href="/audit">
-              Book a Lead Flow Audit — $250
-              <ArrowUpRight size={18} strokeWidth={3} />
-            </a>
-            <a className="text-link dark-link" href="#how-it-works">
-              See how it works
-            </a>
-          </div>
-        </div>
-
-        <OperatorSystemPanel />
-      </section>
-
-      <ThreeStepsSection />
-      <HomeOfferLadderSection setPage={setPage} />
-      <IndustriesSection />
-      <SystemDiagramSection />
-      <FieldNotesSection />
-      <FounderOperatorSection />
-      <FinalCtaSection setPage={setPage} />
+    <main className="b2b-home-page visual-home-page" id="top" data-brand="thurr-solutions">
+      <VisualHero />
+      <PipelineDiagram />
+      <VisualMethodology />
+      <VisualAuditCta />
+      <VisualSelectedWork />
+      <VisualComplianceStrip />
+      <VisualOperatorSection />
+      <TerminalWidget />
     </main>
+  );
+}
+
+function VisualHero() {
+  return (
+    <section className="visual-hero" aria-labelledby="hero-title">
+      <div className="hero-tag">AI Automation Engineer · Houston · Est. 2026</div>
+      <h1 id="hero-title" className="visual-hero-title" aria-label="Your leads come in. Most go nowhere.">
+        <span className="hero-word" style={{ '--word-delay': '0s' }}>Your</span>{' '}
+        <span className="hero-word" style={{ '--word-delay': '0.08s' }}>leads</span>{' '}
+        <span className="hero-word" style={{ '--word-delay': '0.16s' }}>come</span>{' '}
+        <span className="hero-word" style={{ '--word-delay': '0.24s' }}>in.</span>
+        <br />
+        <em className="hero-word" style={{ '--word-delay': '0.32s' }}>Most go nowhere.</em>
+      </h1>
+      <p className="visual-hero-sub">
+        Thurr Solutions builds consent-aware lead capture, follow-up pipelines, and intake systems
+        for local service businesses that can't afford to waste a single inquiry.
+      </p>
+      <div className="visual-hero-actions">
+        <a className="visual-primary-btn" href="#audit">Get the Lead Flow Audit →</a>
+        <a className="visual-secondary-btn" href="#work">See selected work</a>
+      </div>
+      <div className="hero-meta-strip" aria-label="Current engagement status">
+        <span><i className="meta-dot dot-green" />Restore Contracting — Live</span>
+        <span><i className="meta-dot dot-orange" />HeartPathBloom — In Build</span>
+        <span><i className="meta-dot dot-muted" />Thurr Solutions LLC · Missouri</span>
+      </div>
+    </section>
+  );
+}
+
+function PipelineDiagram() {
+  const nodes = [
+    ['LEAD SOURCE', 'Facebook / Google', '/ Direct Inquiry', 20],
+    ['CAPTURE', 'Landing page +', 'consent form', 200],
+    ['QUALIFY', 'Instant response', '+ follow-up seq.', 380],
+    ['TRACK', 'Lead CRM /', 'status pipeline', 560],
+    ['BOOKED CALL', 'Calendar routing', '+ confirmation', 740],
+  ];
+
+  return (
+    <section className="pipeline-section" aria-labelledby="pipeline-title">
+      <div className="pipeline-label" id="pipeline-title">// Lead Flow Architecture — Phase 1 Standard</div>
+      <div className="pipeline-wrap">
+        <svg className="pipeline-svg" viewBox="0 0 900 160" role="img" aria-label="Lead flow from source to booked call">
+          <defs>
+            <marker id="pipe-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(217,98,31,0.4)" />
+            </marker>
+            <filter id="dot-glow" x="-80%" y="-80%" width="260%" height="260%">
+              <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#D9621F" />
+            </filter>
+          </defs>
+          <path id="pipeline-motion-path" d="M 145 80 L 755 80" fill="none" stroke="transparent" />
+          {[145, 325, 505, 685].map((x) => (
+            <g key={x}>
+              <line className="connector-path" x1={x} y1="80" x2={x + 55} y2="80" markerEnd="url(#pipe-arrow)" />
+              {x === 145 ? <line className="connector-path connector-active" x1={x} y1="80" x2={x + 55} y2="80" /> : null}
+            </g>
+          ))}
+          {nodes.map(([title, sub1, sub2, x], index) => (
+            <g className="pipe-node" key={title}>
+              <rect className="node-box" x={x} y="42" width="125" height="76" rx="2" />
+              {index === 0 ? <rect x={x} y="42" width="4" height="76" fill="#D9621F" /> : null}
+              {index === 4 ? <rect x={x + 121} y="42" width="4" height="76" fill="#4F7A3A" /> : null}
+              <text className="node-label-main" x={x + 62.5} y="68">{title}</text>
+              <text className="node-label-sub" x={x + 62.5} y="88">{sub1}</text>
+              <text className="node-label-sub" x={x + 62.5} y="103">{sub2}</text>
+            </g>
+          ))}
+          <circle r="5" fill="#D9621F" filter="url(#dot-glow)">
+            <animateMotion dur="4s" repeatCount="indefinite">
+              <mpath href="#pipeline-motion-path" />
+            </animateMotion>
+          </circle>
+        </svg>
+        <div className="pipeline-status-row">
+          <span><i className="meta-dot dot-green" />Consent capture: enabled</span>
+          <span><i className="meta-dot dot-orange" />Follow-up: 3-touch sequence</span>
+          <span><i className="meta-dot dot-muted" />TCPA-safe · Compliance gate active</span>
+          <strong>BUILD_ID: TS-PHASE1-001</strong>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VisualMethodology() {
+  const items = [
+    ['01 // PHASE ONE', 'AUDIT', 'We map your current lead flow and find exactly where prospects disappear. No assumptions. No generic recommendations.', 'DIAGNOSTIC'],
+    ['02 // PHASE TWO', 'BUILD', 'We build the intake, follow-up, and booking system around your real process — consent-aware, compliant, and built to last.', 'IMPLEMENTATION'],
+    ['03 // ONGOING', 'MANAGE', 'We keep it running. Workflow adjustments, reporting, sequence updates, and campaign coordination after launch.', 'RETAINER'],
+  ];
+
+  return (
+    <section className="visual-methodology" id="how-it-works" aria-label="Audit Build Manage methodology">
+      {items.map(([phase, title, body, tag]) => (
+        <article key={title}>
+          <span>{phase}</span>
+          <h2>{title}</h2>
+          <p>{body}</p>
+          <strong>{tag}</strong>
+        </article>
+      ))}
+    </section>
+  );
+}
+
+function VisualAuditCta() {
+  const [form, setForm] = useState({
+    businessName: '',
+    industry: 'Roofing / Contracting',
+    leadSource: '',
+    email: '',
+    consent: false,
+  });
+  const [state, setState] = useState('idle');
+
+  function updateField(field, value) {
+    setForm((current) => ({ ...current, [field]: value }));
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (!form.consent) {
+      setState('consent');
+      return;
+    }
+    setState('sending');
+    try {
+      await submitAuditRequest({
+        businessName: form.businessName,
+        ownerName: form.businessName,
+        email: form.email,
+        businessUrl: 'Not provided from homepage form',
+        monthlyLeadsEstimate: 'Not sure',
+        frustrationText: `Industry: ${form.industry}. Lead source: ${form.leadSource}`,
+      });
+      setState('queued');
+      window.history.pushState({}, '', '/audit/thanks');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    } catch {
+      setState('error');
+    }
+  }
+
+  return (
+    <section className="visual-audit-cta" id="audit" aria-labelledby="audit-title">
+      <div>
+        <h2 id="audit-title">Find out where your <em>pipeline breaks.</em></h2>
+        <p>
+          The Lead Flow Audit is a $250 paid diagnostic. I review your current process,
+          identify where leads are slipping, and deliver a written summary with a clear
+          recommended first step.
+        </p>
+        <div className="audit-price-line"><strong>$250</strong> · 1 business day turnaround · Thurr reviews personally</div>
+      </div>
+      <form className="visual-audit-form" onSubmit={handleSubmit}>
+        <label>
+          <span>Business name</span>
+          <input required value={form.businessName} placeholder="e.g. Restore Contracting" onChange={(event) => updateField('businessName', event.target.value)} />
+        </label>
+        <label>
+          <span>Industry</span>
+          <select value={form.industry} onChange={(event) => updateField('industry', event.target.value)}>
+            <option>Roofing / Contracting</option>
+            <option>Beauty / Nail Studio</option>
+            <option>Life Insurance</option>
+            <option>Healthcare / Hospice</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>
+          <span>Where do your leads come from?</span>
+          <input required value={form.leadSource} placeholder="Facebook ads, referrals, Google..." onChange={(event) => updateField('leadSource', event.target.value)} />
+        </label>
+        <label>
+          <span>Email address</span>
+          <input required type="email" value={form.email} placeholder="you@yourbusiness.com" onChange={(event) => updateField('email', event.target.value)} />
+        </label>
+        <label className="visual-consent">
+          <input type="checkbox" checked={form.consent} onChange={(event) => updateField('consent', event.target.checked)} />
+          <span>I agree to be contacted by Thurr Solutions about my audit results.</span>
+        </label>
+        <button className="visual-primary-btn" type="submit">
+          {state === 'sending' ? 'Submitting...' : 'Submit Audit Request — $250 →'}
+        </button>
+        {state === 'consent' ? <p className="form-note">Consent is required before I can contact you about the audit.</p> : null}
+        {state === 'error' ? <p className="form-note">The request did not save. Use the full audit page or email hello@thurrsolutions.com.</p> : null}
+      </form>
+    </section>
+  );
+}
+
+function VisualSelectedWork() {
+  const cards = [
+    ['LIVE', 'Restore Contracting', 'Storm Lead Capture System', "Dedicated storm damage lead capture page with source tracking and routing for a contracting company's seasonal campaign.", 'live'],
+    ['IN BUILD', 'HeartPathBloom', 'Youth Wellness — Intake & Consent System', 'Designing intake, consent, and care routing infrastructure for a youth mental health platform. Compliance-first architecture.', 'build'],
+    ['PROPOSAL', 'Insurance Lead Pipeline', 'Life Insurance — Lead Capture & Booking', 'Scoped a consent-aware lead capture, follow-up sequence, and appointment routing system for a nationwide independent agent.', 'proposal'],
+  ];
+
+  return (
+    <section className="visual-work" id="work" aria-labelledby="work-title">
+      <div className="visual-section-label">Selected work</div>
+      <div className="visual-work-grid">
+        {cards.map(([status, title, type, body, tone]) => (
+          <article key={title}>
+            <span className={`work-status ${tone}`}>{status}</span>
+            <h2>{title}</h2>
+            <strong>{type}</strong>
+            <p>{body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function VisualComplianceStrip() {
+  return (
+    <section className="visual-compliance-strip" aria-label="Compliance trust layer">
+      {['HIPAA-Aware System Design', 'TCPA-Safe Follow-Up Architecture', 'COPPA-Compliant Where Required', 'Compliance Sign-Off Required Before Launch'].map((item) => (
+        <span key={item}><i>✓</i>{item}</span>
+      ))}
+      <strong>NO SYSTEM GOES LIVE WITHOUT CLIENT APPROVAL</strong>
+    </section>
+  );
+}
+
+function VisualOperatorSection() {
+  return (
+    <section className="visual-operator" aria-labelledby="operator-title">
+      <span id="operator-title">// About the Operator</span>
+      <p>
+        I'm Thurr — <strong>AI Automation Engineer</strong> and the operator behind Thurr Solutions.
+        I build lead systems, intake flows, and follow-up pipelines for local service businesses that
+        are too busy to chase leads manually. <strong>Every system I build, I run.</strong> <strong>Every
+        client I take on, I work directly.</strong> No account managers. No handoffs.
+      </p>
+    </section>
+  );
+}
+
+function TerminalWidget() {
+  return (
+    <aside className="terminal-widget" aria-label="System status widget">
+      <header>// SYS STATUS</header>
+      {[
+        ['PIPELINE_STATUS', 'ACTIVE', 'green'],
+        ['AUDIT_QUEUE', 'OPEN', 'warm'],
+        ['COMPLY_GATE', 'ENABLED', 'green'],
+        ['OPERATOR', 'THURR / SOLO', 'warm'],
+        ['BUILD_ENV', 'PRODUCTION', 'warm'],
+      ].map(([label, value, tone]) => (
+        <div key={label}>
+          <span>{label}</span>
+          <strong className={tone}>→ {value}</strong>
+        </div>
+      ))}
+    </aside>
   );
 }
 
