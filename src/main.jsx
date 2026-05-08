@@ -218,7 +218,10 @@ function getInitialPage() {
     return 'privacy';
   }
 
-  if (window.location.pathname === '/work/restore-contracting' || window.location.pathname === '/work/restore-contracting/') {
+  if (
+    window.location.pathname === '/work/restore-c' ||
+    window.location.pathname === '/work/restore-c/'
+  ) {
     return 'work-restore';
   }
 
@@ -384,7 +387,7 @@ const pageRoutes = {
   compliance: '/compliance',
   privacy: '/privacy',
   work: '/work',
-  'work-restore': '/work/restore-contracting',
+  'work-restore': '/work/restore-c',
   'work-heartpathbloom': '/work/heartpathbloom',
   'work-insurance': '/work/insurance-pipeline',
 };
@@ -1015,7 +1018,7 @@ function App() {
       compliance: 'Compliance | Thurr Solutions',
       privacy: 'Privacy | Thurr Solutions',
       work: 'Selected Work | Thurr Solutions',
-      'work-restore': 'Restore Contracting | Thurr Solutions',
+      'work-restore': 'Restore-C | Thurr Solutions',
       'work-heartpathbloom': 'HeartPathBloom | Thurr Solutions',
       'work-insurance': 'Insurance Pipeline Concept | Thurr Solutions',
       buildout: 'Lead System Audit | Thurr Solutions',
@@ -1707,7 +1710,7 @@ function App() {
       {page === 'compliance' && <CompliancePage setPage={navigateToPage} />}
       {page === 'privacy' && <PrivacyPage setPage={navigateToPage} />}
       {page === 'work' && <WorkPage setPage={navigateToPage} />}
-      {page === 'work-restore' && <WorkDetailPage slug="restore-contracting" setPage={navigateToPage} />}
+      {page === 'work-restore' && <WorkDetailPage slug="restore-c" setPage={navigateToPage} />}
       {page === 'work-heartpathbloom' && <WorkDetailPage slug="heartpathbloom" setPage={navigateToPage} />}
       {page === 'work-insurance' && <WorkDetailPage slug="insurance-pipeline" setPage={navigateToPage} />}
       {page === 'buildout' && <BuildoutPlanPage {...sharedProps} />}
@@ -2785,7 +2788,7 @@ function VisualHero() {
         <a className="visual-secondary-btn" href="#work">See selected work</a>
       </div>
       <div className="hero-meta-strip" aria-label="Current engagement status">
-        <span><i className="meta-dot dot-green" />Restore Contracting — Live</span>
+        <span><i className="meta-dot dot-green" />Restore-C — Live</span>
         <span><i className="meta-dot dot-orange" />HeartPathBloom — In Build</span>
         <span><i className="meta-dot dot-muted" />Thurr Solutions LLC · Missouri</span>
       </div>
@@ -2922,7 +2925,7 @@ function VisualAuditCta() {
       <form className="visual-audit-form" onSubmit={handleSubmit}>
         <label>
           <span>Business name</span>
-          <input required value={form.businessName} placeholder="e.g. Restore Contracting" onChange={(event) => updateField('businessName', event.target.value)} />
+          <input required value={form.businessName} placeholder="e.g. Restore-C" onChange={(event) => updateField('businessName', event.target.value)} />
         </label>
         <label>
           <span>Industry</span>
@@ -2958,7 +2961,7 @@ function VisualAuditCta() {
 
 function VisualSelectedWork() {
   const cards = [
-    ['LIVE', 'Restore Contracting', 'Storm Lead Capture System', "Dedicated storm damage lead capture page with source tracking and routing for a contracting company's seasonal campaign.", 'live'],
+    ['LIVE', 'Restore-C', 'Storm Lead Capture System', "Dedicated storm damage lead capture page with source tracking and routing for a contracting company's seasonal campaign.", 'live'],
     ['IN BUILD', 'HeartPathBloom', 'Youth Wellness — Intake & Consent System', 'Designing intake, consent, and care routing infrastructure for a youth mental health platform. Compliance-first architecture.', 'build'],
     ['PROPOSAL', 'Insurance Lead Pipeline', 'Life Insurance — Lead Capture & Booking', 'Scoped a consent-aware lead capture, follow-up sequence, and appointment routing system for a nationwide independent agent.', 'proposal'],
   ];
@@ -3435,7 +3438,7 @@ function SystemDiagramSection() {
 function FieldNotesSection() {
   const notes = [
     {
-      client: 'Restore Contracting',
+      client: 'Restore-C',
       label: 'STORM LEAD CAPTURE',
       problem: 'Indianapolis roofing/siding/gutter operator with no instant response and weak landing infrastructure.',
       solution: 'Built a storm lead capture page, instant SMS, and pipeline routing across multiple markets.',
@@ -4677,13 +4680,13 @@ function PrivacyPage({ setPage }) {
 }
 
 const selectedWork = {
-  'restore-contracting': {
+  'restore-c': {
     eyebrow: 'LIVE CLIENT',
-    title: 'Restore Contracting — storm lead capture',
+    title: 'Restore-C — storm lead capture',
     body:
       'Live deployment for a residential contractor capturing storm-damage leads with instant routing. Case study in progress.',
     detail:
-      'Restore is the real client proof point for contractor lead capture. The next useful add-on is a residential close-system presentation that shows the custom app experience without promising a giant enterprise platform.',
+      'Restore-C is the real client proof point for contractor lead capture. The next useful add-on is a residential close-system presentation that shows the custom app experience without promising a giant enterprise platform.',
     status: 'Active retainer',
   },
   heartpathbloom: {
@@ -4735,7 +4738,7 @@ function WorkPage() {
 }
 
 function WorkDetailPage({ slug, setPage }) {
-  const item = selectedWork[slug] || selectedWork['restore-contracting'];
+  const item = selectedWork[slug] || selectedWork['restore-c'];
 
   return (
     <main className="b2b-home-page work-page" id="top" data-brand="thurr-solutions">

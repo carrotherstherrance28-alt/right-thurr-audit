@@ -127,7 +127,7 @@ Goal:
 - Produce a reality-based retention brief + renewal touchpoint draft (not sent) and create the minimum Linear tasks to de-risk churn.
 
 Pick 1 client:
-- Restore Contracting / HeartPathBloom / 5 Star Hospice / Andy Life Insurance / other
+- Restore-C / HeartPathBloom / 5 Star Hospice / Andy Life Insurance / other
 
 Steps:
 1) Confirm renewal timing and any notice window (flag unknowns).

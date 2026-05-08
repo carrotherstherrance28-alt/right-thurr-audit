@@ -1,8 +1,8 @@
-# Restore Contracting Residential Close System Upsell
+# Restore-C Residential Close System Upsell
 
 ## Recommendation
 
-Restore Contracting is already an active client lane. The upsell should not be framed as "we can build you an app" first. That sounds expensive and vague.
+Restore-C is already an active client lane. The upsell should not be framed as "we can build you an app" first. That sounds expensive and vague.
 
 Frame it as:
 
@@ -14,7 +14,7 @@ The 3D presentation is the visual sales asset. The real offer is the sales syste
 
 Client:
 
-Restore Contracting, Inc. / RESTORE-C
+Restore-C / RESTORE-C
 
 Known contact:
 
@@ -22,13 +22,14 @@ Marvin Leach. Kevin may be involved, but confirm the name and role before using 
 
 Latest market update:
 
-- Marvin said Restore has set an office in WV/Ohio.
-- Restore passed on the Northwest Ohio location.
-- Location received: Restore W. Virginia office, 700-B Cherry Avenue, Williamstown, near Fenton Art Glass Collectors.
+- Marvin said Restore wants to focus on the Williamstown [WV] / Ohio River Valley push and have all their guys go to that location to get it jumped off.
+- Restore passed on the prior alternate location.
+- Location received: Restore-C W. Virginia office, 700-B Cherry Avenue, Williamstown, near Fenton Art Glass Collectors.
 - Existing Indianapolis business office address: 1111 E. 54th St., Indianapolis, IN 46220.
-- Restore should be treated as a multi-office/multi-market lead routing opportunity: Indianapolis plus Williamstown WV/Ohio.
-- Marvin is checking with Richard and Kevin before locking the demo time.
-- Future demo language should say WV/Ohio, not Northwest Ohio, unless Marvin corrects it.
+- Demo should center Williamstown [WV] as the launch market. Indianapolis is the existing office route/proof point, not the main story.
+- Demo target: Saturday, May 9, 2026 at 2:00 PM. Confirm timezone because Indianapolis and West Virginia are Eastern Time while Thurr is Central.
+- Kevin is expected to join. Richard is still unconfirmed.
+- Future demo language should say Williamstown [WV] or Ohio River Valley launch.
 - Treat Richard and Kevin as stakeholders until their roles are confirmed.
 
 Current asset already built:
@@ -203,20 +204,40 @@ Message:
 
 > Start with the workflow closest to revenue, then expand only when the process proves itself.
 
-## WV/Ohio Demo Agenda
+## Williamstown Launch Demo Agenda
 
 Use this once Marvin sends the link or confirms a call time.
 
+### Confirmed Demo Window
+
+- Target: Saturday, May 9, 2026 at 2:00 PM.
+- Timezone: confirm Eastern Time.
+- Expected attendees: Marvin and Kevin.
+- Possible attendee: Richard, role unconfirmed.
+- Demo frame: Williamstown [WV] launch command center, with Indianapolis kept as the existing office route/proof point.
+
+### Prep Checklist Before Saturday
+
+1. Confirm timezone.
+2. Confirm whether Richard is joining.
+3. Open and QA the Restore storm lead page.
+4. Prepare one clean test lead with sample homeowner data.
+5. Show Williamstown [WV] as the primary route and Indianapolis [IN] as the existing route.
+6. Make sure the demo pipeline uses these stages: New Lead, Market Routed, Contacted, Inspection Scheduled, Estimate Sent, Closed.
+7. Prepare the close: Phase 1 Williamstown launch intake + tracking build.
+8. Do not send a full proposal before the demo.
+9. Use Marvin's phone number only as a live-demo input if he agrees on the call. Do not hardcode it into demo files.
+
 ### Demo Goal
 
-Show Restore how each office can capture storm leads, respond fast, route the right market to the right team, follow up consistently, and track every opportunity from new lead to closed project.
+Show Restore how the Williamstown [WV] launch can capture storm leads, notify the right team fast, coordinate everyone heading into that market, and track every opportunity from new lead to closed project.
 
 ### Demo Flow
 
 1. Open with the new office context.
-   - "Since Restore now has more than one office, I framed this as a multi-location lead system: Indianapolis and Williamstown WV/Ohio."
+   - "Since the push is Williamstown, I framed this around getting that office jumped off with one lead flow everyone can see."
 2. Show the lead capture page.
-   - Homeowner sees storm damage offer and submits inspection request with service address/market.
+   - Homeowner sees the Williamstown storm damage offer and submits an inspection request.
 3. Submit a test lead.
    - Use sample homeowner data only.
 4. Show instant response.
@@ -226,31 +247,78 @@ Show Restore how each office can capture storm leads, respond fast, route the ri
 6. Show follow-up logic.
    - Day 1 reminder, Day 2 urgency, Day 3 final follow-up if no reply.
 7. Close with Phase 1.
-   - "The first paid build should make this real for WV/Ohio: capture, alert, track, and follow up."
+   - "The first paid build should make this real for Williamstown: capture, alert, track, and follow up while the team is focused there."
 
 ### What Not To Say
 
 - Do not lead with AI.
 - Do not promise more jobs or claim revenue guarantees.
-- Do not mention Northwest Ohio unless Marvin brings it up.
+- Do not bring up the prior alternate location unless Marvin does.
 - Do not pitch a full custom app before the lead-to-close workflow is confirmed.
 - Do not use Richard or Kevin's names in a final deliverable until Marvin confirms their roles.
+
+### Add-On Skills To Seed For Later
+
+Mention these after the live demo, not before. Keep it brief so the main recommendation stays clean.
+
+Say:
+
+> I started with the lead path because that is closest to money. Once the Williamstown intake and tracking system is working, we can layer in add-ons without rebuilding the foundation.
+
+Good add-ons to name:
+
+- Market research and lead list building for new service areas.
+- Missed-call text-back for after-hours or job-site calls.
+- Estimate follow-up sequences for unsigned homeowners.
+- Photo proof and inspection documentation workflows.
+- Review and referral requests after completed jobs.
+- Weather-event campaign pages by market.
+- Owner dashboard reporting by office, rep, and lead status.
+
+Bring it back to focus:
+
+> I would not start with all of that. I would start with Williamstown lead intake, routing, and tracking. Once that is working, these become clean add-ons.
+
+### Pricing / Value Anchor
+
+Use this if they compare the offer to a website or ask why the system is priced at Tier 3.
+
+> I'm not pricing this like a website because I'm not selling you a website.
+>
+> The page is just the front door. What you're paying for is the lead system behind it: the intake, routing, alerts, owner visibility, follow-up, reporting, and the support to keep it working so your team can stay focused on Williamstown instead of chasing leads.
+>
+> At a $15,000 average job, even at a conservative 30% margin, one extra closed project is about $4,500 in gross profit. That covers the net setup after your existing credit.
+>
+> From there, the monthly is about keeping the system running, improving it, and making sure leads don't sit in someone's phone or get lost between offices.
+>
+> I can build the app, but I wouldn't start there. First we prove the workflow: lead comes in, gets routed, gets followed up with, and gets tracked. Once that's working, the app becomes the interface on top of a real process instead of an expensive guess.
+
+Delivery notes:
+
+- Slow down on the price sentences.
+- Pause after "one extra closed project is about $4,500 in gross profit."
+- Look at Kevin on "lost between offices."
+- Stop after "expensive guess." Do not add "what do you think?"
 
 ### Call Close
 
 Use this close:
 
-> The page is the front door. The real value is the system behind it: every lead gets a status, owner, next action, and follow-up path. If this looks right, I would start with the WV/Ohio lead intake and tracking build, then expand into a dashboard once the workflow is proven.
+> The page is the front door. The real value is the system behind it: every lead gets a status, owner, next action, and follow-up path. If this looks right, I would start with the Williamstown launch intake and tracking build, then expand into a dashboard once the workflow is proven.
 
 If both locations are in scope, use this version:
 
-> The page is the front door. The real value is the system behind it: every lead gets routed to the right market, assigned an owner, given a next action, and followed up with until it is scheduled, won, or closed out. If this looks right, I would start with a multi-location intake and tracking build for Indianapolis and Williamstown WV/Ohio, then expand into a dashboard once the workflow is proven.
+> The page is the front door. The real value is the system behind it: every lead gets routed to the right market, assigned an owner, given a next action, and followed up with until it is scheduled, won, or closed out. If this looks right, I would start with a two-route intake and tracking build for Williamstown [WV] and Indianapolis [IN], then expand into a dashboard once the workflow is proven.
+
+If Williamstown is the priority, use this version:
+
+> The page is the front door. The real value is the system behind it: Williamstown leads come in, the right people get notified, every lead gets a status and next action, and Marvin and Kevin can see whether the launch market is moving without chasing texts. If this looks right, I would start with the Williamstown launch intake and tracking build, then keep Indianapolis in the same owner view for continuity.
 
 ## Short Message To Send Restore
 
-Hey Marvin, I got the location for the Restore W. Virginia office on Cherry Avenue.
+Hey Marvin, I got the location for the Restore-C W. Virginia office on Cherry Avenue.
 
-That helps me frame the demo around the Williamstown WV/Ohio office instead of the old Northwest Ohio plan.
+That helps me frame the demo around the Williamstown [WV] launch.
 
 Check with Richard and Kevin and let me know what time works best. I will keep the demo tight: how storm leads come in, how the team gets notified, how follow-up happens, and how everyone can track lead status.
 
@@ -296,7 +364,7 @@ Avoid:
 
 - Send short message and lock demo time.
 - Review Marvin's link when received.
-- Update all client-facing Restore material from Northwest Ohio to WV/Ohio.
+- Update all client-facing Restore material to Williamstown [WV] / Ohio River Valley launch language.
 - Confirm current Restore workflow facts.
 - Build Phase 0 walkthrough script.
 - Create 3D presentation only after the workflow facts are answered.

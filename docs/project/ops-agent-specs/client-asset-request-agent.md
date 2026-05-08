@@ -167,7 +167,7 @@ Goal:
 - Produce a clean asset checklist + follow-up drafts (approval-only) that unblocks the next milestone.
 
 Pick 1 client:
-- Restore Contracting (recommended) / HeartPathBloom / other
+- Restore-C (recommended) / HeartPathBloom / other
 
 Steps:
 1) Identify the next ship (deliverable + target date).

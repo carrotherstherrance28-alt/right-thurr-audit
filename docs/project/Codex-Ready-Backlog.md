@@ -117,6 +117,7 @@ FILES: Claude/Thurr decision needed
 LOCKED COPY / INPUTS: Current local repo is Vite/React, not Next.js App Router.
 DO NOT: Do not assume production deploy workflow.
 ACCEPTANCE: Thurr confirms branch/commit/deploy policy.
+STATUS: BLOCKED (2026-05-07) — Needs Thurr decision. Suggested default: work on local branches named `codex/<ticket-id>-<slug>`, commit small logical changes, do not push or deploy without explicit approval.
 DEPENDENCIES: None.
 OWNER: Thurr
 PRIORITY: P0
@@ -130,6 +131,7 @@ FILES: Claude/Thurr decision needed
 LOCKED COPY / INPUTS: Claude owns final copy critique.
 DO NOT: Do not ask Codex to invent premium positioning from scratch.
 ACCEPTANCE: Approved copy pasted into ticket or Notion page.
+STATUS: BLOCKED (2026-05-07) — Needs Claude/Thurr to paste the final H1/subhead/primary CTA copy (or link the locked Notion section) so polish can proceed without guesswork.
 DEPENDENCIES: None.
 OWNER: Claude/Thurr
 PRIORITY: P0
@@ -254,6 +256,7 @@ FILES: Claude/Thurr decision needed
 LOCKED COPY / INPUTS: User mentioned Discord owner alerts; exact channel ID not confirmed.
 DO NOT: Do not guess or hardcode alert targets.
 ACCEPTANCE: Destination and env var names confirmed.
+STATUS: BLOCKED (2026-05-07) — Needs Thurr to pick alert destinations (Discord/email/n8n) and confirm env var names (no values in repo).
 DEPENDENCIES: None.
 OWNER: Thurr
 PRIORITY: P0
@@ -267,6 +270,7 @@ FILES: Claude/Thurr decision needed
 LOCKED COPY / INPUTS: Prior recommendation: form first, then manual follow-up/booking while offer is still being validated.
 DO NOT: Do not add payment collection before Thurr confirms.
 ACCEPTANCE: Thurr selects form-first, calendar-first, or payment-first.
+STATUS: BLOCKED (2026-05-07) — Needs Thurr decision: `form-first` (recommended while validating) vs `calendar-first` vs `payment-first` so CTAs and routing can be locked.
 DEPENDENCIES: None.
 OWNER: Claude/Thurr
 PRIORITY: P0
@@ -454,7 +458,7 @@ REPO: /Users/thurr/Documents/New project
 BRANCH: codex/client-pipeline-docs
 GOAL: Add a concise pipeline map tying prospects to offers, status, next action, and source links.
 FILES: /Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md
-LOCKED COPY / INPUTS: Include HeartPathBloom, Restore Contracting, Andy Life Insurance, Christy/Sweetest Pea, 5 Star Hospice, Youth Wellness Platform, Right Thurr community/future.
+LOCKED COPY / INPUTS: Include HeartPathBloom, Restore-C, Andy Life Insurance, Christy/Sweetest Pea, 5 Star Hospice, Youth Wellness Platform, Right Thurr community/future.
 DO NOT: Do not include private emails, agreements, signatures, accidental sensitive identifiers, or payment details beyond approved public/internal status.
 ACCEPTANCE: Index has client/prospect, status, offer, next action, risk flag, direct Notion/doc links; sensitive data omitted.
 DEPENDENCIES: Existing docs in /Users/thurr/Documents/New project/docs/sales.
@@ -479,7 +483,7 @@ TICKET: CLT-003 — Add Restore Residential Close System Brief Link
 REPO: /Users/thurr/Documents/New project
 BRANCH: codex/client-pipeline-docs
 GOAL: Make Restore’s upsell/presentation asset easy to find.
-FILES: /Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md; /Users/thurr/Documents/New project/docs/sales/Restore-Contracting-Residential-Close-System-Upsell.md
+FILES: /Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md; /Users/thurr/Documents/New project/docs/sales/Restore-C-Residential-Close-System-Upsell.md
 LOCKED COPY / INPUTS: Position as residential close system / lead generator, not just app.
 DO NOT: Do not build full 3D presentation before workflow answers.
 ACCEPTANCE: Pipeline index links Restore upsell doc and lists next action: collect sales workflow details.
@@ -522,6 +526,7 @@ FILES: Claude/Thurr decision needed
 LOCKED COPY / INPUTS: AI chat cannot go live without human escalation owner and disclosure flow.
 DO NOT: Do not let automated system make clinical decisions.
 ACCEPTANCE: Tisa/Kendalyn provide named adult reviewer and contact method.
+STATUS: BLOCKED (2026-05-07) — Needs client (Tisa/Kendalyn) to name the adult human escalation reviewer + contact method before any live chat/escalation work proceeds.
 DEPENDENCIES: None.
 OWNER: Thurr/client
 PRIORITY: P0
@@ -535,6 +540,7 @@ FILES: Claude/Thurr decision needed
 LOCKED COPY / INPUTS: Youth-only Phase 1; guardian/counselor portals are Phase 2.
 DO NOT: Do not expand scope into Phase 2 features.
 ACCEPTANCE: Screen list approved.
+STATUS: BLOCKED (2026-05-07) — Needs Claude/Thurr/client to approve the Phase 1 screen list (explicitly excluding Phase 2 portals) so implementation scope stays bounded.
 DEPENDENCIES: HeartPathBloom named reviewer.
 OWNER: Claude/Thurr/client
 PRIORITY: P0
@@ -698,6 +704,7 @@ FILES: Claude/Thurr decision needed
 LOCKED COPY / INPUTS: Candidate: Bitwarden or equivalent vault plus platform-native env vars.
 DO NOT: Do not keep secrets in notes, chat, screenshots, repo docs, or raw text files.
 ACCEPTANCE: Thurr confirms vault/tool and migration rule.
+STATUS: BLOCKED (2026-05-07) — Needs Thurr to choose the vault/tool (e.g., Bitwarden) + the rule for what lives in vault vs platform env vars; then we can align repo docs and automation env var naming without storing values.
 DEPENDENCIES: SEC-001.
 OWNER: Thurr
 PRIORITY: P0

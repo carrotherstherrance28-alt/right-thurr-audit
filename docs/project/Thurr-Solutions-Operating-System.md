@@ -60,7 +60,7 @@ Every serious client/opportunity needs:
 
 1. Finish the Thurr Solutions website and Lead Flow Audit path.
 2. Lock HeartPathBloom payment, kickoff, reviewer, and Phase 1 build plan.
-3. Package Restore Contracting residential close system upsell.
+3. Package Restore-C residential close system upsell.
 4. Build Andy Life Insurance Lead Flow Audit presentation and 5 Star Hospice interest presentation.
 5. Verify n8n backups and workflow organization.
 6. Create repeatable fulfillment templates from onboarding to battle plan.
@@ -132,7 +132,7 @@ Sync note:
 | Opportunity | Stage | Direct Link |
 | --- | --- | --- |
 | Andy Life Insurance — Lead Flow Audit | Lead | https://www.notion.so/357a6f1d25238120ad5cf16ff4c2dab2 |
-| Restore Contracting — Residential Close System Upsell | Presentation Needed | https://www.notion.so/357a6f1d2523811a8a9ed5cae3113bb1 |
+| Restore-C — Residential Close System Upsell | Presentation Needed | https://www.notion.so/357a6f1d2523811a8a9ed5cae3113bb1 |
 
 ## Default Codex Behavior
 

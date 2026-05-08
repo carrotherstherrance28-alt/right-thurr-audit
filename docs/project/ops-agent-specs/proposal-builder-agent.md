@@ -187,7 +187,7 @@ Goal:
 - Convert one warm lead into a clear proposal/SOW draft with tight scope + next step.
 
 Pick 1 opportunity:
-- Restore Contracting (upsell) / Christy / Andy Life Insurance / other
+- Restore-C (upsell) / Christy / Andy Life Insurance / other
 
 Steps:
 1) Pull discovery notes (or summarize what’s known + what’s unknown).

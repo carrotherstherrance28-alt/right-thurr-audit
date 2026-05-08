@@ -158,7 +158,7 @@ Escalate before build if the client involves:
 ## First Clients To Run Through This Agent
 
 1. HeartPathBloom
-2. Restore Contracting
+2. Restore-C
 3. Christy / The Sweetest Pea & Co.
 4. Andy Life Insurance
 5. 5 Star Hospice
