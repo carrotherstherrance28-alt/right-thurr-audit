@@ -2780,6 +2780,7 @@ function HomePage({ setPage }) {
       <PipelineDiagram />
       <VisualMethodology />
       <VisualAuditCta />
+      <VisualAuditNextSteps />
       <VisualSelectedWork />
       <VisualComplianceStrip />
       <VisualOperatorSection />
@@ -2792,17 +2793,17 @@ function VisualHero() {
   return (
     <section className="visual-hero" aria-labelledby="hero-title">
       <div className="hero-tag">AI Automation Engineer · Houston · Est. 2026</div>
-      <h1 id="hero-title" className="visual-hero-title" aria-label="Your leads come in. Most go nowhere.">
+      <h1 id="hero-title" className="visual-hero-title" aria-label="Your leads come in. Your follow-up is leaking money.">
         <span className="hero-word" style={{ '--word-delay': '0s' }}>Your</span>{' '}
         <span className="hero-word" style={{ '--word-delay': '0.08s' }}>leads</span>{' '}
         <span className="hero-word" style={{ '--word-delay': '0.16s' }}>come</span>{' '}
         <span className="hero-word" style={{ '--word-delay': '0.24s' }}>in.</span>
         <br />
-        <em className="hero-word" style={{ '--word-delay': '0.32s' }}>Most go nowhere.</em>
+        <em className="hero-word" style={{ '--word-delay': '0.32s' }}>Follow-up leaks money.</em>
       </h1>
       <p className="visual-hero-sub">
-        Thurr Solutions builds consent-aware lead capture, follow-up pipelines, and intake systems
-        for local service businesses that can't afford to waste a single inquiry.
+        Thurr Solutions finds where inquiries stall, builds the capture and follow-up system,
+        and keeps the pipeline visible for local service businesses that cannot afford slow response.
       </p>
       <div className="visual-hero-actions">
         <a className="visual-primary-btn" href="#audit">Get the Lead Flow Audit →</a>
@@ -2980,23 +2981,74 @@ function VisualAuditCta() {
   );
 }
 
+function VisualAuditNextSteps() {
+  const steps = [
+    ['01', 'Submit the request', 'Tell me where leads come from and what happens after they raise their hand. Keep it operational, not polished.'],
+    ['02', 'Thurr reviews the flow', 'I check the intake path, response speed, follow-up gaps, and compliance flags before recommending any build.'],
+    ['03', 'You get the path forward', 'You receive the written findings, the first fix to prioritize, and a build quote with the audit credited if you move within 30 days.'],
+  ];
+
+  return (
+    <section className="audit-next-steps" aria-labelledby="audit-next-title">
+      <div>
+        <span className="visual-section-label">After the audit</span>
+        <h2 id="audit-next-title">No mystery after you pay.</h2>
+      </div>
+      <div className="audit-next-grid">
+        {steps.map(([number, title, body]) => (
+          <article key={title}>
+            <span>{number}</span>
+            <strong>{title}</strong>
+            <p>{body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function VisualSelectedWork() {
   const cards = [
-    ['LIVE', 'Restore-C', 'Storm Lead Capture System', "Dedicated storm damage lead capture page with source tracking and routing for a contracting company's seasonal campaign.", 'live'],
-    ['IN BUILD', 'HeartPathBloom', 'Youth Wellness — Intake & Consent System', 'Designing intake, consent, and care routing infrastructure for a youth mental health platform. Compliance-first architecture.', 'build'],
-    ['PROPOSAL', 'Insurance Lead Pipeline', 'Life Insurance — Lead Capture & Booking', 'Scoped a consent-aware lead capture, follow-up sequence, and appointment routing system for a nationwide independent agent.', 'proposal'],
+    {
+      status: 'LIVE',
+      title: 'Restore-C',
+      type: 'Storm Lead Capture System',
+      body: "Dedicated storm damage lead capture page with source tracking and routing for a contractor's seasonal campaign.",
+      tone: 'live',
+      href: '/work/restore-c',
+      action: 'View work note →',
+    },
+    {
+      status: 'IN BUILD',
+      title: 'HeartPathBloom',
+      type: 'Youth Wellness — Intake & Consent System',
+      body: 'Designing intake, consent, and care routing infrastructure for a youth mental health platform. Compliance-first architecture.',
+      tone: 'build',
+      href: '/work/heartpathbloom',
+      action: 'View build note →',
+    },
+    {
+      status: 'PROPOSAL',
+      title: 'Insurance Lead Pipeline',
+      type: 'Life Insurance — Lead Capture & Booking',
+      body: 'Scoped a consent-aware lead capture, follow-up sequence, and appointment routing system for a nationwide independent agent.',
+      tone: 'proposal',
+      href: '/work/insurance-pipeline',
+      action: 'View concept →',
+    },
   ];
 
   return (
     <section className="visual-work" id="work" aria-labelledby="work-title">
       <div className="visual-section-label">Selected work</div>
       <div className="visual-work-grid">
-        {cards.map(([status, title, type, body, tone]) => (
+        {cards.map(({ status, title, type, body, tone, href, action }) => (
           <article key={title}>
             <span className={`work-status ${tone}`}>{status}</span>
             <h2>{title}</h2>
             <strong>{type}</strong>
             <p>{body}</p>
+            <a className="work-card-action" href={href}>{action}</a>
           </article>
         ))}
       </div>

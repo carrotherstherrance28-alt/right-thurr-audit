@@ -385,6 +385,7 @@ body[data-brand="thurr-solutions"] .brand-name {
 .pipeline-section,
 .visual-methodology,
 .visual-audit-cta,
+.audit-next-steps,
 .visual-work,
 .visual-compliance-strip,
 .visual-operator {
@@ -632,6 +633,64 @@ body[data-brand="thurr-solutions"] .brand-name {
   letter-spacing: 0;
 }
 
+.audit-next-steps {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+  padding: 30px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.audit-next-steps h2 {
+  margin: 18px 0 0;
+  color: var(--paper);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 4vw, 58px);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.audit-next-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
+  background: var(--border);
+}
+
+.audit-next-grid article {
+  min-height: 190px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.audit-next-grid span,
+.work-card-action {
+  color: var(--orange);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.audit-next-grid strong {
+  display: block;
+  margin: 20px 0 12px;
+  color: var(--warm-text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.audit-next-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
 .visual-section-label {
   margin-bottom: 24px;
 }
@@ -652,6 +711,8 @@ body[data-brand="thurr-solutions"] .brand-name {
 }
 
 .visual-work article {
+  display: flex;
+  flex-direction: column;
   min-height: 310px;
   padding: 28px;
   background: var(--bg);
@@ -702,6 +763,20 @@ body[data-brand="thurr-solutions"] .brand-name {
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.work-card-action {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--orange);
+  text-decoration: none;
+}
+
+.work-card-action:hover,
+.work-card-action:focus-visible {
+  color: var(--orange-hover);
 }
 
 .visual-compliance-strip {
@@ -875,6 +950,8 @@ body[data-brand="thurr-solutions"] .site-footer p,
 
   .visual-methodology,
   .visual-audit-cta,
+  .audit-next-steps,
+  .audit-next-grid,
   .visual-work-grid {
     grid-template-columns: 1fr;
   }
@@ -925,6 +1002,7 @@ body[data-brand="thurr-solutions"] .site-footer p,
 
   .pipeline-wrap,
   .visual-audit-form,
+  .audit-next-grid article,
   .visual-methodology article,
   .visual-work article {
     padding: 22px;
