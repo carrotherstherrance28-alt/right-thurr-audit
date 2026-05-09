@@ -54,6 +54,14 @@
       "destination": "/"
     },
     {
+      "source": "/work",
+      "destination": "/"
+    },
+    {
+      "source": "/work/:path*",
+      "destination": "/"
+    },
+    {
       "source": "/diagnostic",
       "destination": "/diagnostic/index.html"
     },
