@@ -1,5 +1,7 @@
 # Premium Website Implementation Backlog
 
+NOTE: Premium `NOW` is currently DONE; remaining `NOW` blockers live in `docs/project/NOW-Queue-Decision-Blockers.md`.
+
 ## NOW
 
 TICKET: TS-001 — Lock OPERATOR CORE Design Tokens

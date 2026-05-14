@@ -1,8 +1,8 @@
-# Right Thurr
+# Thurr Solutions / Right Thurr
 
-Right Thurr turns an idea into a live business system, then shows the user what that system is doing.
+This repo holds the Thurr Solutions B2B website, Right Thurr product/brand docs, diagnostic demos, automation specs, and sales/operations documentation.
 
-This repo is the home for Right Thurr product strategy, brand direction, website planning, and future app prototype work.
+Thurr Solutions is the B2B services brand. Right Thurr is the personal/product/content brand.
 
 ## Repo Structure
 
@@ -15,12 +15,19 @@ docs/
 
 ## Current Focus
 
-- Brand system for Right Thurr and Thurr Solutions
-- Logo sheet direction for Claude Design
-- MVP product spec for the Right Thurr business system builder
-- AI Business Buildout Plan diagnostic engine
+- Thurr Solutions website and Lead Flow Audit path
+- Lead audit request tracking through Supabase, owner alerts, Notion, and Linear
 - Client-ready diagnostic templates, prompt packs, and follow-up automations
-- Website and brand foundation before app build
+- Right Thurr product strategy and future brand/community ideas
+
+## Key Docs
+
+- Codex backlog: `/Users/thurr/Documents/New project/docs/project/Codex-Ready-Backlog.md`
+- Website intake tracking: `/Users/thurr/Documents/New project/docs/project/Website-Intake-Tracking.md`
+- Security rotation runbook: `/Users/thurr/Documents/New project/docs/project/Security-Credential-Rotation.md`
+- Client pipeline index: `/Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md`
+- Agent operating manual: `/Users/thurr/Documents/New project/docs/project/Agent-Operating-System.md`
+- Linear template library: `/Users/thurr/Documents/New project/docs/project/Linear-Issue-Template-Library.md`
 
 ## Brand Split
 

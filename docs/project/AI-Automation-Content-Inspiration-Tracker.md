@@ -53,6 +53,31 @@ What to avoid copying:
 Follow-up idea:
 ```
 
+## Creator Research Queue
+
+Captured May 6, 2026:
+
+- Alex Finn
+- Dan Martell
+- Nate Herk
+- AI Chris Lee
+- Alex Hormozi
+- Chris Koerner
+- The Rich Dad Channel
+
+Research each reference through this lens:
+
+- How they package the offer
+- How they create trust before the CTA
+- How they explain business outcomes
+- How they price, tier, or frame value
+- What Thurr Solutions can adapt without copying
+- What would distract Thurr from the implementation-first lane
+
+Related research backlog:
+
+- `docs/project/Research-Agent-Backlog.md`
+
 ## Candidate Reference Categories
 
 - AI automation educators with strong page authority and workflow demos.

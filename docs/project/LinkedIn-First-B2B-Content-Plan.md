@@ -65,15 +65,23 @@ Purpose: make business owners recognize hidden revenue leaks.
 Post angles:
 
 - The lead responded, but nobody followed up.
+- The customer called, nobody answered, and no text-back went out.
 - Why contact forms fail after submission.
 - The difference between having a website and having a lead system.
 - How fast follow-up changes owner workload.
 - What a good intake form should collect.
+- How to estimate missed-call recovery with a simple ROI calculator.
 
 Example hook:
 
 ```txt
 Most businesses do not have a lead problem. They have a follow-up leak.
+```
+
+Example offer post:
+
+```txt
+If your business misses calls, you do not need to guess what it costs. Count the missed calls, estimate the average job value, and look at how many could be recovered with a fast text-back system.
 ```
 
 ### 2. Buildout Blueprint Thinking
@@ -120,6 +128,7 @@ Post angles:
 
 - Mobile detailing lead-to-booking system.
 - Contractor quote request workflow.
+- Missed-call text-back for roofers, HVAC, beauty, real estate, and insurance offices.
 - Salon appointment follow-up and no-show reduction.
 - Realtor lead routing and daily summary.
 - Funeral home inquiry handling with sensitivity and speed.

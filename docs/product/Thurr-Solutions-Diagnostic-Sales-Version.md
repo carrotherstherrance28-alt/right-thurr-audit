@@ -190,6 +190,7 @@ Best for prospects losing leads after the first touch.
 Includes:
 
 - Email and SMS follow-up flows
+- Missed-call text-back
 - Missed lead reminders
 - CRM pipeline stages
 - Sales task alerts
@@ -199,6 +200,24 @@ Includes:
 Sales copy:
 
 > The money is often in the follow-up. This system makes sure new leads are acknowledged quickly, routed correctly, and followed up with until they book, buy, or clearly opt out.
+
+### Missed-Call Recovery System
+
+Best for appointment-based and local service businesses where missed calls turn into lost jobs.
+
+Includes:
+
+- Missed-call text-back flow
+- SMS response copy
+- Lead reply capture
+- Owner/team alert
+- Lead log
+- Follow-up task
+- Simple ROI calculator
+
+Sales copy:
+
+> If a customer calls and nobody answers, the system should still create a path back to the sale. This build helps recover missed calls, capture the lead by text, and show the owner what faster response may be worth.
 
 ### Sales Operations Dashboard
 

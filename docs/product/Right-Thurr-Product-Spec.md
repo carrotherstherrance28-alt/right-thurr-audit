@@ -8,6 +8,21 @@ The product should not feel like a passive dashboard. It should feel like a busi
 
 The user gives Right Thurr a business idea. Right Thurr creates a System with a blueprint, offer, landing page copy, first task list, activity log, money tracker, and next move.
 
+## Naming / Surface Definition
+
+Right Thurr is Thurr's phrasing of "right there."
+
+That gives the product a second useful surface beyond the app: a curated use-case site where proven business models and systems are right there to copy, adapt, and brand. A user should be able to land on a Right Thurr example, understand the play, and see how it can become their own version.
+
+For example, the website landlord / rank-and-rent model can become a Right Thurr use-case page:
+
+- explain the model in plain language
+- show the asset stack: niche site, tracking number, intake path, lead handoff, follow-up
+- provide a reusable page/video/template structure
+- let Thurr adapt the same model into owned demos, sales assets, or client-safe branded examples
+
+This should still avoid guarantees around rankings, leads, revenue, or profit. Right Thurr can make the system visible and copyable; it should not promise the market result.
+
 ## MVP Positioning
 
 Right Thurr V1 helps local service side hustlers turn an idea into a trackable business system.
@@ -126,6 +141,7 @@ Recommended starter business types:
 - Local service funnel
 - Digital product
 - Lead generation
+- Website landlord / local lead asset
 
 For V1, prioritize local service funnel.
 

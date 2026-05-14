@@ -10,6 +10,12 @@ Thurr Solutions is the B2B version. It should feel more strategic, polished, rel
 
 The two brands should share enough DNA that people understand they belong together, but they should be clearly separated by usage, tone, and visual treatment.
 
+Naming interpretation:
+
+`Right Thurr` should be understood as Thurr's language for "right there." The name can carry a practical promise: the business idea, use case, template, or next move is right there for the user to copy, curate, and make their own.
+
+This means Right Thurr is not only an app name. It can also be a curated use-case surface: a site or library of business models, local service systems, lead-generation plays, and branded examples that Thurr can clone into owned assets or adapt into client-safe versions.
+
 ## Recommended Structure
 
 Use a master brand plus sub-brand system:
@@ -69,6 +75,7 @@ Primary role:
 
 - AI-powered business system builder
 - Entrepreneur-facing app
+- Curated use-case and template site
 - Merch and sticker-friendly identity
 - Public brand voice
 - Travel, creator, local-business energy
@@ -77,6 +84,8 @@ Best use cases:
 
 - App logo
 - Website hero
+- Copyable business model pages
+- Curated local lead asset examples
 - Stickers
 - Luggage tags
 - Social content

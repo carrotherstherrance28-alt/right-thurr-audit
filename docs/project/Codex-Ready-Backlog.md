@@ -1,5 +1,7 @@
 # Codex-Ready Backlog
 
+NOTE: Current `NOW` queue blockers are summarized in `docs/project/NOW-Queue-Decision-Blockers.md`.
+
 ## 1. Website
 
 TICKET: WEB-001 — Replace Homepage Hero Positioning
@@ -691,6 +693,7 @@ FILES: /Users/thurr/Documents/New project/docs/project/Client-Data-Boundaries.md
 LOCKED COPY / INPUTS: HIPAA for hospice, COPPA for HeartPathBloom, TCPA/FCC for SMS, insurance compliance for Andy.
 DO NOT: Do not provide legal advice or claim certification.
 ACCEPTANCE: Doc lists allowed metadata, prohibited data, approval gates, and escalation reviewer requirements; no private data included.
+STATUS: DONE (2026-05-14) — Expanded client data boundaries with workflow-specific prohibited data, approval gates, escalation reviewer requirements, and repo verification command; no private values included.
 DEPENDENCIES: None.
 OWNER: Codex
 PRIORITY: P1
