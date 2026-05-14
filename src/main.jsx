@@ -1698,6 +1698,35 @@ function App() {
     }
   }, [uiTheme]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const revealTargets = Array.from(document.querySelectorAll('.motion-reveal'));
+
+    if (!revealTargets.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealTargets.forEach((target) => target.classList.add('motion-revealed'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('motion-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.16, rootMargin: '0px 0px -6% 0px' },
+    );
+
+    revealTargets.forEach((target) => observer.observe(target));
+
+    return () => observer.disconnect();
+  }, [page, brand]);
+
   function toggleUiTheme() {
     setUiTheme((current) => (current === 'dark' ? 'light' : 'dark'));
   }
@@ -2827,7 +2856,7 @@ function PipelineDiagram() {
   ];
 
   return (
-    <section className="pipeline-section" aria-labelledby="pipeline-title">
+    <section className="pipeline-section motion-reveal" aria-labelledby="pipeline-title">
       <div className="pipeline-label" id="pipeline-title">// Lead Flow Architecture — Phase 1 Standard</div>
       <div className="pipeline-wrap">
         <svg className="pipeline-svg" viewBox="0 0 900 160" role="img" aria-label="Lead flow from source to booked call">
@@ -2883,7 +2912,7 @@ function VisualMethodology() {
   return (
     <section className="visual-methodology" id="how-it-works" aria-label="Audit Build Manage methodology">
       {items.map(([phase, title, body, tag]) => (
-        <article key={title}>
+        <article className="motion-reveal" key={title}>
           <span>{phase}</span>
           <h2>{title}</h2>
           <p>{body}</p>
@@ -2933,7 +2962,7 @@ function VisualAuditCta() {
   }
 
   return (
-    <section className="visual-audit-cta" id="audit" aria-labelledby="audit-title">
+    <section className="visual-audit-cta motion-reveal" id="audit" aria-labelledby="audit-title">
       <div>
         <h2 id="audit-title">Find out where your <em>pipeline breaks.</em></h2>
         <p>
@@ -2988,7 +3017,7 @@ function VisualSelectedWork() {
   ];
 
   return (
-    <section className="visual-work" id="work" aria-labelledby="work-title">
+    <section className="visual-work motion-reveal" id="work" aria-labelledby="work-title">
       <div className="visual-section-label">Selected work</div>
       <div className="visual-work-grid">
         {cards.map(([status, title, type, body, tone]) => (
@@ -3006,7 +3035,7 @@ function VisualSelectedWork() {
 
 function VisualComplianceStrip() {
   return (
-    <section className="visual-compliance-strip" aria-label="Compliance trust layer">
+    <section className="visual-compliance-strip motion-reveal" aria-label="Compliance trust layer">
       {['HIPAA-Aware System Design', 'TCPA-Safe Follow-Up Architecture', 'COPPA-Compliant Where Required', 'Compliance Sign-Off Required Before Launch'].map((item) => (
         <span key={item}><i>✓</i>{item}</span>
       ))}
@@ -3017,7 +3046,7 @@ function VisualComplianceStrip() {
 
 function VisualOperatorSection() {
   return (
-    <section className="visual-operator" aria-labelledby="operator-title">
+    <section className="visual-operator motion-reveal" aria-labelledby="operator-title">
       <span id="operator-title">// About the Operator</span>
       <p>
         I'm Thurr — <strong>AI Automation Engineer</strong> and the operator behind Thurr Solutions.

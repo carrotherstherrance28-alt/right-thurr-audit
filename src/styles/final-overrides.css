@@ -118,6 +118,262 @@ body[data-brand="thurr-solutions"] .work-page .audit-hero .eyebrow {
   letter-spacing: 0.18em;
 }
 
+/* Premium design pass: sharper type, cleaner spacing, restrained product motion. */
+body[data-brand="thurr-solutions"] {
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-control: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-fast: 160ms;
+  --motion-base: 420ms;
+  --motion-slow: 900ms;
+  --sharp-paper: #fff8ea;
+  --sharp-warm: #ece5d8;
+  --sharp-muted: #ada79d;
+  --sharp-dim: #8e887f;
+  --panel-bg: rgba(245, 239, 226, 0.035);
+  --panel-bg-lift: rgba(245, 239, 226, 0.058);
+  --panel-border: rgba(245, 239, 226, 0.12);
+  --panel-border-strong: rgba(217, 98, 31, 0.34);
+  text-rendering: geometricPrecision;
+}
+
+body[data-brand="thurr-solutions"] .visual-home-page {
+  width: min(100% - 56px, 1180px);
+}
+
+body[data-brand="thurr-solutions"] .visual-hero {
+  min-height: calc(100vh - 56px);
+  padding: clamp(88px, 11vw, 132px) 0 clamp(58px, 7vw, 86px);
+}
+
+body[data-brand="thurr-solutions"] .hero-tag,
+body[data-brand="thurr-solutions"] .pipeline-label,
+body[data-brand="thurr-solutions"] .visual-section-label,
+body[data-brand="thurr-solutions"] .visual-operator > span {
+  color: #f07a31;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+body[data-brand="thurr-solutions"] .visual-hero-title {
+  max-width: 920px;
+  margin: 26px 0 24px;
+  color: var(--sharp-paper);
+  font-size: clamp(64px, 8.4vw, 124px);
+  line-height: 0.88;
+  letter-spacing: 0.018em;
+  text-wrap: balance;
+}
+
+body[data-brand="thurr-solutions"] .visual-hero-title em {
+  color: #f07a31;
+  text-shadow: 0 0 22px rgba(217, 98, 31, 0.16);
+}
+
+body[data-brand="thurr-solutions"] .visual-hero-sub {
+  max-width: 620px;
+  margin-bottom: 42px;
+  color: var(--sharp-warm);
+  font-size: 18px;
+  line-height: 1.68;
+}
+
+body[data-brand="thurr-solutions"] .visual-methodology p,
+body[data-brand="thurr-solutions"] .visual-audit-cta p,
+body[data-brand="thurr-solutions"] .visual-work p,
+body[data-brand="thurr-solutions"] .visual-operator p,
+body[data-brand="thurr-solutions"] .visual-consent span,
+body[data-brand="thurr-solutions"] .form-note {
+  color: var(--sharp-muted);
+}
+
+body[data-brand="thurr-solutions"] .hero-meta-strip {
+  margin-top: 54px;
+  gap: 18px;
+}
+
+body[data-brand="thurr-solutions"] .hero-meta-strip span,
+body[data-brand="thurr-solutions"] .pipeline-status-row span,
+body[data-brand="thurr-solutions"] .pipeline-status-row strong {
+  color: var(--sharp-dim);
+}
+
+body[data-brand="thurr-solutions"] .pipeline-section,
+body[data-brand="thurr-solutions"] .visual-methodology,
+body[data-brand="thurr-solutions"] .visual-audit-cta,
+body[data-brand="thurr-solutions"] .visual-work,
+body[data-brand="thurr-solutions"] .visual-compliance-strip,
+body[data-brand="thurr-solutions"] .visual-operator {
+  margin-bottom: clamp(88px, 10vw, 132px);
+}
+
+body[data-brand="thurr-solutions"] .pipeline-wrap,
+body[data-brand="thurr-solutions"] .visual-audit-form {
+  border-color: var(--panel-border);
+  background:
+    linear-gradient(135deg, rgba(217, 98, 31, 0.055), transparent 34%),
+    var(--panel-bg);
+}
+
+body[data-brand="thurr-solutions"] .pipeline-wrap::before,
+body[data-brand="thurr-solutions"] .visual-audit-form::before {
+  color: #f07a31;
+}
+
+body[data-brand="thurr-solutions"] .node-box {
+  fill: rgba(15, 16, 13, 0.94);
+  stroke: rgba(245, 239, 226, 0.16);
+}
+
+body[data-brand="thurr-solutions"] .node-label-main {
+  fill: var(--sharp-paper);
+}
+
+body[data-brand="thurr-solutions"] .node-label-sub {
+  fill: #a49d93;
+}
+
+body[data-brand="thurr-solutions"] .connector-path {
+  stroke: rgba(217, 98, 31, 0.36);
+}
+
+body[data-brand="thurr-solutions"] .visual-methodology {
+  gap: 1px;
+  border: 1px solid var(--panel-border);
+  background: var(--panel-border);
+}
+
+body[data-brand="thurr-solutions"] .visual-methodology article {
+  min-height: 340px;
+  border-right: 0;
+  background:
+    linear-gradient(180deg, rgba(245, 239, 226, 0.038), rgba(245, 239, 226, 0.014)),
+    #0a0b09;
+}
+
+body[data-brand="thurr-solutions"] .visual-methodology article:hover {
+  background:
+    linear-gradient(180deg, rgba(217, 98, 31, 0.075), rgba(245, 239, 226, 0.018)),
+    #0a0b09;
+}
+
+body[data-brand="thurr-solutions"] .visual-methodology h2,
+body[data-brand="thurr-solutions"] .visual-audit-cta h2 {
+  color: var(--sharp-paper);
+  text-wrap: balance;
+}
+
+body[data-brand="thurr-solutions"] .visual-audit-cta {
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 0.78fr);
+  gap: clamp(48px, 7vw, 92px);
+}
+
+body[data-brand="thurr-solutions"] .audit-price-line strong {
+  color: var(--sharp-paper);
+}
+
+body[data-brand="thurr-solutions"] .visual-audit-form input,
+body[data-brand="thurr-solutions"] .visual-audit-form select {
+  border-color: rgba(245, 239, 226, 0.13);
+  background: rgba(245, 239, 226, 0.055);
+  color: var(--sharp-paper);
+}
+
+body[data-brand="thurr-solutions"] .visual-audit-form input::placeholder {
+  color: rgba(216, 210, 200, 0.48);
+}
+
+body[data-brand="thurr-solutions"] .visual-work-grid {
+  border-color: var(--panel-border);
+  background: var(--panel-border);
+}
+
+body[data-brand="thurr-solutions"] .visual-work article {
+  min-height: 332px;
+  background:
+    linear-gradient(180deg, rgba(245, 239, 226, 0.032), rgba(245, 239, 226, 0.012)),
+    #0a0b09;
+}
+
+body[data-brand="thurr-solutions"] .visual-work h2,
+body[data-brand="thurr-solutions"] .visual-operator strong,
+body[data-brand="thurr-solutions"] .terminal-widget strong {
+  color: var(--sharp-paper);
+}
+
+body[data-brand="thurr-solutions"] .visual-work article > strong {
+  color: #b8b0a4;
+}
+
+body[data-brand="thurr-solutions"] .visual-compliance-strip {
+  border-color: var(--panel-border);
+}
+
+body[data-brand="thurr-solutions"] .visual-compliance-strip span {
+  color: #b6afa6;
+}
+
+body[data-brand="thurr-solutions"] .terminal-widget {
+  color: #9f978e;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+}
+
+body[data-brand="thurr-solutions"] .nav-cta,
+body[data-brand="thurr-solutions"] .visual-primary-btn,
+body[data-brand="thurr-solutions"] .visual-secondary-btn,
+body[data-brand="thurr-solutions"] .theme-toggle span,
+body[data-brand="thurr-solutions"] .visual-methodology article,
+body[data-brand="thurr-solutions"] .visual-work article,
+body[data-brand="thurr-solutions"] .work-status {
+  transition:
+    color var(--motion-fast) var(--motion-ease-control),
+    background var(--motion-fast) var(--motion-ease-control),
+    border-color var(--motion-fast) var(--motion-ease-control),
+    transform var(--motion-fast) var(--motion-ease-control),
+    opacity var(--motion-fast) var(--motion-ease-control);
+}
+
+body[data-brand="thurr-solutions"] .visual-methodology article:hover,
+body[data-brand="thurr-solutions"] .visual-work article:hover {
+  transform: translateY(-3px);
+  border-color: var(--panel-border-strong);
+}
+
+body[data-brand="thurr-solutions"] .visual-primary-btn:hover,
+body[data-brand="thurr-solutions"] .visual-primary-btn:focus-visible,
+body[data-brand="thurr-solutions"] .nav-cta:hover,
+body[data-brand="thurr-solutions"] .nav-cta:focus-visible {
+  transform: translate(-2px, -2px);
+}
+
+body[data-brand="thurr-solutions"] .motion-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--motion-base) var(--motion-ease-out),
+    transform var(--motion-base) var(--motion-ease-out);
+}
+
+body[data-brand="thurr-solutions"] .motion-reveal.motion-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body[data-brand="thurr-solutions"] .visual-methodology article:nth-child(2) {
+  transition-delay: 70ms;
+}
+
+body[data-brand="thurr-solutions"] .visual-methodology article:nth-child(3) {
+  transition-delay: 140ms;
+}
+
+body[data-brand="thurr-solutions"] .pipe-node {
+  transition: transform var(--motion-fast) var(--motion-ease-control);
+}
+
+body[data-brand="thurr-solutions"] .pipe-node:hover {
+  transform: translateY(-2px);
+}
+
 /* Light mode is opt-in only. Dark remains the default unless the visitor toggles it. */
 body[data-brand="thurr-solutions"][data-ui-theme="light"] {
   --bg: #F5EFE2;
@@ -191,4 +447,68 @@ body[data-brand="thurr-solutions"][data-ui-theme="light"] .work-page .audit-hero
 
 body[data-brand="thurr-solutions"][data-ui-theme="light"] .node-label-sub {
   fill: #6B6258;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-hero-title,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-methodology h2,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-cta h2,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-work h2,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-operator strong {
+  color: #1A1714;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-hero-sub,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-methodology p,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-audit-cta p,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-work p,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-operator p {
+  color: #4c453e;
+}
+
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-methodology article,
+body[data-brand="thurr-solutions"][data-ui-theme="light"] .visual-work article {
+  background:
+    linear-gradient(180deg, rgba(26, 23, 20, 0.045), rgba(26, 23, 20, 0.018)),
+    #F5EFE2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-brand="thurr-solutions"] *,
+  body[data-brand="thurr-solutions"] *::before,
+  body[data-brand="thurr-solutions"] *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  body[data-brand="thurr-solutions"] .motion-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  body[data-brand="thurr-solutions"] .visual-home-page {
+    width: min(100% - 32px, 1180px);
+  }
+
+  body[data-brand="thurr-solutions"] .visual-audit-cta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  body[data-brand="thurr-solutions"] .visual-home-page {
+    width: min(100% - 24px, 1180px);
+  }
+
+  body[data-brand="thurr-solutions"] .visual-hero-title {
+    font-size: clamp(52px, 16vw, 78px);
+    line-height: 0.92;
+  }
+
+  body[data-brand="thurr-solutions"] .visual-hero-sub {
+    font-size: 16px;
+  }
 }
