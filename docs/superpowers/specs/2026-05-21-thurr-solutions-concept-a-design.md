@@ -118,6 +118,28 @@ The original nine-section structure still applies, but the emphasis changes:
 8. About: solo operator credibility, not big-agency theater.
 9. Final CTA: Lead Flow Audit.
 
+## Government-Ready Recommendation
+
+Add government contracting as a secondary premium lane, not as the main homepage promise.
+
+Recommended label:
+
+> Government-Ready Brand & Lead Systems
+
+This should live under Operations, Compliance-Grade, or a future `/government-ready` page. It should not replace the homepage hero, because the main offer is still brand growth and lead conversion for local service businesses.
+
+Offer this lane as:
+
+- Government-ready website refreshes.
+- Capability statement design and copy support.
+- NAICS and service-positioning research.
+- SAM.gov registration checklist guidance.
+- Contract opportunity monitoring setup.
+- CRM pipeline for bids, RFPs, agency contacts, and follow-up.
+- Compliance-aware intake and document organization.
+
+Avoid making award guarantees or implying legal/compliance certification. Do not use language like `we win you government contracts`. Keep the pitch practical: Thurr Solutions helps service businesses look credible, organize their contract-readiness materials, and build the follow-up system around public-sector opportunities.
+
 ## Implementation Notes
 
 Do not continue iterating on the current Right Thurr-forward hero. Replace it with the approved Thurr Solutions-first direction.
