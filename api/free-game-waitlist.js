@@ -187,8 +187,6 @@ export default async function handler(request, response) {
       apikey: supabaseServiceRoleKey,
       Authorization: `Bearer ${supabaseServiceRoleKey}`,
       'Content-Type': 'application/json',
-      'Content-Profile': 'thurrsolutions',
-      'Accept-Profile': 'thurrsolutions',
       Prefer: 'return=representation',
     },
     body: JSON.stringify(row),

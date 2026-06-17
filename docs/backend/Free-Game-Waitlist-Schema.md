@@ -4,6 +4,9 @@
 
 `thurrsolutions.free_game_waitlist`
 
+The canonical data lives in the `thurrsolutions` schema. Supabase REST currently exposes only
+`public`, so the migration also creates `public.free_game_waitlist` as the API-facing view.
+
 ## Purpose
 
 Store lightweight Right Thurr Free Game interest from the `/thurr` link hub before launching a paid or high-touch community.

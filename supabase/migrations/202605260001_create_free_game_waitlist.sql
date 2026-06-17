@@ -56,3 +56,23 @@ on thurrsolutions.free_game_waitlist (interest_area);
 
 create index if not exists free_game_waitlist_status_idx
 on thurrsolutions.free_game_waitlist (status);
+
+create or replace view public.free_game_waitlist as
+select
+  id,
+  created_at,
+  name,
+  email,
+  phone,
+  sms_opt_in,
+  interest_area,
+  put_on_request,
+  source,
+  page_path,
+  referrer,
+  status,
+  responded_at
+from thurrsolutions.free_game_waitlist;
+
+grant insert, select, update on public.free_game_waitlist to service_role;
+grant insert on public.free_game_waitlist to anon;
