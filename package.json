@@ -14,6 +14,7 @@
     "remotion:render:kirby-logo-options": "remotion render src/remotion/index.jsx KirbyLogoOptions /private/tmp/kirby-logo-options-miracle.mp4",
     "remotion:still:lead-system": "remotion still src/remotion/index.jsx ThurrLeadSystemIntro public/media/thurr-solutions-lead-system-intro-poster.jpg --frame=90",
     "buildout:payload:test": "node scripts/buildout-request-payload-test.mjs",
+    "waitlist:payload:test": "node scripts/free-game-waitlist-payload-test.mjs",
     "thurr-tag:payload:test": "node scripts/thurr-tag-waitlist-payload-test.mjs",
     "report:delivery:test": "node scripts/approved-email-delivery-test.mjs",
     "notion:create-command-center": "node scripts/notion-create-command-center.mjs",

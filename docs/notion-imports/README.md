@@ -4,6 +4,7 @@ These CSV files create the first Command Center databases if the API script is u
 
 - `task-tracker.csv`
 - `content-calendar.csv`
+- `right-thurr-free-game-content-calendar.csv`
 - `ai-ideas-log.csv`
 
 The live databases were also created through `scripts/notion-create-command-center.mjs`:
@@ -21,6 +22,7 @@ The live databases were also created through `scripts/notion-create-command-cent
 5. Rename the imported databases:
    - Task Tracker
    - Content Calendar
+   - Right Thurr Free Game Content Calendar
    - AI Ideas Log
 
 ## Recommended Source Of Truth
@@ -30,3 +32,5 @@ The live databases were also created through `scripts/notion-create-command-cent
 - Notion: daily task visibility, content planning, and idea capture.
 
 Do not sync private lead details into Notion until owner auth/RLS is finalized.
+
+For the Right Thurr Free Game calendar, track public engagement only: saves, replies, DMs, comments, shares, email signups, and "send me that" requests. Do not store private DMs, health details, client data, credentials, or account access notes in the calendar.
