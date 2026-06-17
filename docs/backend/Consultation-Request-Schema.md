@@ -1,12 +1,14 @@
-# Lead Flow Audit Request Schema
+# Consultation Request Schema
 
 ## Table
 
 `thurrsolutions.audit_requests`
 
+Note: the table name is legacy from the prior offer language. Rename only through a coordinated Supabase migration.
+
 ## Purpose
 
-Store public Lead Flow Audit requests from the Thurr Solutions website without collecting regulated or sensitive client data.
+Store public consultation requests from the Thurr Solutions website without collecting regulated or sensitive client data.
 
 ## Fields
 

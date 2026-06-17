@@ -22,7 +22,9 @@
     "use-cases:verify": "node scripts/verify-use-cases.mjs",
     "diagnostic:verify": "node scripts/verify-diagnostic-lanes.mjs",
     "diagnostic:verify:dist": "node scripts/verify-diagnostic-dist.mjs",
-    "diagnostic:create-lane": "node scripts/create-diagnostic-lane.mjs"
+    "diagnostic:create-lane": "node scripts/create-diagnostic-lane.mjs",
+    "audit-alert:verify": "node scripts/verify-audit-alert-hook.mjs",
+    "consultation-alert:verify": "node scripts/verify-audit-alert-hook.mjs"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.454",

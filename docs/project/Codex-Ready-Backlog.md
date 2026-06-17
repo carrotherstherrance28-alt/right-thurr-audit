@@ -231,6 +231,7 @@ FILES: /Users/thurr/Documents/New project/api/audit-request.js; /Users/thurr/Doc
 LOCKED COPY / INPUTS: Preferred destinations: n8n webhook and/or Discord owner alert.
 DO NOT: Do not hardcode webhook URLs, API keys, Discord channel IDs, or email credentials.
 ACCEPTANCE: Endpoint reads alert destination from env vars; failure logs safely; docs list required env vars; npm run build passes.
+STATUS: DONE (2026-05-17) — Generic owner alert hook reads `AUDIT_REQUEST_WEBHOOK_URL` / `DISCORD_OWNER_WEBHOOK_URL`, skips safely when unset, catches alert failures without breaking saved audit requests, documents env-only routing, and has `npm run audit-alert:verify`; production destination remains blocked by the separate Thurr decision.
 DEPENDENCIES: AUD-001; DECISION BLOCKER — Audit Alert Destination.
 OWNER: Codex
 PRIORITY: P1
