@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function SystemStatusBar() {
-  const statuses = ['AUDIT · OPERATIONAL', 'BUILD · OPERATIONAL', 'MANAGE · OPERATIONAL'];
+  const statuses = ['CONSULT · OPERATIONAL', 'BUILD · OPERATIONAL', 'MANAGE · OPERATIONAL'];
   const buildTime = typeof __BUILD_TIME__ === 'string' ? new Date(__BUILD_TIME__) : new Date();
   const statusTime = new Intl.DateTimeFormat('en-US', {
     month: 'short',
@@ -32,6 +32,7 @@ export function SystemStatusBar() {
 }
 
 export function SiteHeader({
+  consultationUrl = 'https://calendly.com/thurr',
   navigateToPage,
   onToggleTheme,
   uiTheme = 'dark',
@@ -55,21 +56,46 @@ export function SiteHeader({
           <span className={uiTheme === 'dark' ? 'active' : ''}>Dark</span>
           <span className={uiTheme === 'light' ? 'active' : ''}>Light</span>
         </button>
-        <a className="nav-cta" href="#audit">Get the Lead Flow Audit — $250</a>
+        <a className="nav-cta" href={consultationUrl} target="_blank" rel="noreferrer">Book a consultation</a>
       </div>
     </header>
   );
 }
 
-export function SiteFooter({ navigateToPage }) {
+export function SiteFooter({ navigateToAbout, navigateToPage }) {
   return (
     <footer className="site-footer" aria-label="Thurr Solutions footer">
-      <div className="footer-brand">THURR SOLUTIONS</div>
-      <p>Thurr Solutions LLC · Missouri · Houston Office · AI Automation Engineer</p>
-      <div className="footer-links">
+      <div className="site-footer-column site-footer-promise">
+        <span>Thurr Solutions</span>
+        <strong>
+          Consult first. <span>Build second.</span>
+        </strong>
+      </div>
+      <div className="site-footer-column">
+        <span>Navigate</span>
+        <button type="button" onClick={() => navigateToPage('home')}>Home</button>
+        <button type="button" onClick={() => navigateToPage('audit')}>Consultation</button>
+        <button type="button" onClick={() => navigateToPage('work')}>Selected Work</button>
+        <button type="button" onClick={navigateToAbout}>About Thurr</button>
+      </div>
+      <div className="site-footer-column">
+        <span>Review</span>
+        <button type="button" onClick={() => navigateToPage('compliance')}>Compliance</button>
         <button type="button" onClick={() => navigateToPage('privacy')}>Privacy Policy</button>
+      </div>
+      <div className="site-footer-column">
+        <span>Contact</span>
         <a href="mailto:hello@thurrsolutions.com">hello@thurrsolutions.com</a>
       </div>
+      <p className="site-footer-trust-strip">
+        HIPAA-aware system design. TCPA-safe follow-up architecture. COPPA-compliant where
+        required. Compliance sign-off required before any regulated system goes live.
+      </p>
+      <p className="site-footer-disclosure">
+        Thurr Solutions builds lead capture, intake, and automation systems. Legal,
+        healthcare, youth, insurance, and SMS compliance decisions remain with the client&apos;s
+        authorized reviewer before public launch.
+      </p>
     </footer>
   );
 }

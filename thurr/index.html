@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Thurr's personal link hub for Thurr Tag, Thurr Solutions, Right Thurr Free Game, booking, and social profiles."
+    />
+    <meta name="author" content="Therrance Carrothers" />
+    <meta property="og:title" content="Thurr | Pointing People in the Right Direction" />
+    <meta
+      property="og:description"
+      content="Thurr Tag, Thurr Solutions, booking, Free Game, and practical systems for people in motion."
+    />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://thurrsolutions.com/thurr" />
+    <meta property="og:image" content="https://thurrsolutions.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Thurr | Pointing People in the Right Direction" />
+    <meta
+      name="twitter:description"
+      content="Thurr Tag, Thurr Solutions, booking, Free Game, and practical systems for people in motion."
+    />
+    <link rel="canonical" href="https://thurrsolutions.com/thurr" />
+    <link rel="icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <title>Thurr | Pointing People in the Right Direction</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #0a0b09;
+        --panel: rgba(245, 239, 226, 0.06);
+        --panel-strong: rgba(245, 239, 226, 0.1);
+        --paper: #f5efe2;
+        --muted: #b9b0a1;
+        --dim: #7a7166;
+        --orange: #d9621f;
+        --orange-bright: #f07a31;
+        --border: rgba(245, 239, 226, 0.16);
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+        background: var(--ink);
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: var(--paper);
+        font-family: "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          linear-gradient(135deg, rgba(217, 98, 31, 0.16), transparent 36%),
+          radial-gradient(circle at 50% 0%, rgba(245, 239, 226, 0.08), transparent 34rem),
+          linear-gradient(180deg, #0a0b09 0%, #11100d 100%);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        content: "";
+        background-image:
+          linear-gradient(rgba(245, 239, 226, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(245, 239, 226, 0.04) 1px, transparent 1px);
+        background-size: 42px 42px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.75), transparent 78%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      .link-shell {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        min-height: 100vh;
+        place-items: center;
+        padding: clamp(24px, 5vw, 64px) 18px;
+      }
+
+      .link-card {
+        width: 100%;
+        max-width: 580px;
+        min-width: 0;
+        padding: clamp(24px, 5vw, 42px);
+        border: 1px solid var(--border);
+        background:
+          linear-gradient(180deg, rgba(245, 239, 226, 0.08), rgba(245, 239, 226, 0.035)),
+          rgba(10, 11, 9, 0.88);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .profile-top {
+        display: grid;
+        gap: 18px;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .brand-badge {
+        display: grid;
+        width: 108px;
+        height: 108px;
+        place-items: center;
+        border: 2px solid rgba(245, 239, 226, 0.22);
+        border-radius: 50%;
+        background: rgba(245, 239, 226, 0.04);
+      }
+
+      .brand-badge img {
+        display: block;
+        width: 82px;
+        height: 82px;
+        object-fit: contain;
+      }
+
+      .profile-top h1 {
+        max-width: 100%;
+        margin: 0;
+        font-family: "Bebas Neue", Impact, sans-serif;
+        font-size: clamp(56px, 15vw, 90px);
+        font-weight: 400;
+        letter-spacing: 0.03em;
+        line-height: 0.85;
+        overflow-wrap: anywhere;
+      }
+
+      .profile-top h1 span {
+        display: block;
+        color: var(--orange-bright);
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        letter-spacing: 0;
+      }
+
+      .handle {
+        margin: -8px 0 0;
+        color: var(--orange-bright);
+        font-family: "DM Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .intro {
+        max-width: 34rem;
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.6;
+      }
+
+      .focus-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        max-width: 100%;
+        min-width: 0;
+        margin: 22px 0 28px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .focus-row li {
+        padding: 8px 10px;
+        border: 1px solid rgba(245, 239, 226, 0.16);
+        color: var(--muted);
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .primary-actions {
+        display: grid;
+        gap: 12px;
+      }
+
+      .primary-actions {
+        margin-bottom: 18px;
+      }
+
+      .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .social-icon {
+        display: inline-grid;
+        min-width: 42px;
+        min-height: 42px;
+        place-items: center;
+        border: 1px solid var(--border);
+        background: rgba(245, 239, 226, 0.045);
+        color: var(--paper);
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        transition:
+          background 160ms ease,
+          border-color 160ms ease,
+          transform 160ms ease;
+      }
+
+      .social-icon:hover,
+      .social-icon:focus-visible {
+        border-color: rgba(217, 98, 31, 0.7);
+        background: var(--panel-strong);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      .signup-panel {
+        display: grid;
+        gap: 16px;
+        margin: 0 0 18px;
+        padding: 20px 0;
+        border-top: 1px solid rgba(245, 239, 226, 0.12);
+        border-bottom: 1px solid rgba(245, 239, 226, 0.12);
+      }
+
+      .signup-heading {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .signup-heading h2 {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.2;
+      }
+
+      .signup-heading p {
+        margin: 3px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .free-game-form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .field {
+        display: grid;
+        min-width: 0;
+        gap: 6px;
+      }
+
+      .field.full {
+        grid-column: 1 / -1;
+      }
+
+      .field label,
+      .checkbox-field {
+        color: var(--dim);
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        line-height: 1.4;
+        text-transform: uppercase;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        min-width: 0;
+        border: 1px solid rgba(245, 239, 226, 0.18);
+        border-radius: 0;
+        background: rgba(245, 239, 226, 0.055);
+        color: var(--paper);
+        outline: none;
+        transition:
+          background 160ms ease,
+          border-color 160ms ease;
+      }
+
+      .field input,
+      .field select {
+        min-height: 44px;
+        padding: 0 12px;
+      }
+
+      .field textarea {
+        min-height: 86px;
+        padding: 12px;
+        resize: vertical;
+      }
+
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        border-color: rgba(217, 98, 31, 0.72);
+        background: rgba(245, 239, 226, 0.08);
+      }
+
+      .field select option {
+        background: #171713;
+        color: var(--paper);
+      }
+
+      .checkbox-field {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: start;
+        gap: 10px;
+        color: var(--muted);
+        letter-spacing: 0.03em;
+        text-transform: none;
+      }
+
+      .checkbox-field input {
+        width: 16px;
+        height: 16px;
+        margin: 1px 0 0;
+        accent-color: var(--orange);
+      }
+
+      .form-submit {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .form-note {
+        margin: 0;
+        color: var(--dim);
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .submit-button {
+        min-height: 46px;
+        padding: 0 18px;
+        border: 1px solid rgba(217, 98, 31, 0.72);
+        background: var(--orange);
+        color: var(--paper);
+        cursor: pointer;
+        font-weight: 700;
+        transition:
+          background 160ms ease,
+          transform 160ms ease;
+      }
+
+      .submit-button:hover,
+      .submit-button:focus-visible {
+        background: var(--orange-bright);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      .submit-button:disabled {
+        cursor: wait;
+        opacity: 0.64;
+        transform: none;
+      }
+
+      .form-status {
+        min-height: 18px;
+        margin: 0;
+        color: var(--dim);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .form-status.success {
+        color: #f0c17f;
+      }
+
+      .form-status.error {
+        color: #ff9d7d;
+      }
+
+      .trap-field {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      .link-button {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+        min-height: 58px;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        text-decoration: none;
+        transition:
+          background 160ms ease,
+          border-color 160ms ease,
+          transform 160ms ease;
+      }
+
+      .link-button:hover,
+      .link-button:focus-visible {
+        border-color: rgba(217, 98, 31, 0.7);
+        background: var(--panel-strong);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      .link-button.primary {
+        border-color: rgba(217, 98, 31, 0.72);
+        background: var(--orange);
+        color: var(--paper);
+      }
+
+      .link-button.primary:hover,
+      .link-button.primary:focus-visible {
+        background: var(--orange-bright);
+      }
+
+      .link-mark {
+        display: inline-grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid rgba(245, 239, 226, 0.18);
+        color: var(--paper);
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .link-copy {
+        display: grid;
+        min-width: 0;
+        gap: 3px;
+      }
+
+      .link-copy strong {
+        font-size: 15px;
+        line-height: 1.2;
+      }
+
+      .link-copy span {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .link-button.primary .link-copy span {
+        color: rgba(245, 239, 226, 0.78);
+      }
+
+      .link-arrow {
+        color: var(--orange-bright);
+        font-family: "DM Mono", monospace;
+        font-size: 13px;
+      }
+
+      .link-button.primary .link-arrow {
+        color: var(--paper);
+      }
+
+      .section-label {
+        margin: 24px 0 10px;
+        color: var(--dim);
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .mini-footer {
+        margin: 26px 0 0;
+        color: var(--dim);
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        line-height: 1.7;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 680px) {
+        .link-shell {
+          align-items: start;
+          padding-inline: 12px;
+        }
+
+        .link-card {
+          padding: 22px 16px;
+        }
+
+        .profile-top h1 {
+          font-size: clamp(48px, 16vw, 60px);
+        }
+
+        .focus-row {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          width: 100%;
+        }
+
+        .focus-row li {
+          text-align: center;
+        }
+
+        .link-button {
+          grid-template-columns: 34px 1fr auto;
+          gap: 11px;
+          padding: 12px;
+        }
+
+        .signup-heading,
+        .form-grid,
+        .form-submit {
+          grid-template-columns: 1fr;
+        }
+
+        .signup-heading {
+          justify-items: start;
+        }
+
+        .link-mark {
+          width: 34px;
+          height: 34px;
+        }
+
+        .link-copy strong {
+          font-size: 14px;
+        }
+
+        .link-copy span {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="link-shell" aria-labelledby="page-title">
+      <section class="link-card">
+        <header class="profile-top">
+          <div class="brand-badge" aria-hidden="true">
+            <img src="/rt-monogram-clean.png" alt="" />
+          </div>
+          <h1 id="page-title">I'm Thurr <span>right there.</span></h1>
+          <p class="handle">@its_Thurr</p>
+          <p class="intro">
+            I point people in the right direction: Thurr Tag, AI systems, travel,
+            useful tools, and people worth knowing.
+          </p>
+        </header>
+
+        <ul class="focus-row" aria-label="Right Thurr content lanes">
+          <li>Thurr Tag</li>
+          <li>AI systems</li>
+          <li>Travel</li>
+          <li>Fitness</li>
+          <li>Free Game</li>
+          <li>Network</li>
+        </ul>
+
+        <nav class="primary-actions" aria-label="Primary links">
+          <a class="link-button primary" href="/thurr-tag/">
+            <span class="link-mark">TT</span>
+            <span class="link-copy">
+              <strong>Thurr Tag Founders List</strong>
+              <span>Series 001 - 150 numbered premium NFC tags.</span>
+            </span>
+            <span class="link-arrow">-&gt;</span>
+          </a>
+
+          <a class="link-button" href="https://calendly.com/thurr" target="_blank" rel="noreferrer">
+            <span class="link-mark">TS</span>
+            <span class="link-copy">
+              <strong>Work with Thurr Solutions</strong>
+              <span>Set up a consultation for brand, AI, lead flow, and business growth.</span>
+            </span>
+            <span class="link-arrow">-&gt;</span>
+          </a>
+
+          <a class="link-button" href="https://calendly.com/thurr" target="_blank" rel="noreferrer">
+            <span class="link-mark">CAL</span>
+            <span class="link-copy">
+              <strong>Book a call</strong>
+              <span>Talk through Thurr Solutions, Thurr Tag, or the next move.</span>
+            </span>
+            <span class="link-arrow">-&gt;</span>
+          </a>
+
+          <a class="link-button" href="#free-game-list">
+            <span class="link-mark">RT</span>
+            <span class="link-copy">
+              <strong>Right Thurr Free Game</strong>
+              <span>AI tools, travel, fitness, setups, and useful people.</span>
+            </span>
+            <span class="link-arrow">-&gt;</span>
+          </a>
+        </nav>
+
+        <section class="signup-panel" id="free-game-list" aria-labelledby="waitlist-title">
+          <div class="signup-heading">
+            <span class="link-mark">RT</span>
+            <div>
+              <h2 id="waitlist-title">Join the Free Game list</h2>
+              <p>Tell me what you are trying to get put on to right now.</p>
+            </div>
+          </div>
+
+          <form id="free-game-form" class="free-game-form" novalidate>
+            <div class="trap-field" aria-hidden="true">
+              <label for="company_website">Company website</label>
+              <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="waitlist_name">Name</label>
+                <input id="waitlist_name" name="name" type="text" autocomplete="name" required />
+              </div>
+
+              <div class="field">
+                <label for="waitlist_email">Email</label>
+                <input id="waitlist_email" name="email" type="email" autocomplete="email" required />
+              </div>
+
+              <div class="field">
+                <label for="waitlist_interest">Lane</label>
+                <select id="waitlist_interest" name="interest_area" required>
+                  <option value="">Pick one</option>
+                  <option>AI tools</option>
+                  <option>Fitness</option>
+                  <option>Travel</option>
+                  <option>Money</option>
+                  <option>Content</option>
+                  <option>Business</option>
+                  <option>Network</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="waitlist_phone">Phone optional</label>
+                <input id="waitlist_phone" name="phone" type="tel" autocomplete="tel" />
+              </div>
+
+              <div class="field full">
+                <label for="waitlist_request">Put me on to</label>
+                <textarea
+                  id="waitlist_request"
+                  name="put_on_request"
+                  required
+                  placeholder="AI tools, travel setups, workouts, healthy eats, content systems..."
+                ></textarea>
+              </div>
+            </div>
+
+            <label class="checkbox-field" for="email_consent">
+              <input id="email_consent" name="email_consent" type="checkbox" required />
+              <span>Send me Right Thurr Free Game drops by email.</span>
+            </label>
+
+            <label class="checkbox-field" for="sms_opt_in">
+              <input id="sms_opt_in" name="sms_opt_in" type="checkbox" />
+              <span>Text me too if I add my phone. Msg/data rates may apply. Reply STOP to opt out.</span>
+            </label>
+
+            <div class="form-submit">
+              <p class="form-note">Keep it broad. No private health, financial, legal, or account details.</p>
+              <button class="submit-button" type="submit">Join list</button>
+            </div>
+
+            <p id="free-game-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <p class="section-label">Profiles</p>
+        <nav class="social-links" aria-label="Thurr profile links">
+          <a class="social-icon" href="https://www.instagram.com/its_Thurr/" target="_blank" rel="noreferrer" aria-label="Instagram">IG</a>
+          <a class="social-icon" href="https://www.tiktok.com/@thurrofficial" target="_blank" rel="noreferrer" aria-label="TikTok">TT</a>
+          <a class="social-icon" href="https://www.youtube.com/@thurrofficial" target="_blank" rel="noreferrer" aria-label="YouTube">YT</a>
+          <a class="social-icon" href="https://www.linkedin.com/in/therrance-carrothers" target="_blank" rel="noreferrer" aria-label="LinkedIn">LI</a>
+          <a class="social-icon" href="https://x.com/thurrofficial" target="_blank" rel="noreferrer" aria-label="X">X</a>
+          <a class="social-icon" href="https://www.facebook.com/therrance.carrothers/" target="_blank" rel="noreferrer" aria-label="Facebook">FB</a>
+          <a class="social-icon" href="https://www.upwork.com/freelancers/~011a33e3e2e65c4bbd?mp_source=share" target="_blank" rel="noreferrer" aria-label="Upwork">UW</a>
+        </nav>
+
+        <p class="mini-footer">Right Thurr by Thurr Solutions LLC</p>
+      </section>
+    </main>
+    <script>
+      const freeGameForm = document.querySelector("#free-game-form");
+      const statusEl = document.querySelector("#free-game-status");
+      const submitButton = freeGameForm?.querySelector(".submit-button");
+
+      function setStatus(message, type = "") {
+        if (!statusEl) return;
+        statusEl.textContent = message;
+        statusEl.className = `form-status ${type}`.trim();
+      }
+
+      function getFormPayload(form) {
+        const formData = new FormData(form);
+        return {
+          name: String(formData.get("name") || "").trim(),
+          email: String(formData.get("email") || "").trim(),
+          phone: String(formData.get("phone") || "").trim(),
+          interest_area: String(formData.get("interest_area") || "").trim(),
+          put_on_request: String(formData.get("put_on_request") || "").trim(),
+          sms_opt_in: formData.get("sms_opt_in") === "on",
+          email_consent: formData.get("email_consent") === "on",
+          company_website: String(formData.get("company_website") || "").trim(),
+          source: "thurr-link-hub",
+          page_path: window.location.pathname,
+          referrer: document.referrer,
+        };
+      }
+
+      function saveLocalPreview(payload) {
+        const key = "right-thurr-free-game-waitlist-preview";
+        const entries = JSON.parse(window.localStorage.getItem(key) || "[]");
+        entries.push({ ...payload, saved_at: new Date().toISOString() });
+        window.localStorage.setItem(key, JSON.stringify(entries.slice(-20)));
+      }
+
+      freeGameForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const payload = getFormPayload(freeGameForm);
+
+        if (!payload.name || !payload.email || !payload.interest_area || !payload.put_on_request) {
+          setStatus("Name, email, lane, and put-on request are required.", "error");
+          return;
+        }
+
+        if (!payload.email_consent) {
+          setStatus("Check the email box so I can send the Free Game drops.", "error");
+          return;
+        }
+
+        if (payload.phone && !payload.sms_opt_in) {
+          setStatus("Check the text opt-in box before adding a phone number, or leave phone blank.", "error");
+          return;
+        }
+
+        submitButton.disabled = true;
+        setStatus("Adding you to the list...");
+
+        try {
+          const response = await fetch("/api/free-game-waitlist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          if (!response.ok && window.location.hostname === "localhost" && response.status === 404) {
+            saveLocalPreview(payload);
+            freeGameForm.reset();
+            setStatus("Local preview saved. Production will save this to the Free Game list.", "success");
+            return;
+          }
+
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            setStatus(result.message || "Could not join the list yet. Try again in a minute.", "error");
+            return;
+          }
+
+          freeGameForm.reset();
+          setStatus(result.message || "You are on the Free Game list.", "success");
+        } catch {
+          setStatus("Could not reach the waitlist right now. Try again in a minute.", "error");
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

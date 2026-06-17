@@ -57,6 +57,7 @@ import { WeatherDelayUpdateUseCasePage } from './components/WeatherDelayUpdateUs
 import { clientDiagnosticTemplates } from './data/clientDiagnosticTemplates.js';
 import diagnosticLanesConfig from '../diagnostic/lanes.json';
 import { fieldDefaults, rightThurrMockData } from './data/rightThurrMockData.js';
+import { calculateLeadLeakEstimate, leadLeakAssumptions } from './lib/leadLeakEstimate.js';
 
 const {
   activityEvents,
@@ -80,7 +81,7 @@ const {
 
 const publicNavItems = [
   ['Home', 'home'],
-  ['Lead Audit', 'audit'],
+  ['Consultation', 'audit'],
   ['Compliance', 'compliance'],
 ];
 
@@ -89,6 +90,8 @@ const socialLinks = {
   instagram: 'https://www.instagram.com/thurrsolutions/',
   upwork: 'https://www.upwork.com/freelancers/~011a33e3e2e65c4bbd?mp_source=share',
 };
+
+const consultationUrl = 'https://calendly.com/thurr';
 
 const introVideo = {
   src: '/media/thurr-solutions-lead-system-intro.mp4',
@@ -479,7 +482,7 @@ async function submitBuildoutRequest(payload) {
 }
 
 async function submitAuditRequest(payload) {
-  const response = await fetch('/api/audit-request', {
+  const response = await fetch('/api/consultation-request', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -494,7 +497,7 @@ async function submitAuditRequest(payload) {
   }
 
   const errorPayload = await response.json().catch(() => ({}));
-  throw new Error(errorPayload.message || 'Lead Flow Audit request failed.');
+  throw new Error(errorPayload.message || 'Consultation request failed.');
 }
 
 function App() {
@@ -1020,15 +1023,15 @@ function App() {
 
     const titlesByPage = {
       home: defaultTitle,
-      audit: 'Lead Flow Audit | Thurr Solutions',
-      'audit-thanks': 'Audit Request Received | Thurr Solutions',
+      audit: 'Book a Consultation | Thurr Solutions',
+      'audit-thanks': 'Consultation Request Received | Thurr Solutions',
       compliance: 'Compliance | Thurr Solutions',
       privacy: 'Privacy | Thurr Solutions',
       work: 'Selected Work | Thurr Solutions',
       'work-restore': 'Restore-C | Thurr Solutions',
       'work-heartpathbloom': 'HeartPathBloom | Thurr Solutions',
       'work-insurance': 'Insurance Pipeline Concept | Thurr Solutions',
-      buildout: 'Lead System Audit | Thurr Solutions',
+      buildout: 'Lead System Consultation | Thurr Solutions',
       solutions: 'Thurr Solutions | Services',
       'usecase-website-landlord': 'Website Landlord (Template) | Thurr Solutions',
       'usecase-ai-lead-followup': 'AI Lead Follow-Up (Template) | Thurr Solutions',
@@ -1751,6 +1754,7 @@ function App() {
         publicNavItems={publicNavItems}
         setMenuOpen={setMenuOpen}
         socialLinks={socialLinks}
+        consultationUrl={consultationUrl}
         uiTheme={uiTheme}
       />
 
@@ -2594,19 +2598,19 @@ function SolutionsPage({ setPage }) {
       <section className="solutions-hero">
         <div className="hero-copy">
           <div className="eyebrow">THURR</div>
-          <h1>AI lead generation systems for local service businesses.</h1>
+          <h1>Autonomous revenue systems for local service businesses.</h1>
           <p>
-            Thurr Solutions builds and manages the intake, follow-up, automation, and AI support
+            Thurr Solutions builds and manages the intake, follow-up, booking, and AI support
             layer that helps contractors, beauty businesses, insurance teams, and service companies
-            respond faster and stop losing warm leads.
+            turn more warm leads into booked work.
           </p>
           <div className="hero-actions">
-            <button className="stamp-button link-button" type="button" onClick={() => setPage('audit')}>
-              BOOK A LEAD SYSTEM AUDIT
+            <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
+              BOOK A CONSULTATION
               <ArrowUpRight size={18} strokeWidth={3} />
-            </button>
+            </a>
             <button className="text-link dark-link button-link" type="button" onClick={() => setPage('audit')}>
-              View audit form
+              View consultation form
             </button>
           </div>
         </div>
@@ -2664,7 +2668,7 @@ function SolutionsPage({ setPage }) {
         <FlowCard
           icon={ClipboardCheck}
           title="AI Consulting"
-          text="Audit the workflow, identify the biggest leak, and create a battle plan before money gets burned on the wrong build."
+          text="Review the workflow, identify the biggest leak, and create a battle plan before money gets burned on the wrong build."
         />
         <FlowCard
           icon={Bot}
@@ -2686,67 +2690,57 @@ function SolutionsPage({ setPage }) {
       <section className="solutions-packages" id="solutions-packages" aria-labelledby="solutions-packages-title">
         <div className="section-copy">
           <div className="eyebrow">THE OFFER LADDER</div>
-          <h2 id="solutions-packages-title">The audit tells us what to fix. The build fixes it.</h2>
+          <h2 id="solutions-packages-title">Pilot first. Expand only when the numbers say so.</h2>
           <p>
-            Start small enough to avoid wasting money, then move into the next phase only when the
-            diagnosis shows it will help revenue, response speed, or owner visibility.
+            Start small enough to prove the lead response loop, then move into a larger contractor
+            build only when job value, lead volume, and missed-revenue pain support it.
           </p>
         </div>
         <div className="offer-ladder">
           <article>
-            <div className="ladder-step">Starter</div>
-            <h3>Lead Flow Audit</h3>
-            <strong>$250-$350</strong>
+            <div className="ladder-step">Review</div>
+            <h3>Consultation</h3>
+            <strong>Setup consultation</strong>
             <p>
-              Diagnose the website, booking path, lead intake, follow-up, and owner visibility.
-              Deliver a scorecard, priority fix list, and recommended battle plan.
+              Diagnose the website, booking path, lead intake, follow-up, and owner visibility
+              before money gets spent on the wrong build.
             </p>
-            <div className="ladder-next">If the website is leaking trust or inquiries, move to Growth Website + Intake.</div>
+            <div className="ladder-next">Output: Founding Pilot, Contractor Growth, or no-build-yet.</div>
           </article>
           <article>
-            <div className="ladder-step">Phase 1</div>
-            <h3>Growth Website + Intake</h3>
-            <strong>$500-$1,500</strong>
+            <div className="ladder-step">Default</div>
+            <h3>Founding Pilot</h3>
+            <strong>$750 setup + $99/mo</strong>
             <p>
-              Build or improve the service site, lead form, booking/inquiry flow, SEO basics, and
-              first follow-up handoff so the business can capture demand cleanly.
+              Install missed-lead capture, first reply, basic follow-up, booking handoff, and
+              Airtable tracking for the first three paid installs.
             </p>
-            <div className="ladder-next">If leads need faster response and routing, move to Automation Build.</div>
+            <div className="ladder-next">Built for proof, testimonials, and real buyer feedback.</div>
           </article>
           <article>
-            <div className="ladder-step">Phase 2</div>
-            <h3>Automation Build</h3>
-            <strong>$1,000-$3,500+</strong>
+            <div className="ladder-step">Manual Review</div>
+            <h3>Contractor Growth</h3>
+            <strong>$2,500-$5,000 + $500-$1,000/mo</strong>
             <p>
-              Connect forms, CRM or sheets, alerts, follow-up sequences, AI summaries, and routing
-              so leads move without constant manual chasing.
+              Add deeper context, reporting, and follow-up for higher-ticket contractors where one
+              recovered job can justify the system.
             </p>
-            <div className="ladder-next">If the system becomes business-critical, move to Managed Automation.</div>
+            <div className="ladder-next">Not the default. Scoped only when the economics support it.</div>
           </article>
           <article>
-            <div className="ladder-step">Add-On</div>
-            <h3>Missed-Call Recovery</h3>
-            <strong>$500-$1,500</strong>
+            <div className="ladder-step">Exception</div>
+            <h3>Custom Build</h3>
+            <strong>Manual quote only</strong>
             <p>
-              Add an automatic missed-call text-back, lead capture path, owner alert, and simple
-              ROI calculator so service businesses can see the value of faster response.
+              Custom scopes stay rare. If the business asks for more than the pilot, pause and
+              review the scope before quoting.
             </p>
-            <div className="ladder-next">Best for contractors, beauty, real estate, insurance, and appointment-based teams.</div>
-          </article>
-          <article>
-            <div className="ladder-step">Retainer</div>
-            <h3>Managed AI Automation</h3>
-            <strong>$250-$750/mo</strong>
-            <p>
-              Monitor workflows, fix breaks, improve prompts, update routing, review errors, and
-              keep the lead path useful after launch.
-            </p>
-            <div className="ladder-next">Best once the workflow is tied to real leads, bookings, or client communication.</div>
+            <div className="ladder-next">No quiet custom quoting as the normal path.</div>
           </article>
         </div>
         <div className="ladder-rule">
-          <strong>The audit fee can be credited toward the build.</strong>
-          <span>That keeps the first step low-risk without turning strategy into free work.</span>
+          <strong>Pricing is validation-first until three paid pilot installs close.</strong>
+          <span>That keeps the first step focused, practical, and tied to proof instead of guessing.</span>
         </div>
       </section>
 
@@ -2765,7 +2759,7 @@ function SolutionsPage({ setPage }) {
             Project Flow
           </div>
           {[
-            'Lead path audit',
+            'Lead path review',
             'Offer, ROI, and workflow plan',
             'Lead capture and follow-up build',
             'AI assistant and reporting layer',
@@ -2792,7 +2786,7 @@ function SolutionsPage({ setPage }) {
         </div>
         <div className="solutions-cta-card">
           <span>RECOMMENDED NEXT STEP</span>
-          <strong>Request the audit first. Build only after the leak is clear.</strong>
+          <strong>Book the consultation first. Build only after the leak is clear.</strong>
           <a className="text-link" href="mailto:hello@thurrsolutions.com">
             Email Thurr <Mail size={18} strokeWidth={3} />
           </a>
@@ -2808,34 +2802,61 @@ function HomePage({ setPage }) {
       <VisualHero />
       <PipelineDiagram />
       <VisualMethodology />
+      <VisualIndustriesSection />
+      <VisualIntroVideoSection />
       <VisualAuditCta />
+      <HomeOfferLadderSection setPage={setPage} />
+      <LeadLeakDiagnosticWidget />
       <VisualSelectedWork />
+      <VisualActivePipeline />
+      <VisualComplianceGuardrail />
       <VisualComplianceStrip />
       <VisualOperatorSection />
+      <VisualFinalCta setPage={setPage} />
       <TerminalWidget />
     </main>
+  );
+}
+
+function VisualIntroVideoSection() {
+  return (
+    <section className="intro-video-section motion-reveal" aria-labelledby="intro-video-title">
+      <IntroVideoStage />
+      <div className="video-copy">
+        <div className="eyebrow">05 / WALKTHROUGH</div>
+        <h2 id="intro-video-title">See the lead system before the build starts.</h2>
+        <p>
+          The walkthrough shows how the consultation turns a loose inquiry path into a visible capture,
+          intake, follow-up, and managed automation system.
+        </p>
+        <div className="video-proof-list" aria-label="Walkthrough checkpoints">
+          <span>Consultation-first scope</span>
+          <span>Owner-visible routing</span>
+          <span>No paid video tools required</span>
+        </div>
+      </div>
+    </section>
   );
 }
 
 function VisualHero() {
   return (
     <section className="visual-hero" aria-labelledby="hero-title">
-      <div className="hero-tag">AI Automation Engineer · Houston · Est. 2026</div>
-      <h1 id="hero-title" className="visual-hero-title" aria-label="Your leads come in. Most go nowhere.">
-        <span className="hero-word" style={{ '--word-delay': '0s' }}>Your</span>{' '}
-        <span className="hero-word" style={{ '--word-delay': '0.08s' }}>leads</span>{' '}
-        <span className="hero-word" style={{ '--word-delay': '0.16s' }}>come</span>{' '}
-        <span className="hero-word" style={{ '--word-delay': '0.24s' }}>in.</span>
+      <div className="hero-tag">Thurr Solutions · Houston / St. Louis · Remote</div>
+      <h1 id="hero-title" className="visual-hero-title" aria-label="Autonomous revenue systems, built for you.">
+        <span className="hero-word" style={{ '--word-delay': '0s' }}>Autonomous</span>{' '}
+        <span className="hero-word" style={{ '--word-delay': '0.08s' }}>revenue</span>{' '}
+        <span className="hero-word" style={{ '--word-delay': '0.16s' }}>systems,</span>
         <br />
-        <em className="hero-word" style={{ '--word-delay': '0.32s' }}>Most go nowhere.</em>
+        <em className="hero-word" style={{ '--word-delay': '0.24s' }}>built for you.</em>
       </h1>
       <p className="visual-hero-sub">
-        Thurr Solutions builds consent-aware lead capture, follow-up pipelines, and intake systems
-        for local service businesses that can't afford to waste a single inquiry.
+        Local service businesses do not lose money because they are bad at the work. They lose it
+        in the gaps. I build the intake, follow-up, and booking layer that keeps warm leads moving.
       </p>
       <div className="visual-hero-actions">
-        <a className="visual-primary-btn" href="#audit">Get the Lead Flow Audit →</a>
-        <a className="visual-secondary-btn" href="#work">See selected work</a>
+        <a className="visual-primary-btn" href={consultationUrl} target="_blank" rel="noreferrer">Book a consultation →</a>
+        <a className="visual-secondary-btn" href="#pricing">See pricing</a>
       </div>
       <div className="hero-meta-strip" aria-label="Current engagement status">
         <span><i className="meta-dot dot-green" />Restore-C — Live</span>
@@ -2904,7 +2925,7 @@ function PipelineDiagram() {
 
 function VisualMethodology() {
   const items = [
-    ['01 // PHASE ONE', 'AUDIT', 'We map your current lead flow and find exactly where prospects disappear. No assumptions. No generic recommendations.', 'DIAGNOSTIC'],
+    ['01 // PHASE ONE', 'CONSULT', 'We map your current lead flow and find exactly where prospects disappear. No assumptions. No generic recommendations.', 'DIAGNOSTIC'],
     ['02 // PHASE TWO', 'BUILD', 'We build the intake, follow-up, and booking system around your real process — consent-aware, compliant, and built to last.', 'IMPLEMENTATION'],
     ['03 // ONGOING', 'MANAGE', 'We keep it running. Workflow adjustments, reporting, sequence updates, and campaign coordination after launch.', 'RETAINER'],
   ];
@@ -2919,6 +2940,64 @@ function VisualMethodology() {
           <strong>{tag}</strong>
         </article>
       ))}
+    </section>
+  );
+}
+
+function VisualIndustriesSection() {
+  const industries = [
+    {
+      title: 'Roofing & Contractors',
+      tag: 'PRIMARY',
+      text:
+        'Storm leads, estimate requests, missed calls, quote follow-up, and owner visibility from first inquiry to booked inspection.',
+      path: 'Relevant lane: Restore-C storm lead capture',
+    },
+    {
+      title: 'Beauty & Service Studios',
+      tag: 'PRIMARY',
+      text:
+        'Booking intake, deposit prompts, no-show recovery, review loops, and follow-up systems for appointment-based service teams.',
+      path: 'Relevant lane: Sweetest Pea intake workflow',
+    },
+    {
+      title: 'Insurance Agents',
+      tag: 'PRIMARY',
+      text:
+        'Consent-aware lead capture, pipeline ownership, licensed-state intake gates, calendar routing, and compliance reviewer handoff.',
+      path: 'Relevant lane: insurance pipeline concept',
+    },
+    {
+      title: 'Healthcare & Hospice',
+      tag: 'COMPLIANCE-FIRST',
+      text:
+        'Only scoped with client-approved compliance review. No PHI in public forms, demos, screenshots, or unaudited automation paths.',
+      path: 'Relevant lane: guarded intake and triage planning',
+    },
+  ];
+
+  return (
+    <section className="visual-industries industries-section motion-reveal" aria-labelledby="industries-title">
+      <div className="section-copy">
+        <div className="visual-section-label">Target industries</div>
+        <h2 id="industries-title">Built for local service teams with expensive lead leakage.</h2>
+        <p>
+          Thurr Solutions starts where slow response, weak intake, and unclear follow-up cost the
+          owner real opportunities. Regulated industries stay behind an explicit review gate.
+        </p>
+      </div>
+      <div className="industry-grid">
+        {industries.map((industry) => (
+          <article className="industry-card" key={industry.title}>
+            <div className="industry-card-top">
+              <h3>{industry.title}</h3>
+              <span>{industry.tag}</span>
+            </div>
+            <p>{industry.text}</p>
+            <strong>{industry.path}</strong>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
@@ -2966,11 +3045,11 @@ function VisualAuditCta() {
       <div>
         <h2 id="audit-title">Find out where your <em>pipeline breaks.</em></h2>
         <p>
-          The Lead Flow Audit is a $250 paid diagnostic. I review your current process,
-          identify where leads are slipping, and deliver a written summary with a clear
-          recommended first step.
+          The consultation starts with a focused setup review. I review your current process,
+          identify where leads are slipping, and recommend whether the founding pilot is enough
+          or whether the business actually needs a larger contractor growth build.
         </p>
-        <div className="audit-price-line"><strong>$250</strong> · 1 business day turnaround · Thurr reviews personally</div>
+        <div className="audit-price-line"><strong>Founding Pilot: $750 setup + $99/mo</strong> · first 3 installs · Thurr reviews personally</div>
       </div>
       <form className="visual-audit-form" onSubmit={handleSubmit}>
         <label>
@@ -2997,14 +3076,98 @@ function VisualAuditCta() {
         </label>
         <label className="visual-consent">
           <input type="checkbox" checked={form.consent} onChange={(event) => updateField('consent', event.target.checked)} />
-          <span>I agree to be contacted by Thurr Solutions about my audit results.</span>
+          <span>I agree to be contacted by Thurr Solutions about my consultation request.</span>
         </label>
         <button className="visual-primary-btn" type="submit">
-          {state === 'sending' ? 'Submitting...' : 'Submit Audit Request — $250 →'}
+          {state === 'sending' ? 'Submitting...' : 'Request setup consultation →'}
         </button>
-        {state === 'consent' ? <p className="form-note">Consent is required before I can contact you about the audit.</p> : null}
-        {state === 'error' ? <p className="form-note">The request did not save. Use the full audit page or email hello@thurrsolutions.com.</p> : null}
+        {state === 'consent' ? <p className="form-note">Consent is required before I can contact you about the consultation.</p> : null}
+        {state === 'error' ? <p className="form-note">The request did not save. Use the full consultation page or email hello@thurrsolutions.com.</p> : null}
       </form>
+    </section>
+  );
+}
+
+function LeadLeakDiagnosticWidget() {
+  const [inputs, setInputs] = useState({
+    monthlyLeads: 80,
+    responseLeakRate: 20,
+    averageJobValue: 750,
+    closeRate: 25,
+  });
+
+  const estimate = useMemo(() => calculateLeadLeakEstimate(inputs), [inputs]);
+  const currency = useMemo(
+    () =>
+      new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+      }),
+    [],
+  );
+
+  function updateInput(field, value) {
+    setInputs((current) => ({
+      ...current,
+      [field]: Number(value),
+    }));
+  }
+
+  const fields = [
+    ['monthlyLeads', 'Monthly inbound leads', 0, 500, 5, 'leads'],
+    ['responseLeakRate', 'Estimated leak rate', 0, 100, 5, '%'],
+    ['averageJobValue', 'Average booked job value', 0, 25000, 50, '$'],
+    ['closeRate', 'Close rate after follow-up', 0, 100, 5, '%'],
+  ];
+
+  return (
+    <section className="lead-leak-widget motion-reveal" aria-labelledby="lead-leak-title">
+      <div className="lead-leak-copy">
+        <div className="visual-section-label">Diagnostic estimator</div>
+        <h2 id="lead-leak-title">Estimate the lead leak before you scope the build.</h2>
+        <p>
+          Use rough numbers to see whether slow response, missed follow-up, or unclear intake is
+          worth a deeper build. The consultation replaces assumptions with a real workflow map.
+        </p>
+        <div className="lead-leak-disclosure">
+          This is a planning estimate, not a revenue guarantee.
+        </div>
+      </div>
+      <div className="lead-leak-panel">
+        <div className="lead-leak-form" aria-label="Lead leak estimate inputs">
+          {fields.map(([field, label, min, max, step, suffix]) => (
+            <label key={field}>
+              <span>{label}</span>
+              <div className="lead-leak-input-row">
+                <input
+                  min={min}
+                  max={max}
+                  step={step}
+                  type="number"
+                  value={inputs[field]}
+                  onChange={(event) => updateInput(field, event.target.value)}
+                />
+                <strong>{suffix}</strong>
+              </div>
+            </label>
+          ))}
+        </div>
+        <div className="lead-leak-results" aria-live="polite">
+          <span>Estimated missed opportunity</span>
+          <strong>{currency.format(estimate.monthlyOpportunity)}</strong>
+          <p>
+            Based on about {estimate.leakedLeads} leaked leads and {estimate.recoverableLeads}
+            recoverable booked opportunities per month.
+          </p>
+          <small>{currency.format(estimate.annualOpportunity)} annualized planning range before audit validation.</small>
+        </div>
+        <ul className="lead-leak-assumptions" aria-label="Lead leak assumptions">
+          {leadLeakAssumptions.map((assumption) => (
+            <li key={assumption}>{assumption}</li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
@@ -3013,7 +3176,6 @@ function VisualSelectedWork() {
   const cards = [
     ['LIVE', 'Restore-C', 'Storm Lead Capture System', "Dedicated storm damage lead capture page with source tracking and routing for a contracting company's seasonal campaign.", 'live'],
     ['IN BUILD', 'HeartPathBloom', 'Youth Wellness — Intake & Consent System', 'Designing intake, consent, and care routing infrastructure for a youth mental health platform. Compliance-first architecture.', 'build'],
-    ['PROPOSAL', 'Insurance Lead Pipeline', 'Life Insurance — Lead Capture & Booking', 'Scoped a consent-aware lead capture, follow-up sequence, and appointment routing system for a nationwide independent agent.', 'proposal'],
   ];
 
   return (
@@ -3033,10 +3195,79 @@ function VisualSelectedWork() {
   );
 }
 
+const activePipelineLanes = [
+  {
+    label: 'Storm lead capture page',
+    phase: 'Active build lane',
+    proof: 'Public-safe contractor funnel work for storm damage inquiries, source tracking, and owner-visible routing.',
+  },
+  {
+    label: 'Youth wellness MVP planning',
+    phase: 'Compliance-gated',
+    proof: 'Phase 1 product planning with consent, reviewer, and escalation decisions kept ahead of any live youth-facing workflow.',
+  },
+  {
+    label: 'Insurance lead pipeline concept',
+    phase: 'Proposal concept',
+    proof: 'Consent-aware capture and follow-up path for licensed-state review, calendar handoff, and compliance reviewer approval.',
+  },
+  {
+    label: 'Contractor close system presentation',
+    phase: 'Sales asset',
+    proof: 'Residential close-system framing for estimate follow-up, proof collection, and next-step visibility before any large app build.',
+  },
+];
+
+function VisualActivePipeline() {
+  return (
+    <section className="active-pipeline-section motion-reveal" aria-labelledby="active-pipeline-title">
+      <div className="section-copy">
+        <div className="visual-section-label">Active pipeline</div>
+        <h2 id="active-pipeline-title">Current proof stays specific without exposing client details.</h2>
+        <p>
+          These lanes show the kinds of systems Thurr Solutions is actively shaping while keeping
+          private payments, internal notes, health details, and client-only decisions out of public copy.
+        </p>
+      </div>
+      <div className="active-pipeline-grid">
+        {activePipelineLanes.map((lane, index) => (
+          <article className="active-pipeline-card" key={lane.label}>
+            <span>{String(index + 1).padStart(2, '0')} / {lane.phase}</span>
+            <h3>{lane.label}</h3>
+            <p>{lane.proof}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function VisualComplianceGuardrail() {
+  return (
+    <section className="visual-compliance-guardrail motion-reveal" aria-labelledby="compliance-guardrail-title">
+      <div>
+        <div className="visual-section-label">Compliance guardrail</div>
+        <h2 id="compliance-guardrail-title">The system can move fast. Public risk still gets reviewed.</h2>
+      </div>
+      <p>
+        For regulated industries, Thurr Solutions builds the system and routes final public-facing
+        copy, consent language, and policy decisions through the client’s authorized reviewer.
+      </p>
+    </section>
+  );
+}
+
 function VisualComplianceStrip() {
+  const items = [
+    'HIPAA Review Gate',
+    'TCPA Consent Review',
+    'COPPA Scope Review',
+    'Client Sign-Off Required Before Launch',
+  ];
+
   return (
     <section className="visual-compliance-strip motion-reveal" aria-label="Compliance trust layer">
-      {['HIPAA-Aware System Design', 'TCPA-Safe Follow-Up Architecture', 'COPPA-Compliant Where Required', 'Compliance Sign-Off Required Before Launch'].map((item) => (
+      {items.map((item) => (
         <span key={item}><i>✓</i>{item}</span>
       ))}
       <strong>NO SYSTEM GOES LIVE WITHOUT CLIENT APPROVAL</strong>
@@ -3047,13 +3278,35 @@ function VisualComplianceStrip() {
 function VisualOperatorSection() {
   return (
     <section className="visual-operator motion-reveal" aria-labelledby="operator-title">
-      <span id="operator-title">// About the Operator</span>
+      <div className="visual-operator-photo" aria-hidden="true">
+        <img src={monogram} alt="" />
+        <span>HEADSHOT PENDING</span>
+      </div>
+      <div>
+        <span id="operator-title">// About the Operator</span>
+        <p>
+          I'm Thurr — <strong>AI Automation Engineer</strong> and the operator behind Thurr Solutions.
+          I build lead systems, intake flows, and follow-up pipelines for local service businesses that
+          are too busy to chase leads manually. <strong>Every system I build, I run.</strong> <strong>Every
+          client I take on, I work directly.</strong> No account managers. No handoffs.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function VisualFinalCta({ setPage }) {
+  return (
+    <section className="visual-final-cta motion-reveal" aria-labelledby="visual-final-cta-title">
+      <span>// Next Step</span>
+      <h2 id="visual-final-cta-title">Start with a setup consultation.</h2>
       <p>
-        I'm Thurr — <strong>AI Automation Engineer</strong> and the operator behind Thurr Solutions.
-        I build lead systems, intake flows, and follow-up pipelines for local service businesses that
-        are too busy to chase leads manually. <strong>Every system I build, I run.</strong> <strong>Every
-        client I take on, I work directly.</strong> No account managers. No handoffs.
+        The consultation gives you the leak map before any build is scoped. One door in:
+        consult first, build second.
       </p>
+      <a className="visual-primary-btn" href={consultationUrl} target="_blank" rel="noreferrer">
+        Book a consultation →
+      </a>
     </section>
   );
 }
@@ -3064,7 +3317,7 @@ function TerminalWidget() {
       <header>// SYS STATUS</header>
       {[
         ['PIPELINE_STATUS', 'ACTIVE', 'green'],
-        ['AUDIT_QUEUE', 'OPEN', 'warm'],
+        ['CONSULT_QUEUE', 'OPEN', 'warm'],
         ['COMPLY_GATE', 'ENABLED', 'green'],
         ['OPERATOR', 'THURR / SOLO', 'warm'],
         ['BUILD_ENV', 'PRODUCTION', 'warm'],
@@ -3081,65 +3334,128 @@ function TerminalWidget() {
 function HomeOfferLadderSection({ setPage }) {
   const offers = [
     {
-      title: 'Lead Flow Audit',
-      price: '$250',
-      text: 'Three days. One report. The biggest leak named, ranked, and priced. You get a PDF report, a 10-minute Loom walkthrough, and a fixed-price quote for the fix.',
-      next: 'Audit credit applies to your build if you start within 30 days.',
+      lane: 'Start here',
+      title: 'Setup Consultation',
+      price: 'Free',
+      fit: 'For owners who know something is leaking but do not know what to build first.',
+      text: 'A focused review of your lead path, current tools, response speed, and follow-up gaps before any build is scoped.',
+      includes: ['Lead path review', 'First-fix recommendation', 'Pilot vs. custom-build decision'],
+      note: 'If there is no clear revenue leak, I will say that before quoting work.',
       action: (
-        <a className="stamp-button link-button" href="/audit">
-          Book Audit
+        <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
+          Book Consultation
           <ArrowUpRight size={18} strokeWidth={3} />
         </a>
       ),
     },
     {
-      title: 'Growth Website + Intake',
-      price: '$500-$1,500',
-      text: 'A site that takes leads in clean and routes them where they belong. Form + auto-response + owner alert + connected to your tools (Calendar, CRM, SMS, email).',
-      next: null,
+      lane: 'Default offer',
+      title: 'Founding Pilot',
+      price: '$750 setup + $99/mo',
+      fit: 'For local service businesses that need missed leads answered, tracked, and routed now.',
+      text: 'A narrow autonomous revenue system: missed-lead capture, first reply, basic follow-up, booking handoff, and Airtable tracking.',
+      includes: ['One intake or missed-lead path', 'Simple follow-up sequence', 'Owner-visible tracking'],
+      note: 'Best first paid step while the offer is being validated. First three installs only.',
       action: (
-        <a className="text-link dark-link" href="/work">
-          See Sample Build
+        <a className="text-link dark-link" href={consultationUrl} target="_blank" rel="noreferrer">
+          Request Pilot Review
         </a>
       ),
     },
     {
-      title: 'Managed Automation',
-      price: '$250-$750/month',
-      text: 'We run the system. You see the dashboard. Issues get caught before clients call you. Monthly report, on-call adjustments, and no surprise invoices.',
-      next: null,
+      lane: 'Higher-ticket service teams',
+      title: 'Contractor Growth',
+      price: '$2,500-$5,000 + $500-$1,000/mo',
+      fit: 'For roofers, contractors, and home-service teams with real lead volume and high job value.',
+      text: 'A deeper response, quote follow-up, reporting, and booking system where one recovered job can justify the build.',
+      includes: ['Lead intake and routing', 'Estimate or quote follow-up', 'Reporting and pipeline visibility'],
+      note: 'Not the default. Scoped only when the economics support it.',
       action: (
-        <a className="text-link dark-link" href="mailto:thurr@thurrsolutions.com">
-          Talk to Thurr
+        <a className="text-link dark-link" href="/work">
+          See Proof Lanes
+        </a>
+      ),
+    },
+    {
+      lane: 'Brand + web',
+      title: 'Revenue Site + Intake',
+      price: '$1,500-$4,500',
+      fit: 'For service businesses whose website, offer, or form path is hurting trust before automation can help.',
+      text: 'Positioning, page copy, lead capture, and intake routing built around one clear buyer action.',
+      includes: ['Homepage or focused landing page', 'Offer and intake copy', 'Form-to-follow-up handoff'],
+      note: 'Bunched here when the real problem is the front door, not the automation.',
+      action: (
+        <a className="text-link dark-link" href={consultationUrl} target="_blank" rel="noreferrer">
+          Review Fit
+        </a>
+      ),
+    },
+    {
+      lane: 'Ongoing',
+      title: 'Managed Automation',
+      price: '$250-$1,000/mo',
+      fit: 'For systems that are already tied to leads, bookings, reporting, or client communication.',
+      text: 'Monitoring, workflow fixes, sequence updates, reporting, and small improvements after launch.',
+      includes: ['Workflow monitoring', 'Monthly improvement pass', 'Reporting and issue review'],
+      note: 'Only sold after there is a live system worth managing.',
+      action: (
+        <a className="text-link dark-link" href={consultationUrl} target="_blank" rel="noreferrer">
+          Talk Support
+        </a>
+      ),
+    },
+    {
+      lane: 'Manual review',
+      title: 'Compliance-Gated Build',
+      price: 'Custom quote',
+      fit: 'For healthcare, youth, insurance, credit, SMS, or other regulated lanes.',
+      text: 'I build the system and keep compliance decisions with the client’s authorized reviewer before anything public goes live.',
+      includes: ['Scope boundary', 'Consent and data-path review', 'Reviewer sign-off gate'],
+      note: 'No PHI, youth data, credit promises, or regulated claims get pushed through public forms or unaudited automations.',
+      action: (
+        <a className="text-link dark-link" href="/compliance">
+          Review Guardrails
         </a>
       ),
     },
   ];
 
   return (
-    <section className="solutions-packages homepage-offer-ladder" aria-labelledby="offer-ladder-title">
+    <section className="solutions-packages homepage-offer-ladder pricing-disclosure-section" id="pricing" aria-labelledby="offer-ladder-title">
       <div className="section-copy">
-        <div className="eyebrow">03 / OFFER LADDER</div>
-        <h2 id="offer-ladder-title">Start low-risk. Move up only after proof.</h2>
+        <div className="eyebrow">03 / PRICING</div>
+        <h2 id="offer-ladder-title">Pick the smallest system that can prove the loop.</h2>
         <p>
-          The audit is the front door. Everything else is optional and only happens after the leak is clear.
+          Pricing is disclosed so the first call is not a guessing game. If the work falls into one
+          of these lanes, it gets bunched here. If it does not, it needs manual review before a quote.
         </p>
+        <div className="pricing-side-note">
+          <strong>Default path:</strong>
+          consultation, founding pilot, then expand only if the system is tied to real revenue.
+        </div>
       </div>
       <div>
         <div className="offer-ladder">
           {offers.map((offer) => (
             <article key={offer.title}>
+              <span className="ladder-step">{offer.lane}</span>
               <h3>{offer.title}</h3>
               <strong>{offer.price}</strong>
+              <p className="pricing-fit">{offer.fit}</p>
               <p>{offer.text}</p>
-              {offer.next ? <div className="ladder-next">{offer.next}</div> : null}
+              <ul className="pricing-includes" aria-label={`${offer.title} includes`}>
+                {offer.includes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {offer.note ? <div className="ladder-next">{offer.note}</div> : null}
               {offer.action ? <div className="ladder-action">{offer.action}</div> : null}
             </article>
           ))}
         </div>
         <div className="ladder-rule">
-          <strong>The audit fee can be credited toward the build.</strong>
-          <span>Keep step one low-risk without turning strategy into free work.</span>
+          <strong>No hidden “book a call to find out if this is $500 or $10K.”</strong>
+          <span>Numbers can move when scope, compliance, integrations, or content volume changes. The lane gets named first.</span>
         </div>
       </div>
     </section>
@@ -3150,9 +3466,9 @@ function ThreeStepsSection() {
   const steps = [
     {
       number: '01',
-      title: 'AUDIT',
+      title: 'CONSULT',
       text:
-        "3 days. We map every place a lead enters your business and grade where they're dying. Output: a written report + Loom walkthrough naming your top 3 leaks. $250–$350",
+        "3 days. We map every place a lead enters your business and grade where they're dying. Output: a written report + Loom walkthrough naming your top 3 leaks. Starts with a setup consultation.",
     },
     {
       number: '02',
@@ -3164,7 +3480,7 @@ function ThreeStepsSection() {
       number: '03',
       title: 'MANAGE',
       text:
-        "Monthly. We run the system, catch issues before clients do, and report what's working. $250–$750/month",
+        "Monthly. We run the system, catch issues before clients do, and report what's working. Custom monthly support once the workflow is live.",
     },
   ];
 
@@ -3184,7 +3500,7 @@ function ThreeStepsSection() {
         ))}
       </div>
       <p className="three-steps-tagline">
-        The audit tells us what to fix. The build fixes it. The retainer keeps it working.
+        The consultation tells us what to fix. The build fixes it. The retainer keeps it working.
       </p>
     </section>
   );
@@ -3234,7 +3550,7 @@ function IntroVideoStage() {
         <div className="video-screen">
           <div className="video-play-mark" aria-hidden="true">▶</div>
           <div>
-            <span>Lead System Audit</span>
+            <span>Lead System Consultation</span>
             <strong>Website → Intake → Follow-up → Managed automation</strong>
           </div>
         </div>
@@ -3251,7 +3567,7 @@ function IntroVideoStage() {
 
 function OperatorSystemPanel() {
   const rows = [
-    ['AUDIT', 'OPERATIONAL', 'LEAD FLOW'],
+    ['CONSULT', 'OPERATIONAL', 'LEAD FLOW'],
     ['BUILD', 'OPERATIONAL', 'INTAKE PATH'],
     ['MANAGE', 'OPERATIONAL', 'MONTHLY'],
   ];
@@ -3281,7 +3597,7 @@ function MethodologySection({ setPage }) {
   const steps = [
     {
       number: '01',
-      name: 'Audit',
+      name: 'Consult',
       duration: 'Week 1',
       text:
         'One week. Output: a written diagnostic showing where leads leak, what is costing money, and what to fix first.',
@@ -3309,7 +3625,7 @@ function MethodologySection({ setPage }) {
     <section className="methodology-section" id="methodology" aria-labelledby="methodology-title">
       <div className="section-copy">
         <div className="eyebrow">01 / METHODOLOGY</div>
-        <h2 id="methodology-title">The audit tells us what to fix. The build fixes it. The retainer keeps it working.</h2>
+        <h2 id="methodology-title">The consultation tells us what to fix. The build fixes it. The retainer keeps it working.</h2>
       </div>
       <div className="methodology-timeline">
         {steps.map((step) => (
@@ -3329,7 +3645,7 @@ function MethodologySection({ setPage }) {
           </article>
         ))}
         <button className="text-link dark-link button-link methodology-cta" type="button" onClick={() => setPage('audit')}>
-          Start with the audit →
+          Start with the consultation →
         </button>
       </div>
     </section>
@@ -3339,8 +3655,8 @@ function MethodologySection({ setPage }) {
 function AuditFeatureSection({ setPage }) {
   const checks = [
     'Speed-to-lead measurement',
-    'Intake form audit',
-    'Follow-up sequence audit',
+    'Intake form review',
+    'Follow-up sequence review',
     'CRM and pipeline visibility check',
     'Compliance flags',
     'Effort/impact fix ranking',
@@ -3350,10 +3666,10 @@ function AuditFeatureSection({ setPage }) {
     <section className="audit-feature-section" aria-labelledby="audit-feature-title">
       <div className="audit-feature-copy">
         <div className="eyebrow">02 / ENTRY POINT</div>
-        <h2 id="audit-feature-title">A $250 diagnostic that pays for itself in one closed lead.</h2>
+        <h2 id="audit-feature-title">A setup consultation that points the first fix at revenue.</h2>
         <p>
-          Most local service businesses do not have a lead problem. They have a leak. The Lead Flow
-          Audit is a structured one-week diagnostic where I trace every step a lead takes from form
+          Most local service businesses do not have a lead problem. They have a leak. The setup
+          consultation is a structured diagnostic where I trace every step a lead takes from form
           submit to follow-up to closed job.
         </p>
         <p>
@@ -3366,14 +3682,14 @@ function AuditFeatureSection({ setPage }) {
           ))}
         </div>
         <button className="stamp-button link-button" type="button" onClick={() => setPage('audit')}>
-          REQUEST THE AUDIT
+          BOOK THE CONSULTATION
           <ArrowUpRight size={18} strokeWidth={3} />
         </button>
       </div>
       <aside className="audit-report-preview" aria-label="Sample audit report preview">
         <div className="sample-watermark">SAMPLE</div>
         <div className="report-preview-top">
-          <span>Lead Flow Audit</span>
+          <span>Consultation</span>
           <strong>Diagnostic Report</strong>
         </div>
         <div className="report-score-line">
@@ -3547,12 +3863,12 @@ function FinalCtaSection({ setPage }) {
   return (
     <section className="final-audit-cta" aria-labelledby="final-cta-title">
       <div className="eyebrow">07 / NEXT STEP</div>
-      <h2 id="final-cta-title">Start with the audit.</h2>
-      <p>One week. $250. A written diagnostic of where your leads are leaking and what to fix first.</p>
-      <button className="stamp-button link-button" type="button" onClick={() => setPage('audit')}>
-        Run a Lead Flow Audit →
+      <h2 id="final-cta-title">Start with a setup consultation.</h2>
+      <p>One week. A written diagnostic of where your leads are leaking and what to fix first.</p>
+      <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
+        Book Consultation →
         <ArrowUpRight size={18} strokeWidth={3} />
-      </button>
+      </a>
     </section>
   );
 }
@@ -3590,12 +3906,15 @@ function AuditPage({ setPage }) {
     <main className="audit-page" id="top" data-brand="thurr-solutions">
       <section className="audit-hero">
         <div className="hero-copy">
-          <div className="eyebrow">LEAD FLOW AUDIT</div>
-          <h1>Find your leak in 3 days. $250.</h1>
-          <p>We map every place a lead enters your business and rank where they&apos;re dying — by revenue impact.</p>
+          <div className="eyebrow">CONSULTATION</div>
+          <h1>Find the smallest system worth building first.</h1>
+          <p>
+            We map where leads enter, where reply speed drops, and whether a founding pilot can fix
+            the leak before a bigger build is even discussed.
+          </p>
           <div className="hero-actions">
             <a className="stamp-button link-button" href="#audit-request-form">
-              Start your audit
+              Set up a consultation
               <ArrowUpRight size={18} strokeWidth={3} />
             </a>
             <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
@@ -3604,9 +3923,9 @@ function AuditPage({ setPage }) {
           </div>
         </div>
         <aside className="audit-price-card">
-          <span>Three-day diagnostic</span>
-          <strong>$250</strong>
-          <p>If you move into the Build within 30 days, your audit fee is credited in full.</p>
+          <span>Founding pilot open</span>
+          <strong>$750 + $99/mo</strong>
+          <p>First three installs only. Contractor Growth is scoped only when job value and lead volume support it.</p>
         </aside>
       </section>
 
@@ -3614,25 +3933,25 @@ function AuditPage({ setPage }) {
         <div className="section-copy">
           <div className="eyebrow">WHAT YOU GET</div>
           <h2 id="audit-deliverables-title">What you get.</h2>
-          <p>Three days after kickoff, you receive:</p>
+          <p>After the setup review, you receive:</p>
         </div>
         <ol>
-          <li>A written report (PDF) ranking your top 3 lead-flow leaks by revenue impact.</li>
-          <li>A 10-minute Loom walkthrough where I explain each one in plain English.</li>
-          <li>A fixed-price quote for the fix — broken into Build phases so you can stop after any phase.</li>
+          <li>A plain-English leak map showing where leads are slowing down or disappearing.</li>
+          <li>A recommendation for Founding Pilot, Contractor Growth, or no-build-yet.</li>
+          <li>A focused first scope so the system proves itself before custom work expands.</li>
         </ol>
-        <p className="audit-deliverables-note">You can keep the audit and stop. No retainer trap, no upsell pressure.</p>
+        <p className="audit-deliverables-note">You can keep the recommendation and stop. No retainer trap, no upsell pressure.</p>
         <p className="audit-deliverables-credit">
-          If you move into the Build within 30 days, your audit fee is credited in full.
+          Pricing stays validation-first until three paid pilot installs close.
         </p>
       </section>
 
       <section className="buildout-section audit-form-section" id="audit-request-form" aria-labelledby="audit-form-title">
         <div className="section-copy">
           <div className="eyebrow">THE REQUEST</div>
-          <h2 id="audit-form-title">Start your audit.</h2>
+          <h2 id="audit-form-title">Set up your consultation.</h2>
           <p>
-            Tell me about your business. I review every audit request personally and respond within one business day.
+            Tell me about your business. I review every consultation request personally and respond within one business day.
           </p>
         </div>
         <AuditRequestForm
@@ -3652,11 +3971,11 @@ function AuditThanksPage() {
       <section className="audit-hero audit-thanks-hero">
         <div className="hero-copy">
           <div className="eyebrow">REQUEST RECEIVED</div>
-          <h1>Got it. Your audit request is in.</h1>
+          <h1>Got it. Your consultation request is in.</h1>
           <p>
-            I&apos;ll reply within 1 business day with two things: 1. A 15-minute kickoff call invite
-            to confirm scope. 2. The $250 invoice. Your audit starts the day payment clears. Three
-            days after that, you&apos;ll have your report. — Thurr
+            I&apos;ll reply within 1 business day with two things: 1. A 15-minute setup consultation
+            invite to confirm scope. 2. The recommended next step for your lead flow. Three days
+            after kickoff, you&apos;ll have your report. — Thurr
           </p>
           <div className="hero-actions">
             <a className="stamp-button link-button" href="/#how-it-works">
@@ -3666,7 +3985,7 @@ function AuditThanksPage() {
           </div>
         </div>
         <aside className="audit-price-card">
-          <span>AUDIT REQUEST RECEIVED</span>
+          <span>CONSULTATION REQUEST RECEIVED</span>
           <strong>Review first</strong>
           <p>No blind build. No tool pile-up. No fake automation theater.</p>
         </aside>
@@ -3739,12 +4058,12 @@ function AuditRequestForm({ auditForm, auditState, handleAuditSubmit, updateAudi
         />
       </label>
       <button className="stamp-button wide-field" type="submit" disabled={auditState === 'sending'}>
-        {auditState === 'sending' ? 'SENDING...' : 'Submit Audit Request'}
+        {auditState === 'sending' ? 'SENDING...' : 'Set Up a Consultation'}
         <ArrowUpRight size={18} strokeWidth={3} />
       </button>
       {auditState === 'error' && (
         <p className="form-note error-note wide-field">
-          Audit request could not be saved. Check the configured endpoint and try again.
+          Consultation request could not be saved. Check the configured endpoint and try again.
         </p>
       )}
     </form>
@@ -3754,21 +4073,25 @@ function AuditRequestForm({ auditForm, auditState, handleAuditSubmit, updateAudi
 function CompliancePage({ setPage }) {
   const sections = [
     {
+      id: 'tcpa',
       title: 'TCPA',
       body:
         'Text and call workflows are gated by consent, opt-out language, and source review. We do not build homeowner blasting systems or treat purchased lists as permission to contact people.',
     },
     {
+      id: 'hipaa',
       title: 'HIPAA',
       body:
         'Healthcare and hospice engagements require a Business Associate Agreement before protected health information touches any workflow. We separate marketing intake from clinical or patient data by default.',
     },
     {
+      id: 'coppa',
       title: 'COPPA',
       body:
         'Youth-facing projects are scoped with parent/guardian consent, data minimization, reviewer visibility, and strict AI exclusion rules before any production build.',
     },
     {
+      id: 'insurance',
       title: 'Insurance',
       body:
         'Insurance marketing and follow-up are reviewed against carrier, upline, TCPA, and state-specific constraints. Automations support process visibility; they do not replace licensed advice or compliance review.',
@@ -3787,7 +4110,7 @@ function CompliancePage({ setPage }) {
       </section>
       <section className="compliance-grid" aria-label="Compliance stance">
         {sections.map((section) => (
-          <article className="compliance-card" id={section.title.toLowerCase()} key={section.title}>
+          <article className="compliance-card" id={section.id} key={section.id}>
             <span>{section.title}</span>
             <p>{section.body}</p>
           </article>
@@ -3795,12 +4118,12 @@ function CompliancePage({ setPage }) {
       </section>
       <section className="final-audit-cta compliance-cta">
         <div className="eyebrow">NEXT STEP</div>
-        <h2>Start with the audit.</h2>
+        <h2>Start with a consultation.</h2>
         <p>Compliance gates are part of the diagnostic, not a surprise after the build starts.</p>
-        <button className="stamp-button link-button" type="button" onClick={() => setPage('audit')}>
-          Run a Lead Flow Audit →
+        <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
+          Book a consultation →
           <ArrowUpRight size={18} strokeWidth={3} />
-        </button>
+        </a>
       </section>
     </main>
   );
@@ -3870,7 +4193,7 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
           </p>
           <div className="hero-actions">
             <a className="stamp-button link-button" href="#buildout-form">
-              START THE AUDIT
+              START THE CONSULTATION
               <ArrowUpRight size={18} strokeWidth={3} />
             </a>
             <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
@@ -3884,7 +4207,7 @@ function BuildoutPlanPage({ form, updateField, handleSubmit, submissionState, cu
             <span>REPORT SAMPLE</span>
             <span className="activity-glyph">✓</span>
           </div>
-          <h2>Lead System Audit</h2>
+          <h2>Lead System Consultation</h2>
           <div className="report-mini-list">
             {blueprintSections.slice(0, 6).map((section, index) => (
               <div key={section}>
@@ -4024,7 +4347,7 @@ function BuildoutForm({ form, updateField, handleSubmit, submissionState }) {
         />
       </label>
       <button className="stamp-button wide-field" type="submit">
-        REQUEST THE AUDIT
+        BOOK THE CONSULTATION
         <ArrowUpRight size={18} strokeWidth={3} />
       </button>
       {submissionState === 'sending' && (
@@ -4687,9 +5010,9 @@ function BrandBoundary() {
 
 function PrivacyPage({ setPage }) {
   const privacyRows = [
-    ['What the audit form collects', 'Business name, owner name, email, website URL, approximate lead volume, and the operational lead-flow issue you describe.'],
+    ['What the consultation form collects', 'Business name, owner name, email, website URL, approximate lead volume, and the operational lead-flow issue you describe.'],
     ['What not to submit', 'Do not submit patient health information, youth/minor private content, passwords, payment details, SSNs, insurance health details, or confidential customer records.'],
-    ['How it is used', 'Audit submissions are used to review fit, prepare a first response, and create internal follow-up records for Thurr Solutions.'],
+    ['How it is used', 'Consultation submissions are used to review fit, prepare a first response, and create internal follow-up records for Thurr Solutions.'],
     ['Where it may route internally', 'A submission may create a private Supabase row, owner alert, Notion prospect record, and Linear review task. These systems are for internal operations only.'],
     ['Retention', 'Prospect records are kept only as long as needed for sales, delivery, compliance, and business recordkeeping. Delete requests can be sent by email.'],
   ];
@@ -4698,9 +5021,9 @@ function PrivacyPage({ setPage }) {
     <main className="compliance-page" id="top" data-brand="thurr-solutions">
       <section className="compliance-hero">
         <div className="eyebrow">PRIVACY</div>
-        <h1>How audit request data is handled.</h1>
+        <h1>How consultation request data is handled.</h1>
         <p>
-          This page explains the operational data boundary for Thurr Solutions audit requests.
+          This page explains the operational data boundary for Thurr Solutions consultation requests.
           It is not a substitute for legal review, and the policy should be reviewed before
           public launch or paid traffic.
         </p>
@@ -4715,14 +5038,14 @@ function PrivacyPage({ setPage }) {
       </section>
       <section className="final-audit-cta compliance-cta">
         <div className="eyebrow">CONTACT</div>
-        <h2>Questions about your audit request?</h2>
+        <h2>Questions about your consultation request?</h2>
         <p>Email Thurr Solutions directly before submitting regulated or sensitive information.</p>
         <a className="stamp-button link-button" href="mailto:hello@thurrsolutions.com">
           Email Thurr Solutions →
           <ArrowUpRight size={18} strokeWidth={3} />
         </a>
         <button className="text-link dark-link button-link" type="button" onClick={() => setPage('audit')}>
-          Back to Lead Flow Audit →
+          Back to consultation →
         </button>
       </section>
     </main>
