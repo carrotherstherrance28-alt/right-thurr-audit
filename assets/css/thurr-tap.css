@@ -1,0 +1,158 @@
+:root {
+  --ink: #1a1a1a;
+  --orange: #c2552a;
+  --paper: #f7f3ee;
+  --muted: #666666;
+  --line: rgba(26, 26, 26, 0.14);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.45;
+  margin: 0;
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+.tap-page {
+  align-items: center;
+  display: grid;
+  min-height: 100vh;
+  padding: clamp(1rem, 5vw, 2rem);
+}
+
+.tap-card {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0 auto;
+  max-width: 430px;
+  padding: clamp(1.4rem, 6vw, 2rem) 0;
+  text-align: center;
+  width: min(100%, 430px);
+}
+
+.tap-avatar {
+  align-items: center;
+  background: #050505;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  display: flex;
+  height: 120px;
+  justify-content: center;
+  justify-self: center;
+  overflow: hidden;
+  width: 120px;
+}
+
+.tap-avatar img {
+  height: 72px;
+  object-fit: contain;
+  width: 72px;
+}
+
+.tap-identity {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.tap-kicker {
+  color: var(--orange);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.tap-identity h1 {
+  font-size: clamp(2rem, 10vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 0;
+}
+
+.tap-identity p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  font-style: italic;
+  margin: 0;
+}
+
+.tap-primary,
+.tap-links a,
+.tap-footer a {
+  border-radius: 999px;
+  font-weight: 900;
+  min-height: 52px;
+  text-decoration: none;
+}
+
+.tap-primary {
+  align-items: center;
+  background: var(--orange);
+  color: var(--paper);
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.tap-links {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.tap-links a {
+  align-items: center;
+  border: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.tap-links a::after {
+  content: ">";
+}
+
+.tap-footer {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0.45rem;
+  justify-items: center;
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+}
+
+.tap-footer img {
+  width: 120px;
+}
+
+.tap-footer p {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.tap-footer a {
+  align-items: center;
+  color: var(--orange);
+  display: inline-flex;
+  justify-content: center;
+  min-height: 0;
+}

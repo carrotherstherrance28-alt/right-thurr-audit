@@ -100,6 +100,14 @@
     {
       "source": "/thurr-tag/",
       "destination": "/thurr-tag/index.html"
+    },
+    {
+      "source": "/t/001",
+      "destination": "/t/001/index.html"
+    },
+    {
+      "source": "/t/001/",
+      "destination": "/t/001/index.html"
     }
   ]
 }

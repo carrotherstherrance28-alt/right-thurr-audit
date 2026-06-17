@@ -41,6 +41,7 @@ export default defineConfig({
           card: resolve(__dirname, 'card/index.html'),
           thurr: resolve(__dirname, 'thurr/index.html'),
           'thurr-tag': resolve(__dirname, 'thurr-tag/index.html'),
+          'tap-001': resolve(__dirname, 't/001/index.html'),
         };
 
         const lanesPath = resolve(__dirname, 'diagnostic/lanes.json');
