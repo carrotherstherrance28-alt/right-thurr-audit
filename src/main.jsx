@@ -534,7 +534,7 @@ function App() {
     const twitterDescriptionMeta = document.querySelector('meta[name="twitter:description"]');
 
     return {
-      title: document.title || 'Thurr Solutions | AI Lead Generation Systems',
+      title: document.title || 'Thurr Solutions | Autonomous Revenue Systems',
       canonicalHref: canonicalLink?.getAttribute('href') || `${window.location.origin}/`,
       description: descriptionMeta?.getAttribute('content') || '',
       robots: robotsMeta?.getAttribute('content') || null,
@@ -962,7 +962,7 @@ function App() {
     }
 
     const canonicalHref = headDefaults?.canonicalHref || `${window.location.origin}/`;
-    const defaultTitle = headDefaults?.title || 'Thurr Solutions | AI Lead Generation Systems';
+    const defaultTitle = headDefaults?.title || 'Thurr Solutions | Autonomous Revenue Systems';
 
     function upsertRobotsMeta(content) {
       let robotsMeta = document.querySelector('meta[name="robots"]');
