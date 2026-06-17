@@ -195,6 +195,12 @@ export default async function handler(request, response) {
   });
 
   if (!supabaseResponse.ok) {
+    const errorBody = await supabaseResponse.text().catch(() => '');
+    console.error('Free Game waitlist Supabase insert failed', {
+      status: supabaseResponse.status,
+      body: errorBody.slice(0, 500),
+    });
+
     sendJson(response, 502, {
       ok: false,
       status: 'supabase_error',
