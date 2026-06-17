@@ -98,6 +98,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Roofing & Contractors, Beauty & Service Studios, Insurance Agents, Healthcare & Hospice copy from Claude brief.
 DO NOT: Do not add icons or CTAs.
 ACCEPTANCE: 2x2 desktop, 1-column mobile, healthcare card has COMPLIANCE-FIRST tag, npm run build passes.
+STATUS: DONE (2026-05-15) — Added text-only 2x2 industry qualification grid with COMPLIANCE-FIRST healthcare lane; verified source marker check and `npm run build`.
 DEPENDENCIES: TS-001.
 OWNER: Codex
 PRIORITY: P1
@@ -111,6 +112,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Page scaffold only until final TCPA/HIPAA/COPPA/Insurance body copy is locked.
 DO NOT: Do not make certification or guarantee claims.
 ACCEPTANCE: Page renders, footer link works, anchor sections exist, npm run build passes.
+STATUS: DONE (2026-05-15) — /compliance scaffold has stable TCPA/HIPAA/COPPA/Insurance anchors, footer navigation, Vercel SPA rewrite, and verified `npm run build`.
 DEPENDENCIES: TS-001; Thurr/Claude final copy.
 OWNER: Codex
 PRIORITY: P1
@@ -124,6 +126,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Nodes from Claude brief.
 DO NOT: Do not use Mermaid or external diagram libraries.
 ACCEPTANCE: Pure SVG, responsive, readable, npm run build passes.
+STATUS: DONE (2026-05-15) — Homepage renders a hand-built responsive SVG lead-flow architecture diagram with no external diagram library; verified source marker check and `npm run build`.
 DEPENDENCIES: TS-001.
 OWNER: Codex
 PRIORITY: P1
@@ -137,6 +140,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Restore and HeartPathBloom tiles. Third tile is Thurr decision needed.
 DO NOT: Do not add client logos, fake testimonials, private emails, or private payment details.
 ACCEPTANCE: Two public-safe cards render, no links until work pages exist, npm run build passes.
+STATUS: DONE (2026-05-16) — Homepage selected-work section now renders only Restore-C and HeartPathBloom public-safe tiles; the undecided third tile was removed; verified `npm run build`.
 DEPENDENCIES: TS-001.
 OWNER: Codex
 PRIORITY: P1
@@ -150,6 +154,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Founder/final CTA/footer copy from Claude brief. Founder photo path is Thurr decision needed.
 DO NOT: Do not add newsletter signup or extra contact form.
 ACCEPTANCE: Founder section uses placeholder if no photo is chosen, final CTA points only to /audit, footer has disclosure, npm run build passes.
+STATUS: DONE (2026-05-16) — Added operator section headshot placeholder, one-door final Lead Flow Audit CTA, and footer legal/compliance disclosure; verified `npm run build`.
 DEPENDENCIES: TS-001.
 OWNER: Codex
 PRIORITY: P1
@@ -165,6 +170,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Inputs and disclosure from Claude brief.
 DO NOT: Do not promise results or hide assumptions.
 ACCEPTANCE: Widget calculates estimate, disclaimer visible, verification script covers math assumptions, npm run build passes.
+STATUS: DONE (2026-05-17) — Added homepage lead leak diagnostic widget with four editable assumptions, planning-only disclaimer, pure calculation helper, `npm run lead-leak:verify`, and verified build.
 DEPENDENCIES: TS-001; TS-003.
 OWNER: Codex
 PRIORITY: P2

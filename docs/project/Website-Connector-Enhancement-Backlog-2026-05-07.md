@@ -26,6 +26,7 @@ FILES: src/main.jsx, src/components/SiteChrome.jsx
 LOCKED COPY / INPUTS: Privacy page explains what the audit form collects, what not to submit, internal routing, retention, and contact. Footer trust strip: "HIPAA-aware system design. TCPA-safe follow-up architecture. COPPA-compliant where required. Compliance sign-off required before any regulated system goes live."  
 DO NOT: Claim legal compliance guarantees or say HIPAA-certified.  
 ACCEPTANCE: /privacy renders; footer links Privacy; footer includes compliance trust strip; npm run build passes.  
+STATUS: DONE (2026-05-18) — `/privacy` route and footer Privacy link are present; added locked compliance trust strip, `npm run privacy-route:verify`, and verified `npm run build`.
 DEPENDENCIES: none  
 OWNER: Codex  
 PRIORITY: P0  

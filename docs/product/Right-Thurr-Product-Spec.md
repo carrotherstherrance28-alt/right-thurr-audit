@@ -23,13 +23,37 @@ For example, the website landlord / rank-and-rent model can become a Right Thurr
 
 This should still avoid guarantees around rankings, leads, revenue, or profit. Right Thurr can make the system visible and copyable; it should not promise the market result.
 
+## Free Game Prelaunch Surface
+
+Before Right Thurr becomes a full commerce or app launch, it should run as a Thurr-led Free Game prelaunch.
+
+This surface is for ambitious operators who want practical put-ons:
+
+- AI tools and workflows
+- Workout routines and consistency lessons
+- Healthy eats and travel food finds
+- Setup tours for tech, desk, creator, travel, phone, and gym bag workflows
+- People doing useful work
+- Travel lessons and lifestyle systems
+- Client-safe business/process lessons from Thurr Solutions builds
+
+The prelaunch goal is audience proof, not checkout volume. Track saves, replies, DMs, comments, shares, email signups, and "send me that" requests before deciding which product, merch, community, or app lane deserves deeper buildout.
+
+The first community question is:
+
+> What are you trying to get put on to right now?
+
+Sort answers into AI tools, fitness, travel, money, content, business, healthy eats, and network. Repeated answers become the next content series or lightweight Free Game Circle topic.
+
 ## MVP Positioning
 
 Right Thurr V1 helps local service side hustlers turn an idea into a trackable business system.
 
-Primary example:
+Sample demo lane:
 
 > "I want to start a mobile detailing business in Dallas."
+
+Dallas Mobile Detailing is a sample Right Thurr and diagnostic lane, not the core Thurr Solutions offer.
 
 Right Thurr turns that into:
 
@@ -648,15 +672,18 @@ Delay:
 - Full Stripe integration
 - PayPal integration
 - Shopify integration
+- Paid community
 - SMS automation
 - Lead scraping
 - Email sending
 - Printify and Printful
+- Paid ads
+- Heavy course or membership infrastructure
 - Full vector memory
 - Multi-agent marketplace
 - Advanced analytics
 
-These can come after the core System loop works.
+These can come after the core System loop works and the Free Game prelaunch proves repeated audience demand.
 
 ## V1 Success Criteria
 

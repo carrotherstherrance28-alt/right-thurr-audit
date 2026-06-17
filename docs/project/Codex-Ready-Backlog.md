@@ -54,6 +54,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Dallas Mobile Detailing may remain as a sample Right Thurr/diagnostic lane.
 DO NOT: Do not delete diagnostic demo routes. Do not erase prior product documentation.
 ACCEPTANCE: Homepage no longer reads like Thurr Solutions is only a detailing offer; demo language labels Dallas Mobile Detailing as example/demo; npm run build passes.
+STATUS: DONE (2026-05-16) — Dallas Mobile Detailing is bounded as a sample Right Thurr/diagnostic lane, homepage remains Thurr Solutions lead-systems focused, and `npm run demo-lane:verify` plus `npm run build` pass.
 DEPENDENCIES: WEB-001.
 OWNER: Codex
 PRIORITY: P1
@@ -67,6 +68,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Priority targets: roofing/contractors, beauty/service studios, insurance agents. Healthcare/hospice appears only with compliance caution language.
 DO NOT: Do not list every possible industry from notes. Do not pitch regulated healthcare automation without guardrails.
 ACCEPTANCE: Site shows 3 primary target lanes and one compliance-gated lane; each lane links or scrolls to relevant examples; npm run build passes.
+STATUS: DONE (2026-05-15) — Homepage now includes Roofing & Contractors, Beauty & Service Studios, Insurance Agents, and compliance-gated Healthcare & Hospice target lanes; verified source marker check and `npm run build`.
 DEPENDENCIES: WEB-003.
 OWNER: Codex
 PRIORITY: P1
@@ -80,6 +82,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: “For regulated industries, Thurr Solutions builds the system and routes final public-facing copy, consent language, and policy decisions through the client’s authorized reviewer.”
 DO NOT: Do not claim legal, HIPAA, COPPA, TCPA, or insurance compliance services as a standalone certification.
 ACCEPTANCE: Compliance note appears near offer/use-case areas; wording is clear but not fear-based; npm run build passes.
+STATUS: DONE (2026-05-15) — Added homepage compliance guardrail note with authorized-reviewer routing copy, softened public strip from certification-style claims to review gates, added `npm run compliance:verify`, and verified `npm run build`.
 DEPENDENCIES: WEB-003.
 OWNER: Codex
 PRIORITY: P1
@@ -93,6 +96,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Use generalized proof: storm lead capture page, youth wellness MVP planning, insurance lead pipeline concept, contractor close system presentation.
 DO NOT: Do not publish private emails, agreements, deposits, pricing that is not approved for public use, or client-sensitive healthcare/youth data.
 ACCEPTANCE: Section communicates credibility without private information; no sensitive identifiers; npm run build passes.
+STATUS: DONE (2026-05-17) — Added a public-safe active pipeline section covering storm lead capture, youth wellness MVP planning, insurance lead pipeline concept, and contractor close system presentation; added `npm run active-pipeline:verify` and verified `npm run build`.
 DEPENDENCIES: WEB-003.
 OWNER: Codex
 PRIORITY: P2
@@ -106,6 +110,7 @@ FILES: /Users/thurr/Documents/New project/docs/project/Website-Intake-Tracking.m
 LOCKED COPY / INPUTS: Website intake should ultimately flow to Supabase, owner alert, Notion task/client record, and Linear follow-up issue when appropriate.
 DO NOT: Do not include secrets or API keys.
 ACCEPTANCE: Documentation lists each intake path, data destination, owner alert destination, and manual fallback; direct Notion checklist link included; npm run build unaffected.
+STATUS: DONE (2026-05-17) — Website intake tracking now lists public intake paths, data destinations, env-driven owner alert routing, Notion/Linear fallback steps, direct Notion checklist links, and README pointers; docs-only change.
 DEPENDENCIES: AUD-002; AUD-003; NOT-002; LIN-002.
 OWNER: Codex
 PRIORITY: P2
@@ -162,6 +167,7 @@ FILES: /Users/thurr/Documents/New project/src/main.jsx; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Video path: /media/thurr-solutions-lead-system-intro.mp4. Poster path: /media/thurr-solutions-lead-system-intro-poster.jpg.
 DO NOT: Do not use Runway credits. Do not generate or clone Thurr’s voice. Do not upload private assets.
 ACCEPTANCE: If video exists, player renders; if missing, placeholder renders cleanly; CTA remains visible; npm run build passes.
+STATUS: DONE (2026-05-17) — Homepage now renders the intro video section before the audit CTA, using the locked MP4/poster paths with a clean placeholder fallback; added `npm run intro-video:verify` and verified `npm run build`.
 DEPENDENCIES: WEB-001.
 OWNER: Codex
 PRIORITY: P0
@@ -289,6 +295,7 @@ FILES: /Users/thurr/Documents/New project/docs/project/Thurr-Solutions-Operating
 LOCKED COPY / INPUTS: Command Center: https://www.notion.so/34ca6f1d252381dbae98fd09da37ae32. Client Command Center: https://www.notion.so/350a6f1d2523814d8b91f103559431e8. Website + Marketplace Launch HQ: https://www.notion.so/350a6f1d2523817d8d04ee2fecdad043. Gym HQ: https://www.notion.so/357a6f1d25238103bdc7f8832a917164.
 DO NOT: Do not include private legal IDs, API keys, client private data, or financial account details.
 ACCEPTANCE: Doc lists source-of-truth pages by function; marks Notion as source of truth and Linear as execution; links are direct; no secrets.
+STATUS: DONE (2026-05-15) — Expanded operating system and Notion command center map with function ownership, direct links, and guardrails; no secrets added.
 DEPENDENCIES: None.
 OWNER: Codex
 PRIORITY: P1
@@ -302,6 +309,7 @@ FILES: /Users/thurr/Documents/New project/docs/project/Website-Intake-Tracking.m
 LOCKED COPY / INPUTS: Website intake should create or update a prospect/opportunity with offer, phase, status, next action, links, and deadline.
 DO NOT: Do not directly alter Notion if API access is unavailable. Do not duplicate existing databases unless needed.
 ACCEPTANCE: Spec maps website fields to Notion fields; includes manual fallback; links relevant Notion pages; no secrets.
+STATUS: DONE (2026-05-15) — Expanded intake tracking and Notion audit spec with field mapping, destination checklist, duplicate handling, and manual fallback.
 DEPENDENCIES: AUD-002.
 OWNER: Codex
 PRIORITY: P1
@@ -315,6 +323,7 @@ FILES: /Users/thurr/Documents/New project/docs/project/Client-Fulfillment-Battle
 LOCKED COPY / INPUTS: Template fields: client, offer, phase, status, deposit status, timeline, deliverables, assets needed, client decisions, compliance reviewer, next 7 days, links.
 DO NOT: Do not create client-facing Notion access by default.
 ACCEPTANCE: Template can be copied into Notion manually or used by n8n later; includes client-facing vs internal-only sections; no private data.
+STATUS: DONE (2026-05-15) — Expanded battle plan template with deposit status, deliverables, decisions, assets, links, client-facing summary, and internal-only risk checklist.
 DEPENDENCIES: None.
 OWNER: Codex
 PRIORITY: P1
@@ -356,6 +365,7 @@ FILES: /Users/thurr/Documents/New project/docs/project/Linear-Issue-Template-Lib
 LOCKED COPY / INPUTS: Templates: Website Change, Lead Flow Audit, Client Onboarding, Presentation Build, Automation Build, n8n Workflow, Compliance Review Gate, Credential Rotation, Follow-Up Task, Bug/Fix.
 DO NOT: Do not include private tokens or assume Linear API access.
 ACCEPTANCE: Template library uses consistent fields: goal, inputs, do not, acceptance, owner, due date, links; can be pasted into Linear.
+STATUS: DONE (2026-05-15) — Expanded Linear template library with standard fields across requested work types plus client asset, scope change, and release gate templates.
 DEPENDENCIES: None.
 OWNER: Codex
 PRIORITY: P1
@@ -369,6 +379,7 @@ FILES: /Users/thurr/Documents/New project/scripts/linear-seed-backlog.mjs; /User
 LOCKED COPY / INPUTS: Use this backlog as source. Team/project naming must match Thurr Solutions Linear workspace.
 DO NOT: Do not call Linear API unless token/env is configured and Thurr approves.
 ACCEPTANCE: Script runs in dry-run mode by default; CSV/manual import exists; no credentials committed.
+STATUS: DONE (2026-05-17) — Added `scripts/linear-seed-backlog.mjs` dry-run parser, generated `docs/project/linear-backlog-import.csv`, added `npm run linear:seed:verify`, and verified the script does not call Linear or include credential language in CSV descriptions.
 DEPENDENCIES: LIN-001; DECISION BLOCKER — Linear API Write Access.
 OWNER: Codex
 PRIORITY: P2
@@ -410,6 +421,7 @@ FILES: /Users/thurr/Documents/New project/docs/project/Agent-Operating-System.md
 LOCKED COPY / INPUTS: Agents: Operations Manager, Client Delivery, Sales Follow-Up, Lead Flow Audit, Presentation Builder, Content Engine, KPI Scoreboard, Release Gate.
 DO NOT: Do not claim agents can act autonomously with money, sending, client contact, or production changes without approval.
 ACCEPTANCE: Manual includes purpose, trigger phrases, allowed actions, prohibited actions, outputs, and source-of-truth links.
+STATUS: DONE (2026-05-15) — Expanded agent operating manual with trigger phrases, allowed actions, output requirements, prohibited actions, and source links.
 DEPENDENCIES: Existing agent specs in /Users/thurr/Documents/New project/docs/project/ops-agent-specs.
 OWNER: Codex
 PRIORITY: P1
@@ -423,6 +435,7 @@ FILES: /Users/thurr/thurnos-memory/memory/semantic/ops; /Users/thurr/Documents/N
 LOCKED COPY / INPUTS: Existing specs should be synced, not reinvented. Use draft-only guardrails unless explicit approval is present.
 DO NOT: Do not overwrite unknown user edits. Do not add sensitive client data. Do not give agents permission to spend, send, deploy, or change production without approval.
 ACCEPTANCE: Thurnos memory has current specs for each approved agent; update note added; git diff only touches intended memory files.
+STATUS: DONE (2026-05-19) — Thurnos memory reports AGT-002 one-at-a-time merge review complete, no staged source spec missing, remaining diffs intentional, and no remaining merge review items in `UPSTREAM-SYNC.md`.
 DEPENDENCIES: AGT-001.
 OWNER: Codex
 PRIORITY: P2
@@ -464,6 +477,7 @@ FILES: /Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md
 LOCKED COPY / INPUTS: Include HeartPathBloom, Restore-C, Andy Life Insurance, Christy/Sweetest Pea, 5 Star Hospice, Youth Wellness Platform, Right Thurr community/future.
 DO NOT: Do not include private emails, agreements, signatures, accidental sensitive identifiers, or payment details beyond approved public/internal status.
 ACCEPTANCE: Index has client/prospect, status, offer, next action, risk flag, direct Notion/doc links; sensitive data omitted.
+STATUS: DONE (2026-05-15) — Pipeline index includes HeartPathBloom, Restore-C, Andy, Christy/Sweetest Pea, 5 Star Hospice, Youth Wellness Platform, and Right Thurr future lane with offers, next actions, risk flags, and links.
 DEPENDENCIES: Existing docs in /Users/thurr/Documents/New project/docs/sales.
 OWNER: Codex
 PRIORITY: P1
@@ -477,6 +491,7 @@ FILES: /Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md; /
 LOCKED COPY / INPUTS: Deposit received May 1, 2026. Build clock running. COPPA applies. Named crisis escalation reviewer still needs lock before AI chat goes live.
 DO NOT: Do not publish deposit info on public website. Do not create clinical claims.
 ACCEPTANCE: Internal docs reflect corrected date/status; reviewer decision is a blocker; no public exposure.
+STATUS: DONE (2026-05-15) — Internal pipeline and operating system docs show HeartPathBloom signed, deposit received May 1, 2026, build clock running, COPPA risk, and reviewer blocker.
 DEPENDENCIES: CLT-001.
 OWNER: Codex
 PRIORITY: P0
@@ -490,6 +505,7 @@ FILES: /Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md; /
 LOCKED COPY / INPUTS: Position as residential close system / lead generator, not just app.
 DO NOT: Do not build full 3D presentation before workflow answers.
 ACCEPTANCE: Pipeline index links Restore upsell doc and lists next action: collect sales workflow details.
+STATUS: DONE (2026-05-15) — Pipeline index links Restore-C upsell doc and lists workflow-detail collection as the next action before overbuilding.
 DEPENDENCIES: CLT-001.
 OWNER: Codex
 PRIORITY: P1
@@ -503,6 +519,7 @@ FILES: /Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md; /
 LOCKED COPY / INPUTS: Position line: “The goal is not just buying leads. The goal is owning the pipeline.”
 DO NOT: Do not imply compliance approval or guaranteed ROI.
 ACCEPTANCE: Pipeline index links Andy doc and lists intake gates: licensed states, lead sources, follow-up, CRM, compliance reviewer.
+STATUS: DONE (2026-05-15) — Pipeline index links Andy insurance doc and keeps intake gates in the audit path before any marketing launch.
 DEPENDENCIES: CLT-001.
 OWNER: Codex
 PRIORITY: P1
@@ -516,6 +533,7 @@ FILES: /Users/thurr/Documents/New project/docs/sales/Client-Pipeline-Index.md
 LOCKED COPY / INPUTS: Christy/Sweetest Pea was Tier 2 $450 scope replacing Gloss Genius; she went quiet after proposal.
 DO NOT: Do not label as signed or Tier 1 Gloss Genius embed.
 ACCEPTANCE: Pipeline index reflects accurate status and next follow-up.
+STATUS: DONE (2026-05-15) — Pipeline index reflects Christy/Sweetest Pea as quiet after Tier 2 $450 Gloss Genius replacement proposal, with one follow-up as next action.
 DEPENDENCIES: CLT-001.
 OWNER: Codex
 PRIORITY: P1
@@ -593,50 +611,50 @@ NOW / NEXT / LATER: LATER
 TICKET: DECISION BLOCKER — Right Thurr Website Status
 REPO: Claude/Thurr decision needed
 BRANCH: Claude/Thurr decision needed
-GOAL: Confirm whether rightthurr.com exists separately or remains inside current mixed repo.
-FILES: Claude/Thurr decision needed
-LOCKED COPY / INPUTS: Right Thurr is personal/lifestyle/travel/content brand, not B2B Thurr Solutions.
+GOAL: Keep Thurr Solutions as the B2B public site while Right Thurr Free Game prelaunch is documented and tested before any separate website/store build.
+FILES: docs/project/Right-Thurr-Free-Game-Prelaunch.md; docs/project/Right-Thurr-Free-Game-Waitlist-Copy.md; docs/brand/Right-Thurr-Brand-System.md
+LOCKED COPY / INPUTS: Right Thurr is Thurr-led personal/lifestyle/travel/content/community/product brand, not the B2B Thurr Solutions homepage.
 DO NOT: Do not mix Right Thurr lifestyle merch copy into Thurr Solutions B2B homepage.
-ACCEPTANCE: Domain/repo/status confirmed.
+ACCEPTANCE: Any future `/right-thurr` route or rightthurr.com launch uses the Free Game prelaunch positioning and stays separate from the Thurr Solutions homepage.
 DEPENDENCIES: None.
 OWNER: Thurr
 PRIORITY: P1
 NOW / NEXT / LATER: NEXT
 
-TICKET: DECISION BLOCKER — Right Thurr First Product Lane
-REPO: Claude/Thurr decision needed
-BRANCH: Claude/Thurr decision needed
-GOAL: Decide first monetizable Right Thurr lane.
-FILES: Claude/Thurr decision needed
-LOCKED COPY / INPUTS: Options mentioned: travel/luggage tags, community, content, app with connections, merch.
-DO NOT: Do not build store/community before product lane is selected.
-ACCEPTANCE: One first lane selected with success metric.
+TICKET: RT-001 — Launch Right Thurr Free Game Prelaunch
+REPO: right-thurr-audit
+BRANCH: codex/operator-core-premium-site
+GOAL: Run a 30-day Thurr-led Free Game content test for ambitious operators before commerce or paid community.
+FILES: docs/project/Right-Thurr-Free-Game-Prelaunch.md; docs/notion-imports/right-thurr-free-game-content-calendar.csv; docs/project/Right-Thurr-Free-Game-Waitlist-Copy.md
+LOCKED COPY / INPUTS: First lane is Free Game: AI tools, workflows, setups, workouts, healthy eats, travel lessons, useful people, and client-safe build lessons.
+DO NOT: Do not launch Shopify, Printful, Stripe, Twilio, paid ads, or paid community before proof.
+ACCEPTANCE: 30-day content calendar exists; waitlist copy exists; success metrics are 30 posts/drafts, 10+ useful conversations, 25+ warm interest-list entries, and 3 repeat themes.
 DEPENDENCIES: Right Thurr website status.
 OWNER: Claude/Thurr
-PRIORITY: P2
-NOW / NEXT / LATER: LATER
+PRIORITY: P1
+NOW / NEXT / LATER: NOW
 
-TICKET: DECISION BLOCKER — Right Thurr Public Phrase Bank
-REPO: Claude/Thurr decision needed
-BRANCH: Claude/Thurr decision needed
-GOAL: Approve which phrases can be used publicly.
-FILES: Claude/Thurr decision needed
-LOCKED COPY / INPUTS: Candidate phrases: You got to be thurr; Subscribe button right thurr; I’m Thurr; Be Thurr; Thurr you go; Thurr Way.
-DO NOT: Do not publish raw notes or sensitive/private references.
-ACCEPTANCE: Approved phrase bank created.
+TICKET: RT-002 — Approve Right Thurr Public Phrase Bank
+REPO: right-thurr-audit
+BRANCH: codex/operator-core-premium-site
+GOAL: Review and approve the draft phrase bank before public posting, profile copy, or merch.
+FILES: docs/brand/Right-Thurr-Phrase-Bank.md
+LOCKED COPY / INPUTS: Draft phrases include Free Game for ambitious operators, What are you trying to get put on to right now, The next move is right thurr, and Thurr-isms to test carefully.
+DO NOT: Do not publish phrases, print merch, or use Thurr-isms heavily before exact wording is approved.
+ACCEPTANCE: Thurr marks phrases as approved, test-only, or rejected for public use.
 DEPENDENCIES: None.
 OWNER: Claude/Thurr
 PRIORITY: P2
-NOW / NEXT / LATER: LATER
+NOW / NEXT / LATER: NEXT
 
-TICKET: DECISION BLOCKER — Community Timing
-REPO: Claude/Thurr decision needed
-BRANCH: Claude/Thurr decision needed
-GOAL: Decide whether Right Thurr community is paused until B2B site/client delivery is stable.
-FILES: Claude/Thurr decision needed
-LOCKED COPY / INPUTS: Current risk: community is maintenance-heavy for solo operator.
-DO NOT: Do not launch unpaid community that adds daily workload without automation/support.
-ACCEPTANCE: Community marked Now, Next, or Later.
+TICKET: RT-003 — Seed Free Game Circle Interest List
+REPO: right-thurr-audit
+BRANCH: codex/operator-core-premium-site
+GOAL: Collect lightweight community interest without launching a paid or high-touch group.
+FILES: docs/project/Right-Thurr-Free-Game-Prelaunch.md; docs/project/Right-Thurr-Free-Game-Waitlist-Copy.md; docs/project/Thurr-Community-Roadmap.md
+LOCKED COPY / INPUTS: Community starts as Free Game Circle interest capture with one question: What are you trying to get put on to right now?
+DO NOT: Do not launch paid community, daily support, private coaching, or hands-on build promises before 8-12 weeks of content and 100+ warm leads.
+ACCEPTANCE: Interest form copy exists; response tags exist; paid/high-touch community remains delayed until proof signals are met.
 DEPENDENCIES: None.
 OWNER: Claude/Thurr
 PRIORITY: P2
