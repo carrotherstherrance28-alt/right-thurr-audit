@@ -38,6 +38,7 @@ export default defineConfig({
       input: (() => {
         const input = {
           main: resolve(__dirname, 'index.html'),
+          maintenance: resolve(__dirname, 'maintenance/index.html'),
           card: resolve(__dirname, 'card/index.html'),
           thurr: resolve(__dirname, 'thurr/index.html'),
           'thurr-tag': resolve(__dirname, 'thurr-tag/index.html'),

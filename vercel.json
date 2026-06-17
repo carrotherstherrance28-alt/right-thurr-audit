@@ -108,6 +108,14 @@
     {
       "source": "/t/001/",
       "destination": "/t/001/index.html"
+    },
+    {
+      "source": "/maintenance",
+      "destination": "/maintenance/index.html"
+    },
+    {
+      "source": "/maintenance/",
+      "destination": "/maintenance/index.html"
     }
   ]
 }
