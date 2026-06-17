@@ -92,6 +92,14 @@
     {
       "source": "/links/",
       "destination": "/thurr/index.html"
+    },
+    {
+      "source": "/thurr-tag",
+      "destination": "/thurr-tag/index.html"
+    },
+    {
+      "source": "/thurr-tag/",
+      "destination": "/thurr-tag/index.html"
     }
   ]
 }
