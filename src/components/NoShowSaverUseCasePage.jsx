@@ -15,7 +15,7 @@ export function NoShowSaverUseCasePage({ setPage }) {
           </p>
           <div className="usecase-hero-actions">
             <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-              Start with the Lead Flow Audit
+              Book a consultation
             </button>
             <button className="stamp-button ghost-button" type="button" onClick={() => setPage('solutions')}>
               See Thurr Solutions services
@@ -78,11 +78,11 @@ export function NoShowSaverUseCasePage({ setPage }) {
       <section className="usecase-section usecase-cta" aria-labelledby="usecase-cta-title">
         <h2 id="usecase-cta-title">If you want it built</h2>
         <p>
-          Start with the Lead Flow Audit. You’ll get a clean map of your booking-to-confirmation path, the scripts to approve, and
+          Book a consultation. You’ll get a clean map of your booking-to-confirmation path, the scripts to approve, and
           the guardrails to keep it operator-safe.
         </p>
         <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-          Start the audit
+          Book the consultation
         </button>
       </section>
     </main>

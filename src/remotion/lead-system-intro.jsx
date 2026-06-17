@@ -34,7 +34,7 @@ const scenes = [
   },
   {
     eyebrow: 'Start here',
-    title: 'Thurr starts with a Lead Flow Audit.',
+    title: 'Thurr starts with a consultation.',
     body: 'We review the website, intake, booking path, follow-up, and owner visibility.',
     accent: 'Audit',
   },
@@ -52,7 +52,7 @@ const scenes = [
   },
   {
     eyebrow: 'Keep it working',
-    title: 'The audit tells us what to fix. The build fixes it.',
+    title: 'The consultation tells us what to fix. The build fixes it.',
     body: 'The retainer keeps the lead system working as the business grows.',
     accent: 'Managed System',
   },
@@ -330,7 +330,7 @@ export function ThurrLeadSystemIntro() {
           />
           <span>Thurr Solutions</span>
         </div>
-        <span style={{ color: colors.green }}>Lead System Audit</span>
+        <span style={{ color: colors.green }}>Lead System Consultation</span>
       </div>
 
       {scenes.map((scene, index) => (
@@ -361,7 +361,7 @@ export function ThurrLeadSystemIntro() {
               textTransform: 'uppercase',
             }}
           >
-            Start with the Lead System Audit
+            Start with the Lead System Consultation
           </div>
           <div
             style={{
@@ -379,4 +379,3 @@ export function ThurrLeadSystemIntro() {
     </AbsoluteFill>
   );
 }
-

@@ -13,7 +13,7 @@ export function MissedCallTextbackUseCasePage({ setPage }) {
           </p>
           <div className="usecase-hero-actions">
             <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-              Start with the Lead Flow Audit
+              Book a consultation
             </button>
             <button className="stamp-button ghost-button" type="button" onClick={() => setPage('solutions')}>
               See Thurr Solutions services
@@ -76,11 +76,11 @@ export function MissedCallTextbackUseCasePage({ setPage }) {
       <section className="usecase-section usecase-cta" aria-labelledby="usecase-cta-title">
         <h2 id="usecase-cta-title">If you want it built</h2>
         <p>
-          Start with the Lead Flow Audit. You’ll get a clean map of your inbound calls, your missed-call volume, and the simplest
+          Book a consultation. You’ll get a clean map of your inbound calls, your missed-call volume, and the simplest
           build list to recover the conversations you already paid for.
         </p>
         <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-          Start the audit
+          Book the consultation
         </button>
       </section>
     </main>

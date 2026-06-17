@@ -15,7 +15,7 @@ export function ServiceReminderUseCasePage({ setPage }) {
           </p>
           <div className="usecase-hero-actions">
             <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-              Start with the Lead Flow Audit
+              Book a consultation
             </button>
             <button className="stamp-button ghost-button" type="button" onClick={() => setPage('solutions')}>
               See Thurr Solutions services
@@ -80,11 +80,11 @@ export function ServiceReminderUseCasePage({ setPage }) {
       <section className="usecase-section usecase-cta" aria-labelledby="usecase-cta-title">
         <h2 id="usecase-cta-title">If you want it built</h2>
         <p>
-          Start with the Lead Flow Audit. You’ll get a clean map of trigger rules, consent assumptions, reply routing, and the build
+          Book a consultation. You’ll get a clean map of trigger rules, consent assumptions, reply routing, and the build
           list to keep it operator-safe.
         </p>
         <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-          Start the audit
+          Book the consultation
         </button>
       </section>
     </main>

@@ -16,7 +16,7 @@ export function ChangeOrderApprovalUseCasePage({ setPage }) {
           </p>
           <div className="usecase-hero-actions">
             <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-              Start with the Lead Flow Audit
+              Book a consultation
             </button>
             <button className="stamp-button ghost-button" type="button" onClick={() => setPage('solutions')}>
               See Thurr Solutions services
@@ -84,11 +84,11 @@ export function ChangeOrderApprovalUseCasePage({ setPage }) {
       <section className="usecase-section usecase-cta" aria-labelledby="usecase-cta-title">
         <h2 id="usecase-cta-title">If you want it built</h2>
         <p>
-          Start with the Lead Flow Audit. You’ll get the exact “change order” script, the approval capture step, and the stop
+          Book a consultation. You’ll get the exact “change order” script, the approval capture step, and the stop
           rules that keep it operator-safe.
         </p>
         <button className="stamp-button link-button" type="button" onClick={() => setPage('buildout')}>
-          Start the audit
+          Book the consultation
         </button>
       </section>
     </main>
