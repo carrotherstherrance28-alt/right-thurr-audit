@@ -68,6 +68,30 @@
     {
       "source": "/diagnostic/:path*",
       "destination": "/"
+    },
+    {
+      "source": "/card",
+      "destination": "/card/index.html"
+    },
+    {
+      "source": "/card/",
+      "destination": "/card/index.html"
+    },
+    {
+      "source": "/thurr",
+      "destination": "/thurr/index.html"
+    },
+    {
+      "source": "/thurr/",
+      "destination": "/thurr/index.html"
+    },
+    {
+      "source": "/links",
+      "destination": "/thurr/index.html"
+    },
+    {
+      "source": "/links/",
+      "destination": "/thurr/index.html"
     }
   ]
 }

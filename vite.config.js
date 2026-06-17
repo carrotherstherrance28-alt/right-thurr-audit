@@ -10,9 +10,36 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) {
+            return undefined;
+          }
+
+          if (id.includes('/react/') || id.includes('/react-dom/')) {
+            return 'vendor-react';
+          }
+
+          if (id.includes('/@supabase/')) {
+            return 'vendor-supabase';
+          }
+
+          if (id.includes('/@remotion/') || id.includes('/remotion/')) {
+            return 'vendor-remotion';
+          }
+
+          if (id.includes('/lucide-react/')) {
+            return 'vendor-icons';
+          }
+
+          return 'vendor';
+        },
+      },
       input: (() => {
         const input = {
           main: resolve(__dirname, 'index.html'),
+          card: resolve(__dirname, 'card/index.html'),
+          thurr: resolve(__dirname, 'thurr/index.html'),
         };
 
         const lanesPath = resolve(__dirname, 'diagnostic/lanes.json');
