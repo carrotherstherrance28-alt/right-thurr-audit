@@ -33,7 +33,8 @@
     "privacy-route:verify": "node scripts/verify-privacy-route.mjs",
     "diagnostic:verify": "node scripts/verify-diagnostic-lanes.mjs",
     "diagnostic:verify:dist": "node scripts/verify-diagnostic-dist.mjs",
-    "diagnostic:create-lane": "node scripts/create-diagnostic-lane.mjs"
+    "diagnostic:create-lane": "node scripts/create-diagnostic-lane.mjs",
+    "phase8:verify": "node scripts/verify-phase8-engine.mjs"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.454",

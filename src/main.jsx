@@ -102,12 +102,17 @@ const auditInitialForm = {
   businessName: '',
   ownerName: '',
   email: '',
-  businessUrl: '',
-  monthlyLeadsEstimate: 'Not sure',
-  frustrationText: '',
+  phone: '',
+  whatDoYouNeed: 'Website + follow-up automation',
 };
 
-const auditLeadVolumes = ['<25', '25–100', '100–500', '500+', 'Not sure'];
+const consultationNeedOptions = [
+  'Website + follow-up automation',
+  'Booking system',
+  'Lead follow-up workflow',
+  'Proposal/payment cleanup',
+  'Not sure yet',
+];
 
 const operatorNavItems = [
   ['Command Center', 'command'],
@@ -481,23 +486,58 @@ async function submitBuildoutRequest(payload) {
   return 'queued-local';
 }
 
-async function submitAuditRequest(payload) {
-  const response = await fetch('/api/consultation-request', {
+function getEngineWebhookUrl() {
+  return (
+    import.meta.env.NEXT_PUBLIC_ENGINE_WEBHOOK_URL ||
+    import.meta.env.VITE_ENGINE_WEBHOOK_URL ||
+    ''
+  );
+}
+
+function normalizeEngineLeadPayload(payload) {
+  const fullName = payload.full_name || payload.owner_name || payload.ownerName || payload.name || '';
+  const businessName = payload.business_name || payload.businessName || payload.business || '';
+  const whatDoYouNeed =
+    payload.what_do_you_need ||
+    payload.whatDoYouNeed ||
+    payload.frustration_text ||
+    payload.frustrationText ||
+    '';
+
+  return {
+    name: String(fullName).trim(),
+    full_name: String(fullName).trim(),
+    business_name: String(businessName).trim(),
+    email: String(payload.email || '').trim().toLowerCase(),
+    phone: String(payload.phone || '').trim(),
+    what_do_you_need: String(whatDoYouNeed).trim(),
+    source: payload.source || 'website-consultation-form',
+  };
+}
+
+async function submitEngineLeadIntake(payload) {
+  const webhookUrl = getEngineWebhookUrl();
+
+  if (!webhookUrl) {
+    throw new Error('Engine webhook is not configured.');
+  }
+
+  const response = await fetch(webhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(normalizeEngineLeadPayload(payload)),
   });
 
   if (response.ok) {
     return response.json().catch(() => ({ ok: true }));
   }
 
-  if (response.status === 404) {
-    return { ok: true, status: 'queued-local' };
-  }
-
   const errorPayload = await response.json().catch(() => ({}));
-  throw new Error(errorPayload.message || 'Consultation request failed.');
+  throw new Error(errorPayload.message || 'Engine lead intake failed.');
+}
+
+async function submitAuditRequest(payload) {
+  return submitEngineLeadIntake(payload);
 }
 
 function App() {
@@ -3028,9 +3068,9 @@ function VisualAuditCta() {
         businessName: form.businessName,
         ownerName: form.businessName,
         email: form.email,
-        businessUrl: 'Not provided from homepage form',
-        monthlyLeadsEstimate: 'Not sure',
-        frustrationText: `Industry: ${form.industry}. Lead source: ${form.leadSource}`,
+        phone: '',
+        whatDoYouNeed: `Industry: ${form.industry}. Lead source: ${form.leadSource}`,
+        source: 'homepage-consultation-form',
       });
       setState('queued');
       window.history.pushState({}, '', '/audit/thanks');
@@ -3850,9 +3890,9 @@ function AuditPage({ setPage }) {
         business_name: auditForm.businessName,
         owner_name: auditForm.ownerName,
         email: auditForm.email,
-        business_url: auditForm.businessUrl,
-        monthly_leads_estimate: auditForm.monthlyLeadsEstimate,
-        frustration_text: auditForm.frustrationText,
+        phone: auditForm.phone,
+        what_do_you_need: auditForm.whatDoYouNeed,
+        source: 'consultation-page',
       });
       setAuditState('queued');
       setAuditForm(auditInitialForm);
@@ -3986,36 +4026,26 @@ function AuditRequestForm({ auditForm, auditState, handleAuditSubmit, updateAudi
         />
       </label>
       <label>
-        Business URL
+        Phone
         <input
-          type="url"
-          value={auditForm.businessUrl}
-          onChange={(event) => updateAuditField('businessUrl', event.target.value)}
-          placeholder="https://..."
+          type="tel"
+          value={auditForm.phone}
+          onChange={(event) => updateAuditField('phone', event.target.value)}
+          placeholder="(555) 555-5555"
           required
         />
       </label>
       <label>
-        Approx. monthly lead volume
+        What do you need?
         <select
-          value={auditForm.monthlyLeadsEstimate}
-          onChange={(event) => updateAuditField('monthlyLeadsEstimate', event.target.value)}
+          value={auditForm.whatDoYouNeed}
+          onChange={(event) => updateAuditField('whatDoYouNeed', event.target.value)}
           required
         >
-          {auditLeadVolumes.map((volume) => (
-            <option key={volume}>{volume}</option>
+          {consultationNeedOptions.map((option) => (
+            <option key={option}>{option}</option>
           ))}
         </select>
-      </label>
-      <label className="wide-field">
-        Where do you think leads are slipping through?
-        <textarea
-          value={auditForm.frustrationText}
-          onChange={(event) => updateAuditField('frustrationText', event.target.value)}
-          rows={4}
-          placeholder="Where do you think leads are slipping through?"
-          required
-        />
       </label>
       <button className="stamp-button wide-field" type="submit" disabled={auditState === 'sending'}>
         {auditState === 'sending' ? 'SENDING...' : 'Book a consultation'}
@@ -4023,8 +4053,14 @@ function AuditRequestForm({ auditForm, auditState, handleAuditSubmit, updateAudi
       </button>
       {auditState === 'error' && (
         <p className="form-note error-note wide-field">
-          Consultation request could not be saved. Check the configured endpoint and try again.
+          The Engine intake webhook is not reachable right now. Use the booking link below instead.
         </p>
+      )}
+      {auditState === 'error' && (
+        <a className="stamp-button link-button wide-field fallback-booking-cta" href={consultationUrl} target="_blank" rel="noreferrer">
+          Open booking page
+          <ArrowUpRight size={18} strokeWidth={3} />
+        </a>
       )}
     </form>
   );
@@ -4970,7 +5006,7 @@ function BrandBoundary() {
 
 function PrivacyPage({ setPage }) {
   const privacyRows = [
-    ['What the consultation form collects', 'Business name, owner name, email, website URL, approximate lead volume, and the operational lead-flow issue you describe.'],
+    ['What the consultation form collects', 'Business name, owner name, email, phone, and the consultation need you select.'],
     ['What not to submit', 'Do not submit patient health information, youth/minor private content, passwords, payment details, SSNs, insurance health details, or confidential customer records.'],
     ['How it is used', 'Consultation submissions are used to review fit, prepare a first response, and create internal follow-up records for Thurr Solutions.'],
     ['Where it may route internally', 'A submission may create a private Supabase row, owner alert, Notion prospect record, and Linear review task. These systems are for internal operations only.'],
