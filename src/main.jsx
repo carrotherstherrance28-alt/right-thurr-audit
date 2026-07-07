@@ -1023,7 +1023,7 @@ function App() {
 
     const titlesByPage = {
       home: defaultTitle,
-      audit: 'Book a Consultation | Thurr Solutions',
+      audit: 'Book a consultation | Thurr Solutions',
       'audit-thanks': 'Consultation Request Received | Thurr Solutions',
       compliance: 'Compliance | Thurr Solutions',
       privacy: 'Privacy | Thurr Solutions',
@@ -2710,7 +2710,7 @@ function SolutionsPage({ setPage }) {
           <article>
             <div className="ladder-step">Default</div>
             <h3>Founding Pilot</h3>
-            <strong>$750 setup + $99/mo</strong>
+            <strong>Scoped after consultation</strong>
             <p>
               Install missed-lead capture, first reply, basic follow-up, booking handoff, and
               Airtable tracking for the first three paid installs.
@@ -3049,7 +3049,7 @@ function VisualAuditCta() {
           identify where leads are slipping, and recommend whether the founding pilot is enough
           or whether the business actually needs a larger contractor growth build.
         </p>
-        <div className="audit-price-line"><strong>Founding Pilot: $750 setup + $99/mo</strong> · first 3 installs · Thurr reviews personally</div>
+        <div className="audit-price-line"><strong>Scope is set after the consultation.</strong> Every business has a different lead path, tool stack, and follow-up burden.</div>
       </div>
       <form className="visual-audit-form" onSubmit={handleSubmit}>
         <label>
@@ -3079,7 +3079,7 @@ function VisualAuditCta() {
           <span>I agree to be contacted by Thurr Solutions about my consultation request.</span>
         </label>
         <button className="visual-primary-btn" type="submit">
-          {state === 'sending' ? 'Submitting...' : 'Request setup consultation →'}
+          {state === 'sending' ? 'Submitting...' : 'Book a consultation'}
         </button>
         {state === 'consent' ? <p className="form-note">Consent is required before I can contact you about the consultation.</p> : null}
         {state === 'error' ? <p className="form-note">The request did not save. Use the full consultation page or email hello@thurrsolutions.com.</p> : null}
@@ -3343,7 +3343,7 @@ function HomeOfferLadderSection({ setPage }) {
       note: 'If there is no clear revenue leak, I will say that before quoting work.',
       action: (
         <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
-          Book Consultation
+          Book a consultation
           <ArrowUpRight size={18} strokeWidth={3} />
         </a>
       ),
@@ -3351,7 +3351,7 @@ function HomeOfferLadderSection({ setPage }) {
     {
       lane: 'Default offer',
       title: 'Founding Pilot',
-      price: '$750 setup + $99/mo',
+      price: 'Scoped after consultation',
       fit: 'For local service businesses that need missed leads answered, tracked, and routed now.',
       text: 'A narrow autonomous revenue system: missed-lead capture, first reply, basic follow-up, booking handoff, and Airtable tracking.',
       includes: ['One intake or missed-lead path', 'Simple follow-up sequence', 'Owner-visible tracking'],
@@ -3393,7 +3393,7 @@ function HomeOfferLadderSection({ setPage }) {
     {
       lane: 'Ongoing',
       title: 'Managed Automation',
-      price: '$250-$1,000/mo',
+      price: 'Scoped monthly support',
       fit: 'For systems that are already tied to leads, bookings, reporting, or client communication.',
       text: 'Monitoring, workflow fixes, sequence updates, reporting, and small improvements after launch.',
       includes: ['Workflow monitoring', 'Monthly improvement pass', 'Reporting and issue review'],
@@ -3866,7 +3866,7 @@ function FinalCtaSection({ setPage }) {
       <h2 id="final-cta-title">Start with a setup consultation.</h2>
       <p>One week. A written diagnostic of where your leads are leaking and what to fix first.</p>
       <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
-        Book Consultation →
+        Book a consultation →
         <ArrowUpRight size={18} strokeWidth={3} />
       </a>
     </section>
@@ -3914,7 +3914,7 @@ function AuditPage({ setPage }) {
           </p>
           <div className="hero-actions">
             <a className="stamp-button link-button" href="#audit-request-form">
-              Set up a consultation
+              Book a consultation
               <ArrowUpRight size={18} strokeWidth={3} />
             </a>
             <button className="text-link dark-link button-link" type="button" onClick={() => setPage('home')}>
@@ -3924,7 +3924,7 @@ function AuditPage({ setPage }) {
         </div>
         <aside className="audit-price-card">
           <span>Founding pilot open</span>
-          <strong>$750 + $99/mo</strong>
+          <strong>Scoped after review</strong>
           <p>First three installs only. Contractor Growth is scoped only when job value and lead volume support it.</p>
         </aside>
       </section>
@@ -4058,7 +4058,7 @@ function AuditRequestForm({ auditForm, auditState, handleAuditSubmit, updateAudi
         />
       </label>
       <button className="stamp-button wide-field" type="submit" disabled={auditState === 'sending'}>
-        {auditState === 'sending' ? 'SENDING...' : 'Set Up a Consultation'}
+        {auditState === 'sending' ? 'SENDING...' : 'Book a consultation'}
         <ArrowUpRight size={18} strokeWidth={3} />
       </button>
       {auditState === 'error' && (
