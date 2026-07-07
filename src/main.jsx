@@ -3331,16 +3331,16 @@ function TerminalWidget() {
   );
 }
 
-function HomeOfferLadderSection({ setPage }) {
+function HomeOfferLadderSection() {
   const offers = [
     {
-      lane: 'Start here',
-      title: 'Setup Consultation',
-      price: 'Free',
-      fit: 'For owners who know something is leaking but do not know what to build first.',
-      text: 'A focused review of your lead path, current tools, response speed, and follow-up gaps before any build is scoped.',
-      includes: ['Lead path review', 'First-fix recommendation', 'Pilot vs. custom-build decision'],
-      note: 'If there is no clear revenue leak, I will say that before quoting work.',
+      lane: 'Website ladder',
+      title: 'Basic',
+      price: '$50/mo + $400 setup',
+      fit: 'For simple service businesses that need a clean web presence on a standard template.',
+      text: 'Standard template, no monthly edits, no custom domain.',
+      includes: ['Standard template', 'No monthly edits', 'No custom domain'],
+      note: 'Best when the site only needs to be credible and live.',
       action: (
         <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
           Book a consultation
@@ -3349,72 +3349,32 @@ function HomeOfferLadderSection({ setPage }) {
       ),
     },
     {
-      lane: 'Default offer',
-      title: 'Founding Pilot',
-      price: 'Scoped after consultation',
-      fit: 'For local service businesses that need missed leads answered, tracked, and routed now.',
-      text: 'A narrow autonomous revenue system: missed-lead capture, first reply, basic follow-up, booking handoff, and Airtable tracking.',
-      includes: ['One intake or missed-lead path', 'Simple follow-up sequence', 'Owner-visible tracking'],
-      note: 'Best first paid step while the offer is being validated. First three installs only.',
+      lane: 'Most common',
+      title: 'Standard',
+      price: '$75/mo + FREE setup',
+      fit: 'For owners who want the website connected to the engine behind the visuals.',
+      text: 'Custom domain, 2 edits/mo, hosting + GHL automation.',
+      includes: ['Custom domain', '2 edits/mo', 'Hosting + GHL automation'],
+      note: 'Default fit for Porter, Masoo, and future website deals.',
       action: (
-        <a className="text-link dark-link" href={consultationUrl} target="_blank" rel="noreferrer">
-          Request Pilot Review
+        <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
+          Book a consultation
+          <ArrowUpRight size={18} strokeWidth={3} />
         </a>
       ),
     },
     {
-      lane: 'Higher-ticket service teams',
-      title: 'Contractor Growth',
-      price: '$2,500-$5,000 + $500-$1,000/mo',
-      fit: 'For roofers, contractors, and home-service teams with real lead volume and high job value.',
-      text: 'A deeper response, quote follow-up, reporting, and booking system where one recovered job can justify the build.',
-      includes: ['Lead intake and routing', 'Estimate or quote follow-up', 'Reporting and pipeline visibility'],
-      note: 'Not the default. Scoped only when the economics support it.',
+      lane: 'Booking-ready',
+      title: 'Premium',
+      price: '$125/mo + FREE setup',
+      fit: 'For appointment-based businesses that need booking and support built into the website path.',
+      text: 'Everything in Standard + online booking system + priority support.',
+      includes: ['Everything in Standard', 'Online booking system', 'Priority support'],
+      note: 'Recommended when the website should turn interest into booked time.',
       action: (
-        <a className="text-link dark-link" href="/work">
-          See Proof Lanes
-        </a>
-      ),
-    },
-    {
-      lane: 'Brand + web',
-      title: 'Revenue Site + Intake',
-      price: '$1,500-$4,500',
-      fit: 'For service businesses whose website, offer, or form path is hurting trust before automation can help.',
-      text: 'Positioning, page copy, lead capture, and intake routing built around one clear buyer action.',
-      includes: ['Homepage or focused landing page', 'Offer and intake copy', 'Form-to-follow-up handoff'],
-      note: 'Bunched here when the real problem is the front door, not the automation.',
-      action: (
-        <a className="text-link dark-link" href={consultationUrl} target="_blank" rel="noreferrer">
-          Review Fit
-        </a>
-      ),
-    },
-    {
-      lane: 'Ongoing',
-      title: 'Managed Automation',
-      price: 'Scoped monthly support',
-      fit: 'For systems that are already tied to leads, bookings, reporting, or client communication.',
-      text: 'Monitoring, workflow fixes, sequence updates, reporting, and small improvements after launch.',
-      includes: ['Workflow monitoring', 'Monthly improvement pass', 'Reporting and issue review'],
-      note: 'Only sold after there is a live system worth managing.',
-      action: (
-        <a className="text-link dark-link" href={consultationUrl} target="_blank" rel="noreferrer">
-          Talk Support
-        </a>
-      ),
-    },
-    {
-      lane: 'Manual review',
-      title: 'Compliance-Gated Build',
-      price: 'Custom quote',
-      fit: 'For healthcare, youth, insurance, credit, SMS, or other regulated lanes.',
-      text: 'I build the system and keep compliance decisions with the client’s authorized reviewer before anything public goes live.',
-      includes: ['Scope boundary', 'Consent and data-path review', 'Reviewer sign-off gate'],
-      note: 'No PHI, youth data, credit promises, or regulated claims get pushed through public forms or unaudited automations.',
-      action: (
-        <a className="text-link dark-link" href="/compliance">
-          Review Guardrails
+        <a className="stamp-button link-button" href={consultationUrl} target="_blank" rel="noreferrer">
+          Book a consultation
+          <ArrowUpRight size={18} strokeWidth={3} />
         </a>
       ),
     },
@@ -3423,15 +3383,15 @@ function HomeOfferLadderSection({ setPage }) {
   return (
     <section className="solutions-packages homepage-offer-ladder pricing-disclosure-section" id="pricing" aria-labelledby="offer-ladder-title">
       <div className="section-copy">
-        <div className="eyebrow">03 / PRICING</div>
-        <h2 id="offer-ladder-title">Pick the smallest system that can prove the loop.</h2>
+        <div className="eyebrow">03 / SCOPE</div>
+        <h2 id="offer-ladder-title">Website pricing that keeps the next step clear.</h2>
         <p>
-          Pricing is disclosed so the first call is not a guessing game. If the work falls into one
-          of these lanes, it gets bunched here. If it does not, it needs manual review before a quote.
+          Basic, Standard, and Premium website plans give owners a simple monthly path. The
+          first move is still a setup consultation so the right tier matches the real need.
         </p>
         <div className="pricing-side-note">
-          <strong>Default path:</strong>
-          consultation, founding pilot, then expand only if the system is tied to real revenue.
+          <strong>Applies to:</strong>
+          Porter, Masoo, and all future website deals.
         </div>
       </div>
       <div>
@@ -3454,8 +3414,8 @@ function HomeOfferLadderSection({ setPage }) {
           ))}
         </div>
         <div className="ladder-rule">
-          <strong>No hidden “book a call to find out if this is $500 or $10K.”</strong>
-          <span>Numbers can move when scope, compliance, integrations, or content volume changes. The lane gets named first.</span>
+          <strong>Book a consultation first.</strong>
+          <span>The ladder supports the conversation. Custom build fees, store setup, regulated work, or larger automation scope are quoted separately.</span>
         </div>
       </div>
     </section>
